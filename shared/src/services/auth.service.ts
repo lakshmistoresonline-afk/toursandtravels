@@ -6,7 +6,7 @@ import {
 	onAuthStateChanged,
 	User as FirebaseUser
 } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp, collection, getDocs, query, orderBy } from "firebase/firestore";
 import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
 import type { AppUser } from "@workspace/shared/types/user.d";
@@ -29,6 +29,19 @@ export class AuthService extends Service {
 			return { user: userDoc.data() as AppUser, error: null };
 		} catch (err: any) {
 			return { user: null, error: new ApiError(err.message, 500) };
+		}
+	}
+
+	/**
+	 * Get all users (Admin)
+	 */
+	async getAllUsers(): Promise<AppUser[]> {
+		try {
+			const q = query(collection(this.db, this.USERS_COLLECTION), orderBy("first_name", "asc"));
+			const snap = await getDocs(q);
+			return snap.docs.map(d => d.data() as AppUser);
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
 		}
 	}
 

@@ -8,7 +8,7 @@ const getTopAnalytics = (
 ) => {
 	return [
 		{
-			title: "Total Revenue (AED)",
+			title: "Total Revenue (INR)",
 			value: formatCurrencyCompact(Number(total_revenue)),
 		},
 		{

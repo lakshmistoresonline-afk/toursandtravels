@@ -55,7 +55,7 @@ export function MetaDetails({
 			{hasPricing && pricing != null && (
 				<>
 					<meta property="product:price:amount" content={pricing.price} />
-					<meta property="product:price:currency" content="AED" />
+					<meta property="product:price:currency" content="INR" />
 				</>
 			)}
 		</>

@@ -120,7 +120,7 @@ export default function AddTourPage() {
 						<CardHeader><CardTitle>Pricing & Capacity</CardTitle></CardHeader>
 						<CardContent className="grid md:grid-cols-2 gap-6">
 							<FormField control={control} name="price" render={({ field }) => (
-								<FormItem><FormLabel>Price (AED)</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(Number(e.target.value))} /></FormControl></FormItem>
+								<FormItem><FormLabel>Price (INR)</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(Number(e.target.value))} /></FormControl></FormItem>
 							)} />
 							<FormField control={control} name="max_participants" render={({ field }) => (
 								<FormItem><FormLabel>Max Capacity</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(Number(e.target.value))} /></FormControl></FormItem>

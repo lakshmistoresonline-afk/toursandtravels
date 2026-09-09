@@ -12,7 +12,7 @@ export const REGISTRATION_STATUSES = ["PENDING", "CONFIRMED", "CANCELLED", "COMP
 export const BOOKING_STATUS = REGISTRATION_STATUSES;
 export const PAYMENT_STATUS = ["PENDING", "PAID", "FAILED", "REFUNDED"] as const;
 
-export const PAYMENT_CURRENCY = "AED" as const;
+export const PAYMENT_CURRENCY = "INR" as const;
 
 export const MAX_META_KEYWORDS = 25;
 

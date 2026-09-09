@@ -39,7 +39,7 @@ export const TourCard = memo(
 							<div className="mt-4 flex items-center justify-between">
 								<div>
 									<p className="text-xs text-muted-foreground">Starting from</p>
-									<p className="font-bold text-lg text-primary">{tour.price?.toLocaleString()} AED</p>
+									<p className="font-bold text-lg text-primary">{tour.price?.toLocaleString()} INR</p>
 								</div>
 								<Badge variant="secondary">{tour.status?.replace('_', ' ').toLowerCase()}</Badge>
 							</div>

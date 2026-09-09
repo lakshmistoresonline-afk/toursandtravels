@@ -79,7 +79,7 @@ export const RecentBookingsCard = ({ recentBookings }: { recentBookings: HighLev
 								<div className="flex items-center gap-4 ml-auto">
 									<div className="text-right space-y-1">
 										<div className="font-medium text-base">
-											{booking.total.toFixed(2)} AED
+											{booking.total.toFixed(2)} INR
 										</div>
 									</div>
 									<div>

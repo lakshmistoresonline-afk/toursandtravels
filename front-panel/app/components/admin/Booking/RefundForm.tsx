@@ -39,7 +39,7 @@ export function RefundForm({ bookingId, paidAmount, onSuccess, onCancel }: Refun
 	const form = useForm<RefundFormValues>({
 		resolver: zodResolver(
 			refundSchema.refine((data) => data.amount <= paidAmount, {
-				message: `Amount cannot exceed paid amount (${paidAmount.toFixed(2)} AED)`,
+				message: `Amount cannot exceed paid amount (${paidAmount.toFixed(2)} INR)`,
 				path: ["amount"],
 			}),
 		),
@@ -90,7 +90,7 @@ export function RefundForm({ bookingId, paidAmount, onSuccess, onCancel }: Refun
 					name="amount"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Refund Amount (AED)</FormLabel>
+							<FormLabel>Refund Amount (INR)</FormLabel>
 							<FormControl>
 								<Input
 									type="number"

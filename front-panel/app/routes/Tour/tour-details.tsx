@@ -107,7 +107,7 @@ export default function TourDetailsPage() {
 						</div>
 						<div className="text-right">
 							<div className="text-sm text-muted-foreground">Price per person</div>
-							<div className="text-3xl font-bold text-primary">{tour.price?.toLocaleString()} AED</div>
+							<div className="text-3xl font-bold text-primary">{tour.price?.toLocaleString()} INR</div>
 						</div>
 					</div>
 				</div>

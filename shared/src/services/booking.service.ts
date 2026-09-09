@@ -21,7 +21,20 @@ export class BookingService extends Service {
 	 */
 	async createRegistration(tourId: string, travellersCount: number, notes?: string): Promise<string> {
 		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
+		return this.performRegistration(tourId, this.currentUid, travellersCount, notes);
+	}
 
+	/**
+	 * Create registration on behalf of a user (Admin)
+	 */
+	async adminCreateRegistration(tourId: string, customerId: string, travellersCount: number, notes?: string): Promise<string> {
+		return this.performRegistration(tourId, customerId, travellersCount, notes);
+	}
+
+	/**
+	 * Shared registration logic
+	 */
+	private async performRegistration(tourId: string, customerId: string, travellersCount: number, notes?: string): Promise<string> {
 		try {
 			return await runTransaction(this.db, async (transaction) => {
 				const tourRef = doc(this.db, this.TOURS_COLLECTION, tourId);
@@ -30,27 +43,23 @@ export class BookingService extends Service {
 				if (!tourDoc.exists()) throw new ApiError("Tour not found", 404);
 				const tourData = tourDoc.data();
 
-				if (tourData.status !== "REGISTRATION_OPEN" && tourData.status !== "PUBLISHED") {
-					throw new ApiError("Registration is closed", 400);
-				}
-
 				const currentParticipants = tourData.currentParticipants || 0;
 				if (tourData.max_participants && (currentParticipants + travellersCount > tourData.max_participants)) {
 					throw new ApiError("Tour is full", 400);
 				}
 
-				const userRef = doc(this.db, this.USERS_COLLECTION, this.currentUid!);
+				const userRef = doc(this.db, this.USERS_COLLECTION, customerId);
 				const userDoc = await transaction.get(userRef);
-				if (!userDoc.exists()) throw new ApiError("Profile not found", 404);
+				if (!userDoc.exists()) throw new ApiError("User profile not found", 404);
 
 				const regRef = collection(this.db, this.REGISTRATIONS_COLLECTION);
 				const newRegDoc = doc(regRef);
 				transaction.set(newRegDoc, {
 					tourId,
-					customerId: this.currentUid,
+					customerId,
 					travellersCount,
 					notes: notes || null,
-					status: "PENDING",
+					status: "CONFIRMED", // Admin registrations are confirmed by default
 					profileSnapshot: userDoc.data(),
 					createdAt: serverTimestamp(),
 					updatedAt: serverTimestamp()

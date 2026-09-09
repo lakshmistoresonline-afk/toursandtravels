@@ -53,7 +53,7 @@ export default function AdminToursPage() {
 		{
 			id: "Price",
 			accessorKey: "price",
-			header: "Price (AED)",
+			header: "Price (INR)",
 			cell: (info) => <span>{info.row.original.price?.toLocaleString()}</span>
 		},
 		{
