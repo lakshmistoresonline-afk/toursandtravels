@@ -12,3 +12,14 @@ ui-debug.log
 .idea
 *.log
 bootstrap.cjs
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!components.json
+!firebase.json
+!firestore.indexes.json
+!*.artifact.md
+!toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
+# wait, I should ignore the sdk file specifically
+toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json

@@ -33,13 +33,16 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		optimizeDeps: {
-			exclude: ["@tanstack/react-query"],
 			include: [
 				"@tabler/icons-react",
 				"lucide-react",
 				"@radix-ui/react-dropdown-menu",
 				"@radix-ui/react-tooltip",
 				"@radix-ui/react-dialog",
+				"firebase/app",
+				"firebase/auth",
+				"firebase/firestore",
+				"firebase/storage",
 			],
 		},
 		define: {
