@@ -1,17 +1,9 @@
 import { ToursService } from "@workspace/shared/services/tours.service";
 import type { FPTourFilters } from "@workspace/shared/schemas/fp-tours-filter.schema";
-import { CACHE_KEYS } from "@workspace/shared/utils/cache-keys";
-import { cacheService } from "@workspace/shared/services/cache.service";
 
 export const tourDetailsQuery = async ({ request, tour_id }: { request: Request; tour_id: string }) => {
-	const queryFn = async () => {
-		const svc = new ToursService(request);
-		const resp = await svc.getFPTourDetails(tour_id);
-		return resp;
-	};
-
-	const result = await cacheService.get(CACHE_KEYS.tours.details("FP", tour_id), queryFn);
-	return result;
+	const svc = new ToursService(request);
+	return await svc.getFPTourDetails(tour_id);
 };
 
 export const toursQuery = async ({
@@ -27,36 +19,16 @@ export const toursQuery = async ({
 	pageSize?: number;
 	filters?: FPTourFilters;
 }) => {
-	const queryFn = async () => {
-		const svc = new ToursService(request);
-		const resp = await svc.getFPHighLevelTours(q, pageIndex, pageSize, filters);
-		return resp;
-	};
-
-	const result = await cacheService.get(
-		CACHE_KEYS.tours.highLevel("FP", q, pageIndex, pageSize, filters),
-		queryFn,
-	);
-	return result;
+	const svc = new ToursService(request);
+	return await svc.getFPHighLevelTours(q, pageIndex, pageSize, filters);
 };
 
 export const availabilityQuery = async (
-	request: Request,
-	optionId: number | null,
-	dateStr: string | null,
-	tourId: string | null,
+	_request: Request,
+	_optionId: number | null,
+	_dateStr: string | null,
+	_tourId: string | null,
 ) => {
-	if (!optionId || !dateStr || !tourId) return [];
-
-	const queryFn = async () => {
-		const svc = new ToursService(request);
-		const resp = await svc.getTourTimeSlotAvailability(optionId, dateStr);
-		return resp;
-	};
-
-	const result = await cacheService.get(
-		CACHE_KEYS.tours.slotAvailability(optionId, dateStr, tourId),
-		queryFn,
-	);
-	return result;
+	// REFACTORED: Legacy availability query disabled in Simple mode
+	return [];
 };

@@ -72,8 +72,8 @@ export class AdminDashboardService extends Service {
 			// Group by date (truncate to day)
 			const grouped = new Map<string, { bookings: number }>();
 
-			data.forEach((order) => {
-				const dateKey = format(new Date(order.created_at), "yyyy-MM-dd");
+			data.forEach((order: any) => {
+				const dateKey = format(new Date(order.created_at || ""), "yyyy-MM-dd");
 				const existing = grouped.get(dateKey) || { bookings: 0 };
 				existing.bookings += 1;
 				grouped.set(dateKey, existing);

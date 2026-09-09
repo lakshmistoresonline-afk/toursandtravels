@@ -1,0 +1,718 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/login": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/logout": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/dashboard": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/get-export-bookings-data": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Categories/categories": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Categories/add-category": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Categories/update-category": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Cities/cities": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Cities/add-city": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Cities/update-city": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tags/tags": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tags/add-tag": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tags/update-tag": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tours/tours": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tours/add-tour": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tours/tour-details": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tours/update-tour": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Booking/bookings": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Booking/send-confirmation-email": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Booking/update-booking": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/refund-payment": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/retry-stripe-checkout": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/HeroSections/hero-sections": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/HeroSections/add-hero-section": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/HeroSections/update-hero-section": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/delete-hero-section": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Collections/collections": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Collections/add-collection": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Collections/update-collection": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/delete-collection": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Coupons/coupons": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Coupons/add-coupon": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Coupons/update-coupon": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Error/404": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/Auth/login": {
+        "id": "routes/Auth/login",
+        "parentId": "root",
+        "file": "app/routes/Auth/login.tsx",
+        "path": "login",
+        "config": {}
+      },
+      "routes/_actions/logout": {
+        "id": "routes/_actions/logout",
+        "parentId": "root",
+        "file": "app/routes/_actions/logout.tsx",
+        "path": "logout",
+        "config": {}
+      },
+      "routes/layout": {
+        "id": "routes/layout",
+        "parentId": "root",
+        "file": "app/routes/layout.tsx",
+        "config": {}
+      },
+      "routes/dashboard": {
+        "id": "routes/dashboard",
+        "parentId": "routes/layout",
+        "file": "app/routes/dashboard.tsx",
+        "index": true,
+        "config": {}
+      },
+      "routes/_actions/get-export-bookings-data": {
+        "id": "routes/_actions/get-export-bookings-data",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/get-export-bookings-data.tsx",
+        "path": "get-export-bookings-data",
+        "config": {}
+      },
+      "routes/Categories/categories": {
+        "id": "routes/Categories/categories",
+        "parentId": "routes/layout",
+        "file": "app/routes/Categories/categories.tsx",
+        "path": "categories",
+        "index": true,
+        "config": {}
+      },
+      "routes/Categories/add-category": {
+        "id": "routes/Categories/add-category",
+        "parentId": "routes/layout",
+        "file": "app/routes/Categories/add-category.tsx",
+        "path": "categories/add",
+        "config": {}
+      },
+      "routes/Categories/update-category": {
+        "id": "routes/Categories/update-category",
+        "parentId": "routes/layout",
+        "file": "app/routes/Categories/update-category.tsx",
+        "path": "categories/:categoryId/update",
+        "config": {}
+      },
+      "routes/Cities/cities": {
+        "id": "routes/Cities/cities",
+        "parentId": "routes/layout",
+        "file": "app/routes/Cities/cities.tsx",
+        "path": "cities",
+        "index": true,
+        "config": {}
+      },
+      "routes/Cities/add-city": {
+        "id": "routes/Cities/add-city",
+        "parentId": "routes/layout",
+        "file": "app/routes/Cities/add-city.tsx",
+        "path": "cities/add",
+        "config": {}
+      },
+      "routes/Cities/update-city": {
+        "id": "routes/Cities/update-city",
+        "parentId": "routes/layout",
+        "file": "app/routes/Cities/update-city.tsx",
+        "path": "cities/:cityId/update",
+        "config": {}
+      },
+      "routes/Tags/tags": {
+        "id": "routes/Tags/tags",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tags/tags.tsx",
+        "path": "tags",
+        "config": {}
+      },
+      "routes/Tags/add-tag": {
+        "id": "routes/Tags/add-tag",
+        "parentId": "routes/Tags/tags",
+        "file": "app/routes/Tags/add-tag.tsx",
+        "path": "add",
+        "config": {}
+      },
+      "routes/Tags/update-tag": {
+        "id": "routes/Tags/update-tag",
+        "parentId": "routes/Tags/tags",
+        "file": "app/routes/Tags/update-tag.tsx",
+        "path": ":id/update",
+        "config": {}
+      },
+      "routes/Tours/tours": {
+        "id": "routes/Tours/tours",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tours/tours.tsx",
+        "path": "tours",
+        "index": true,
+        "config": {}
+      },
+      "routes/Tours/add-tour": {
+        "id": "routes/Tours/add-tour",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tours/add-tour.tsx",
+        "path": "tours/add",
+        "config": {}
+      },
+      "routes/Tours/tour-details": {
+        "id": "routes/Tours/tour-details",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tours/tour-details.tsx",
+        "path": "tours/tour/:id/:urlKey?",
+        "config": {}
+      },
+      "routes/Tours/update-tour": {
+        "id": "routes/Tours/update-tour",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tours/update-tour.tsx",
+        "path": "tours/tour/:id/update",
+        "config": {}
+      },
+      "routes/Booking/bookings": {
+        "id": "routes/Booking/bookings",
+        "parentId": "routes/layout",
+        "file": "app/routes/Booking/bookings.tsx",
+        "path": "bookings",
+        "config": {}
+      },
+      "routes/Booking/send-confirmation-email": {
+        "id": "routes/Booking/send-confirmation-email",
+        "parentId": "routes/Booking/bookings",
+        "file": "app/routes/Booking/send-confirmation-email.tsx",
+        "path": "send-confirmation-email/:booking_id",
+        "config": {}
+      },
+      "routes/Booking/update-booking": {
+        "id": "routes/Booking/update-booking",
+        "parentId": "routes/layout",
+        "file": "app/routes/Booking/update-booking.tsx",
+        "path": "bookings/:id/:ref/update",
+        "config": {}
+      },
+      "routes/_actions/refund-payment": {
+        "id": "routes/_actions/refund-payment",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/refund-payment.tsx",
+        "path": "bookings/:booking_id/refund",
+        "config": {}
+      },
+      "routes/_actions/retry-stripe-checkout": {
+        "id": "routes/_actions/retry-stripe-checkout",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/retry-stripe-checkout.tsx",
+        "path": "retry-stripe-checkout",
+        "config": {}
+      },
+      "routes/HeroSections/hero-sections": {
+        "id": "routes/HeroSections/hero-sections",
+        "parentId": "routes/layout",
+        "file": "app/routes/HeroSections/hero-sections.tsx",
+        "path": "hero-sections",
+        "config": {}
+      },
+      "routes/HeroSections/add-hero-section": {
+        "id": "routes/HeroSections/add-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "app/routes/HeroSections/add-hero-section.tsx",
+        "path": "add",
+        "config": {}
+      },
+      "routes/HeroSections/update-hero-section": {
+        "id": "routes/HeroSections/update-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "app/routes/HeroSections/update-hero-section.tsx",
+        "path": ":id/update",
+        "config": {}
+      },
+      "routes/_actions/delete-hero-section": {
+        "id": "routes/_actions/delete-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "app/routes/_actions/delete-hero-section.tsx",
+        "path": ":id/delete",
+        "config": {}
+      },
+      "routes/Collections/collections": {
+        "id": "routes/Collections/collections",
+        "parentId": "routes/layout",
+        "file": "app/routes/Collections/collections.tsx",
+        "path": "collections",
+        "index": true,
+        "config": {}
+      },
+      "routes/Collections/add-collection": {
+        "id": "routes/Collections/add-collection",
+        "parentId": "routes/layout",
+        "file": "app/routes/Collections/add-collection.tsx",
+        "path": "collections/add",
+        "config": {}
+      },
+      "routes/Collections/update-collection": {
+        "id": "routes/Collections/update-collection",
+        "parentId": "routes/layout",
+        "file": "app/routes/Collections/update-collection.tsx",
+        "path": "collections/:id/update",
+        "config": {}
+      },
+      "routes/_actions/delete-collection": {
+        "id": "routes/_actions/delete-collection",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/delete-collection.tsx",
+        "path": "collections/:id/delete",
+        "config": {}
+      },
+      "routes/Coupons/coupons": {
+        "id": "routes/Coupons/coupons",
+        "parentId": "routes/layout",
+        "file": "app/routes/Coupons/coupons.tsx",
+        "path": "coupons",
+        "index": true,
+        "config": {}
+      },
+      "routes/Coupons/add-coupon": {
+        "id": "routes/Coupons/add-coupon",
+        "parentId": "routes/layout",
+        "file": "app/routes/Coupons/add-coupon.tsx",
+        "path": "coupons/add",
+        "config": {}
+      },
+      "routes/Coupons/update-coupon": {
+        "id": "routes/Coupons/update-coupon",
+        "parentId": "routes/layout",
+        "file": "app/routes/Coupons/update-coupon.tsx",
+        "path": "coupons/:id/update",
+        "config": {}
+      },
+      "routes/Error/404": {
+        "id": "routes/Error/404",
+        "parentId": "routes/layout",
+        "file": "app/routes/Error/404.tsx",
+        "path": "*",
+        "config": {}
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "E:/Tour/rr-tours-app-main/admin/app",
+    "basename": "/",
+    "buildDirectory": "E:/Tour/rr-tours-app-main/admin/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/Auth/login": {
+        "id": "routes/Auth/login",
+        "parentId": "root",
+        "file": "./routes/Auth/login.tsx",
+        "path": "login"
+      },
+      "routes/_actions/logout": {
+        "id": "routes/_actions/logout",
+        "parentId": "root",
+        "file": "./routes/_actions/logout.tsx",
+        "path": "logout"
+      },
+      "routes/layout": {
+        "id": "routes/layout",
+        "parentId": "root",
+        "file": "./routes/layout.tsx"
+      },
+      "routes/dashboard": {
+        "id": "routes/dashboard",
+        "parentId": "routes/layout",
+        "file": "routes/dashboard.tsx",
+        "index": true
+      },
+      "routes/_actions/get-export-bookings-data": {
+        "id": "routes/_actions/get-export-bookings-data",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/get-export-bookings-data.tsx",
+        "path": "get-export-bookings-data"
+      },
+      "routes/Categories/categories": {
+        "id": "routes/Categories/categories",
+        "parentId": "routes/layout",
+        "file": "./routes/Categories/categories.tsx",
+        "path": "categories",
+        "index": true
+      },
+      "routes/Categories/add-category": {
+        "id": "routes/Categories/add-category",
+        "parentId": "routes/layout",
+        "file": "./routes/Categories/add-category.tsx",
+        "path": "categories/add"
+      },
+      "routes/Categories/update-category": {
+        "id": "routes/Categories/update-category",
+        "parentId": "routes/layout",
+        "file": "./routes/Categories/update-category.tsx",
+        "path": "categories/:categoryId/update"
+      },
+      "routes/Cities/cities": {
+        "id": "routes/Cities/cities",
+        "parentId": "routes/layout",
+        "file": "./routes/Cities/cities.tsx",
+        "path": "cities",
+        "index": true
+      },
+      "routes/Cities/add-city": {
+        "id": "routes/Cities/add-city",
+        "parentId": "routes/layout",
+        "file": "./routes/Cities/add-city.tsx",
+        "path": "cities/add"
+      },
+      "routes/Cities/update-city": {
+        "id": "routes/Cities/update-city",
+        "parentId": "routes/layout",
+        "file": "./routes/Cities/update-city.tsx",
+        "path": "cities/:cityId/update"
+      },
+      "routes/Tags/tags": {
+        "id": "routes/Tags/tags",
+        "parentId": "routes/layout",
+        "file": "./routes/Tags/tags.tsx",
+        "path": "tags"
+      },
+      "routes/Tags/add-tag": {
+        "id": "routes/Tags/add-tag",
+        "parentId": "routes/Tags/tags",
+        "file": "./routes/Tags/add-tag.tsx",
+        "path": "add"
+      },
+      "routes/Tags/update-tag": {
+        "id": "routes/Tags/update-tag",
+        "parentId": "routes/Tags/tags",
+        "file": "./routes/Tags/update-tag.tsx",
+        "path": ":id/update"
+      },
+      "routes/Tours/tours": {
+        "id": "routes/Tours/tours",
+        "parentId": "routes/layout",
+        "file": "./routes/Tours/tours.tsx",
+        "path": "tours",
+        "index": true
+      },
+      "routes/Tours/add-tour": {
+        "id": "routes/Tours/add-tour",
+        "parentId": "routes/layout",
+        "file": "./routes/Tours/add-tour.tsx",
+        "path": "tours/add"
+      },
+      "routes/Tours/tour-details": {
+        "id": "routes/Tours/tour-details",
+        "parentId": "routes/layout",
+        "file": "./routes/Tours/tour-details.tsx",
+        "path": "tours/tour/:id/:urlKey?"
+      },
+      "routes/Tours/update-tour": {
+        "id": "routes/Tours/update-tour",
+        "parentId": "routes/layout",
+        "file": "./routes/Tours/update-tour.tsx",
+        "path": "tours/tour/:id/update"
+      },
+      "routes/Booking/bookings": {
+        "id": "routes/Booking/bookings",
+        "parentId": "routes/layout",
+        "file": "./routes/Booking/bookings.tsx",
+        "path": "bookings"
+      },
+      "routes/Booking/send-confirmation-email": {
+        "id": "routes/Booking/send-confirmation-email",
+        "parentId": "routes/Booking/bookings",
+        "file": "./routes/Booking/send-confirmation-email.tsx",
+        "path": "send-confirmation-email/:booking_id"
+      },
+      "routes/Booking/update-booking": {
+        "id": "routes/Booking/update-booking",
+        "parentId": "routes/layout",
+        "file": "./routes/Booking/update-booking.tsx",
+        "path": "bookings/:id/:ref/update"
+      },
+      "routes/_actions/refund-payment": {
+        "id": "routes/_actions/refund-payment",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/refund-payment.tsx",
+        "path": "bookings/:booking_id/refund"
+      },
+      "routes/_actions/retry-stripe-checkout": {
+        "id": "routes/_actions/retry-stripe-checkout",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/retry-stripe-checkout.tsx",
+        "path": "retry-stripe-checkout"
+      },
+      "routes/HeroSections/hero-sections": {
+        "id": "routes/HeroSections/hero-sections",
+        "parentId": "routes/layout",
+        "file": "./routes/HeroSections/hero-sections.tsx",
+        "path": "hero-sections"
+      },
+      "routes/HeroSections/add-hero-section": {
+        "id": "routes/HeroSections/add-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "./routes/HeroSections/add-hero-section.tsx",
+        "path": "add"
+      },
+      "routes/HeroSections/update-hero-section": {
+        "id": "routes/HeroSections/update-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "./routes/HeroSections/update-hero-section.tsx",
+        "path": ":id/update"
+      },
+      "routes/_actions/delete-hero-section": {
+        "id": "routes/_actions/delete-hero-section",
+        "parentId": "routes/HeroSections/hero-sections",
+        "file": "./routes/_actions/delete-hero-section.tsx",
+        "path": ":id/delete"
+      },
+      "routes/Collections/collections": {
+        "id": "routes/Collections/collections",
+        "parentId": "routes/layout",
+        "file": "./routes/Collections/collections.tsx",
+        "path": "collections",
+        "index": true
+      },
+      "routes/Collections/add-collection": {
+        "id": "routes/Collections/add-collection",
+        "parentId": "routes/layout",
+        "file": "./routes/Collections/add-collection.tsx",
+        "path": "collections/add"
+      },
+      "routes/Collections/update-collection": {
+        "id": "routes/Collections/update-collection",
+        "parentId": "routes/layout",
+        "file": "./routes/Collections/update-collection.tsx",
+        "path": "collections/:id/update"
+      },
+      "routes/_actions/delete-collection": {
+        "id": "routes/_actions/delete-collection",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/delete-collection.tsx",
+        "path": "collections/:id/delete"
+      },
+      "routes/Coupons/coupons": {
+        "id": "routes/Coupons/coupons",
+        "parentId": "routes/layout",
+        "file": "./routes/Coupons/coupons.tsx",
+        "path": "coupons",
+        "index": true
+      },
+      "routes/Coupons/add-coupon": {
+        "id": "routes/Coupons/add-coupon",
+        "parentId": "routes/layout",
+        "file": "./routes/Coupons/add-coupon.tsx",
+        "path": "coupons/add"
+      },
+      "routes/Coupons/update-coupon": {
+        "id": "routes/Coupons/update-coupon",
+        "parentId": "routes/layout",
+        "file": "./routes/Coupons/update-coupon.tsx",
+        "path": "coupons/:id/update"
+      },
+      "routes/Error/404": {
+        "id": "routes/Error/404",
+        "parentId": "routes/layout",
+        "file": "./routes/Error/404.tsx",
+        "path": "*"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "./routes/Auth/login.tsx",
+            "path": "login"
+          },
+          {
+            "file": "./routes/_actions/logout.tsx",
+            "path": "logout"
+          },
+          {
+            "file": "./routes/layout.tsx",
+            "children": [
+              {
+                "file": "routes/dashboard.tsx",
+                "index": true
+              },
+              {
+                "file": "./routes/_actions/get-export-bookings-data.tsx",
+                "path": "get-export-bookings-data"
+              },
+              {
+                "file": "./routes/Categories/categories.tsx",
+                "index": true,
+                "path": "categories"
+              },
+              {
+                "file": "./routes/Categories/add-category.tsx",
+                "path": "categories/add"
+              },
+              {
+                "file": "./routes/Categories/update-category.tsx",
+                "path": "categories/:categoryId/update"
+              },
+              {
+                "file": "./routes/Cities/cities.tsx",
+                "index": true,
+                "path": "cities"
+              },
+              {
+                "file": "./routes/Cities/add-city.tsx",
+                "path": "cities/add"
+              },
+              {
+                "file": "./routes/Cities/update-city.tsx",
+                "path": "cities/:cityId/update"
+              },
+              {
+                "file": "./routes/Tags/tags.tsx",
+                "children": [
+                  {
+                    "file": "./routes/Tags/add-tag.tsx",
+                    "path": "add"
+                  },
+                  {
+                    "file": "./routes/Tags/update-tag.tsx",
+                    "path": ":id/update"
+                  }
+                ],
+                "path": "tags"
+              },
+              {
+                "file": "./routes/Tours/tours.tsx",
+                "index": true,
+                "path": "tours"
+              },
+              {
+                "file": "./routes/Tours/add-tour.tsx",
+                "path": "tours/add"
+              },
+              {
+                "file": "./routes/Tours/tour-details.tsx",
+                "path": "tours/tour/:id/:urlKey?"
+              },
+              {
+                "file": "./routes/Tours/update-tour.tsx",
+                "path": "tours/tour/:id/update"
+              },
+              {
+                "file": "./routes/Booking/bookings.tsx",
+                "children": [
+                  {
+                    "file": "./routes/Booking/send-confirmation-email.tsx",
+                    "path": "send-confirmation-email/:booking_id"
+                  }
+                ],
+                "path": "bookings"
+              },
+              {
+                "file": "./routes/Booking/update-booking.tsx",
+                "path": "bookings/:id/:ref/update"
+              },
+              {
+                "file": "./routes/_actions/refund-payment.tsx",
+                "path": "bookings/:booking_id/refund"
+              },
+              {
+                "file": "./routes/_actions/retry-stripe-checkout.tsx",
+                "path": "retry-stripe-checkout"
+              },
+              {
+                "file": "./routes/HeroSections/hero-sections.tsx",
+                "children": [
+                  {
+                    "file": "./routes/HeroSections/add-hero-section.tsx",
+                    "path": "add"
+                  },
+                  {
+                    "file": "./routes/HeroSections/update-hero-section.tsx",
+                    "path": ":id/update"
+                  },
+                  {
+                    "file": "./routes/_actions/delete-hero-section.tsx",
+                    "path": ":id/delete"
+                  }
+                ],
+                "path": "hero-sections"
+              },
+              {
+                "file": "./routes/Collections/collections.tsx",
+                "index": true,
+                "path": "collections"
+              },
+              {
+                "file": "./routes/Collections/add-collection.tsx",
+                "path": "collections/add"
+              },
+              {
+                "file": "./routes/Collections/update-collection.tsx",
+                "path": "collections/:id/update"
+              },
+              {
+                "file": "./routes/_actions/delete-collection.tsx",
+                "path": "collections/:id/delete"
+              },
+              {
+                "file": "./routes/Coupons/coupons.tsx",
+                "index": true,
+                "path": "coupons"
+              },
+              {
+                "file": "./routes/Coupons/add-coupon.tsx",
+                "path": "coupons/add"
+              },
+              {
+                "file": "./routes/Coupons/update-coupon.tsx",
+                "path": "coupons/:id/update"
+              },
+              {
+                "file": "./routes/Error/404.tsx",
+                "path": "*"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}

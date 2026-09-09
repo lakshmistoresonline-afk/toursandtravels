@@ -19,9 +19,9 @@ export interface ServiceBase {
 }
 
 export class Service implements ServiceBase {
-	supabase;
-	readonly headers;
-	readonly request;
+	supabase: SupabaseClient<Database>;
+	readonly headers: Headers;
+	readonly request: Request;
 	currentUser?: ServiceBaseCurrentUser | null | undefined = null;
 
 	protected readonly IMAGES_BUCKET = STORAGE_BUCKETS.images;

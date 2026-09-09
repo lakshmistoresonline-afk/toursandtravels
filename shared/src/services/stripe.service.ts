@@ -84,6 +84,9 @@ export class StripeServerService extends StripeService {
 		cancelUrl: string;
 		customer_email?: string;
 	}): Promise<{ sessionId: string | null; url: string | null; error: ApiError | null }> {
+		if (!this.stripe) {
+			return { sessionId: null, url: null, error: new ApiError("Stripe not configured", 500) };
+		}
 		try {
 			const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = cartItems.map((item) => ({
 				price_data: {
@@ -119,6 +122,7 @@ export class StripeServerService extends StripeService {
 
 	/** Retrieve Checkout Session */
 	async retreiveCheckoutSession(sessionId: string): Promise<{ session: Stripe.Checkout.Session | null }> {
+		if (!this.stripe) return { session: null };
 		const session = await this.stripe.checkout.sessions.retrieve(sessionId);
 		return { session };
 	}
@@ -127,6 +131,9 @@ export class StripeServerService extends StripeService {
 	async retrievePaymentIntent(
 		paymentIntentId: string,
 	): Promise<{ paymentIntent: Stripe.PaymentIntent | null; error: ApiError | null }> {
+		if (!this.stripe) {
+			return { paymentIntent: null, error: new ApiError("Stripe not configured", 500) };
+		}
 		try {
 			const paymentIntent = await this.stripe.paymentIntents.retrieve(paymentIntentId);
 			return { paymentIntent, error: null };
@@ -153,6 +160,9 @@ export class StripeServerService extends StripeService {
 		reason: Stripe.RefundCreateParams.Reason;
 		note: string;
 	}): Promise<{ refundId: string | null; error: ApiError | null }> {
+		if (!this.stripe) {
+			return { refundId: null, error: new ApiError("Stripe not configured", 500) };
+		}
 		try {
 			const refund = await this.stripe.refunds.create({
 				payment_intent: paymentIntentId,
@@ -173,6 +183,7 @@ export class StripeServerService extends StripeService {
 
 	/** Cancel Payment */
 	async cancelPayment(paymentIntentId: string): Promise<{ error: ApiError | null }> {
+		if (!this.stripe) return { error: new ApiError("Stripe not configured", 500) };
 		try {
 			await this.stripe.paymentIntents.cancel(paymentIntentId);
 			return { error: null };

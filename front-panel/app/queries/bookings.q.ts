@@ -1,40 +1,30 @@
 import { BookingService } from "@workspace/shared/services/booking.service";
-import { cacheService } from "@workspace/shared/services/cache.service";
-import { CACHE_KEYS } from "@workspace/shared/utils/cache-keys";
 
-export const bookingByRefQuery = async ({ request, ref }: { request: Request; ref: string }) => {
-	if (ref == null) return null;
-
-	const queryFn = async () => {
-		const svc = new BookingService(request);
-		const resp = await svc.getBookingByRef(ref);
-		return resp;
-	};
-
-	const result = await cacheService.get(CACHE_KEYS.bookings.details("FP", ref), queryFn);
-	return result;
+/**
+ * REFACTORED: Legacy bookings query now redirects to registrations
+ */
+export const getMyBookingsQuery = async ({
+	pageIndex = 0,
+	pageSize = 10,
+	request
+}: {
+	pageIndex?: number;
+	pageSize?: number;
+	request: Request;
+}) => {
+	const svc = new BookingService(request);
+	return await svc.getMyRegistrations(pageIndex, pageSize);
 };
 
-export const myBookingsQuery = async ({
-	request,
-	userId,
-	pageIndex,
-	pageSize,
+export const bookingByRefQuery = async ({
+	ref,
+	request
 }: {
+	ref: string;
 	request: Request;
-	userId: string;
-	pageIndex: number;
-	pageSize: number;
 }) => {
-	const queryFn = async () => {
-		const svc = new BookingService(request);
-		const resp = await svc.getMyBookings(userId, pageIndex, pageSize);
-		return resp;
-	};
-
-	const result = await cacheService.get(
-		CACHE_KEYS.bookings.user_bookings(userId, pageIndex, pageSize),
-		queryFn,
-	);
-	return result;
+	console.warn("bookingByRefQuery called - this is a legacy method. Ref:", ref);
+	const svc = new BookingService(request);
+	// In Simple mode, we might just return null or try to find a registration by ID
+	return null;
 };

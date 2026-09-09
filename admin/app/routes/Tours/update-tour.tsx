@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import {
 	type ActionFunctionArgs,
-	Link,
 	type LoaderFunctionArgs,
 	useActionData,
 	useLoaderData,
@@ -156,7 +155,6 @@ export default function UpdateTourPage() {
 						</CardContent>
 					</Card>
 
-					{/* Pricing & Status */}
 					<Card>
 						<CardHeader><CardTitle>Pricing & Status</CardTitle></CardHeader>
 						<CardContent className="grid md:grid-cols-3 gap-6">
@@ -172,14 +170,13 @@ export default function UpdateTourPage() {
 											<SelectItem value="PUBLISHED">Published</SelectItem>
 											<SelectItem value="REGISTRATION_OPEN">Registration Open</SelectItem>
 											<SelectItem value="REGISTRATION_CLOSED">Registration Closed</SelectItem>
-											<SelectItem value="UPCOMING">Upcoming</SelectItem>
-											<SelectItem value="COMPLETED">Completed</SelectItem>
 										</SelectContent>
 									</Select>
 								</FormItem>
 							)} />
 						</CardContent>
 					</Card>
+
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between">
 							<CardTitle>Tour Itinerary</CardTitle>
@@ -216,175 +213,3 @@ export default function UpdateTourPage() {
 		</div>
 	);
 }
-
-	return (
-		<>
-			<MetaDetails
-				metaTitle={"Update " + tour?.name + " Tour | Admin Panel"}
-				metaDescription={"Update" + tour?.name + " Tour"}
-				metaKeywords="Update Tour"
-			/>
-			<section className="flex flex-col gap-4">
-				<div className="flex gap-4 items-center">
-					<BackButton href="/tours" />
-					<h1 className="text-2xl font-semibold">Update Tour</h1>
-				</div>
-				<form className="space-y-4" onSubmit={handleSubmit(onFormSubmit)}>
-					<Form {...form}>
-						<div className="grid md:grid-cols-2 gap-4">
-							{/* General Card */}
-							<GeneralDetailsCard
-								control={control as any}
-								cities={cities}
-								categories={categories}
-								providers={providers}
-							/>
-
-							{/* Attributes Card */}
-							<AttributesCard control={control as any} />
-						</div>
-
-						{/* Images Card */}
-						<ImagesInputCard control={control as any} />
-
-						{/* Tags Selection Card */}
-						<TagsCard control={control as any} tags={tags} noTags={watchedTags.length === 0} />
-
-						{/* MAIN Content Card */}
-						<MainContentCard
-							control={control as any}
-							cancellation_policies={cancellation_policies}
-						/>
-
-						{/* Options Card */}
-						<TourOptionsCard control={control as any} participants={participants} />
-
-						{/* Address Card */}
-						<AddressCard control={control as any} />
-
-						{/* Meta Details Card */}
-						<Card>
-							<CardHeader>
-								<CardTitle className="text-lg">SEO & Meta Attributes</CardTitle>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								{/* Meta Title */}
-								<FormField
-									control={control}
-									name="meta_details.meta_title"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Meta Title</FormLabel>
-											<FormControl>
-												<Input
-													placeholder="e.g. Ferrari World, Abu Dhabi"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								{/* Meta Description */}
-								<FormField
-									control={control}
-									name="meta_details.meta_description"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Meta Description</FormLabel>
-											<FormControl>
-												<Textarea
-													placeholder="A short description for SEO"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								{/* Meta Keywords */}
-								<FormField
-									control={control}
-									name="meta_details.meta_keywords"
-									render={({ field, fieldState }) => (
-										<FormItem>
-											<FormLabel>Meta Keywords</FormLabel>
-											<FormControl>
-												<TagsInput
-													value={field.value}
-													onValueChange={field.onChange}
-													max={MAX_META_KEYWORDS}
-													editable
-													addOnPaste
-													className="w-full"
-													aria-invalid={!!fieldState.error}
-												>
-													<div className="flex sm:flex-row flex-col gap-2">
-														<TagsInputList>
-															{field.value && Array.isArray(field.value)
-																? field.value.map((item) => (
-																		<TagsInputItem
-																			key={item}
-																			value={item}
-																		>
-																			{item}
-																		</TagsInputItem>
-																	))
-																: null}
-															<TagsInputInput placeholder="Add meta keywords..." />
-														</TagsInputList>
-														<CustomTagsInputClear />
-													</div>
-													<div className="text-muted-foreground text-sm">
-														You can add up to {MAX_META_KEYWORDS} keywords
-													</div>
-												</TagsInput>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								{/* URL Key */}
-								<FormField
-									control={control}
-									name="meta_details.url_key"
-									render={({ field }) => (
-										<FormItem>
-											<div className="flex gap-2">
-												<FormLabel>URL Key</FormLabel>
-												<span className="text-muted-foreground text-sm">
-													(Without spaces)
-												</span>
-											</div>
-											<FormControl>
-												<Input
-													disabled
-													placeholder="e.g. ferrari-world-abu-dhabi-tour"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							</CardContent>
-						</Card>
-
-						{/* Submit Button */}
-						<div className="flex gap-4 justify-end md:col-span-3">
-							<Link to={"/tours"} viewTransition prefetch="intent">
-								<Button variant={"outline"}>Back</Button>
-							</Link>
-							<Button type="submit" disabled={isSubmitting}>
-								{isSubmitting && <Loader2 className="animate-spin mr-2" />}
-								<span>Update</span>
-							</Button>
-						</div>
-					</Form>
-				</form>
-			</section>
-		</>
-	);
-}
-
-export type UpdateFormControlType = Control<UpdateTourInput>;

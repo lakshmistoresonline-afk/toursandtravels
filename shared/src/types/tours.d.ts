@@ -35,6 +35,7 @@ export type GetTourDetails = Tables<"tours"> & {
 	tour_options: TourDetailOption[];
 	itinerary: Tables<"tour_itineraries">[];
 	hasGroupPrice?: boolean;
+	destination?: string | null;
 };
 
 export type HighLevelTour = {

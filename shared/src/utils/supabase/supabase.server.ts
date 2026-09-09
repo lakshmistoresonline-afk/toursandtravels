@@ -7,7 +7,7 @@ import type { Database } from "@workspace/shared/types/supabase";
  */
 export function createSupabaseServerClient(request: Request) {
 	const supabaseUrl = process.env.VITE_SUPABASE_URL;
-	const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY; // Using Anon key for SSR as per standard patterns
+	const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 	if (!supabaseUrl || !supabaseKey) {
 		throw new Error("Missing Supabase environment variables: VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY must be set.");
@@ -21,7 +21,11 @@ export function createSupabaseServerClient(request: Request) {
 		{
 			cookies: {
 				getAll() {
-					return parseCookieHeader(request.headers.get("Cookie") ?? "");
+					const cookies = parseCookieHeader(request.headers.get("Cookie") ?? "");
+					return cookies.map((cookie) => ({
+						name: cookie.name,
+						value: cookie.value ?? "",
+					}));
 				},
 				setAll(cookiesToSet) {
 					cookiesToSet.forEach(({ name, value, options }) =>
@@ -37,5 +41,3 @@ export function createSupabaseServerClient(request: Request) {
 
 	return { supabase, headers };
 }
-
-export { createSupabaseServerClient };
