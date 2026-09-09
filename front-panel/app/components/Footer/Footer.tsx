@@ -7,7 +7,7 @@ export default function Footer() {
 			<div className="container mx-auto py-12 px-4">
 				<div className="grid gap-8 md:grid-cols-3">
 					<div className="space-y-4">
-						<span className="text-xl font-bold">WanderNest</span>
+						<span className="text-xl font-bold">Ambady Tours and Travels</span>
 						<p className="text-sm text-muted-foreground">
 							Simple Tour Management System. Easy bookings for memorable trips.
 						</p>
@@ -32,7 +32,7 @@ export default function Footer() {
 				</div>
 
 				<div className="mt-12 flex flex-col gap-4 border-t pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-					<p>© {new Date().getFullYear()} WanderNest. All rights reserved.</p>
+					<p>© {new Date().getFullYear()} Ambady Tours and Travels. All rights reserved.</p>
 					<span className="flex gap-2 items-center">
 						<span>Built for travelers</span>
 						<Heart className="size-4 text-destructive fill-destructive" />

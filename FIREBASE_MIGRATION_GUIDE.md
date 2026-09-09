@@ -1,6 +1,6 @@
-# WanderNest — Firebase Migration & Production Guide
+# Ambady Tours and Travels — Firebase Migration & Production Guide
 
-This document summarizes the complete migration of the WanderNest Tour Management System from a complex multi-provider architecture to a streamlined, **Firebase-only** platform.
+This document summarizes the complete migration of the Ambady Tours and Travels Tour Management System from a complex multi-provider architecture to a streamlined, **Firebase-only** platform.
 
 ## 🏗️ Architecture Overview
 
@@ -21,7 +21,7 @@ There is exactly **one login screen** at `/login`. The system automatically rout
 ### Test Accounts
 | Account Type | Email | Password | Role |
 | :--- | :--- | :--- | :--- |
-| **Administrator** | `admin@wandernest.com` | `Password123` | **admin** |
+| **Administrator** | `admin@Ambady Tours and Travels.com` | `Password123` | **admin** |
 | **Test User 1** | `user1@example.com` | `Password123` | user |
 | **Test User 2** | `user2@example.com` | `Password123` | user |
 

@@ -65,7 +65,7 @@ export const RecentBookingsCard = ({ recentBookings }: { recentBookings: HighLev
 										{booking.customer_name || "Guest"}{" "}
 										<span className="hover:text-primary hover:underline underline-offset-4">
 											<a
-												href={`https://wa.me/${booking.customer_phone}?text=Hi! I am from WanderNest.\nThanks for booking with us.\nYour booking reference is ${booking.booking_ref}`}
+												href={`https://wa.me/${booking.customer_phone}?text=Hi! I am from Ambady Tours and Travels.\nThanks for booking with us.\nYour booking reference is ${booking.booking_ref}`}
 												target="_blank"
 												rel="noopener noreferrer"
 											>

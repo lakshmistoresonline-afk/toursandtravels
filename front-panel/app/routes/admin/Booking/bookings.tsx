@@ -117,7 +117,7 @@ export default function BookingsPage() {
 			const worksheet = XLSX.utils.json_to_sheet(exportData);
 			const workbook = XLSX.utils.book_new();
 			XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
-			XLSX.writeFile(workbook, `WanderNest_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
+			XLSX.writeFile(workbook, `Ambady Tours and Travels_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
 		} catch (error) {
 			console.error("Export failed:", error);
 		} finally {

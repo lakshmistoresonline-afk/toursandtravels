@@ -1,6 +1,6 @@
-# WanderNest — Local Development Guide
+# Ambady Tours and Travels — Local Development Guide
 
-Follow these steps to set up and run the WanderNest Tour Management System on your local machine.
+Follow these steps to set up and run the Ambady Tours and Travels Tour Management System on your local machine.
 
 ## 1. Prerequisites
 - **Node.js**: Version 20 or higher recommended.
@@ -48,7 +48,7 @@ The system uses a **Single Login** at `/login`.
   - Login with `user1@example.com` (Password: `Password123`).
   - You will be able to browse tours and join them.
 - **To test as an Admin**:
-  - Login with `admin@wandernest.com` (Password: `Password123`).
+  - Login with `admin@Ambady Tours and Travels.com` (Password: `Password123`).
   - You will be redirected to the **Admin Dashboard**.
   - You can also manually go to `/admin` once logged in.
 

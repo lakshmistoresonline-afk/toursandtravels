@@ -99,9 +99,9 @@ export default function ContactUs() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="Contact Us | WanderNest"
+				metaTitle="Contact Us | Ambady Tours and Travels"
 				metaDescription="We're here to help you with any questions or concerns you may have. Don't hesitate to reach out to us!"
-				metaKeywords="WanderNest, Contact"
+				metaKeywords="Ambady Tours and Travels, Contact"
 				ogType="article"
 				ogUrl={`${process.env.VITE_MAIN_APP_URL}/contact-us`}
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/contact-us`}

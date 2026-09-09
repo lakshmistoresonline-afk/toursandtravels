@@ -79,7 +79,7 @@ export default function AccountDetailsPage() {
 
 	return (
 		<div className="space-y-8 max-w-3xl animate-in slide-in-from-right-4 duration-500">
-			<MetaDetails metaTitle="Profile | WanderNest" />
+			<MetaDetails metaTitle="Profile | Ambady Tours and Travels" />
 
 			<div className="bg-primary/5 p-8 rounded-3xl flex items-center gap-6 border border-primary/10">
 				<div className="h-20 w-20 rounded-2xl bg-primary flex items-center justify-center text-white text-3xl font-black shadow-xl shadow-primary/20">

@@ -106,9 +106,9 @@ export default function About() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="About Us | WanderNest"
+				metaTitle="About Us | Ambady Tours and Travels"
 				metaDescription="Discover who we are - your trusted partner for unforgettable experiences in Dubai and the UAE."
-				metaKeywords="About us, WanderNest, Dubai tours, UAE travel"
+				metaKeywords="About us, Ambady Tours and Travels, Dubai tours, UAE travel"
 				ogType="website"
 				ogUrl={`${process.env.VITE_MAIN_APP_URL}/about`}
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/about`}

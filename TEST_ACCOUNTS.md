@@ -1,4 +1,4 @@
-# WanderNest — Test Account Credentials
+# Ambady Tours and Travels — Test Account Credentials
 
 Use these credentials to verify the application functionality across different roles.
 
@@ -13,7 +13,7 @@ These accounts can access the `/admin` dashboard to manage tours and view all re
 
 | Name | Email | Role |
 | :--- | :--- | :--- |
-| System Admin | `admin@wandernest.com` | **Admin** |
+| System Admin | `admin@ambady.com` | **Admin** |
 
 ---
 
@@ -39,7 +39,7 @@ These accounts are for testing the customer booking flow and profile reuse.
 - Note that when you register for a *second* tour, your details are pulled automatically from your profile.
 
 ### 2. Test Admin Panel
-- Login with `admin@wandernest.com`.
+- Login with `admin@ambady.com`.
 - Navigate to `/admin`.
 - Verify you can see the **Dashboard stats**.
 - Go to **Tours** to create/edit tours.
@@ -47,5 +47,5 @@ These accounts are for testing the customer booking flow and profile reuse.
 
 ### 3. Test Security
 - Login with `user1@example.com`.
-- Try to manually navigate to `http://localhost:5173/admin`.
+- Try to manually navigate to `/admin`.
 - Verify that the application redirects you back to the login or home page (Access Denied).

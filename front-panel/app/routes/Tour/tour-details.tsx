@@ -90,7 +90,7 @@ export default function TourDetailsPage() {
 	return (
 		<div className="bg-slate-50/30 min-h-screen pb-20 animate-in fade-in duration-700">
 			<MetaDetails
-				metaTitle={tour.name + " | WanderNest"}
+				metaTitle={tour.name + " | Ambady Tours and Travels"}
 				metaDescription={tour.overview?.slice(0, 320)}
 			/>
 

@@ -25,7 +25,7 @@ export default function MyBookingsPage() {
 
 	return (
 		<div className="container mx-auto max-w-4xl px-4">
-			<MetaDetails metaTitle="My Tours | WanderNest" />
+			<MetaDetails metaTitle="My Tours | Ambady Tours and Travels" />
 			<div className="mb-8">
 				<h1 className="text-3xl font-bold">My Tour History</h1>
 				<p className="text-muted-foreground mt-2">Manage your current and past registrations.</p>

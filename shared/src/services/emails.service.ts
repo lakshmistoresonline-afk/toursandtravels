@@ -37,7 +37,7 @@ class EmailService {
 	public async sendInquiry(payload: any) {
 		const { full_name, email, subject, message } = payload;
 		return this.sendEmail({
-			from: `WanderNest <inquiries@wandernest.com>`,
+			from: `Ambady Tours and Travels <inquiries@Ambady Tours and Travels.com>`,
 			to: EMAIL_ADDRESS_1,
 			subject: `New Inquiry: ${subject}`,
 			text: `New Inquiry from ${full_name} (${email})\n\nSubject: ${subject}\n\nMessage: ${message}`,
@@ -48,7 +48,7 @@ class EmailService {
 	public async sendSoftBookingCreationEmail(payload: any) {
 		const { booking_ref, customer_email, customer_name, total, customer_phone, tour_name } = payload;
 		return this.sendEmail({
-			from: `WanderNest <bookings@wandernest.com>`,
+			from: `Ambady Tours and Travels <bookings@Ambady Tours and Travels.com>`,
 			to: EMAIL_ADDRESS_1,
 			subject: `New Registration: #${booking_ref} - ${tour_name}`,
 			text: `A new tour registration has been placed!\n\nReference: ${booking_ref}\nCustomer: ${customer_name} (${customer_email}, ${customer_phone})\nTotal: $${total?.toFixed(2)}`,
@@ -59,19 +59,19 @@ class EmailService {
 	public async sendBookingConfirmation(payload: any) {
 		const { booking_ref, customer_name, customer_email } = payload;
 		return this.sendEmail({
-			from: `WanderNest <bookings@wandernest.com>`,
+			from: `Ambady Tours and Travels <bookings@Ambady Tours and Travels.com>`,
 			to: customer_email,
 			subject: `Registration Confirmed – #${booking_ref}`,
-			text: `Dear ${customer_name},\n\nYour registration #${booking_ref} has been confirmed.\n\nThank you for choosing WanderNest!`,
+			text: `Dear ${customer_name},\n\nYour registration #${booking_ref} has been confirmed.\n\nThank you for choosing Ambady Tours and Travels!`,
 		});
 	}
 
 	/** Send password reset link email */
 	public async sendPasswordResetLink(recoveryLink: string, email: string) {
 		return this.sendEmail({
-			from: `WanderNest <no-reply@wandernest.com>`,
+			from: `Ambady Tours and Travels <no-reply@Ambady Tours and Travels.com>`,
 			to: email,
-			subject: `Password Reset Request - WanderNest`,
+			subject: `Password Reset Request - Ambady Tours and Travels`,
 			text: `Your password reset link: ${recoveryLink}`,
 		});
 	}
@@ -79,9 +79,9 @@ class EmailService {
 	/** Send otp for admin login */
 	public async sendAdminLoginOtpEmail(code: string, email: string) {
 		return this.sendEmail({
-			from: `WanderNest <no-reply@wandernest.com>`,
+			from: `Ambady Tours and Travels <no-reply@Ambady Tours and Travels.com>`,
 			to: email,
-			subject: `Login Verification Code - WanderNest`,
+			subject: `Login Verification Code - Ambady Tours and Travels`,
 			text: `Your login verification code is: ${code}`,
 		});
 	}
@@ -89,10 +89,10 @@ class EmailService {
 	/** Send welcome email on signup */
 	public async sendWelcomeEmail(firstName: string, email: string) {
 		return this.sendEmail({
-			from: `WanderNest <no-reply@wandernest.com>`,
+			from: `Ambady Tours and Travels <no-reply@Ambady Tours and Travels.com>`,
 			to: email,
-			subject: `👋 Welcome to WanderNest, ${firstName}!`,
-			text: `Welcome to WanderNest, ${firstName}! We're excited to have you on board.`,
+			subject: `👋 Welcome to Ambady Tours and Travels, ${firstName}!`,
+			text: `Welcome to Ambady Tours and Travels, ${firstName}! We're excited to have you on board.`,
 		});
 	}
 }

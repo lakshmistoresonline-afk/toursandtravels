@@ -20,7 +20,7 @@ export function MetaDetails({
 	canonicalUrl,
 	ogUrl,
 	ogImage,
-	siteName = "WanderNest",
+	siteName = "Ambady Tours and Travels",
 	ogType = "website",
 	hasPricing = false,
 	pricing = null,

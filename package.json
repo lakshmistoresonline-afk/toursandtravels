@@ -16,11 +16,13 @@
 		"build:app": "npm run build -w front-panel",
 		"build": "npm run build:shared && npm run build:app",
 		"typecheck": "npm -ws --if-present run typecheck",
-		"format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md,css,scss}\""
+		"format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md,css,scss}\"",
+		"db:reset": "node shared/src/scripts/reset-db.cjs"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.1",
-		"prettier": "^3.7.4",
-		"firebase-tools": "^13.31.1"
+		"firebase-admin": "^14.3.0",
+		"firebase-tools": "^13.31.1",
+		"prettier": "^3.7.4"
 	}
 }

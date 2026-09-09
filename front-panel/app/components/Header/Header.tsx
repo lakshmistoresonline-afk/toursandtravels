@@ -39,7 +39,7 @@ export default function Header() {
 							<SheetHeader className="mt-8">
 								<div className="flex items-center gap-2">
 									<div className="bg-primary h-8 w-8 rounded-lg flex items-center justify-center text-white font-bold">W</div>
-									<span className="text-2xl font-black tracking-tight">WanderNest</span>
+									<span className="text-2xl font-black tracking-tight">Ambady Tours and Travels</span>
 								</div>
 							</SheetHeader>
 							<nav className="flex flex-col gap-6 mt-12">
@@ -60,7 +60,7 @@ export default function Header() {
 
 				<Link to="/" className="flex items-center gap-2 group">
 					<div className="bg-primary h-10 w-10 rounded-2xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-primary/30 group-hover:rotate-12 transition-transform">W</div>
-					<span className="text-2xl font-black tracking-tighter text-slate-900">WanderNest</span>
+					<span className="text-2xl font-black tracking-tighter text-slate-900">Ambady Tours and Travels</span>
 				</Link>
 
 				<nav className="ml-16 hidden lg:flex items-center gap-10">

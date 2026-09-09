@@ -23,7 +23,7 @@ export default function ToursPage() {
 	return (
 		<div className="animate-in fade-in duration-700">
 			<MetaDetails
-				metaTitle="Explore Tours | WanderNest"
+				metaTitle="Explore Tours | Ambady Tours and Travels"
 				metaDescription="Find your next adventure from our curated list of professional tours."
 			/>
 

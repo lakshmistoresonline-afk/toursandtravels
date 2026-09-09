@@ -50,7 +50,7 @@ export default function UpdatePassword() {
 
 	return (
 		<div className="container max-w-md mx-auto py-20 px-4">
-			<MetaDetails metaTitle="Update Password | WanderNest" />
+			<MetaDetails metaTitle="Update Password | Ambady Tours and Travels" />
 			<Card>
 				<CardHeader><CardTitle className="text-2xl">Set New Password</CardTitle></CardHeader>
 				<CardContent>

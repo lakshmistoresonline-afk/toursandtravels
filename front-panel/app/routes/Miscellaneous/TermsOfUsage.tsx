@@ -7,9 +7,9 @@ export default function TermsOfUsePage() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="Terms of Use | WanderNest"
+				metaTitle="Terms of Use | Ambady Tours and Travels"
 				metaDescription="Our terms of use outline the rules and guidelines for using our website and services."
-				metaKeywords="Terms of Use, User Agreement, WanderNest"
+				metaKeywords="Terms of Use, User Agreement, Ambady Tours and Travels"
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/terms-of-use`}
 			/>
 
@@ -35,7 +35,7 @@ export default function TermsOfUsePage() {
 								1. Acceptance of Terms
 							</h2>
 							<p>
-								By accessing or using WanderNest's website and services, you agree to be bound
+								By accessing or using Ambady Tours and Travels's website and services, you agree to be bound
 								by these Terms of Use. If you do not agree, please do not use our services.
 							</p>
 						</section>

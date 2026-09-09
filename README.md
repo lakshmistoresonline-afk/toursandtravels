@@ -1,6 +1,6 @@
-# WanderNest — Simple Tour Management System (Firebase Edition)
+# Ambady Tours and Travels — Simple Tour Management System (Firebase Edition)
 
-This is a complete Firebase-only architecture for the WanderNest Tour Management System.
+This is a complete Firebase-only architecture for the Ambady Tours and Travels Tour Management System.
 
 ## Features
 - **Firebase Hosting**: High-performance static hosting for the React SPA.

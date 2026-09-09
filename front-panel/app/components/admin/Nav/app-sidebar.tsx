@@ -19,7 +19,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
 					<SidebarMenuItem className="px-1">
 						<Link to="/" viewTransition prefetch="viewport">
 							<div className="w-25 h-fit">
-								<img src="/logo.png" className="w-25 h-fit" alt="WanderNest" />
+								<img src="/logo.png" className="w-25 h-fit" alt="Ambady Tours and Travels" />
 							</div>
 						</Link>
 					</SidebarMenuItem>

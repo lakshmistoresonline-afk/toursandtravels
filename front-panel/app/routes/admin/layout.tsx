@@ -20,7 +20,7 @@ export default function AdminLayout() {
 						<div className="bg-primary h-8 w-8 rounded-lg flex items-center justify-center">
 							<span className="text-white font-bold">W</span>
 						</div>
-						<h2 className="font-bold text-xl tracking-tight hidden sm:block">WanderNest Admin</h2>
+						<h2 className="font-bold text-xl tracking-tight hidden sm:block">Ambady Tours and Travels Admin</h2>
 					</Link>
 
 					<div className="flex items-center gap-6">

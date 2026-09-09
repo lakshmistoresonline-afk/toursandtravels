@@ -45,7 +45,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="WanderNest | Premium Tour Experiences"
+				metaTitle="Ambady Tours and Travels | Premium Tour Experiences"
 				metaDescription="Book curated tours and unforgettable travel experiences with ease."
 			/>
 
