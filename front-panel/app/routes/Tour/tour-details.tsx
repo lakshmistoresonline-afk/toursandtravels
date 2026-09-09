@@ -11,10 +11,13 @@ import { Button } from "~/components/ui/button";
 import { format } from "date-fns";
 import {
 	Calendar,
-	Clock,
-	MapPin,
 	Users,
 	Loader2,
+	MapPin,
+	IndianRupee,
+	ArrowLeft,
+	ShieldCheck,
+	CheckCircle2
 } from "lucide-react";
 import { useMemo, useEffect } from "react";
 import TourImageCarousel from "~/components/Tour/TourImageCarousel";
@@ -68,15 +71,15 @@ export default function TourDetailsPage() {
 		}
 	}, [actionData]);
 
-	if (!tour) return <div className="container py-20 text-center">Tour not found</div>;
+	if (!tour) return <div className="container py-20 text-center text-slate-500">Tour not found</div>;
 
 	const tour_images = useMemo(() => {
 		const filteredImages = tour?.images?.filter((i: string | null) => i != null) ?? [];
 		return [
-			{ url: tour.cover_image, title: tour.name + " Cover" },
+			{ url: tour.cover_image, title: tour.name },
 			...filteredImages.map((url: string, idx: number) => ({
 				url,
-				title: tour.name + " Image " + idx,
+				title: `${tour.name} - ${idx + 1}`,
 			})),
 		];
 	}, [tour]);
@@ -85,132 +88,151 @@ export default function TourDetailsPage() {
 	const isRegistrationOpen = tour.status === "REGISTRATION_OPEN" || tour.status === "PUBLISHED";
 
 	return (
-		<>
+		<div className="bg-slate-50/30 min-h-screen pb-20 animate-in fade-in duration-700">
 			<MetaDetails
 				metaTitle={tour.name + " | WanderNest"}
 				metaDescription={tour.overview?.slice(0, 320)}
 			/>
 
-			<div className="container mx-auto py-8 space-y-8 px-4">
-				<div className="space-y-4">
-					<div className="flex justify-between items-start flex-wrap gap-4">
-						<div>
-							<div className="flex items-center gap-3 mb-2">
-								<Badge variant="outline" className="font-mono">{tour.tour_code}</Badge>
+			{/* Breadcrumb / Back button */}
+			<div className="container mx-auto px-4 py-6">
+				<Button variant="ghost" size="sm" asChild className="rounded-full hover:bg-white border-2 border-transparent hover:border-slate-100 transition-all font-bold text-slate-500">
+					<Link to="/tours"><ArrowLeft className="mr-2 h-4 w-4" /> All Destinations</Link>
+				</Button>
+			</div>
+
+			<div className="container mx-auto px-4">
+				<div className="grid lg:grid-cols-[1fr_400px] gap-12">
+					<div className="space-y-12">
+						{/* Header Info */}
+						<div className="space-y-6">
+							<div className="flex items-center gap-3">
+								<Badge className="bg-slate-900 px-4 py-1 rounded-full font-mono tracking-wider">{tour.tour_code}</Badge>
 								<TourStatusBadge status={tour.status!} />
 							</div>
-							<h1 className="text-4xl font-bold">{tour.name}</h1>
-							<div className="flex items-center gap-2 text-muted-foreground mt-2">
-								<MapPin className="h-4 w-4" />
+							<h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter leading-tight">{tour.name}</h1>
+							<div className="flex items-center gap-3 text-lg font-bold text-slate-500">
+								<div className="p-2 bg-primary/10 rounded-xl"><MapPin className="h-5 w-5 text-primary" /></div>
 								<span>{tour.destination}</span>
 							</div>
 						</div>
-						<div className="text-right">
-							<div className="text-sm text-muted-foreground">Price per person</div>
-							<div className="text-3xl font-bold text-primary">{tour.price?.toLocaleString()} INR</div>
-						</div>
-					</div>
-				</div>
 
-				<div className="grid lg:grid-cols-3 gap-8">
-					<div className="lg:col-span-2 space-y-10">
-						<TourImageCarousel images={tour_images} />
-
-						<div className="space-y-6">
-							<h2 className="text-2xl font-bold border-b pb-2">Overview</h2>
-							<p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">{tour.overview}</p>
+						{/* Carousel */}
+						<div className="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200">
+							<TourImageCarousel images={tour_images} />
 						</div>
 
-						{tour.itinerary && tour.itinerary.length > 0 && (
+						{/* Sections */}
+						<div className="grid md:grid-cols-2 gap-12 pt-8 border-t border-slate-100">
 							<div className="space-y-6">
-								<h2 className="text-2xl font-bold border-b pb-2">Itinerary</h2>
-								<div className="space-y-6">
-									{tour.itinerary.map((day: any) => (
-										<div key={day.id} className="flex gap-6">
-											<div className="flex flex-col items-center">
-												<div className="h-10 w-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+								<h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
+									<CheckCircle2 className="h-6 w-6 text-primary" /> Overview
+								</h2>
+								<p className="text-lg leading-relaxed text-slate-600 whitespace-pre-wrap font-medium">{tour.overview}</p>
+							</div>
+
+							{tour.itinerary && tour.itinerary.length > 0 && (
+								<div className="space-y-8">
+									<h2 className="text-2xl font-black text-slate-900 flex items-center gap-3">
+										<Calendar className="h-6 w-6 text-primary" /> Journey Itinerary
+									</h2>
+									<div className="space-y-10 relative">
+										<div className="absolute left-6 top-2 bottom-2 w-0.5 bg-slate-100" />
+										{tour.itinerary.map((day: any) => (
+											<div key={day.id} className="relative flex gap-8 group">
+												<div className="h-12 w-12 rounded-2xl bg-white border-4 border-slate-50 shadow-sm flex items-center justify-center font-black text-slate-900 z-10 group-hover:bg-primary group-hover:text-white group-hover:border-primary/20 transition-all">
 													{day.day_number}
 												</div>
-												<div className="flex-1 w-0.5 bg-muted mt-2"></div>
+												<div className="space-y-2 pt-1">
+													<h3 className="text-xl font-bold text-slate-900">{day.title}</h3>
+													<p className="text-slate-500 leading-relaxed">{day.description}</p>
+												</div>
 											</div>
-											<div className="space-y-2 pb-6">
-												<h3 className="text-xl font-semibold">{day.title}</h3>
-												<p className="text-muted-foreground">{day.description}</p>
-											</div>
-										</div>
-									))}
+										))}
+									</div>
 								</div>
-							</div>
-						)}
+							)}
+						</div>
 					</div>
 
-					<div className="space-y-6">
-						<Card className="sticky top-24">
-							<CardHeader>
-								<CardTitle>Register for this Tour</CardTitle>
-								<CardDescription>Secure your spot in few clicks.</CardDescription>
+					{/* Registration Sidebar */}
+					<aside className="relative">
+						<Card className="sticky top-28 border-none shadow-2xl shadow-slate-200 rounded-[2.5rem] overflow-hidden">
+							<CardHeader className="bg-slate-900 text-white p-10">
+								<div className="flex justify-between items-center mb-2">
+									<p className="text-xs font-black uppercase tracking-widest text-slate-400">Total Price</p>
+									<Badge className="bg-emerald-500 text-white border-none shadow-lg">Save 20% today</Badge>
+								</div>
+								<div className="flex items-baseline gap-1">
+									<span className="text-5xl font-black">₹{tour.price?.toLocaleString()}</span>
+									<span className="text-slate-400 text-sm font-bold">/ person</span>
+								</div>
 							</CardHeader>
-							<CardContent className="space-y-6">
-								<div className="space-y-3 text-sm">
-									<div className="flex justify-between">
-										<span className="text-muted-foreground flex items-center gap-2"><Calendar className="h-4 w-4" /> Start Date</span>
-										<span className="font-medium">{tour.start_date || 'TBD'}</span>
+							<CardContent className="p-10 space-y-8">
+								<div className="grid grid-cols-2 gap-4">
+									<div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1">Start Date</p>
+										<p className="font-bold text-slate-900">{tour.start_date || 'TBD'}</p>
 									</div>
-									<div className="flex justify-between">
-										<span className="text-muted-foreground flex items-center gap-2"><Users className="h-4 w-4" /> Max Capacity</span>
-										<span className="font-medium">{tour.max_participants || "Unlimited"}</span>
+									<div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1">Capacity</p>
+										<p className="font-bold text-slate-900">{tour.max_participants || "Unlim."}</p>
 									</div>
 								</div>
 
-								<Separator />
+								<div className="space-y-4">
+									{!user ? (
+										<div className="text-center space-y-4 py-4 bg-primary/5 rounded-3xl border border-dashed border-primary/20">
+											<p className="text-sm font-bold text-slate-600 px-6 leading-relaxed">Sign in to claim your spot and use your profile details.</p>
+											<Button asChild className="rounded-2xl px-10 h-12 shadow-lg shadow-primary/20 font-black"><Link to="/login">Join as User</Link></Button>
+										</div>
+									) : isRegistrationOpen ? (
+										<Form method="post" className="space-y-6">
+											<input type="hidden" name="intent" value="register" />
+											<div className="space-y-3">
+												<label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Travellers</label>
+												<Input type="number" name="travellersCount" defaultValue={1} min={1} max={tour.max_participants || 50} className="h-14 rounded-2xl bg-slate-50 border-none font-bold text-lg px-6 focus-visible:ring-primary/10" />
+											</div>
+											<div className="space-y-3">
+												<label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Notes (Optional)</label>
+												<textarea name="notes" className="w-full min-h-[120px] p-6 bg-slate-50 border-none rounded-3xl text-sm font-medium focus:ring-2 focus:ring-primary/10 transition-all outline-none" placeholder="Dietary needs or special requests?"></textarea>
+											</div>
 
-								{!user ? (
-									<div className="space-y-4">
-										<p className="text-sm text-center text-muted-foreground">Please login to register.</p>
-										<Button asChild className="w-full"><Link to="/login">Login / Sign Up</Link></Button>
-									</div>
-								) : isRegistrationOpen ? (
-									<Form method="post" className="space-y-4">
-										<input type="hidden" name="intent" value="register" />
-										<div className="space-y-2">
-											<label className="text-sm font-medium">Number of Travellers</label>
-											<Input type="number" name="travellersCount" defaultValue={1} min={1} max={tour.max_participants || 50} />
+											<div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-start gap-3">
+												<ShieldCheck className="h-5 w-5 text-emerald-600 mt-0.5" />
+												<div className="space-y-1">
+													<p className="text-xs font-black text-emerald-700 uppercase">One-Click Booking</p>
+													<p className="text-[11px] text-emerald-600 font-medium leading-tight">Details for **{user.first_name}** will be pulled from profile.</p>
+												</div>
+											</div>
+
+											<Button type="submit" className="w-full h-16 rounded-2xl text-lg font-black shadow-2xl shadow-primary/30 hover:scale-[1.02] transition-transform active:scale-[0.98]" disabled={isRegistering}>
+												{isRegistering ? <Loader2 className="animate-spin mr-2 h-6 w-6" /> : "Confirm Spot Now"}
+											</Button>
+										</Form>
+									) : (
+										<div className="text-center p-8 bg-red-50 rounded-3xl border border-red-100 font-black text-red-600 uppercase tracking-tighter shadow-inner">
+											Registration is {tour.status?.replace('_', ' ')}
 										</div>
-										<div className="space-y-2">
-											<label className="text-sm font-medium">Special Notes</label>
-											<textarea name="notes" className="w-full min-h-[80px] p-2 border rounded-md text-sm" placeholder="Optional notes..."></textarea>
-										</div>
-										<div className="bg-muted p-3 rounded-lg text-xs space-y-1">
-											<p className="font-semibold text-primary uppercase tracking-wider">Quick Profile Reuse</p>
-											<p>Details for <strong>{user.first_name} {user.last_name}</strong> will be used.</p>
-											<Link to="/account/details" className="text-primary hover:underline font-medium">Manage profile</Link>
-										</div>
-										<Button type="submit" className="w-full" size="lg" disabled={isRegistering}>
-											{isRegistering ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : "Join Tour"}
-										</Button>
-									</Form>
-								) : (
-									<div className="text-center p-4 bg-muted rounded-lg font-medium text-destructive">
-										Registration is {tour.status?.replace('_', ' ').toLowerCase()}.
-									</div>
-								)}
+									)}
+								</div>
 							</CardContent>
 						</Card>
-					</div>
+					</aside>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
 function TourStatusBadge({ status }: { status: string }) {
 	const variants: Record<string, "default" | "secondary" | "outline" | "destructive"> = {
-		PUBLISHED: "secondary",
-		REGISTRATION_OPEN: "default",
-		REGISTRATION_CLOSED: "destructive",
-		DRAFT: "outline",
+		REGISTRATION_OPEN: "bg-emerald-500 text-white",
+		PUBLISHED: "bg-blue-500 text-white",
+		REGISTRATION_CLOSED: "bg-red-500 text-white",
+		DRAFT: "bg-slate-400 text-white",
 	};
-	return <Badge variant={variants[status] || "outline"} className="capitalize">{status?.replace('_', ' ').toLowerCase()}</Badge>;
+	return <Badge className={`px-4 py-1 rounded-full border-none shadow-sm font-bold text-[10px] uppercase tracking-widest ${variants[status] || ""}`}>{status?.replace('_', ' ')}</Badge>;
 }
 
 function Input({ ...props }: any) {

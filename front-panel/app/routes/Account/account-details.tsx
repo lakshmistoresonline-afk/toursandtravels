@@ -1,21 +1,21 @@
 import { useRouteLoaderData, useActionData, useSubmit, useNavigation } from "react-router";
 import { loader as rootLoader } from "~/root";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import { Loader2, Save } from "lucide-react";
+import { Loader2, Save, User as UserIcon, MapPin, Phone } from "lucide-react";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { ProfileUpdateForm, profileUpdateSchema } from "@workspace/shared/schemas/profile-update.schema";
+import { profileUpdateSchema } from "@workspace/shared/schemas/profile-update.schema";
 import { AuthService } from "@workspace/shared/services/auth.service";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
 
-export async function clientAction({ request }: any) {
+export const clientAction = async ({ request }: any) => {
 	try {
 		const formData = await request.formData();
 		const data = Object.fromEntries(formData);
@@ -36,7 +36,7 @@ export async function clientAction({ request }: any) {
 	} catch (err: any) {
 		return { success: false, error: err.message || "Failed to update profile" };
 	}
-}
+};
 
 export default function AccountDetailsPage() {
 	const rootData = useRouteLoaderData<typeof rootLoader>("root");
@@ -45,10 +45,9 @@ export default function AccountDetailsPage() {
 	const navigation = useNavigation();
 
 	const user = rootData?.user as FullCurrentUser | null;
-
 	const isSubmitting = navigation.state === "submitting";
 
-	const form = useForm<ProfileUpdateForm>({
+	const form = useForm<any>({
 		disabled: isSubmitting,
 		resolver: zodResolver(profileUpdateSchema),
 		defaultValues: {
@@ -57,64 +56,61 @@ export default function AccountDetailsPage() {
 			gender: (user?.gender as any) || null,
 			date_of_birth: user?.date_of_birth || null,
 			phone_number: user?.phone_number || "",
-			whatsapp_number: user?.whatsapp_number || "",
 			address_house: user?.address_house || "",
 			address_street: user?.address_street || "",
 			address_locality: user?.address_locality || "",
-			address_district: user?.address_district || "",
-			address_state: user?.address_state || "",
-			address_pin_code: user?.address_pin_code || "",
 			country: user?.country || "",
-			identity_type: user?.identity_type || "",
-			identity_number: user?.identity_number || "",
-			emergency_contact_name: user?.emergency_contact_name || "",
-			emergency_contact_number: user?.emergency_contact_number || "",
-			emergency_contact_relationship: user?.emergency_contact_relationship || "",
-			avatar_url: user?.avatar_url || null,
 		},
 	});
 
-	const onSubmit = (data: ProfileUpdateForm) => {
+	const onSubmit = (data: any) => {
 		submit(data as any, { method: "post" });
 	};
 
 	useEffect(() => {
 		if (actionData?.success) {
-			toast.success("Profile updated successfully!");
+			toast.success("Profile saved successfully!");
 		} else if (actionData?.error) {
 			toast.error(actionData.error);
 		}
 	}, [actionData]);
 
-	if (!user) return <div className="text-center py-20">Please login to view profile.</div>;
+	if (!user) return null;
 
 	return (
-		<div className="space-y-6 max-w-4xl mx-auto px-4">
-			<MetaDetails metaTitle="Account Details | WanderNest" />
-			<h1 className="text-3xl font-bold">My Profile</h1>
+		<div className="space-y-8 max-w-3xl animate-in slide-in-from-right-4 duration-500">
+			<MetaDetails metaTitle="Profile | WanderNest" />
+
+			<div className="bg-primary/5 p-8 rounded-3xl flex items-center gap-6 border border-primary/10">
+				<div className="h-20 w-20 rounded-2xl bg-primary flex items-center justify-center text-white text-3xl font-black shadow-xl shadow-primary/20">
+					{user.first_name?.charAt(0)}
+				</div>
+				<div>
+					<h2 className="text-2xl font-black text-slate-900">{user.first_name} {user.last_name}</h2>
+					<p className="text-slate-500 font-medium">{user.email}</p>
+				</div>
+			</div>
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-					<Card>
-						<CardHeader>
-							<CardTitle>Personal Details</CardTitle>
-							<CardDescription>Keep your profile updated for faster registrations.</CardDescription>
+					{/* Personal Card */}
+					<Card className="border-none shadow-sm rounded-3xl overflow-hidden">
+						<CardHeader className="bg-slate-50 px-8 py-6 border-b border-slate-100 flex flex-row items-center gap-3">
+							<UserIcon className="h-5 w-5 text-slate-400" />
+							<CardTitle className="text-lg font-bold">Personal Information</CardTitle>
 						</CardHeader>
-						<CardContent className="grid sm:grid-cols-2 gap-4">
+						<CardContent className="p-8 grid sm:grid-cols-2 gap-6">
 							<FormField control={form.control} name="first_name" render={({ field }) => (
-								<FormItem><FormLabel>First Name</FormLabel><FormControl><Input {...field} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">First Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="last_name" render={({ field }) => (
-								<FormItem><FormLabel>Last Name</FormLabel><FormControl><Input {...field} /></FormControl></FormItem>
-							)} />
-							<FormField control={form.control} name="phone_number" render={({ field }) => (
-								<FormItem><FormLabel>Mobile</FormLabel><FormControl><Input {...field} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">Last Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="gender" render={({ field }) => (
-								<FormItem><FormLabel>Gender</FormLabel>
+								<FormItem><FormLabel className="font-bold text-slate-600">Gender</FormLabel>
 									<Select onValueChange={field.onChange} defaultValue={field.value || ""}>
-										<FormControl><SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
-										<SelectContent>
+										<FormControl><SelectTrigger className="h-12 rounded-xl"><SelectValue /></SelectTrigger></FormControl>
+										<SelectContent className="rounded-xl">
 											<SelectItem value="Male">Male</SelectItem>
 											<SelectItem value="Female">Female</SelectItem>
 											<SelectItem value="Other">Other</SelectItem>
@@ -122,31 +118,38 @@ export default function AccountDetailsPage() {
 									</Select>
 								</FormItem>
 							)} />
+							<FormField control={form.control} name="phone_number" render={({ field }) => (
+								<FormItem><FormLabel className="font-bold text-slate-600">Contact Number</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+							)} />
 						</CardContent>
 					</Card>
 
-					<Card>
-						<CardHeader><CardTitle>Address Information</CardTitle></CardHeader>
-						<CardContent className="grid sm:grid-cols-2 gap-4">
+					{/* Address Card */}
+					<Card className="border-none shadow-sm rounded-3xl overflow-hidden">
+						<CardHeader className="bg-slate-50 px-8 py-6 border-b border-slate-100 flex flex-row items-center gap-3">
+							<MapPin className="h-5 w-5 text-slate-400" />
+							<CardTitle className="text-lg font-bold">Residency Address</CardTitle>
+						</CardHeader>
+						<CardContent className="p-8 grid sm:grid-cols-2 gap-6">
 							<FormField control={form.control} name="address_house" render={({ field }) => (
-								<FormItem><FormLabel>House No.</FormLabel><FormControl><Input {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">Flat / House No.</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="address_street" render={({ field }) => (
-								<FormItem><FormLabel>Street</FormLabel><FormControl><Input {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">Street Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="address_locality" render={({ field }) => (
-								<FormItem><FormLabel>Locality</FormLabel><FormControl><Input {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">City / Locality</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="country" render={({ field }) => (
-								<FormItem><FormLabel>Country</FormLabel><FormControl><Input {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-600">Country</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 						</CardContent>
 					</Card>
 
-					<div className="flex justify-end">
-						<Button type="submit" size="lg" disabled={isSubmitting}>
-							{isSubmitting ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : <Save className="mr-2 h-4 w-4" />}
-							Save Changes
+					<div className="flex justify-end pt-4">
+						<Button type="submit" size="lg" className="rounded-2xl px-10 py-7 text-lg font-black shadow-xl shadow-primary/30 hover:scale-105 transition-transform" disabled={isSubmitting}>
+							{isSubmitting ? <Loader2 className="animate-spin mr-2 h-5 w-5" /> : <Save className="mr-2 h-5 w-5" />}
+							Update My Profile
 						</Button>
 					</div>
 				</form>

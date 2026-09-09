@@ -7,6 +7,8 @@ import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { InquiryBanner } from "~/components/Contact/InquirySection";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { Card, CardContent } from "~/components/ui/card";
+import { ShieldCheck, Star, Headset, IndianRupee } from "lucide-react";
 
 export const clientLoader = async ({ request }: Route.LoaderArgs) => {
 	try {
@@ -24,7 +26,7 @@ export const clientLoader = async ({ request }: Route.LoaderArgs) => {
 	} catch (error) {
 		return {
 			featuredToursResp: { tours: [], total: 0 },
-			errors: "",
+			errors: "Failed to load tours. Please check your internet connection.",
 			success_msg: "",
 		};
 	}
@@ -43,15 +45,45 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="WanderNest | Simple Tour Management"
-				metaDescription="Book amazing tours and enjoy unforgettable travel experiences."
+				metaTitle="WanderNest | Premium Tour Experiences"
+				metaDescription="Book curated tours and unforgettable travel experiences with ease."
 			/>
-			<section className="pb-20 sm:space-y-16 space-y-8">
+
+			<div className="space-y-20 pb-20">
+				{/* Hero Section */}
 				<HeroSection hero_sections={[]} />
+
+				{/* Feature Highlights */}
+				<section className="container mx-auto px-4">
+					<div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+						{[
+							{ title: "Trusted Tours", desc: "Hand-vetted experiences for safety and quality.", icon: ShieldCheck, color: "bg-blue-50 text-blue-600" },
+							{ title: "Top Rated", desc: "Consistently high scores from our global community.", icon: Star, color: "bg-yellow-50 text-yellow-600" },
+							{ title: "24/7 Support", desc: "Our dedicated team is always here for you.", icon: Headset, color: "bg-purple-50 text-purple-600" },
+							{ title: "Best Value", desc: "Competitive pricing with no hidden charges.", icon: IndianRupee, color: "bg-green-50 text-green-600" },
+						].map((item, i) => (
+							<Card key={i} className="border-none shadow-sm bg-white/50 backdrop-blur-sm hover:shadow-md transition-all">
+								<CardContent className="pt-6">
+									<div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center mb-4`}>
+										<item.icon className="w-6 h-6" />
+									</div>
+									<h3 className="font-bold text-lg mb-1">{item.title}</h3>
+									<p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+								</CardContent>
+							</Card>
+						))}
+					</div>
+				</section>
+
+				{/* Featured Tours */}
 				<FeaturedToursSection tours={loaderData.featuredToursResp.tours ?? []} />
+
+				{/* Brand Story / Why Us Section */}
 				<WhyUsSection />
+
+				{/* Contact/Inquiry Section */}
 				<InquiryBanner />
-			</section>
+			</div>
 		</>
 	);
 }

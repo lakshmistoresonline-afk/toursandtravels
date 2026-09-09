@@ -1,5 +1,5 @@
 import { Form, Link, NavLink, useNavigation, useRouteLoaderData } from "react-router";
-import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard } from "lucide-react";
+import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard, Globe } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
 import { loader } from "~/root";
@@ -17,7 +17,7 @@ import type { FullCurrentUser } from "@workspace/shared/types/user";
 
 const NAV_LINKS = [
 	{ label: "Home", to: "/" },
-	{ label: "All Tours", to: "/tours" },
+	{ label: "Tours", to: "/tours" },
 	{ label: "About", to: "/about" },
 	{ label: "FAQs", to: "/faqs" },
 ];
@@ -27,48 +27,60 @@ export default function Header() {
 	const user = rootLoaderData?.user as FullCurrentUser | null;
 
 	return (
-		<header className="bg-background border-b">
-			<div className="container mx-auto flex items-center h-16 px-4">
+		<header className="bg-white/80 backdrop-blur-xl border-b sticky top-0 z-50">
+			<div className="container mx-auto flex items-center h-20 px-4">
 				{/* Mobile menu */}
-				<div className="mr-2 flex lg:hidden">
+				<div className="mr-4 flex lg:hidden">
 					<Sheet>
 						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon"><Menu className="h-5 w-5" /></Button>
+							<Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-50"><Menu className="h-6 w-6" /></Button>
 						</SheetTrigger>
-						<SheetContent side="left" className="w-64">
-							<SheetHeader className="mt-5"><span className="text-lg font-semibold">WanderNest</span></SheetHeader>
-							<nav className="flex flex-col gap-4 mt-8">
+						<SheetContent side="left" className="w-[300px] rounded-r-3xl">
+							<SheetHeader className="mt-8">
+								<div className="flex items-center gap-2">
+									<div className="bg-primary h-8 w-8 rounded-lg flex items-center justify-center text-white font-bold">W</div>
+									<span className="text-2xl font-black tracking-tight">WanderNest</span>
+								</div>
+							</SheetHeader>
+							<nav className="flex flex-col gap-6 mt-12">
 								{NAV_LINKS.map((link) => (
-									<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm ${isActive ? "font-medium" : "text-muted-foreground"}`}>
+									<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-lg font-bold transition-all ${isActive ? "text-primary translate-x-2" : "text-slate-500"}`}>
 										{link.label}
 									</NavLink>
 								))}
 								{user?.role === "admin" && (
-									<NavLink to="/admin" className="text-sm text-primary font-bold">Admin Dashboard</NavLink>
+									<NavLink to="/admin" className="text-lg text-emerald-600 font-black border-t pt-6 flex items-center gap-2">
+										<LayoutDashboard className="h-5 w-5" /> Admin Panel
+									</NavLink>
 								)}
 							</nav>
 						</SheetContent>
 					</Sheet>
 				</div>
 
-				<Link to="/" className="flex items-center gap-2">
-					<span className="text-xl font-bold tracking-tight">WanderNest</span>
+				<Link to="/" className="flex items-center gap-2 group">
+					<div className="bg-primary h-10 w-10 rounded-2xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-primary/30 group-hover:rotate-12 transition-transform">W</div>
+					<span className="text-2xl font-black tracking-tighter text-slate-900">WanderNest</span>
 				</Link>
 
-				<nav className="ml-12 hidden lg:flex items-center gap-6">
+				<nav className="ml-16 hidden lg:flex items-center gap-10">
 					{NAV_LINKS.map((link) => (
-						<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm hover:text-primary transition-colors ${isActive ? "font-medium text-foreground" : "text-muted-foreground"}`}>
+						<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm font-bold tracking-wide transition-all hover:text-primary relative py-1 ${isActive ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" : "text-slate-500"}`}>
 							{link.label}
 						</NavLink>
 					))}
 					{user?.role === "admin" && (
-						<NavLink to="/admin" className="text-sm text-primary font-bold hover:opacity-80">Admin Dashboard</NavLink>
+						<NavLink to="/admin" className="text-sm text-emerald-600 font-black hover:opacity-80 flex items-center gap-1.5 bg-emerald-50 px-4 py-2 rounded-full">
+							<LayoutDashboard className="h-4 w-4" /> Dashboard
+						</NavLink>
 					)}
 				</nav>
 
 				<div className="flex-1" />
 
-				<UserAccountButton user={user} />
+				<div className="flex items-center gap-4">
+					<UserAccountButton user={user} />
+				</div>
 			</div>
 		</header>
 	);
@@ -81,8 +93,8 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 
 	if (!user) {
 		return (
-			<Button size="sm" asChild>
-				<Link to="/login"><LogIn className="mr-2 h-4 w-4" /> Login</Link>
+			<Button size="lg" className="rounded-2xl font-bold px-8 shadow-lg shadow-primary/20 hover:scale-105 transition-transform" asChild>
+				<Link to="/login">Sign In</Link>
 			</Button>
 		);
 	}
@@ -90,26 +102,41 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<Avatar className="h-9 w-9 border">
-					<AvatarImage src={user.avatar_url ?? undefined} />
-					<AvatarFallback>{user.first_name?.charAt(0) ?? "U"}</AvatarFallback>
-				</Avatar>
+				<div className="flex items-center gap-3 p-1 pr-3 rounded-2xl hover:bg-slate-50 transition-colors border-2 border-transparent hover:border-slate-100">
+					<Avatar className="h-10 w-10 border-2 border-white shadow-sm ring-2 ring-primary/10">
+						<AvatarImage src={user.avatar_url ?? undefined} />
+						<AvatarFallback className="bg-primary text-white font-bold">{user.first_name?.charAt(0) ?? "U"}</AvatarFallback>
+					</Avatar>
+					<div className="hidden sm:block text-left">
+						<p className="text-xs font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Hello,</p>
+						<p className="text-sm font-bold text-slate-900 leading-none">{user.first_name}</p>
+					</div>
+				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-56" align="end">
-				<DropdownMenuLabel>👋 Welcome, {user.first_name}</DropdownMenuLabel>
-				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuItem asChild><Link to="/account/details"><Info className="mr-2 h-4 w-4" /> Account Details</Link></DropdownMenuItem>
-					<DropdownMenuItem asChild><Link to="/account/bookings"><Calendar className="mr-2 h-4 w-4" /> My Bookings</Link></DropdownMenuItem>
+			<DropdownMenuContent className="w-64 rounded-3xl p-2 shadow-2xl border-slate-100" align="end" sideOffset={8}>
+				<DropdownMenuLabel className="px-4 py-4">
+					<p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Authenticated Account</p>
+					<p className="text-sm font-bold text-slate-900 truncate">{user.email}</p>
+				</DropdownMenuLabel>
+				<DropdownMenuSeparator className="bg-slate-50 mx-2" />
+				<DropdownMenuGroup className="p-1">
+					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3">
+						<Link to="/account/details"><Info className="mr-3 h-4 w-4 text-slate-400" /> Account Profile</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3">
+						<Link to="/account/bookings"><Calendar className="mr-3 h-4 w-4 text-slate-400" /> My Registrations</Link>
+					</DropdownMenuItem>
 					{user.role === "admin" && (
-						<DropdownMenuItem asChild><Link to="/admin"><LayoutDashboard className="mr-2 h-4 w-4" /> Admin Panel</Link></DropdownMenuItem>
+						<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3 bg-emerald-50/50 text-emerald-700 focus:bg-emerald-50 focus:text-emerald-700">
+							<Link to="/admin"><LayoutDashboard className="mr-3 h-4 w-4" /> Admin Dashboard</Link>
+						</DropdownMenuItem>
 					)}
 				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
-				<Form action="/logout" method="POST">
+				<DropdownMenuSeparator className="bg-slate-50 mx-2" />
+				<Form action="/logout" method="POST" className="p-1">
 					<button type="submit" className="w-full">
-						<DropdownMenuItem variant="destructive" className="cursor-pointer">
-							{isLoggingOut ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <LogOutIcon className="mr-2 h-4 w-4" />}
+						<DropdownMenuItem variant="destructive" className="rounded-xl cursor-pointer py-3 focus:bg-red-50 focus:text-red-600">
+							{isLoggingOut ? <Loader2 className="mr-3 h-4 w-4 animate-spin" /> : <LogOutIcon className="mr-3 h-4 w-4" />}
 							Logout
 						</DropdownMenuItem>
 					</button>

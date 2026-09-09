@@ -6,7 +6,6 @@ import {
 	addDoc,
 	updateDoc,
 	query,
-	where,
 	orderBy,
 	serverTimestamp,
 	writeBatch
@@ -26,6 +25,7 @@ export class ToursService extends Service {
 			const tourRef = collection(this.db, this.TOURS_COLLECTION);
 			const docRef = await addDoc(tourRef, {
 				...input,
+				currentParticipants: 0,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 				added_by: this.currentUid
@@ -74,15 +74,36 @@ export class ToursService extends Service {
 		}
 	}
 
+	/**
+	 * Get tours for front panel
+	 * Simplified query to avoid complex Firestore composite indexes
+	 */
 	async getFPHighLevelTours(qText = ""): Promise<GetHighLevelToursResponse> {
 		try {
 			const toursRef = collection(this.db, this.TOURS_COLLECTION);
-			let q = query(toursRef, where("status", "in", ["PUBLISHED", "REGISTRATION_OPEN"]), orderBy("createdAt", "desc"));
+			// Simple query - fetch all, filter in-memory for Spark Plan compatibility
+			const q = query(toursRef, orderBy("createdAt", "desc"));
 			const snap = await getDocs(q);
-			let tours = snap.docs.map(d => ({ id: d.id, ...d.data() })) as HighLevelTour[];
-			if (qText) tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+
+			let tours = snap.docs.map(d => ({
+				id: d.id,
+				...d.data(),
+				// Handle Timestamp conversion for the frontend
+				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
+			})) as HighLevelTour[];
+
+			// Filter only open/published tours for users
+			tours = tours.filter(t =>
+				["PUBLISHED", "REGISTRATION_OPEN"].includes(t.status)
+			);
+
+			if (qText) {
+				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+			}
+
 			return { tours, total: tours.length };
 		} catch (err: any) {
+			console.error("Firestore getFPHighLevelTours error:", err);
 			throw new ApiError(err.message, 500);
 		}
 	}
@@ -92,8 +113,16 @@ export class ToursService extends Service {
 			const toursRef = collection(this.db, this.TOURS_COLLECTION);
 			const q = query(toursRef, orderBy("createdAt", "desc"));
 			const snap = await getDocs(q);
-			let tours = snap.docs.map(d => ({ id: d.id, ...d.data() })) as HighLevelTour[];
-			if (qText) tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+			let tours = snap.docs.map(d => ({
+				id: d.id,
+				...d.data(),
+				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
+			})) as HighLevelTour[];
+
+			if (qText) {
+				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+			}
+
 			return { tours, total: tours.length };
 		} catch (err: any) {
 			throw new ApiError(err.message, 500);
