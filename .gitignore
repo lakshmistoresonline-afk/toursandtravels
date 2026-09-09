@@ -1,7 +1,4 @@
 node_modules
-.env
-.env.*
-!.env.example
 build
 dist
 .react-router
@@ -11,15 +8,9 @@ firestore-debug.log
 ui-debug.log
 .idea
 *.log
-bootstrap.cjs
-*.json
-!package.json
-!package-lock.json
-!tsconfig.json
-!components.json
-!firebase.json
-!firestore.indexes.json
-!*.artifact.md
-!toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
-# wait, I should ignore the sdk file specifically
-toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
+# User requested to keep these in Git for portability
+# .env
+# .env.*
+# toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
+# bootstrap.cjs
+# reset-db.cjs

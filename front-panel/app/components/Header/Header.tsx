@@ -1,5 +1,5 @@
 import { Form, Link, NavLink, useNavigation, useRouteLoaderData } from "react-router";
-import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard, Globe } from "lucide-react";
+import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
 import { loader } from "~/root";
@@ -30,16 +30,16 @@ export default function Header() {
 		<header className="bg-white/80 backdrop-blur-xl border-b sticky top-0 z-50">
 			<div className="container mx-auto flex items-center h-20 px-4">
 				{/* Mobile menu */}
-				<div className="mr-4 flex lg:hidden">
+				<div className="mr-4 lg:hidden">
 					<Sheet>
 						<SheetTrigger asChild>
 							<Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-50"><Menu className="h-6 w-6" /></Button>
 						</SheetTrigger>
 						<SheetContent side="left" className="w-[300px] rounded-r-3xl">
 							<SheetHeader className="mt-8">
-								<div className="flex items-center gap-2">
-									<div className="bg-primary h-8 w-8 rounded-lg flex items-center justify-center text-white font-bold">W</div>
-									<span className="text-2xl font-black tracking-tight">Ambady Tours and Travels</span>
+								<div className="flex items-center gap-2 text-primary">
+									<img src="/ambady-logo.png" alt="Ambady" className="h-10 w-10 object-contain rounded-full shadow-sm" />
+									<span className="text-xl font-black tracking-tight">Ambady</span>
 								</div>
 							</SheetHeader>
 							<nav className="flex flex-col gap-6 mt-12">
@@ -58,9 +58,14 @@ export default function Header() {
 					</Sheet>
 				</div>
 
-				<Link to="/" className="flex items-center gap-2 group">
-					<div className="bg-primary h-10 w-10 rounded-2xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-primary/30 group-hover:rotate-12 transition-transform">W</div>
-					<span className="text-2xl font-black tracking-tighter text-slate-900">Ambady Tours and Travels</span>
+				<Link to="/" className="flex items-center gap-3 group">
+					<div className="h-12 w-12 rounded-full overflow-hidden border-2 border-primary/20 shadow-md group-hover:scale-105 transition-transform duration-300">
+						<img src="/ambady-logo.png" alt="Ambady Tours Logo" className="h-full w-full object-cover" />
+					</div>
+					<div className="flex flex-col leading-none">
+						<span className="text-2xl font-black tracking-tighter text-slate-900 uppercase">Ambady</span>
+						<span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Tours & Travels</span>
+					</div>
 				</Link>
 
 				<nav className="ml-16 hidden lg:flex items-center gap-10">
@@ -78,9 +83,7 @@ export default function Header() {
 
 				<div className="flex-1" />
 
-				<div className="flex items-center gap-4">
-					<UserAccountButton user={user} />
-				</div>
+				<UserAccountButton user={user} />
 			</div>
 		</header>
 	);
@@ -88,7 +91,6 @@ export default function Header() {
 
 function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 	const navigation = useNavigation();
-
 	const isLoggingOut = navigation.state === "submitting" && navigation.formAction === "/logout";
 
 	if (!user) {
@@ -104,11 +106,11 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 			<DropdownMenuTrigger asChild className="cursor-pointer">
 				<div className="flex items-center gap-3 p-1 pr-3 rounded-2xl hover:bg-slate-50 transition-colors border-2 border-transparent hover:border-slate-100">
 					<Avatar className="h-10 w-10 border-2 border-white shadow-sm ring-2 ring-primary/10">
-						<AvatarImage src={user.avatar_url ?? undefined} />
-						<AvatarFallback className="bg-primary text-white font-bold">{user.first_name?.charAt(0) ?? "U"}</AvatarFallback>
+						<AvatarImage src={user.avatar_url || "/ambady-logo.png"} />
+						<AvatarFallback className="bg-primary text-white font-bold">{user.first_name?.charAt(0) ?? "A"}</AvatarFallback>
 					</Avatar>
 					<div className="hidden sm:block text-left">
-						<p className="text-xs font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Hello,</p>
+						<p className="text-xs font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Welcome,</p>
 						<p className="text-sm font-bold text-slate-900 leading-none">{user.first_name}</p>
 					</div>
 				</div>
