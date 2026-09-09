@@ -1,54 +1,35 @@
-import { config as dotenvConfig } from "dotenv";
-import path from "path";
 import { createServerClient, parseCookieHeader, serializeCookieHeader } from "@supabase/ssr";
-import { type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@workspace/shared/types/supabase";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-dotenvConfig({ path: path.resolve(__dirname, "../../../../.env"), quiet: true });
+/**
+ * Creates a Supabase server client for React Router v7 / standard Fetch API environments.
+ * This helper manages cookie-based authentication.
+ */
+export function createSupabaseServerClient(request: Request) {
+	const supabaseUrl = process.env.VITE_SUPABASE_URL;
+	const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY; // Using Anon key for SSR as per standard patterns
 
-function createSupabaseServerClient(request: Request) {
-	if (!process.env.VITE_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-		throw new Error("Missing Supabase environment variables");
+	if (!supabaseUrl || !supabaseKey) {
+		throw new Error("Missing Supabase environment variables: VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY must be set.");
 	}
 
 	const headers = new Headers();
 
-	/* In production max cookie age is 1 day but in dev. it is 1 year */
-	const maxCookieAge = 60 * 60 * 24 * (process.env.VITE_ENV === "production" ? 60 : 365);
-
-	// @ts-ignore
-	const supabase: SupabaseClient<Database> = createServerClient(
-		process.env.VITE_SUPABASE_URL!,
-		process.env.SUPABASE_SERVICE_ROLE_KEY!,
+	const supabase = createServerClient<Database>(
+		supabaseUrl,
+		supabaseKey,
 		{
 			cookies: {
 				getAll() {
-					const cookies = parseCookieHeader(request.headers.get("Cookie") ?? "");
-					return cookies.map((cookie) => ({ name: cookie.name, value: cookie.value ?? "" }));
+					return parseCookieHeader(request.headers.get("Cookie") ?? "");
 				},
 				setAll(cookiesToSet) {
 					cookiesToSet.forEach(({ name, value, options }) =>
 						headers.append(
 							"Set-Cookie",
-							serializeCookieHeader(name, value, {
-								...options,
-								httpOnly: true,
-								maxAge: maxCookieAge,
-								secure:
-									process.env.VITE_ENV != null
-										? process.env.VITE_ENV === "production"
-										: false,
-								sameSite: "lax",
-								path: "/",
-							}),
+							serializeCookieHeader(name, value, options),
 						),
 					);
-				},
-			},
-			global: {
-				headers: {
-					Cookie: request.headers.get("Cookie") || "",
 				},
 			},
 		},
