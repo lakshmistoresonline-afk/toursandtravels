@@ -29,7 +29,6 @@ export default defineConfig(({ mode }) => {
 			alias: {
 				"~": path.resolve(__dirname, "./app"),
 				"@workspace/shared": path.resolve(__dirname, "../shared/src"),
-				// /esm/icons/index.mjs only exports the icons statically, so no separate chunks are created
 				"@tabler/icons-react": "@tabler/icons-react/dist/esm/icons/index.mjs",
 			},
 		},
@@ -44,13 +43,13 @@ export default defineConfig(({ mode }) => {
 			],
 		},
 		define: {
-			"process.env.VITE_ENV": JSON.stringify(env.VITE_ENV),
-			"process.env.VITE_PROJECT_ID": JSON.stringify(env.VITE_PROJECT_ID),
-			"process.env.VITE_SUPABASE_ANON_KEY": JSON.stringify(env.VITE_SUPABASE_ANON_KEY),
-			"process.env.VITE_SUPABASE_URL": JSON.stringify(env.VITE_SUPABASE_URL),
+			"process.env.VITE_FIREBASE_API_KEY": JSON.stringify(env.VITE_FIREBASE_API_KEY),
+			"process.env.VITE_FIREBASE_AUTH_DOMAIN": JSON.stringify(env.VITE_FIREBASE_AUTH_DOMAIN),
+			"process.env.VITE_FIREBASE_PROJECT_ID": JSON.stringify(env.VITE_FIREBASE_PROJECT_ID),
+			"process.env.VITE_FIREBASE_STORAGE_BUCKET": JSON.stringify(env.VITE_FIREBASE_STORAGE_BUCKET),
+			"process.env.VITE_FIREBASE_MESSAGING_SENDER_ID": JSON.stringify(env.VITE_FIREBASE_MESSAGING_SENDER_ID),
+			"process.env.VITE_FIREBASE_APP_ID": JSON.stringify(env.VITE_FIREBASE_APP_ID),
 			"process.env.VITE_MAIN_APP_URL": JSON.stringify(env.VITE_MAIN_APP_URL),
-			"process.env.VITE_RECAPTCHA_SITE_KEY": JSON.stringify(env.VITE_RECAPTCHA_SITE_KEY),
-			"process.env.VITE_STRIPE_PUBLISHABLE_KEY": JSON.stringify(env.VITE_STRIPE_PUBLISHABLE_KEY),
 		},
 		server: {
 			port: 5175,

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import BookingConfirmationEmail from "@workspace/shared/emails/templates/BookingConfirmationEmail";
 import { BookingConfirmationPayload } from "@workspace/shared/types/emails";
 
-export const loader = async () => {
+export const clientLoader = async () => {
 	if (process.env.VITE_ENV !== "development") throw new Error("Email preview is disabled in production.");
 	const samplePayload: BookingConfirmationPayload = {
 		booking_ref: "WN-ABC123",

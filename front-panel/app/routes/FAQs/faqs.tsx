@@ -1,7 +1,7 @@
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion";
 
-export const loader = () => {
+export const clientLoader = () => {
 	return null;
 };
 const faqs = [

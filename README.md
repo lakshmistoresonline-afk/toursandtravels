@@ -1,133 +1,57 @@
-# WanderNest - Simple Tour Management System
+# WanderNest — Simple Tour Management System (Firebase Edition)
 
-> Focused, Fast, and Free-tier compatible Tour Management System.
-
----
-
-## Central Business Model
-**ONE CUSTOMER PROFILE → MANY FUTURE TOUR REGISTRATIONS**
-
-Customers register once, and their details are automatically reused for all future tour registrations. Admin manages tours, itineraries, and participants with profile snapshots for historical integrity.
-
----
+This is a complete Firebase-only architecture for the WanderNest Tour Management System.
 
 ## Features
+- **Firebase Hosting**: High-performance static hosting for the React SPA.
+- **Firebase Auth**: Single login for both Customers and Administrators.
+- **Cloud Firestore**: Real-time NoSQL database for users, tours, and registrations.
+- **Firebase Storage**: Cloud storage for tour images.
+- **Role-Based Security**: Hardened Firestore rules for admin and user access control.
+- **Spark-Friendly**: Optimized to run within Firebase's no-cost tier.
 
-### <u>Customer Application</u>
-- **Once-off Registration**: Complete profile with personal, contact, and address details.
-- **Tour Discovery**: Browse upcoming tours and itineraries.
-- **Quick Registration**: "Join Tour" with a single click, reusing saved profile data.
-- **Tour History**: View upcoming and completed journeys.
+## Project Structure
+- `front-panel/`: The unified React Router v7 application (includes both User and Admin interfaces).
+- `shared/`: Shared services and types.
 
-### <u>Admin Panel</u>
-- **Tour CRUD**: Manage tours with day-by-day itineraries.
-- **Registration Management**: View participants with their profile snapshots at the time of registration.
-- **Dashboard**: Simple metrics for customers, tours, and registrations.
+## Setup Instructions
 
----
+### 1. Firebase Project
+- Use existing project: `toursandtravels-73c62`.
+- Ensure Email/Password Auth is enabled.
+- Ensure Cloud Firestore is in Native mode.
 
-## Tech Stack (Free Tier Optimized)
-- **Frontend**: React 19, React Router v7.
-- **Backend**: Supabase (Auth, PostgreSQL, Storage).
-- **Styling**: Tailwind CSS, Shadcn UI.
-- **Dependencies**: Simplified to remove mandatory Stripe, Redis, and Resend.
+### 2. Environment Variables
+Copy `.env.example` to `.env` and fill in your Firebase Web App credentials.
 
----
-
-## Environment Variables
-Create a `.env` file from `.env.sample`:
-```dotenv
-VITE_SUPABASE_URL=your-project-url
-VITE_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-```
-
----
-
-## Local Development
-1. `npm install`
-2. `npm run dev`
-
-## Build & Deployment
-Build everything from repo root using npm:
-
+### 3. Install Dependencies
 ```bash
-npm run build:shared
-npm run build:admin
-npm run build:front
-# or
-npm run build:all
+npm install
 ```
 
-Or use docker <b>(RUN FROM REPO ROOT)</b>
+### 4. Build and Test
 ```bash
-export $(cat .env | xargs)
-
-docker build -f front-panel/Dockerfile \
-    $(for var in $(cat .env | cut -d= -f1); do echo "--build-arg $var=${!var}"; done) \
-    -t rr-tours-app .
-
-docker run --env-file .env -p 3000:3000 front-panel
+npm run build
+npm run dev
 ```
 
-## Deploying on Render
+### 5. Deployment
+Ensure you have `firebase-tools` installed and are logged in.
+```bash
+firebase deploy
+```
 
-The simplest and most reliable way to host both apps in a monorepo is to create **two separate Render services** — one for each app.
+## Admin Bootstrap
+To make a user an admin:
+1. Register normally through the `/signup` page.
+2. Go to the Firebase Console -> Firestore.
+3. Find the user document in the `users` collection.
+4. Change the `role` field from `"user"` to `"admin"`.
+5. Refresh the app, and you will have access to `/admin`.
 
-### Service 1 — front-panel
-
-- **Name:** `front-panel` (or similar)
-- **Environment:** Docker
-- **Dockerfile Path:** front-panel/Dockerfile
-- **Environment Variables:** Add these from `.env`
-- **Secret Variable File:** Add `.env` file and its content
-
-### Service 2 — admin-panel
-
-- **Name:** `admin-panel` (or similar)
-- **Environment:** Docker
-- **Dockerfile Path:** admin-panel/Dockerfile
-- **Environment Variables:** Add these from `.env`
-- **Secret Variable File:** Add `.env` file and its content
-
-### Important Render Notes
-
-- **Two services is strongly recommended** for monorepos  
-    (One service per app → each points to its own subdirectory)
-
-- **Security rule**  
-  Environment variables that are not prefixed by VITE_ must **never** be sent to the browser.
-
-## Deploying on Vercel
-
-Vercel handles monorepos and React Router well, but the cleanest split is usually:
-
-### Recommended: front-panel → Vercel   +   admin → Render
-
-#### front-panel on Vercel
-
-1. New Vercel project → Import repo
-2. **Root Directory:** `/front-panel`
-3. **Build Command** (optional — Vercel often auto-detects):
-   ```bash
-   npm run build -w front-panel
-   ```
-4. **Output Directory:** usually auto-detected (`./front-panel/build`)
-5. **Environment Variables** (in Vercel dashboard):
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-   - all other variables
-
-#### admin → keep on Render
-
-Use the Render setup shown above — this keeps your service role key 100% server-side.
-
-### Alternative: Both on Vercel
-
-- **Two separate projects** (easiest):
-    - Project 1 → Root: `/front-panel`
-    - Project 2 → Root: `/admin`
-
-- **Single project + rewrites** → requires `vercel.json` configuration
-
-<u><i>Developed by Talha — open an issue or contact at muhammadtalha13457@gmail.com.<i><u>
+## Removed Services
+- Supabase (All components removed)
+- Stripe (Disabled/Mocked)
+- Redis (Removed)
+- Resend (Logging only)
+- Husky (Removed)

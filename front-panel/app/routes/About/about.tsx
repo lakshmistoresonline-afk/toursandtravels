@@ -2,7 +2,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Carousel, CarouselContent, CarouselItem } from "~/components/ui/carousel";
 
-export const loader = () => {
+export const clientLoader = () => {
 	return null;
 };
 

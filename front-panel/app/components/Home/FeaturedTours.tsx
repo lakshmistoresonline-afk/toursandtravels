@@ -1,39 +1,19 @@
-import type { FP_HighLevelTour } from "@workspace/shared/types/fp-tours";
 import { TourCard } from "~/components/Tour/TourCard";
-import { Carousel, CarouselContent, CarouselItem } from "~/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useRouteLoaderData } from "react-router";
 
-export default function FeaturedToursSection({ tours }: { tours: FP_HighLevelTour[] }) {
-	const rootLoaderData = useRouteLoaderData("root");
+export default function FeaturedToursSection({ tours }: { tours: any[] }) {
+	if (!tours || tours.length === 0) return null;
 
 	return (
-		<section className="sm:space-y-6 space-y-4">
-			<h2 className="section-heading">Best Picks</h2>
+		<section className="space-y-6 container mx-auto px-4">
+			<div className="flex justify-between items-center">
+				<h2 className="text-3xl font-bold tracking-tight">Top Destinations</h2>
+			</div>
 
-			<Carousel
-				className="w-full max-w-full"
-				plugins={[
-					Autoplay({
-						delay: 3000,
-					}),
-				]}
-			>
-				<CarouselContent>
-					{tours.map((tour) => (
-						<CarouselItem
-							key={tour.id}
-							className="pl-4 min-[550px]:basis-1/2 md:basis-1/3 lg:basis-1/4"
-						>
-							<TourCard
-								tour={tour}
-								linkPrefetch="viewport"
-								coupons={rootLoaderData.couponsResp.coupons ?? []}
-							/>
-						</CarouselItem>
-					))}
-				</CarouselContent>
-			</Carousel>
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{tours.map((tour) => (
+					<TourCard key={tour.id} tour={tour} />
+				))}
+			</div>
 		</section>
 	);
 }

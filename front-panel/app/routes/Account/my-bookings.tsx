@@ -1,154 +1,82 @@
-import { useLoaderData, useSearchParams, redirect, type LoaderFunctionArgs } from "react-router";
+import { useLoaderData, redirect, type LoaderFunctionArgs, Link } from "react-router";
 import { format } from "date-fns";
 import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { genAuthSecurity } from "@workspace/shared/utils/auth-utils.server";
+import { Card, CardContent } from "~/components/ui/card";
+import { Calendar, MapPin } from "lucide-react";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
-import type { Database } from "@workspace/shared/types/supabase";
-import { myRegistrationsQuery } from "~/queries/registrations.q";
+import { BookingService } from "@workspace/shared/services/booking.service";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 
-const PAGE_SIZE = 10;
-
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-	const { authId } = genAuthSecurity(request);
-	if (!authId) return redirect("/login");
-
-	const userResult = await getCurrentUser(request);
-	if (!userResult.user) return redirect("/login");
-
-	const url = new URL(request.url);
-	const currentPage = Number(url.searchParams.get("page")) || 1;
-	const pageIndex = Math.max(0, currentPage - 1);
+export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
+	const { user } = await getCurrentUser(request);
+	if (!user) return redirect("/login");
 
 	try {
-		const result = await myRegistrationsQuery({ pageIndex, pageSize: PAGE_SIZE, request });
-		return { registrationsData: result, currentPage };
+		const svc = new BookingService();
+		const result = await svc.getMyRegistrations();
+		return { registrations: result.registrations };
 	} catch (error) {
-		console.error(error);
-		return {
-			registrationsData: { registrations: [], total: 0 },
-			currentPage,
-			errorMessage: "Failed to load registrations.",
-		};
+		return { registrations: [] };
 	}
 };
 
 export default function MyBookingsPage() {
-	const { registrationsData, currentPage, errorMessage } = useLoaderData<typeof loader>();
-	const { registrations, total } = registrationsData;
-	const totalPages = Math.ceil(total / PAGE_SIZE);
-	const [_, setSearchParams] = useSearchParams();
-
-	const handlePageChange = (newPage: number) => {
-		setSearchParams((prev) => {
-			const p = new URLSearchParams(prev);
-			p.set("page", String(newPage));
-			return p;
-		});
-	};
+	const { registrations } = useLoaderData<typeof loader>();
 
 	return (
-		<>
-			<MetaDetails
-				metaTitle="My Tours | WanderNest"
-				metaDescription="View your tour registrations"
-				metaKeywords="WanderNest"
-			/>
-			<div className="container mx-auto max-w-5xl">
-				<div className="mb-8">
-					<h1 className="text-3xl font-bold tracking-tight">My Tours</h1>
-					<p className="text-muted-foreground mt-1">View and manage your tour registrations</p>
-				</div>
+		<div className="container mx-auto max-w-4xl px-4">
+			<MetaDetails metaTitle="My Tours | WanderNest" />
+			<div className="mb-8">
+				<h1 className="text-3xl font-bold">My Tour History</h1>
+				<p className="text-muted-foreground mt-2">Manage your current and past registrations.</p>
+			</div>
 
-				{errorMessage && <div className="text-destructive mb-4">{errorMessage}</div>}
-
-				{registrations.length === 0 ? (
-					<Card>
-						<CardContent className="py-12 text-center text-muted-foreground">
-							You haven't registered for any tours yet.
-						</CardContent>
-					</Card>
-				) : (
-					<div className="space-y-4">
-						{registrations.map((reg: any) => (
-							<Card key={reg.id}>
-								<div className="p-6">
-									<div className="flex flex-col md:flex-row justify-between gap-4">
-										<div className="space-y-2">
-											<div className="flex items-center gap-3">
-												<h3 className="text-xl font-semibold">{reg.tours?.name}</h3>
-												<Badge variant={reg.status === 'CONFIRMED' ? 'default' : reg.status === 'PENDING' ? 'warning' : 'destructive'}>
-													{reg.status}
-												</Badge>
+			{registrations.length === 0 ? (
+				<Card className="py-20 text-center border-dashed">
+					<p className="text-muted-foreground">You haven't joined any tours yet.</p>
+					<Link to="/tours" className="text-primary hover:underline mt-4 inline-block font-medium">Explore available tours</Link>
+				</Card>
+			) : (
+				<div className="grid gap-6">
+					{registrations.map((reg: any) => (
+						<Card key={reg.id} className="overflow-hidden">
+							<CardContent className="p-0">
+								<div className="flex flex-col md:flex-row">
+									<div className="w-full md:w-48 h-32 md:h-auto">
+										<img
+											src={reg.tours?.cover_image || "/placeholder-tour.jpg"}
+											alt={reg.tours?.name}
+											className="w-full h-full object-cover"
+										/>
+									</div>
+									<div className="p-6 flex-1">
+										<div className="flex justify-between items-start">
+											<div>
+												<h3 className="text-xl font-bold">{reg.tours?.name}</h3>
+												<div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+													<span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {reg.tours?.destination}</span>
+													<span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {reg.tours?.start_date || 'TBD'}</span>
+												</div>
 											</div>
-											<div className="text-sm text-muted-foreground">
-												{reg.tours?.destination} • {reg.tours?.start_date ? format(new Date(reg.tours.start_date), "PPP") : 'Date TBD'}
-											</div>
-											<div className="text-sm">
-												Registered on: {format(new Date(reg.registration_date), "PPP")}
-											</div>
+											<Badge variant={reg.status === 'CONFIRMED' ? 'default' : 'warning'}>
+												{reg.status}
+											</Badge>
 										</div>
-										<div className="flex flex-col md:items-end gap-2">
-											<div className="text-lg font-bold">
-												{reg.travellers_count} Travellers
+										<div className="mt-4 pt-4 border-t flex justify-between items-center text-sm">
+											<div>
+												<span className="font-semibold">{reg.travellersCount} Travellers</span>
 											</div>
-											<div className="text-sm text-muted-foreground">
-												Total: {(reg.tours?.price * reg.travellers_count).toLocaleString()} AED
+											<div className="text-muted-foreground text-xs italic">
+												Registered on {reg.createdAt ? format(new Date(reg.createdAt), "PPP") : 'Recently'}
 											</div>
 										</div>
 									</div>
 								</div>
-							</Card>
-						))}
-					</div>
-				)}
-
-				{totalPages > 1 && (
-					<div className="mt-8 flex justify-center items-center gap-4">
-						<Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>
-							<ChevronLeft className="h-4 w-4 mr-1" /> Previous
-						</Button>
-						<span className="text-sm">Page {currentPage} of {totalPages}</span>
-						<Button variant="outline" size="sm" disabled={currentPage >= totalPages} onClick={() => handlePageChange(currentPage + 1)}>
-							Next <ChevronRight className="h-4 w-4 ml-1" />
-						</Button>
-					</div>
-				)}
-			</div>
-		</>
-	);
-}
-
-// Helper components remain unchanged
-function BookingStatusBadge({ status }: { status: Database["public"]["Enums"]["booking_status_enum"] }) {
-	const variants: Record<string, "default" | "secondary" | "destructive" | "warning"> = {
-		CONFIRMED: "default",
-		PENDING: "warning",
-		CANCELLED: "destructive",
-	};
-
-	return (
-		<Badge variant={variants[status] || "outline"} className="capitalize">
-			{status.toLowerCase()}
-		</Badge>
-	);
-}
-
-function PaymentStatusBadge({ status }: { status: Database["public"]["Enums"]["payment_status_enum"] }) {
-	const variants: Record<string, "default" | "secondary" | "destructive" | "warning"> = {
-		PAID: "default",
-		UNPAID: "warning",
-		REFUNDED: "destructive",
-		PENDING: "warning",
-		PARTIAL: "warning",
-	};
-
-	return (
-		<Badge variant={variants[status] || "outline"} className="capitalize text-xs">
-			{status.toLowerCase()}
-		</Badge>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			)}
+		</div>
 	);
 }

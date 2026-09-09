@@ -21,25 +21,24 @@ import TourImageCarousel from "~/components/Tour/TourImageCarousel";
 import { Separator } from "~/components/ui/separator";
 import { tourDetailsQuery } from "~/queries/tours.q";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { SUPABASE_IMAGE_BUCKET_PATH } from "@workspace/shared/constants/constants";
 import { Badge } from "~/components/ui/badge";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { toast } from "sonner";
 
-export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+export const clientLoader = async ({ params, request }: LoaderFunctionArgs) => {
 	if (!params.id) return null;
 	const tour = await tourDetailsQuery({ request, tour_id: params.id });
 	const userData = await getCurrentUser(request);
 	return { tour, userData };
 };
 
-export const action = async ({ request, params }: any) => {
+export const clientAction = async ({ request, params }: any) => {
 	const formData = await request.formData();
 	const intent = formData.get("intent");
 
 	if (intent === "register") {
-		const bookingSvc = new BookingService(request);
+		const bookingSvc = new BookingService();
 		const travellersCount = Number(formData.get("travellersCount") || 1);
 		const notes = formData.get("notes")?.toString();
 
@@ -54,7 +53,7 @@ export const action = async ({ request, params }: any) => {
 };
 
 export default function TourDetailsPage() {
-	const loaderData = useLoaderData<typeof loader>();
+	const loaderData = useLoaderData<typeof clientLoader>();
 	const actionData = useActionData() as any;
 	const navigation = useNavigation();
 
@@ -75,9 +74,9 @@ export default function TourDetailsPage() {
 		const filteredImages = tour?.images?.filter((i: string | null) => i != null) ?? [];
 		return [
 			{ url: tour.cover_image, title: tour.name + " Cover" },
-			...filteredImages.map((j: string, idx: number) => ({
-				url: j,
-				title: tour.name + " Secondary Image " + idx,
+			...filteredImages.map((url: string, idx: number) => ({
+				url,
+				title: tour.name + " Image " + idx,
 			})),
 		];
 	}, [tour]);
@@ -88,12 +87,11 @@ export default function TourDetailsPage() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle={(tour.meta_details?.meta_title ?? tour.name) + " | WanderNest"}
-				metaDescription={tour.meta_details?.meta_description ?? tour.overview?.slice(0, 320)}
-				ogImage={SUPABASE_IMAGE_BUCKET_PATH + "/" + tour.cover_image}
+				metaTitle={tour.name + " | WanderNest"}
+				metaDescription={tour.overview?.slice(0, 320)}
 			/>
 
-			<div className="container mx-auto py-8 space-y-8">
+			<div className="container mx-auto py-8 space-y-8 px-4">
 				<div className="space-y-4">
 					<div className="flex justify-between items-start flex-wrap gap-4">
 						<div>
@@ -120,14 +118,14 @@ export default function TourDetailsPage() {
 
 						<div className="space-y-6">
 							<h2 className="text-2xl font-bold border-b pb-2">Overview</h2>
-							<p className="text-lg leading-relaxed text-muted-foreground">{tour.overview}</p>
+							<p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">{tour.overview}</p>
 						</div>
 
 						{tour.itinerary && tour.itinerary.length > 0 && (
 							<div className="space-y-6">
 								<h2 className="text-2xl font-bold border-b pb-2">Itinerary</h2>
 								<div className="space-y-6">
-									{tour.itinerary.sort((a, b) => a.day_number - b.day_number).map((day) => (
+									{tour.itinerary.map((day: any) => (
 										<div key={day.id} className="flex gap-6">
 											<div className="flex flex-col items-center">
 												<div className="h-10 w-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
@@ -137,14 +135,7 @@ export default function TourDetailsPage() {
 											</div>
 											<div className="space-y-2 pb-6">
 												<h3 className="text-xl font-semibold">{day.title}</h3>
-												{day.departure_time && (
-													<div className="flex items-center gap-1 text-sm text-muted-foreground">
-														<Clock className="h-3 w-3" /> {day.departure_time}
-													</div>
-												)}
 												<p className="text-muted-foreground">{day.description}</p>
-												{day.activities && <p className="text-sm"><strong>Activities:</strong> {day.activities}</p>}
-												{day.meals && <p className="text-sm"><strong>Meals:</strong> {day.meals}</p>}
 											</div>
 										</div>
 									))}
@@ -163,11 +154,7 @@ export default function TourDetailsPage() {
 								<div className="space-y-3 text-sm">
 									<div className="flex justify-between">
 										<span className="text-muted-foreground flex items-center gap-2"><Calendar className="h-4 w-4" /> Start Date</span>
-										<span className="font-medium">{tour.start_date ? format(new Date(tour.start_date), "PPP") : 'TBD'}</span>
-									</div>
-									<div className="flex justify-between">
-										<span className="text-muted-foreground flex items-center gap-2"><Clock className="h-4 w-4" /> End Date</span>
-										<span className="font-medium">{tour.end_date ? format(new Date(tour.end_date), "PPP") : 'TBD'}</span>
+										<span className="font-medium">{tour.start_date || 'TBD'}</span>
 									</div>
 									<div className="flex justify-between">
 										<span className="text-muted-foreground flex items-center gap-2"><Users className="h-4 w-4" /> Max Capacity</span>
@@ -222,9 +209,6 @@ function TourStatusBadge({ status }: { status: string }) {
 		REGISTRATION_OPEN: "default",
 		REGISTRATION_CLOSED: "destructive",
 		DRAFT: "outline",
-		ONGOING: "default",
-		COMPLETED: "outline",
-		CANCELLED: "destructive",
 	};
 	return <Badge variant={variants[status] || "outline"} className="capitalize">{status?.replace('_', ' ').toLowerCase()}</Badge>;
 }

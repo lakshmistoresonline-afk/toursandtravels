@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { memo } from "react";
-import { SUPABASE_IMAGE_BUCKET_PATH } from "@workspace/shared/constants/constants";
+
 import type { FPHighLevelCategory } from "@workspace/shared/types/categories";
 
 export const CategoryCard = memo(({ category, ...props }: { category: FPHighLevelCategory }) => {
@@ -13,7 +13,7 @@ export const CategoryCard = memo(({ category, ...props }: { category: FPHighLeve
 		>
 			<div className="select-none relative aspect-4/3 overflow-hidden rounded-2xl border" {...props}>
 				<img
-					src={SUPABASE_IMAGE_BUCKET_PATH + "/" + category.image}
+					src={ category.image}
 					alt={category.name}
 					title={category.name}
 					className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[104%]"

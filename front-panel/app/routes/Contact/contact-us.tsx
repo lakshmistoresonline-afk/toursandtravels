@@ -42,7 +42,7 @@ const contactInfo = [
 	},
 ];
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
 		const formData = await request.formData();
 
@@ -91,7 +91,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 	}
 };
 
-export const loader = () => {
+export const clientLoader = () => {
 	return null;
 };
 

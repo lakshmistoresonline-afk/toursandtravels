@@ -5,7 +5,6 @@ import ErrorPage from "~/components/Error/ErrorPage";
 import { TopLoadingBar } from "~/components/Loaders/TopLoadingBar";
 import { Toaster } from "~/components/ui/sonner";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
-import { allCouponsQuery } from "~/queries/coupons.q";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -21,21 +20,12 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
-	const resp = await getCurrentUser(request);
-	const couponsResp = await allCouponsQuery({ request, user_id: resp?.user?.id ?? null });
-
-	const user = resp?.user ?? null;
-	const current_user_error = resp?.error ?? null;
-
-	if (!user || current_user_error) console.warn("❌ No user found");
-	else console.log(user?.email, " logged in");
-
-	return {
-		headers: resp.headers,
-		user: user,
-		current_user_error,
-		couponsResp,
-	};
+	try {
+		const { user } = await getCurrentUser(request);
+		return { user };
+	} catch (error) {
+		return { user: null };
+	}
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
