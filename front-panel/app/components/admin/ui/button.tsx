@@ -32,7 +32,7 @@ const buttonVariants = cva(
 	},
 );
 
-const MotionSlot = motion(Slot);
+const MotionSlot = motion.create(Slot);
 
 function Button({
 	className,
