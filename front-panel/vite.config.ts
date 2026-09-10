@@ -57,9 +57,6 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			port: 5175,
-			warmup: {
-				clientFiles: ["./app/root.tsx", "./app/entry.client.tsx"],
-			},
 		},
 	};
 });

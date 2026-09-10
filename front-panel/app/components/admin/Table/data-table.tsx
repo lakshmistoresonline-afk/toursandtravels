@@ -112,12 +112,9 @@ export const DataTable = ({
 				>
 					{table.getRowModel().rows?.length > 0 ? (
 						table.getRowModel().rows.map((row) => (
-							<motion.tr
+							<TableRow
 								key={row.id}
 								id={row.id}
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{ duration: 0.4, ease: "easeOut" }}
 								data-state={row.getIsSelected() && "selected"}
 								data-slot="table-row"
 								className="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
@@ -127,7 +124,7 @@ export const DataTable = ({
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}
-							</motion.tr>
+							</TableRow>
 						))
 					) : (
 						<TableRow>

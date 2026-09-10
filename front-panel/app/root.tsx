@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body className="min-h-screen font-sans antialiased selection:bg-[#d4af37] selection:text-white">
+			<body className="min-h-screen font-sans antialiased selection:bg-[#d4af37] selection:text-white" data-gramm="false" spellCheck="false">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
