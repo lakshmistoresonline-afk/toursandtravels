@@ -64,7 +64,7 @@ export default function AdminDashboard() {
 
 	return (
 		<div className="space-y-12 animate-in fade-in duration-700">
-			<MetaDetails metaTitle="Sanctuary | Admin Dashboard" />
+			<MetaDetails metaTitle="Sanctuary | Admin Dashboard" metaDescription="Overview of sacred paths and pilgrims." />
 
 			<div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#d4af37]/10 pb-10">
 				<div className="space-y-2">

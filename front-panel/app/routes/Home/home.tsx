@@ -1,15 +1,14 @@
-import type { Route } from "./+types/home";
 import { toursQuery } from "~/queries/tours.q";
 import FeaturedToursSection from "~/components/Home/FeaturedTours";
 import HeroSection from "~/components/Home/HeroSection";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Heart, Shield, Sparkles } from "lucide-react";
 
-export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
+export const clientLoader = async ({ request }: any) => {
 	try {
 		const featuredToursResp = await toursQuery({ request, q: "" });
 
@@ -31,7 +30,8 @@ export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
 	}
 };
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home() {
+	const loaderData = useLoaderData() as any;
 	useEffect(() => {
 		if (loaderData.errors) {
 			toast.error(loaderData.errors);

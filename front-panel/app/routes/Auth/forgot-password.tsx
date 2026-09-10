@@ -47,7 +47,7 @@ export default function ForgotPassword() {
 
 	return (
 		<div className="container max-w-md mx-auto py-20 px-4">
-			<MetaDetails metaTitle="Forgot Password | AMBADY PILGRIMAGE EXPERIENCES" />
+			<MetaDetails metaTitle="Forgot Password | AMBADY PILGRIMAGE EXPERIENCES" metaDescription="Reset your pilgrimage portal access." />
 			<Card>
 				<CardHeader className="text-center">
 					<CardTitle className="text-2xl">Reset Password</CardTitle>

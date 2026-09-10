@@ -5,8 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/SEO/MetaDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/SEO/MetaDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/entry.client.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/entry.server.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front-panel/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/update-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/update-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/react-router.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/vite.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +58,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "migration/rsbuild-rspack",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/Tour/rr-tours-app-main",
     "settings.editor.selected.configurable": "com.google.gct.login2.settings.GoogleLoginApplicationSettingsConfigurableProvider"

@@ -198,7 +198,7 @@ export default function BookingsPage() {
 
 	return (
 		<div className="flex flex-1 flex-col gap-6">
-			<MetaDetails metaTitle="Pilgrimage Journey Registrations | Admin" />
+			<MetaDetails metaTitle="Pilgrimage Journey Registrations | Admin" metaDescription="Manage pilgrim registrations and journeys." />
 			<div className="flex justify-between items-center">
 				<h1 className="text-2xl font-bold">Pilgrimage Journey Registrations</h1>
 				<div className="flex gap-2">

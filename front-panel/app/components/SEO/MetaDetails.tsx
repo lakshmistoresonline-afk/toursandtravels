@@ -1,6 +1,6 @@
 export interface SeoMetaProps {
 	metaTitle: string;
-	metaDescription: string;
+	metaDescription?: string;
 	metaKeywords?: string;
 	canonicalUrl?: string;
 	ogUrl?: string;
@@ -15,7 +15,7 @@ export interface SeoMetaProps {
 
 export function MetaDetails({
 	metaTitle,
-	metaDescription,
+	metaDescription = "Spiritual and cultural pilgrimage journeys curated for a meaningful experience.",
 	metaKeywords,
 	canonicalUrl,
 	ogUrl,

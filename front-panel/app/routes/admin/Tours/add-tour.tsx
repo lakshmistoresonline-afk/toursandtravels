@@ -83,7 +83,7 @@ export default function AddTourPage() {
 
 	return (
 		<div className="space-y-10 max-w-5xl mx-auto pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
-			<MetaDetails metaTitle="Initiate Pilgrimage Journey | Admin" />
+			<MetaDetails metaTitle="Initiate Pilgrimage Journey | Admin" metaDescription="Create a new sacred journey experience." />
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 				<div className="space-y-1">

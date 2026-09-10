@@ -1,7 +1,7 @@
 import { ToursService } from "@workspace/shared/services/tours.service";
-import { Loader2, ArrowLeft, Plus, Trash2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
 	type ActionFunctionArgs,
 	type LoaderFunctionArgs,
@@ -18,7 +18,6 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 
 export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
@@ -67,7 +66,6 @@ export default function UpdateTourPage() {
 	});
 
 	const { control, handleSubmit } = form;
-	const { fields, append, remove } = useFieldArray({ control, name: "itinerary" });
 
 	useEffect(() => {
 		if (actionData?.success) {
