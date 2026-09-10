@@ -7,39 +7,9 @@
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-panel/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Collections/CollectionsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Collections/CollectionsSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Dashboard/RecentBookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Dashboard/RecentBookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Footer/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Home/FeaturedTours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Home/FeaturedTours.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-panel/app/components/Home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Home/HeroSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Nav/app-sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Nav/app-sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/SEO/MetaDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/SEO/MetaDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/Dashboard/RecentBookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/Dashboard/RecentBookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/Nav/app-sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/Nav/app-sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/SEO/MetaDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/SEO/MetaDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/About/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/About/about.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/update-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/update-password.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Contact/contact-us.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Contact/contact-us.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Miscellaneous/PrivacyPolicy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Miscellaneous/PrivacyPolicy.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Miscellaneous/TermsOfUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Miscellaneous/TermsOfUsage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Tour/tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Tour/tours.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/public/brand/amady-background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/public/brand/amady-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/constants/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/constants/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/scripts/bootstrap.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/scripts/bootstrap.cjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/scripts/reset-db.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/services/emails.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/services/emails.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
