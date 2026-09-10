@@ -63,7 +63,7 @@ export class ToursService extends Service {
 	async getTourDetails(tourId: string): Promise<GetTourDetails | null> {
 		try {
 			const tourDoc = await getDoc(doc(this.db, this.TOURS_COLLECTION, tourId));
-			if (!tourDoc.exists()) throw new ApiError("Tour not found", 404);
+			if (!tourDoc.exists()) throw new ApiError("Pilgrimage journey not found", 404);
 			const tourData = tourDoc.data();
 			const itineraryRef = collection(this.db, this.TOURS_COLLECTION, tourId, "itineraries");
 			const itinerarySnap = await getDocs(query(itineraryRef, orderBy("day_number", "asc")));

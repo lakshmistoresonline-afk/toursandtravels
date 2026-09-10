@@ -7,9 +7,9 @@ export default function TermsOfUsePage() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="Terms of Use | Ambady Tours and Travels"
+				metaTitle="Terms of Use | AMADY PILGRIMAGE EXPERIENCES"
 				metaDescription="Our terms of use outline the rules and guidelines for using our website and services."
-				metaKeywords="Terms of Use, User Agreement, Ambady Tours and Travels"
+				metaKeywords="Terms of Use, User Agreement, AMADY PILGRIMAGE EXPERIENCES"
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/terms-of-use`}
 			/>
 
@@ -35,7 +35,7 @@ export default function TermsOfUsePage() {
 								1. Acceptance of Terms
 							</h2>
 							<p>
-								By accessing or using Ambady Tours and Travels's website and services, you agree to be bound
+								By accessing or using AMADY PILGRIMAGE EXPERIENCES's website and services, you agree to be bound
 								by these Terms of Use. If you do not agree, please do not use our services.
 							</p>
 						</section>
@@ -43,7 +43,7 @@ export default function TermsOfUsePage() {
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">2. User Accounts</h2>
 							<p>
-								You may need to create an account to book tours. You are responsible for
+								You may need to create an account to register for pilgrimage journeys. You are responsible for
 								maintaining the confidentiality of your account information and for all
 								activities that occur under your account.
 							</p>
@@ -51,11 +51,11 @@ export default function TermsOfUsePage() {
 
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">
-								3. Bookings and Payments
+								3. Registrations and Payments
 							</h2>
 							<p>
-								All bookings are subject to availability. Payments are processed securely
-								through third-party providers. Once a booking is confirmed, it is
+								All registrations are subject to availability. Payments are processed securely
+								through third-party providers. Once a registration is confirmed, it is
 								non-transferable.
 							</p>
 						</section>
@@ -65,8 +65,8 @@ export default function TermsOfUsePage() {
 								4. Cancellations and Refunds
 							</h2>
 							<p>
-								Cancellation policies vary by tour. Please check the specific tour's policy
-								before booking. Refunds, if applicable, will be processed within 7–10 business
+								Cancellation policies vary by pilgrimage journey. Please check the specific pilgrimage journey's policy
+								before registering. Refunds, if applicable, will be processed within 7–10 business
 								days.
 							</p>
 						</section>
@@ -84,8 +84,7 @@ export default function TermsOfUsePage() {
 								6. Intellectual Property
 							</h2>
 							<p>
-								All content on our site, including images, text, and logos, is owned by Top
-								Attractions Dubai or its partners. Unauthorized use is prohibited.
+								All content on our site, including images, text, and logos, is owned by AMADY PILGRIMAGE EXPERIENCES or its partners. Unauthorized use is prohibited.
 							</p>
 						</section>
 
@@ -96,7 +95,7 @@ export default function TermsOfUsePage() {
 							<p>
 								We are not liable for any indirect, incidental, or consequential damages
 								arising from your use of our services. Our liability is limited to the amount
-								paid for the booking.
+								paid for the registration.
 							</p>
 						</section>
 

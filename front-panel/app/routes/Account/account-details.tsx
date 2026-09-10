@@ -1,6 +1,6 @@
 import { useRouteLoaderData, useActionData, useSubmit, useNavigation } from "react-router";
-import { loader as rootLoader } from "~/root";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "~/components/ui/card";
+import { clientLoader as rootLoader } from "~/root";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
@@ -60,6 +60,7 @@ export default function AccountDetailsPage() {
 			address_street: user?.address_street || "",
 			address_locality: user?.address_locality || "",
 			country: user?.country || "",
+			aadhar_number: user?.aadhar_number || "",
 		},
 	});
 
@@ -69,7 +70,7 @@ export default function AccountDetailsPage() {
 
 	useEffect(() => {
 		if (actionData?.success) {
-			toast.success("Profile saved successfully!");
+			toast.success("Spiritual profile saved successfully!");
 		} else if (actionData?.error) {
 			toast.error(actionData.error);
 		}
@@ -78,39 +79,39 @@ export default function AccountDetailsPage() {
 	if (!user) return null;
 
 	return (
-		<div className="space-y-8 max-w-3xl animate-in slide-in-from-right-4 duration-500">
-			<MetaDetails metaTitle="Profile | Ambady Tours and Travels" />
+		<div className="space-y-12 max-w-4xl animate-in slide-in-from-right-8 duration-700">
+			<MetaDetails metaTitle="Pilgrim Profile | AMADY" />
 
-			<div className="bg-primary/5 p-8 rounded-3xl flex items-center gap-6 border border-primary/10">
-				<div className="h-20 w-20 rounded-2xl bg-primary flex items-center justify-center text-white text-3xl font-black shadow-xl shadow-primary/20">
+			<div className="glass-card p-10 rounded-[2.5rem] flex items-center gap-8 border border-[#d4af37]/10 shadow-2xl">
+				<div className="h-24 w-24 rounded-full glass-card border-2 border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] text-4xl font-serif shadow-xl">
 					{user.first_name?.charAt(0)}
 				</div>
-				<div>
-					<h2 className="text-2xl font-black text-slate-900">{user.first_name} {user.last_name}</h2>
-					<p className="text-slate-500 font-medium">{user.email}</p>
+				<div className="space-y-1">
+					<h2 className="text-3xl font-serif text-[#fdfcf0] tracking-tight">{user.first_name} {user.last_name}</h2>
+					<p className="text-[#fdfcf0]/40 font-sans font-bold text-[10px] uppercase tracking-[0.2em]">{user.email}</p>
 				</div>
 			</div>
 
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
 					{/* Personal Card */}
-					<Card className="border-none shadow-sm rounded-3xl overflow-hidden">
-						<CardHeader className="bg-slate-50 px-8 py-6 border-b border-slate-100 flex flex-row items-center gap-3">
-							<UserIcon className="h-5 w-5 text-slate-400" />
-							<CardTitle className="text-lg font-bold">Personal Information</CardTitle>
-						</CardHeader>
-						<CardContent className="p-8 grid sm:grid-cols-2 gap-6">
+					<Card className="glass-card border border-white/5 rounded-[2.5rem] overflow-hidden">
+						<div className="px-10 py-6 border-b border-white/5 flex items-center gap-4 bg-white/5">
+							<UserIcon className="h-4 w-4 text-[#d4af37]/60" />
+							<h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">Personal Identity</h3>
+						</div>
+						<CardContent className="p-10 grid sm:grid-cols-2 gap-x-8 gap-y-8">
 							<FormField control={form.control} name="first_name" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">First Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">First Name</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="last_name" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Last Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Last Name</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="gender" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Gender</FormLabel>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Gender</FormLabel>
 									<Select onValueChange={field.onChange} defaultValue={field.value || ""}>
-										<FormControl><SelectTrigger className="h-12 rounded-xl"><SelectValue /></SelectTrigger></FormControl>
-										<SelectContent className="rounded-xl">
+										<FormControl><SelectTrigger className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus:ring-[#d4af37]/20"><SelectValue /></SelectTrigger></FormControl>
+										<SelectContent className="bg-[#0a0e1a] border-[#d4af37]/20 text-[#fdfcf0]">
 											<SelectItem value="Male">Male</SelectItem>
 											<SelectItem value="Female">Female</SelectItem>
 											<SelectItem value="Other">Other</SelectItem>
@@ -119,37 +120,40 @@ export default function AccountDetailsPage() {
 								</FormItem>
 							)} />
 							<FormField control={form.control} name="phone_number" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Contact Number</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Contact Number</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={form.control} name="aadhar_number" render={({ field }) => (
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Aadhar Number</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 						</CardContent>
 					</Card>
 
 					{/* Address Card */}
-					<Card className="border-none shadow-sm rounded-3xl overflow-hidden">
-						<CardHeader className="bg-slate-50 px-8 py-6 border-b border-slate-100 flex flex-row items-center gap-3">
-							<MapPin className="h-5 w-5 text-slate-400" />
-							<CardTitle className="text-lg font-bold">Residency Address</CardTitle>
-						</CardHeader>
-						<CardContent className="p-8 grid sm:grid-cols-2 gap-6">
+					<Card className="glass-card border border-white/5 rounded-[2.5rem] overflow-hidden">
+						<div className="px-10 py-6 border-b border-white/5 flex items-center gap-4 bg-white/5">
+							<MapPin className="h-4 w-4 text-[#d4af37]/60" />
+							<h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">Residency</h3>
+						</div>
+						<CardContent className="p-10 grid sm:grid-cols-2 gap-x-8 gap-y-8">
 							<FormField control={form.control} name="address_house" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Flat / House No.</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Flat / House No.</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="address_street" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Street Name</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Street Name</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="address_locality" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">City / Locality</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">City / Locality</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 							<FormField control={form.control} name="country" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-600">Country</FormLabel><FormControl><Input className="h-12 rounded-xl" {...field} value={field.value || ""} /></FormControl></FormItem>
+								<FormItem className="space-y-3"><FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Country</FormLabel><FormControl><Input className="h-14 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} value={field.value || ""} /></FormControl></FormItem>
 							)} />
 						</CardContent>
 					</Card>
 
-					<div className="flex justify-end pt-4">
-						<Button type="submit" size="lg" className="rounded-2xl px-10 py-7 text-lg font-black shadow-xl shadow-primary/30 hover:scale-105 transition-transform" disabled={isSubmitting}>
-							{isSubmitting ? <Loader2 className="animate-spin mr-2 h-5 w-5" /> : <Save className="mr-2 h-5 w-5" />}
-							Update My Profile
+					<div className="flex justify-end pt-6">
+						<Button type="submit" className="h-20 px-12 rounded-full bg-[#d4af37] text-[#0a0e1a] text-xs font-bold uppercase tracking-[0.3em] shadow-2xl shadow-[#d4af37]/20 hover:scale-[1.05] transition-all hover:bg-[#b8860b]" disabled={isSubmitting}>
+							{isSubmitting ? <Loader2 className="animate-spin mr-3 h-5 w-5" /> : <Save className="mr-3 h-5 w-5" />}
+							Update Pilgrim Profile
 						</Button>
 					</div>
 				</form>

@@ -2,7 +2,7 @@ import { Form, Link, NavLink, useNavigation, useRouteLoaderData } from "react-ro
 import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
-import { loader } from "~/root";
+import { clientLoader as loader } from "~/root";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -15,11 +15,13 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
 
+const logo = "/brand/amady-logo.png";
+
 const NAV_LINKS = [
 	{ label: "Home", to: "/" },
-	{ label: "Tours", to: "/tours" },
+	{ label: "Pilgrimage Journeys", to: "/tours" },
 	{ label: "About", to: "/about" },
-	{ label: "FAQs", to: "/faqs" },
+	{ label: "Contact", to: "/contact-us" },
 ];
 
 export default function Header() {
@@ -27,29 +29,32 @@ export default function Header() {
 	const user = rootLoaderData?.user as FullCurrentUser | null;
 
 	return (
-		<header className="bg-white/80 backdrop-blur-xl border-b sticky top-0 z-50">
-			<div className="container mx-auto flex items-center h-20 px-4">
+		<header className="bg-[#0a0e1a]/60 backdrop-blur-xl border-b border-[#d4af37]/20 sticky top-0 z-50">
+			<div className="container mx-auto flex items-center h-24 px-4">
 				{/* Mobile menu */}
 				<div className="mr-4 lg:hidden">
 					<Sheet>
 						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-50"><Menu className="h-6 w-6" /></Button>
+							<Button variant="ghost" size="icon" className="rounded-xl hover:bg-[#d4af37]/10 text-[#d4af37]"><Menu className="h-6 w-6" /></Button>
 						</SheetTrigger>
-						<SheetContent side="left" className="w-[300px] rounded-r-3xl">
+						<SheetContent side="left" className="w-[300px] bg-[#0a0e1a] border-r border-[#d4af37]/20">
 							<SheetHeader className="mt-8">
-								<div className="flex items-center gap-2 text-primary">
-									<img src="/ambady-logo.png" alt="Ambady" className="h-10 w-10 object-contain rounded-full shadow-sm" />
-									<span className="text-xl font-black tracking-tight">Ambady</span>
+								<div className="flex items-center gap-3">
+									<img src={logo} alt="Amady" className="h-12 w-12 object-contain" />
+									<div className="text-left">
+										<span className="block text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMADY</span>
+										<span className="block text-[8px] font-sans font-bold tracking-[0.2em] text-[#fdfcf0]/60 uppercase">Pilgrimage Experiences</span>
+									</div>
 								</div>
 							</SheetHeader>
 							<nav className="flex flex-col gap-6 mt-12">
 								{NAV_LINKS.map((link) => (
-									<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-lg font-bold transition-all ${isActive ? "text-primary translate-x-2" : "text-slate-500"}`}>
+									<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-lg font-sans font-medium transition-all ${isActive ? "text-[#d4af37] translate-x-2" : "text-[#fdfcf0]/70 hover:text-[#d4af37]"}`}>
 										{link.label}
 									</NavLink>
 								))}
 								{user?.role === "admin" && (
-									<NavLink to="/admin" className="text-lg text-emerald-600 font-black border-t pt-6 flex items-center gap-2">
+									<NavLink to="/admin" className="text-lg text-[#d4af37] font-bold border-t border-[#d4af37]/20 pt-6 flex items-center gap-2">
 										<LayoutDashboard className="h-5 w-5" /> Admin Panel
 									</NavLink>
 								)}
@@ -58,25 +63,25 @@ export default function Header() {
 					</Sheet>
 				</div>
 
-				<Link to="/" className="flex items-center gap-3 group">
-					<div className="h-12 w-12 rounded-full overflow-hidden border-2 border-primary/20 shadow-md group-hover:scale-105 transition-transform duration-300">
-						<img src="/ambady-logo.png" alt="Ambady Tours Logo" className="h-full w-full object-cover" />
+				<Link to="/" className="flex items-center gap-4 group">
+					<div className="h-16 w-16 overflow-hidden transition-transform duration-500 group-hover:scale-105">
+						<img src={logo} alt="Amady Logo" className="h-full w-full object-contain" />
 					</div>
 					<div className="flex flex-col leading-none">
-						<span className="text-2xl font-black tracking-tighter text-slate-900 uppercase">Ambady</span>
-						<span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Tours & Travels</span>
+						<span className="text-3xl font-display font-bold tracking-[0.15em] text-[#d4af37]">AMADY</span>
+						<span className="text-[9px] font-sans font-bold text-[#fdfcf0]/70 uppercase tracking-[0.3em] mt-1">Pilgrimage Experiences</span>
 					</div>
 				</Link>
 
 				<nav className="ml-16 hidden lg:flex items-center gap-10">
 					{NAV_LINKS.map((link) => (
-						<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm font-bold tracking-wide transition-all hover:text-primary relative py-1 ${isActive ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" : "text-slate-500"}`}>
+						<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm font-sans font-semibold tracking-[0.1em] uppercase transition-all hover:text-[#d4af37] relative py-1 ${isActive ? "text-[#d4af37] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#d4af37]" : "text-[#fdfcf0]/80"}`}>
 							{link.label}
 						</NavLink>
 					))}
 					{user?.role === "admin" && (
-						<NavLink to="/admin" className="text-sm text-emerald-600 font-black hover:opacity-80 flex items-center gap-1.5 bg-emerald-50 px-4 py-2 rounded-full">
-							<LayoutDashboard className="h-4 w-4" /> Dashboard
+						<NavLink to="/admin" className="text-[10px] text-[#0a0e1a] font-bold uppercase tracking-widest bg-[#d4af37] px-4 py-2 rounded-full hover:bg-[#b8860b] transition-colors flex items-center gap-2">
+							<LayoutDashboard className="h-3.5 w-3.5" /> Dashboard
 						</NavLink>
 					)}
 				</nav>
@@ -95,7 +100,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 
 	if (!user) {
 		return (
-			<Button size="lg" className="rounded-2xl font-bold px-8 shadow-lg shadow-primary/20 hover:scale-105 transition-transform" asChild>
+			<Button size="lg" className="rounded-full font-bold px-8 bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] hover:scale-105 transition-all shadow-lg shadow-[#d4af37]/20" asChild>
 				<Link to="/login">Sign In</Link>
 			</Button>
 		);
@@ -104,40 +109,40 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<div className="flex items-center gap-3 p-1 pr-3 rounded-2xl hover:bg-slate-50 transition-colors border-2 border-transparent hover:border-slate-100">
-					<Avatar className="h-10 w-10 border-2 border-white shadow-sm ring-2 ring-primary/10">
-						<AvatarImage src={user.avatar_url || "/ambady-logo.png"} />
-						<AvatarFallback className="bg-primary text-white font-bold">{user.first_name?.charAt(0) ?? "A"}</AvatarFallback>
+				<div className="flex items-center gap-3 p-1 pr-3 rounded-full hover:bg-white/5 transition-colors border border-transparent hover:border-[#d4af37]/20">
+					<Avatar className="h-10 w-10 border border-[#d4af37]/30 shadow-sm ring-1 ring-[#d4af37]/20">
+						<AvatarImage src={user.avatar_url || "/brand/amady-logo.png"} />
+						<AvatarFallback className="bg-[#d4af37] text-[#0a0e1a] font-bold">{user.first_name?.charAt(0) ?? "A"}</AvatarFallback>
 					</Avatar>
 					<div className="hidden sm:block text-left">
-						<p className="text-xs font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Welcome,</p>
-						<p className="text-sm font-bold text-slate-900 leading-none">{user.first_name}</p>
+						<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] leading-none mb-1">Pilgrim</p>
+						<p className="text-sm font-bold text-[#fdfcf0] leading-none">{user.first_name}</p>
 					</div>
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-64 rounded-3xl p-2 shadow-2xl border-slate-100" align="end" sideOffset={8}>
+			<DropdownMenuContent className="w-64 rounded-2xl p-2 bg-[#0a0e1a] border border-[#d4af37]/20 shadow-2xl" align="end" sideOffset={8}>
 				<DropdownMenuLabel className="px-4 py-4">
-					<p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Authenticated Account</p>
-					<p className="text-sm font-bold text-slate-900 truncate">{user.email}</p>
+					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] mb-1">Authenticated</p>
+					<p className="text-sm font-bold text-[#fdfcf0] truncate">{user.email}</p>
 				</DropdownMenuLabel>
-				<DropdownMenuSeparator className="bg-slate-50 mx-2" />
+				<DropdownMenuSeparator className="bg-[#d4af37]/10 mx-2" />
 				<DropdownMenuGroup className="p-1">
-					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3">
-						<Link to="/account/details"><Info className="mr-3 h-4 w-4 text-slate-400" /> Account Profile</Link>
+					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3 text-[#fdfcf0]/80 focus:bg-[#d4af37]/10 focus:text-[#d4af37]">
+						<Link to="/account/details"><Info className="mr-3 h-4 w-4 opacity-50" /> Profile</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3">
-						<Link to="/account/bookings"><Calendar className="mr-3 h-4 w-4 text-slate-400" /> My Registrations</Link>
+					<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3 text-[#fdfcf0]/80 focus:bg-[#d4af37]/10 focus:text-[#d4af37]">
+						<Link to="/account/bookings"><Calendar className="mr-3 h-4 w-4 opacity-50" /> My Journeys</Link>
 					</DropdownMenuItem>
 					{user.role === "admin" && (
-						<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3 bg-emerald-50/50 text-emerald-700 focus:bg-emerald-50 focus:text-emerald-700">
-							<Link to="/admin"><LayoutDashboard className="mr-3 h-4 w-4" /> Admin Dashboard</Link>
+						<DropdownMenuItem asChild className="rounded-xl cursor-pointer py-3 bg-[#d4af37]/5 text-[#d4af37] focus:bg-[#d4af37]/10">
+							<Link to="/admin"><LayoutDashboard className="mr-3 h-4 w-4" /> Admin Panel</Link>
 						</DropdownMenuItem>
 					)}
 				</DropdownMenuGroup>
-				<DropdownMenuSeparator className="bg-slate-50 mx-2" />
+				<DropdownMenuSeparator className="bg-[#d4af37]/10 mx-2" />
 				<Form action="/logout" method="POST" className="p-1">
 					<button type="submit" className="w-full">
-						<DropdownMenuItem variant="destructive" className="rounded-xl cursor-pointer py-3 focus:bg-red-50 focus:text-red-600">
+						<DropdownMenuItem variant="destructive" className="rounded-xl cursor-pointer py-3 focus:bg-red-950/30 text-red-400">
 							{isLoggingOut ? <Loader2 className="mr-3 h-4 w-4 animate-spin" /> : <LogOutIcon className="mr-3 h-4 w-4" />}
 							Logout
 						</DropdownMenuItem>

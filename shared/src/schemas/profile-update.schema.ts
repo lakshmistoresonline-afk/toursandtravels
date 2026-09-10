@@ -15,6 +15,7 @@ export const profileUpdateSchema = z.object({
 	address_state: z.string().optional().nullable(),
 	address_pin_code: z.string().optional().nullable(),
 	country: z.string().optional().nullable(),
+	aadhar_number: z.string().optional().nullable(),
 	identity_type: z.string().optional().nullable(),
 	identity_number: z.string().optional().nullable(),
 	emergency_contact_name: z.string().optional().nullable(),

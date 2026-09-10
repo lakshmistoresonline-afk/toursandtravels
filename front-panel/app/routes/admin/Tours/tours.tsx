@@ -42,7 +42,7 @@ export default function AdminToursPage() {
 	const columns: ColumnDef<HighLevelTour, unknown>[] = [
 		{
 			id: "Tour",
-			header: "Tour Details",
+			header: "Pilgrimage Journey Details",
 			cell: ({ row }) => (
 				<div className="flex items-center gap-4">
 					<div className="h-12 w-12 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -116,7 +116,7 @@ export default function AdminToursPage() {
 						</a>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem className="rounded-xl cursor-pointer py-2.5 text-red-600 focus:text-red-600 focus:bg-red-50">
-							<Trash2 className="mr-2 h-4 w-4" /> Delete Tour
+							<Trash2 className="mr-2 h-4 w-4" /> Delete Pilgrimage Journey
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
@@ -132,15 +132,15 @@ export default function AdminToursPage() {
 
 	return (
 		<div className="flex flex-col gap-8 animate-in fade-in duration-500">
-			<MetaDetails metaTitle="Manage Inventory | Ambady Tours and Travels Admin" />
+			<MetaDetails metaTitle="Manage Inventory | AMADY PILGRIMAGE EXPERIENCES Admin" />
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 				<div>
-					<h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Tour Inventory</h1>
+					<h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Pilgrimage Journey Inventory</h1>
 					<p className="text-slate-500 mt-2 text-lg">Manage and track all initiated experiences.</p>
 				</div>
 				<Button asChild size="lg" className="rounded-2xl px-8 shadow-lg shadow-primary/20">
-					<Link to="add"><PlusCircle className="mr-2 h-5 w-5" /> Initiate New Tour</Link>
+					<Link to="add"><PlusCircle className="mr-2 h-5 w-5" /> Initiate New Pilgrimage Journey</Link>
 				</Button>
 			</div>
 

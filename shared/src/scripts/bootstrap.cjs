@@ -21,7 +21,7 @@ const auth = getAuth();
 const db = getFirestore();
 
 const testUsers = [
-    { email: "admin@ambady.com", password: "Password123", role: "admin", firstName: "Ambady", lastName: "Admin" },
+    { email: "admin@amady.com", password: "Password123", role: "admin", firstName: "AMADY", lastName: "Admin" },
     { email: "user1@example.com", password: "Password123", role: "user", firstName: "John", lastName: "Doe" },
     { email: "user2@example.com", password: "Password123", role: "user", firstName: "Jane", lastName: "Smith" },
     { email: "user3@example.com", password: "Password123", role: "user", firstName: "Alice", lastName: "Brown" },

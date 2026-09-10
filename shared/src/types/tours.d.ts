@@ -7,7 +7,9 @@ export type HighLevelTour = {
 	price: number;
 	destination: string;
 	start_date: string | null;
+	start_time: string | null;
 	end_date: string | null;
+	end_time: string | null;
 	createdAt: any;
 	updatedAt: any;
 };

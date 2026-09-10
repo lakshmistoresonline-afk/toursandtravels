@@ -81,7 +81,7 @@ export default function ExportBookingsButton() {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Export Bookings</DialogTitle>
+					<DialogTitle>Export Registrations</DialogTitle>
 				</DialogHeader>
 
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

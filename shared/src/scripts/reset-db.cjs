@@ -21,7 +21,7 @@ const auth = getAuth();
 const db = getFirestore();
 
 const testUsers = [
-    { email: "admin@ambady.com", password: "Password123", role: "admin", firstName: "Ambady", lastName: "Admin" },
+    { email: "admin@amady.com", password: "Password123", role: "admin", firstName: "AMADY", lastName: "Admin" },
     { email: "user1@example.com", password: "Password123", role: "user", firstName: "John", lastName: "Doe" },
     { email: "user2@example.com", password: "Password123", role: "user", firstName: "Jane", lastName: "Smith" },
     { email: "user3@example.com", password: "Password123", role: "user", firstName: "Alice", lastName: "Brown" },
@@ -61,8 +61,23 @@ async function deleteQueryBatch(query, resolve) {
 async function reset() {
     console.log("🔥 FULL DATABASE RESET INITIATED...");
 
-    const collections = ["users", "tours", "registrations"];
-    for (const col of collections) {
+    // 1. Delete Tours and their Subcollections
+    console.log("🗑️ Deleting collection: tours and subcollections...");
+    const toursSnap = await db.collection("tours").get();
+    for (const doc of toursSnap.docs) {
+        // Delete itineraries subcollection first
+        const itinerariesSnap = await doc.ref.collection("itineraries").get();
+        const batch = db.batch();
+        itinerariesSnap.docs.forEach(iDoc => batch.delete(iDoc.ref));
+        await batch.commit();
+
+        // Delete the tour document itself
+        await doc.ref.delete();
+    }
+
+    // 2. Delete other top-level collections
+    const otherCollections = ["users", "registrations"];
+    for (const col of otherCollections) {
         console.log(`🗑️ Deleting collection: ${col}...`);
         await deleteCollection(col);
     }

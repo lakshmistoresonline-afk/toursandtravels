@@ -117,7 +117,7 @@ export default function BookingsPage() {
 			const worksheet = XLSX.utils.json_to_sheet(exportData);
 			const workbook = XLSX.utils.book_new();
 			XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
-			XLSX.writeFile(workbook, `Ambady Tours and Travels_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
+			XLSX.writeFile(workbook, `AMADY PILGRIMAGE EXPERIENCES_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
 		} catch (error) {
 			console.error("Export failed:", error);
 		} finally {
@@ -198,9 +198,9 @@ export default function BookingsPage() {
 
 	return (
 		<div className="flex flex-1 flex-col gap-6">
-			<MetaDetails metaTitle="Tour Registrations | Admin" />
+			<MetaDetails metaTitle="Pilgrimage Journey Registrations | Admin" />
 			<div className="flex justify-between items-center">
-				<h1 className="text-2xl font-bold">Tour Registrations</h1>
+				<h1 className="text-2xl font-bold">Pilgrimage Journey Registrations</h1>
 				<div className="flex gap-2">
 					<Button variant="outline" size="sm" onClick={() => setIsManualRegOpen(true)}>
 						<Plus className="mr-2 h-4 w-4" /> Manual Registration
@@ -235,13 +235,13 @@ export default function BookingsPage() {
 				<DialogContent className="max-w-md">
 					<DialogHeader>
 						<DialogTitle>Manual Registration</DialogTitle>
-						<DialogDescription>Register a user for a tour manually.</DialogDescription>
+						<DialogDescription>Register a pilgrim for a pilgrimage journey manually.</DialogDescription>
 					</DialogHeader>
 					<form onSubmit={handleManualSubmit} className="space-y-4 py-4">
 						<div className="space-y-2">
-							<Label>Select Tour</Label>
+							<Label>Select Pilgrimage Journey</Label>
 							<Select name="tourId" required>
-								<SelectTrigger><SelectValue placeholder="Choose a tour" /></SelectTrigger>
+								<SelectTrigger><SelectValue placeholder="Choose a pilgrimage journey" /></SelectTrigger>
 								<SelectContent>
 									{tours.map((t: any) => (
 										<SelectItem key={t.id} value={t.id}>{t.name} ({t.tour_code})</SelectItem>
@@ -250,9 +250,9 @@ export default function BookingsPage() {
 							</Select>
 						</div>
 						<div className="space-y-2">
-							<Label>Select User</Label>
+							<Label>Select Pilgrim</Label>
 							<Select name="customerId" required>
-								<SelectTrigger><SelectValue placeholder="Choose a user" /></SelectTrigger>
+								<SelectTrigger><SelectValue placeholder="Choose a pilgrim" /></SelectTrigger>
 								<SelectContent>
 									{users.map((u: any) => (
 										<SelectItem key={u.uid} value={u.uid}>{u.first_name} {u.last_name} ({u.email})</SelectItem>
@@ -261,7 +261,7 @@ export default function BookingsPage() {
 							</Select>
 						</div>
 						<div className="space-y-2">
-							<Label>Travellers Count</Label>
+							<Label>Pilgrims Count</Label>
 							<Input type="number" name="travellersCount" defaultValue={1} min={1} required />
 						</div>
 						<div className="space-y-2">
@@ -271,7 +271,7 @@ export default function BookingsPage() {
 						<DialogFooter>
 							<Button type="button" variant="outline" onClick={() => setIsManualRegOpen(false)}>Cancel</Button>
 							<Button type="submit" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Register User"}
+								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Register Pilgrim"}
 							</Button>
 						</DialogFooter>
 					</form>

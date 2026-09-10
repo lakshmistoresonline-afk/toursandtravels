@@ -7,9 +7,8 @@ import {
 	type LoaderFunctionArgs,
 	redirect,
 	useActionData,
-	useNavigate,
-	useNavigation,
 	useSubmit,
+	useNavigation,
 } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,8 +21,10 @@ import {
 	emailPasswordLoginSchema,
 } from "@workspace/shared/schemas/login.schema";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
+import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
+
+const logo = "/brand/amady-logo.png";
 
 export async function clientAction({ request }: ActionFunctionArgs) {
 	const formData = await request.formData();
@@ -60,7 +61,6 @@ export async function clientLoader({ request }: LoaderFunctionArgs) {
 export default function LoginPage() {
 	const actionData = useActionData() as any;
 	const navigation = useNavigation();
-	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = useState(false);
 
 	const isSubmitting = navigation.state === "submitting";
@@ -87,70 +87,86 @@ export default function LoginPage() {
 	}, [actionData]);
 
 	return (
-		<div className="container max-w-md mx-auto py-20">
-			<MetaDetails metaTitle="Login | Tours & Travels" />
-			<Card>
-				<CardHeader className="text-center">
-					<CardTitle className="text-2xl">Welcome Back</CardTitle>
-					<CardDescription>Login to manage your tours or book new ones.</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<Form {...form}>
-						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
-							<FormField
-								control={control}
-								name="email"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Email</FormLabel>
-										<FormControl>
-											<div className="relative">
-												<MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-												<Input placeholder="name@example.com" className="pl-10" {...field} />
-											</div>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={control}
-								name="password"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Password</FormLabel>
-										<FormControl>
-											<div className="relative">
-												<LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-												<Input
-													type={showPassword ? "text" : "password"}
-													placeholder="••••••••"
-													className="pl-10"
-													{...field}
-												/>
-												<button
-													type="button"
-													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-3 top-1/2 -translate-y-1/2"
-												>
-													{showPassword ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
-												</button>
-											</div>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<Button type="submit" className="w-full" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Login"}
-							</Button>
-						</form>
-					</Form>
-					<div className="mt-4 text-center text-sm">
-						Don't have an account? <Link to="/signup" className="text-primary hover:underline">Sign up</Link>
-					</div>
-				</CardContent>
-			</Card>
+		<div className="relative min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-20 px-4 overflow-hidden">
+			<div className="relative z-10 w-full max-w-lg animate-in fade-in slide-in-from-bottom-12 duration-1000">
+				<MetaDetails metaTitle="Login | AMADY" />
+				<Card className="glass-card border border-[#d4af37]/20 rounded-[3rem] overflow-hidden shadow-2xl shadow-black/50">
+					<CardHeader className="text-center pt-12 pb-8 px-10">
+						<div className="mx-auto w-24 h-24 mb-6 hover:scale-105 transition-transform duration-500">
+							<img src={logo} alt="Amady Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+						</div>
+						<h2 className="text-4xl font-serif text-[#fdfcf0] tracking-tight mb-2 uppercase">Welcome Back</h2>
+						<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.4em]">
+							Your Sacred Journey Awaits
+						</p>
+					</CardHeader>
+					<CardContent className="px-12 pb-16">
+						<Form {...form}>
+							<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
+								<FormField
+									control={control}
+									name="email"
+									render={({ field }) => (
+										<FormItem className="space-y-3">
+											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Email Address</FormLabel>
+											<FormControl>
+												<div className="relative">
+													<MailIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-[#d4af37]/40" />
+													<Input
+														placeholder="name@pilgrimage.com"
+														className="h-16 pl-16 rounded-2xl border border-white/5 bg-white/5 focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 font-sans"
+														{...field}
+													/>
+												</div>
+											</FormControl>
+											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-2" />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={control}
+									name="password"
+									render={({ field }) => (
+										<FormItem className="space-y-3">
+											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Secret Code</FormLabel>
+											<FormControl>
+												<div className="relative">
+													<LockIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-[#d4af37]/40" />
+													<Input
+														type={showPassword ? "text" : "password"}
+														placeholder="••••••••"
+														className="h-16 pl-16 pr-16 rounded-2xl border border-white/5 bg-white/5 focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 font-sans"
+														{...field}
+													/>
+													<button
+														type="button"
+														onClick={() => setShowPassword(!showPassword)}
+														className="absolute right-6 top-1/2 -translate-y-1/2 text-[#d4af37]/40 hover:text-[#d4af37] transition-colors"
+													>
+														{showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+													</button>
+												</div>
+											</FormControl>
+											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-2" />
+										</FormItem>
+									)}
+								/>
+								<Button type="submit" className="w-full h-20 rounded-full text-xs font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] shadow-2xl shadow-[#d4af37]/20 hover:scale-[1.02] transition-all hover:bg-[#b8860b]" disabled={isSubmitting}>
+									{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Sign In to Journey"}
+								</Button>
+							</form>
+						</Form>
+						<div className="mt-10 text-center">
+							<p className="text-[#fdfcf0]/40 text-[10px] font-bold uppercase tracking-widest">
+								New to Amady?{" "}
+								<Link to="/signup" className="text-[#d4af37] hover:text-[#fdfcf0] transition-colors ml-1">
+									Begin Registration
+								</Link>
+							</p>
+						</div>
+					</CardContent>
+				</Card>
+			</div>
 		</div>
 	);
 }

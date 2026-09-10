@@ -86,6 +86,7 @@ export class AuthService extends Service {
 				country: null,
 				emergency_contact_name: null,
 				emergency_contact_number: null,
+				aadhar_number: data.aadharNumber,
 				avatar_url: null,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),

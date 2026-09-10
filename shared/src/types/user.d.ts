@@ -23,6 +23,7 @@ export type AppUser = {
 	country: string | null;
 	emergency_contact_name: string | null;
 	emergency_contact_number: string | null;
+	aadhar_number: string | null;
 	avatar_url?: string | null;
 	createdAt: string;
 	updatedAt: string;

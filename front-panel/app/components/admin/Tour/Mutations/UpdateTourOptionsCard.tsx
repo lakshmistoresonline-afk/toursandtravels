@@ -73,9 +73,9 @@ export const TourOptionsCard = ({
 				</div>
 
 				<div className="grid gap-2">
-					<CardTitle>Tour Options</CardTitle>
+					<CardTitle>Pilgrimage Journey Options</CardTitle>
 					<CardDescription>
-						Available packages/options in this tour are listed here.
+						Available packages/options in this pilgrimage journey are listed here.
 					</CardDescription>
 				</div>
 			</CardHeader>

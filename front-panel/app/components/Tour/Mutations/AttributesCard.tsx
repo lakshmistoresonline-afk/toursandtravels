@@ -30,9 +30,9 @@ export const AttributesCard = ({ control }: Props) => {
 										}}
 									/>
 									<div className="grid gap-1.5 font-normal">
-										<p className="text-sm leading-none font-medium">Featured Tour</p>
+										<p className="text-sm leading-none font-medium">Featured Pilgrimage Journey</p>
 										<p className="text-muted-foreground text-sm">
-											Tour will be displayed as main tour on the home page.
+											Pilgrimage Journey will be displayed as main pilgrimage journey on the home page.
 										</p>
 									</div>
 								</Label>
@@ -59,7 +59,7 @@ export const AttributesCard = ({ control }: Props) => {
 									<div className="grid gap-1.5 font-normal">
 										<p className="text-sm leading-none font-medium">Toggle Status</p>
 										<p className="text-muted-foreground text-sm">
-											Tour will be set as inactive and not displayed on the website.
+											Pilgrimage Journey will be set as inactive and not displayed on the website.
 										</p>
 									</div>
 								</Label>
@@ -86,7 +86,7 @@ export const AttributesCard = ({ control }: Props) => {
 									<div className="grid gap-1.5 font-normal">
 										<p className="text-sm leading-none font-medium">Free Cancellation</p>
 										<p className="text-muted-foreground text-sm">
-											Tour can be claimed to be cancelled for free if active.
+											Pilgrimage Journey can be claimed to be cancelled for free if active.
 										</p>
 									</div>
 								</Label>
@@ -115,7 +115,7 @@ export const AttributesCard = ({ control }: Props) => {
 											Wheel Chair Accessible
 										</p>
 										<p className="text-muted-foreground text-sm">
-											Tour will be marked as accessible for people with wheel chair.
+											Pilgrimage Journey will be marked as accessible for people with wheel chair.
 										</p>
 									</div>
 								</Label>

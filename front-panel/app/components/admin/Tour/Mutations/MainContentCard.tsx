@@ -33,9 +33,9 @@ export const MainContentCard = ({
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Tour Content</CardTitle>
+				<CardTitle>Pilgrimage Journey Content</CardTitle>
 				<CardDescription>
-					Enter the tour main content to show on the tour details page.
+					Enter the pilgrimage journey main content to show on the pilgrimage journey details page.
 				</CardDescription>
 			</CardHeader>
 			<Separator />
@@ -49,7 +49,7 @@ export const MainContentCard = ({
 							<FormLabel>Overview</FormLabel>
 							<FormControl>
 								<Textarea
-									placeholder="e.g. Overview of the tour"
+									placeholder="e.g. Overview of the pilgrimage journey"
 									className="min-h-24"
 									maxLength={2000}
 									{...field}
@@ -69,7 +69,7 @@ export const MainContentCard = ({
 							<FormLabel>Highlights</FormLabel>
 							<FormControl>
 								<Textarea
-									placeholder="e.g. Highlights of the tour"
+									placeholder="e.g. Highlights of the pilgrimage journey"
 									className="min-h-36"
 									maxLength={1500}
 									{...field}
@@ -154,7 +154,7 @@ export const MainContentCard = ({
 					name={`live_tour_guide`}
 					render={({ field }) => (
 						<FormItem className="flex items-center space-x-3 mt-6">
-							<FormLabel className="text-base">Live Tour Guide Available</FormLabel>
+							<FormLabel className="text-base">Live Pilgrimage Journey Guide Available</FormLabel>
 							<FormControl>
 								<Switch
 									checked={field.value === "true"}
@@ -172,7 +172,7 @@ export const MainContentCard = ({
 					name="live_tour_guide_langs"
 					render={({ field, fieldState }) => (
 						<FormItem hidden={watchedGuide !== "true"}>
-							<FormLabel>Tour Guide Languages</FormLabel>
+							<FormLabel>Pilgrimage Journey Guide Languages</FormLabel>
 							<FormControl>
 								<TagsInput
 									value={field.value}
@@ -192,7 +192,7 @@ export const MainContentCard = ({
 														</TagsInputItem>
 													))
 												: null}
-											<TagsInputInput placeholder="Add tour guide languages..." />
+											<TagsInputInput placeholder="Add pilgrimage journey guide languages..." />
 										</TagsInputList>
 										<CustomTagsInputClear />
 									</div>

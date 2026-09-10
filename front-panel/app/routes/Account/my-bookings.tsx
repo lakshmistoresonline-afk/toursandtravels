@@ -2,7 +2,7 @@ import { useLoaderData, redirect, type LoaderFunctionArgs, Link } from "react-ro
 import { format } from "date-fns";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Compass } from "lucide-react";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
@@ -21,53 +21,55 @@ export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function MyBookingsPage() {
-	const { registrations } = useLoaderData<typeof loader>();
+	const { registrations } = useLoaderData<any>();
 
 	return (
-		<div className="container mx-auto max-w-4xl px-4">
-			<MetaDetails metaTitle="My Tours | Ambady Tours and Travels" />
-			<div className="mb-8">
-				<h1 className="text-3xl font-bold">My Tour History</h1>
-				<p className="text-muted-foreground mt-2">Manage your current and past registrations.</p>
+		<div className="container mx-auto max-w-5xl px-4 animate-in fade-in duration-700">
+			<MetaDetails metaTitle="My Pilgrimage Journeys | AMADY" />
+			<div className="mb-12">
+				<h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#d4af37] mb-2">History</h4>
+				<h1 className="text-4xl font-serif text-[#fdfcf0]">My Pilgrimage History</h1>
+				<p className="text-[#fdfcf0]/40 mt-3 text-sm font-sans font-light uppercase tracking-widest leading-relaxed">View your past and upcoming sacred registrations.</p>
 			</div>
 
 			{registrations.length === 0 ? (
-				<Card className="py-20 text-center border-dashed">
-					<p className="text-muted-foreground">You haven't joined any tours yet.</p>
-					<Link to="/tours" className="text-primary hover:underline mt-4 inline-block font-medium">Explore available tours</Link>
-				</Card>
+				<div className="py-32 text-center glass-card rounded-[3rem] border border-dashed border-[#d4af37]/20">
+					<Compass className="h-12 w-12 text-[#d4af37]/20 mx-auto mb-6" />
+					<p className="text-[#fdfcf0]/40 text-sm font-bold uppercase tracking-widest">You haven't joined any pilgrimage journeys yet.</p>
+					<Link to="/tours" className="text-[#d4af37] hover:text-[#fdfcf0] mt-6 inline-block text-[10px] font-bold uppercase tracking-[0.2em] border-b border-[#d4af37]/40 pb-1 transition-all">Explore Sacred Pilgrimage Journeys</Link>
+				</div>
 			) : (
-				<div className="grid gap-6">
+				<div className="grid gap-8">
 					{registrations.map((reg: any) => (
-						<Card key={reg.id} className="overflow-hidden">
+						<Card key={reg.id} className="glass-card border border-white/5 rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/20 transition-all duration-500">
 							<CardContent className="p-0">
 								<div className="flex flex-col md:flex-row">
-									<div className="w-full md:w-48 h-32 md:h-auto">
+									<div className="w-full md:w-64 h-48 md:h-auto overflow-hidden">
 										<img
-											src={reg.tours?.cover_image || "/placeholder-tour.jpg"}
+											src={reg.tours?.cover_image || "https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&w=800&q=80"}
 											alt={reg.tours?.name}
-											className="w-full h-full object-cover"
+											className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
 										/>
 									</div>
-									<div className="p-6 flex-1">
-										<div className="flex justify-between items-start">
-											<div>
-												<h3 className="text-xl font-bold">{reg.tours?.name}</h3>
-												<div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-													<span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {reg.tours?.destination}</span>
-													<span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {reg.tours?.start_date || 'TBD'}</span>
+									<div className="p-10 flex-1 space-y-6">
+										<div className="flex justify-between items-start gap-4">
+											<div className="space-y-2">
+												<h3 className="text-2xl font-serif text-[#fdfcf0] group-hover:text-[#d4af37] transition-colors">{reg.tours?.name}</h3>
+												<div className="flex items-center gap-6 text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-widest">
+													<span className="flex items-center gap-2"><MapPin className="h-3 w-3 text-[#d4af37]" /> {reg.tours?.destination}</span>
+													<span className="flex items-center gap-2"><Calendar className="h-3 w-3 text-[#d4af37]" /> {reg.tours?.start_date || 'TBD'}</span>
 												</div>
 											</div>
-											<Badge variant={reg.status === 'CONFIRMED' ? 'default' : 'warning'}>
+											<Badge className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${reg.status === 'CONFIRMED' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20'}`}>
 												{reg.status}
 											</Badge>
 										</div>
-										<div className="mt-4 pt-4 border-t flex justify-between items-center text-sm">
-											<div>
-												<span className="font-semibold">{reg.travellersCount} Travellers</span>
+										<div className="pt-6 border-t border-white/5 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+											<div className="text-[#fdfcf0]/70">
+												<span className="text-[#d4af37]">{reg.travellersCount}</span> Pilgrims Registered
 											</div>
-											<div className="text-muted-foreground text-xs italic">
-												Registered on {reg.createdAt ? format(new Date(reg.createdAt), "PPP") : 'Recently'}
+											<div className="text-[#fdfcf0]/30 italic font-light">
+												{reg.createdAt ? format(new Date(reg.createdAt), "PPP") : 'Recently'}
 											</div>
 										</div>
 									</div>

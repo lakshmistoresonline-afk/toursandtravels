@@ -22,6 +22,10 @@ export const signupSchema = z.object({
 		.refine((val) => val.trim().length > 0, {
 			message: "Email is required",
 		}),
+	aadharNumber: z
+		.string()
+		.min(1, "Aadhar number is required")
+		.regex(/^\d{12}$/, "Aadhar number must be exactly 12 digits"),
 	phone: z
 		.string()
 		.optional()

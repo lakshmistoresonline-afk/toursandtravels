@@ -31,7 +31,6 @@ export default function ErrorPage() {
 					<p className="mt-6 text-lg font-medium text-pretty text-muted-foreground sm:text-xl/8">
 						{errorText}
 					</p>
-					e
 					<div className="mt-10 flex items-center justify-center gap-x-6">
 						<Link to="/">
 							<Button>

@@ -1,13 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
-import { BriefcaseBusinessIcon, Clock8Icon, Loader2, MapPinIcon, PhoneIcon } from "lucide-react";
+import { Card, CardContent, CardHeader } from "~/components/ui/card";
+import { Clock8Icon, Loader2, MapPinIcon, PhoneIcon, Send } from "lucide-react";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { CONTACT_NUMBER_1 } from "@workspace/shared/constants/constants";
-import { Separator } from "~/components/ui/separator";
 import { Button } from "~/components/ui/button";
 import { GoogleReCaptcha, verifyRecaptcha } from "~/components/ReCaptcha/GoogleReCaptcha";
 import { ActionResponse } from "@workspace/shared/types/action-data";
-import { type ActionFunctionArgs, useActionData, useNavigate, useNavigation, useSubmit } from "react-router";
+import { type ActionFunctionArgs, useActionData, useNavigation, useSubmit } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { contactFormData, contactSchema } from "@workspace/shared/schemas/contact.schema";
@@ -21,22 +19,17 @@ import { emailService } from "@workspace/shared/services/emails.service";
 
 const contactInfo = [
 	{
-		title: "Office Hours",
+		title: "Sacred Hours",
 		icon: Clock8Icon,
-		description: "Monday-Friday\n8:00 am to 11:00 pm",
+		description: "Mon-Fri: 8:00 AM - 11:00 PM\nSat-Sun: Spiritual Retreat",
 	},
 	{
-		title: "Our Address",
+		title: "The Sanctuary",
 		icon: MapPinIcon,
-		description: "802 ABC Rd,Dubai\n96812, UAE",
+		description: "802 AMADY Rd, Dubai\n96812, UAE",
 	},
 	{
-		title: "Office 2",
-		icon: BriefcaseBusinessIcon,
-		description: "N/A",
-	},
-	{
-		title: "Get in Touch",
+		title: "Direct Path",
 		icon: PhoneIcon,
 		description: "+" + CONTACT_NUMBER_1,
 	},
@@ -45,23 +38,15 @@ const contactInfo = [
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
 		const formData = await request.formData();
-
 		const recaptchaToken = formData.get("recaptchaToken") as string;
 
 		if (!recaptchaToken || recaptchaToken == "") {
-			return {
-				success: false,
-				error: "Captcha identification failed",
-			};
+			return { success: false, error: "Captcha identification failed" };
 		}
 
 		const captchaResult = await verifyRecaptcha(recaptchaToken);
-
 		if (!captchaResult.success) {
-			return {
-				success: false,
-				error: "Captcha verification failed",
-			};
+			return { success: false, error: "Captcha verification failed" };
 		}
 
 		const data = {
@@ -72,22 +57,16 @@ export const clientAction = async ({ request }: ActionFunctionArgs) => {
 		};
 
 		const parseResult = contactSchema.safeParse(data);
-
 		if (!parseResult.success) {
 			const firstError = Object.values(parseResult.error.flatten().fieldErrors).flat()[0]!;
 			return { success: false, error: firstError };
 		}
 
 		await emailService.sendInquiry(data);
-
 		return { success: true };
 	} catch (error: any) {
-		const errorMessage =
-			error instanceof ApiError ? error.message : error.message || "Failed to process request";
-		return {
-			success: false,
-			error: errorMessage,
-		};
+		const errorMessage = error instanceof ApiError ? error.message : error.message || "Failed to process request";
+		return { success: false, error: errorMessage };
 	}
 };
 
@@ -97,73 +76,60 @@ export const clientLoader = () => {
 
 export default function ContactUs() {
 	return (
-		<>
+		<div className="min-h-screen animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle="Contact Us | Ambady Tours and Travels"
-				metaDescription="We're here to help you with any questions or concerns you may have. Don't hesitate to reach out to us!"
-				metaKeywords="Ambady Tours and Travels, Contact"
-				ogType="article"
-				ogUrl={`${process.env.VITE_MAIN_APP_URL}/contact-us`}
-				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/contact-us`}
-				ogImage="/contact-us.jpg"
+				metaTitle="Contact | AMADY"
+				metaDescription="Get in touch with AMADY PILGRIMAGE EXPERIENCES for inquiries about our pilgrimage journeys and services."
+				metaKeywords="AMADY PILGRIMAGE EXPERIENCES, Contact, Faith, Heritage"
 			/>
-			<section className="py-8 sm:py-16">
-				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-					{/* Header */}
-					<div className="relative mx-auto mb-12 w-fit sm:mb-16 lg:mb-24">
-						<h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">Contact Us</h2>
+
+			<section className="pt-32 pb-20">
+				<div className="container mx-auto px-6 max-w-7xl">
+					<div className="text-center space-y-4 mb-20">
+						<h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">Communion</h4>
+						<h1 className="text-5xl md:text-7xl font-serif text-[#fdfcf0] tracking-tight">Seek Guidance</h1>
+						<p className="text-[#fdfcf0]/40 text-sm font-sans font-light uppercase tracking-widest leading-relaxed max-w-2xl mx-auto">
+							We are here to support your spiritual quest. Reach out for any inquiries regarding our sacred journeys.
+						</p>
 					</div>
 
-					<div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1fr]">
-						<div className="space-y-8">
-							<div className="space-y-4">
-								<h3 className="text-2xl font-semibold">Happy to help you!</h3>
-								<p className="text-muted-foreground text-lg font-medium">
-									We&apos;re here to help you with any questions or concerns you may have.
-									Don&apos;t hesitate to reach out to us! Have a question about tours,
-									bookings, or anything else?
-								</p>
-							</div>
-
-							{/* Contact Info Grid */}
-							<div className="grid gap-4 sm:grid-cols-2">
+					<div className="grid gap-16 lg:grid-cols-[0.8fr_1fr]">
+						<div className="space-y-12">
+							<div className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-1">
 								{contactInfo.map((info, index) => (
-									<Card key={index}>
-										<CardContent className="flex flex-col items-center gap-2 text-center">
-											<Avatar className="size-9 border">
-												<AvatarFallback className="bg-transparent [&>svg]:size-5">
-													<info.icon />
-												</AvatarFallback>
-											</Avatar>
-											<div className="space-y-3">
-												<h4 className="text-lg font-semibold">{info.title}</h4>
-												<div className="text-muted-foreground text-base font-medium">
-													{info.description.split("\n").map((line, idx) => (
-														<p key={idx}>{line}</p>
-													))}
-												</div>
+									<div key={index} className="glass-card p-8 rounded-[2rem] border border-[#d4af37]/10 flex items-start gap-6 group hover:border-[#d4af37]/30 transition-all duration-500">
+										<div className="h-12 w-12 rounded-full glass-card border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]/60 group-hover:text-[#d4af37] transition-colors">
+											<info.icon className="h-5 w-5" />
+										</div>
+										<div className="space-y-2">
+											<h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">{info.title}</h4>
+											<div className="text-[#fdfcf0]/60 text-sm font-sans font-light leading-relaxed whitespace-pre-wrap">
+												{info.description}
 											</div>
-										</CardContent>
-									</Card>
+										</div>
+									</div>
 								))}
 							</div>
 						</div>
-						<InquiryForm />
+
+						<div className="glass-card p-10 md:p-12 rounded-[3rem] border border-[#d4af37]/10 shadow-2xl relative overflow-hidden">
+							<div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+								<Send className="h-32 w-32 text-[#d4af37] -rotate-12" />
+							</div>
+							<InquiryForm />
+						</div>
 					</div>
 				</div>
 			</section>
-		</>
+		</div>
 	);
 }
 
 const InquiryForm = () => {
 	const actionData: ActionResponse = useActionData();
-
 	const submit = useSubmit();
 	const navigation = useNavigation();
-	const navigate = useNavigate();
 	const recaptchaRef = useRef(null);
-
 	const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
 	const isSending = navigation.state === "submitting" && navigation.formMethod === "POST";
@@ -185,7 +151,7 @@ const InquiryForm = () => {
 	useEffect(() => {
 		if (actionData) {
 			if (actionData.success) {
-				toast.success("Your message has been sent successfully. We will get back to you soon.");
+				toast.success("Your message has been received. Guidance will follow soon.");
 				setRecaptchaToken(null);
 				reset();
 				if (recaptchaRef.current !== null) {
@@ -195,25 +161,18 @@ const InquiryForm = () => {
 			} else if (actionData.error) {
 				toast.error(actionData.error);
 				setRecaptchaToken(null);
-				reset();
-				if (recaptchaRef.current !== null) {
-					// @ts-ignore
-					recaptchaRef.current.reset();
-				}
 			} else if (actionData.validationErrors) {
-				toast.error("Invalid form data. Please check your inputs.");
+				toast.error("Invalid input. Please check your details.");
 				Object.entries(actionData.validationErrors).forEach(([field, errors]) => {
 					setError(field as keyof contactFormData, { message: errors[0] });
 				});
 			}
 		}
-	}, [actionData, navigate]);
+	}, [actionData, reset, setError]);
 
 	const handleFormSubmittion = (data: contactFormData) => {
-		if (!recaptchaToken || recaptchaToken == "") {
-			toast.error("Invalid Captcha", {
-				description: "Try again later",
-			});
+		if (!recaptchaToken) {
+			toast.error("Identity Verification Needed", { description: "Please complete the captcha." });
 			return;
 		}
 
@@ -222,95 +181,86 @@ const InquiryForm = () => {
 		formData.append("full_name", data.full_name.trim());
 		formData.append("subject", data.subject.trim());
 		formData.append("message", data.message.trim());
-		formData.append("recaptchaToken", recaptchaToken ?? "");
+		formData.append("recaptchaToken", recaptchaToken);
 		submit(formData, { method: "POST", action: "/contact-us" });
 	};
 
 	return (
-		<Card>
-			<CardHeader>
-				<CardTitle className="text-lg font-semibold">Inquire</CardTitle>
-				<CardDescription>
-					If your have any doubts or queries you may send us a message here.
-				</CardDescription>
-			</CardHeader>
-			<Separator />
-			<CardContent>
-				<Form {...form}>
-					<form method="POST" className="space-y-4" onSubmit={handleSubmit(handleFormSubmittion)}>
-						<div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
-							<FormField
-								control={control}
-								name="full_name"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Full Name</FormLabel>
-										<FormControl>
-											<Input placeholder="John Doe" min={1} type="text" {...field} />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={control}
-								name="email"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Email</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="johndoe@gmail.com"
-												min={1}
-												type="email"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
+		<div className="space-y-10">
+			<div className="space-y-2">
+				<h3 className="text-3xl font-serif text-[#fdfcf0] tracking-tight">Divine Inquiry</h3>
+				<p className="text-[10px] font-bold text-[#fdfcf0]/30 uppercase tracking-[0.3em]">Send your message to the sanctuary</p>
+			</div>
+
+			<Form {...form}>
+				<form method="POST" className="space-y-8" onSubmit={handleSubmit(handleFormSubmittion)}>
+					<div className="grid sm:grid-cols-2 gap-8">
 						<FormField
 							control={control}
-							name="subject"
+							name="full_name"
 							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Subject</FormLabel>
+								<FormItem className="space-y-3">
+									<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Full Name</FormLabel>
 									<FormControl>
-										<Input placeholder="Subject" min={1} type="text" {...field} />
+										<Input placeholder="Your Name" className="h-16 rounded-2xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} />
 									</FormControl>
-									<FormMessage />
+									<FormMessage className="text-red-400 text-[9px] font-bold uppercase tracking-widest ml-2" />
 								</FormItem>
 							)}
 						/>
 						<FormField
 							control={control}
-							name="message"
+							name="email"
 							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Message</FormLabel>
+								<FormItem className="space-y-3">
+									<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Email</FormLabel>
 									<FormControl>
-										<Textarea placeholder="Message" className="h-32" {...field} />
+										<Input placeholder="email@example.com" className="h-16 rounded-2xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} />
 									</FormControl>
-									<FormMessage />
+									<FormMessage className="text-red-400 text-[9px] font-bold uppercase tracking-widest ml-2" />
 								</FormItem>
 							)}
 						/>
+					</div>
+					<FormField
+						control={control}
+						name="subject"
+						render={({ field }) => (
+							<FormItem className="space-y-3">
+								<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Subject</FormLabel>
+								<FormControl>
+									<Input placeholder="Inquiry Topic" className="h-16 rounded-2xl border-white/5 bg-white/5 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40" {...field} />
+								</FormControl>
+								<FormMessage className="text-red-400 text-[9px] font-bold uppercase tracking-widest ml-2" />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={control}
+						name="message"
+						render={({ field }) => (
+							<FormItem className="space-y-3">
+								<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-2">Message</FormLabel>
+								<FormControl>
+									<Textarea placeholder="Share your thoughts..." className="min-h-[160px] p-6 rounded-2xl border-white/5 bg-white/5 text-[#fdfcf0] focus:ring-[#d4af37]/20 focus:border-[#d4af37]/40 outline-none resize-none" {...field} />
+								</FormControl>
+								<FormMessage className="text-red-400 text-[9px] font-bold uppercase tracking-widest ml-2" />
+							</FormItem>
+						)}
+					/>
 
-						<GoogleReCaptcha
-							siteKey={process.env.VITE_RECAPTCHA_SITE_KEY as string}
-							onChange={(token) => setRecaptchaToken(token)}
-							ref={recaptchaRef}
-						/>
+					<GoogleReCaptcha
+						siteKey={process.env.VITE_RECAPTCHA_SITE_KEY as string}
+						onChange={(token) => setRecaptchaToken(token)}
+						ref={recaptchaRef}
+					/>
 
-						<Button type="submit" className="w-full" disabled={isSending || !recaptchaToken}>
-							{isSending && <Loader2 className="animate-spin mr-1" />}
-							<span>Send</span>
-						</Button>
-					</form>
-				</Form>
-			</CardContent>
-		</Card>
+					<Button type="submit" className="w-full h-20 rounded-full text-xs font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] shadow-2xl shadow-[#d4af37]/20 hover:scale-[1.02] transition-all hover:bg-[#b8860b]" disabled={isSending || !recaptchaToken}>
+						{isSending ? <Loader2 className="animate-spin mr-3 h-5 w-5" /> : <Send className="mr-3 h-4 w-4" />}
+						Send Inquiry
+					</Button>
+				</form>
+			</Form>
+		</div>
 	);
 };

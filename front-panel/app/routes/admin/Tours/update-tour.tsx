@@ -58,6 +58,10 @@ export default function UpdateTourPage() {
 			price: tour?.price || 0,
 			max_participants: tour?.max_participants || 20,
 			status: tour?.status || "DRAFT",
+			start_date: tour?.start_date || "",
+			start_time: tour?.start_time || "",
+			end_date: tour?.end_date || "",
+			end_time: tour?.end_time || "",
 			itinerary: tour?.itinerary || [],
 		},
 	});
@@ -119,6 +123,18 @@ export default function UpdateTourPage() {
 										</SelectContent>
 									</Select>
 								</FormItem>
+							)} />
+							<FormField control={control} name="start_date" render={({ field }) => (
+								<FormItem><FormLabel>Start Date</FormLabel><FormControl><Input type="date" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="start_time" render={({ field }) => (
+								<FormItem><FormLabel>Start Time</FormLabel><FormControl><Input type="time" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="end_date" render={({ field }) => (
+								<FormItem><FormLabel>End Date</FormLabel><FormControl><Input type="date" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="end_time" render={({ field }) => (
+								<FormItem><FormLabel>End Time</FormLabel><FormControl><Input type="time" {...field} /></FormControl></FormItem>
 							)} />
 						</CardContent>
 					</Card>

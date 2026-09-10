@@ -44,6 +44,7 @@ export default defineConfig(({ mode }) => {
 				"firebase/firestore",
 				"firebase/storage",
 			],
+			exclude: ["@workspace/shared"],
 		},
 		define: {
 			"process.env.VITE_FIREBASE_API_KEY": JSON.stringify(env.VITE_FIREBASE_API_KEY),
@@ -56,6 +57,9 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			port: 5175,
+			warmup: {
+				clientFiles: ["./app/root.tsx", "./app/entry.client.tsx"],
+			},
 		},
 	};
 });

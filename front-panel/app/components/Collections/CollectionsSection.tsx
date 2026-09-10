@@ -2,13 +2,12 @@ import type { FPCollection } from "@workspace/shared/types/collections";
 import { TourCard } from "~/components/Tour/TourCard";
 import { Carousel, CarouselContent, CarouselItem } from "~/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Link, useRouteLoaderData } from "react-router";
-import { ArrowRight } from "lucide-react";
-import type { FrontPanelCoupon } from "@workspace/shared/types/coupons";
+import { Link } from "react-router";
+import { ArrowRight, Compass } from "lucide-react";
 
 export default function CollectionsSection({
 	collections,
-	title = "Curated Collections",
+	title = "Sacred Collections",
 	isCity = false,
 }: {
 	collections: FPCollection[];
@@ -16,25 +15,24 @@ export default function CollectionsSection({
 	isCity?: boolean;
 }) {
 	if (collections.length === 0) return null;
-	const rootLoaderData = useRouteLoaderData("root");
 
 	return (
-		<section className="py-12 bg-background">
-			<div className="mx-auto space-y-14">
-				<div className="mx-auto px-4 space-y-2">
-					<h2 className="text-3xl font-bold text-center">{title}</h2>
-					<p className="text-center text-muted-foreground">
+		<section className="py-24">
+			<div className="container mx-auto space-y-20">
+				<div className="text-center space-y-6">
+					<h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">Curated Paths</h4>
+					<h2 className="text-4xl md:text-6xl font-serif text-[#fdfcf0]">{title}</h2>
+					<p className="text-[#fdfcf0]/40 font-sans font-light uppercase tracking-[0.2em] text-xs">
 						{!isCity
-							? "🍀 Collections curated by Ambady Tours and Travels 🍀"
-							: "Explore handpicked tours for your next adventure ❣️"}
+							? "Handpicked spiritual experiences curated by AMADY PILGRIMAGE EXPERIENCES"
+							: "Explore sacred destinations for your next spiritual journey"}
 					</p>
 				</div>
-				<div className="space-y-14">
+				<div className="space-y-24">
 					{collections.map((collection) => (
 						<CollectionCarousel
 							key={collection.id}
 							collection={collection}
-							coupons={rootLoaderData.couponsResp.coupons ?? []}
 						/>
 					))}
 				</div>
@@ -45,58 +43,62 @@ export default function CollectionsSection({
 
 function CollectionCarousel({
 	collection,
-	coupons,
 	...props
 }: {
 	collection: FPCollection;
-	coupons: FrontPanelCoupon[];
 }) {
 	const tours = collection.tours || [];
 
 	return (
-		<div {...props}>
+		<div {...props} className="space-y-10">
 			{/* Header */}
-			<div className="flex justify-between items-center mb-1">
-				<h3 className="text-2xl font-semibold max-sm:mx-auto">{collection.name}</h3>
+			<div className="flex justify-between items-end gap-6 px-4">
+				<div className="space-y-2">
+					<h3 className="text-3xl font-serif text-[#fdfcf0] tracking-tight">{collection.name}</h3>
+					{collection.description && (
+						<p className="text-sm text-[#fdfcf0]/40 font-sans font-light max-w-2xl">{collection.description}</p>
+					)}
+				</div>
 				<Link
 					to={`/collection/${collection.id}`}
-					viewTransition
-					prefetch="viewport"
-					className="sm:flex hidden gap-1 items-center justify-center group text-primary"
+					className="group hidden sm:flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#d4af37] border-b border-[#d4af37]/20 pb-1 hover:text-[#fdfcf0] transition-all"
 				>
-					View All
-					<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-all ease-in-out" />
+					Explore All
+					<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-all" />
 				</Link>
 			</div>
-			{collection.description && (
-				<p className="mb-4 text-muted-foreground max-sm:text-center">{collection.description}</p>
-			)}
 
 			<Carousel
-				className="w-full max-w-full"
+				className="w-full"
+				opts={{
+					align: "start",
+					loop: true,
+				}}
 				plugins={[
 					Autoplay({
-						delay: 3000,
+						delay: 5000,
 					}),
 				]}
 			>
-				<CarouselContent>
+				<CarouselContent className="-ml-6">
 					{tours.map((tour) => (
 						<CarouselItem
 							key={tour.id}
-							title={tour.name}
-							className="pl-4 min-[550px]:basis-1/2 md:basis-1/3 lg:basis-1/4"
+							className="pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
 						>
-							<TourCard tour={tour} linkPrefetch="viewport" coupons={coupons ?? []} />
+							<TourCard tour={tour} />
 						</CarouselItem>
 					))}
 				</CarouselContent>
 			</Carousel>
 
 			{tours.length === 0 && (
-				<p className="text-center text-muted-foreground mt-4">
-					No tours available in this collection yet.
-				</p>
+				<div className="py-20 text-center glass-card rounded-[2.5rem] border border-dashed border-white/10 mx-4">
+					<Compass className="h-10 w-10 text-white/10 mx-auto mb-4" />
+					<p className="text-[#fdfcf0]/30 text-[10px] font-bold uppercase tracking-widest">
+						No journeys available in this collection yet.
+					</p>
+				</div>
 			)}
 		</div>
 	);

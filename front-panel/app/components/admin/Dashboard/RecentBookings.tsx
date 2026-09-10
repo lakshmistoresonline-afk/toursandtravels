@@ -10,13 +10,13 @@ export const RecentBookingsCard = ({ recentBookings }: { recentBookings: HighLev
 	return (
 		<Card className="border-none shadow-sm">
 			<CardHeader>
-				<CardTitle className="text-lg font-semibold tracking-tight">Recent Bookings</CardTitle>
+				<CardTitle className="text-lg font-semibold tracking-tight">Recent Registrations</CardTitle>
 			</CardHeader>
 			<Separator />
 			<CardContent>
 				{recentBookings.length === 0 ? (
 					<div className="py-8 text-center text-sm text-muted-foreground">
-						No recent bookings yet.
+						No recent registrations yet.
 					</div>
 				) : (
 					<div className="space-y-1">
@@ -65,7 +65,7 @@ export const RecentBookingsCard = ({ recentBookings }: { recentBookings: HighLev
 										{booking.customer_name || "Guest"}{" "}
 										<span className="hover:text-primary hover:underline underline-offset-4">
 											<a
-												href={`https://wa.me/${booking.customer_phone}?text=Hi! I am from Ambady Tours and Travels.\nThanks for booking with us.\nYour booking reference is ${booking.booking_ref}`}
+												href={`https://wa.me/${booking.customer_phone}?text=Hi! I am from AMADY PILGRIMAGE EXPERIENCES.\nThanks for registering with us.\nYour registration reference is ${booking.booking_ref}`}
 												target="_blank"
 												rel="noopener noreferrer"
 											>

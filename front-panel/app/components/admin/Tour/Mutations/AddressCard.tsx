@@ -33,7 +33,7 @@ export const AddressCard = ({ control }: { control: AddFormControlType }) => {
 			<CardHeader>
 				<CardTitle>Address</CardTitle>
 				<CardDescription>
-					Visitors will be able to see this address on this tour details page
+					Visitors will be able to see this address on this pilgrimage journey details page
 				</CardDescription>
 			</CardHeader>
 			<Separator />
@@ -74,7 +74,7 @@ export const AddressCard = ({ control }: { control: AddFormControlType }) => {
 											<TooltipContent>
 												<p>
 													Please enter google maps iframe link from share section of
-													the current tour in google maps.
+													the current pilgrimage journey in google maps.
 												</p>
 											</TooltipContent>
 										</Tooltip>

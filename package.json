@@ -12,6 +12,7 @@
 	"scripts": {
 		"bootstrap": "npm install",
 		"dev": "npm run dev -w front-panel",
+		"dev:clean": "npm run dev:clean -w front-panel",
 		"build:shared": "npm run build -w shared",
 		"build:app": "npm run build -w front-panel",
 		"build": "npm run build:shared && npm run build:app",

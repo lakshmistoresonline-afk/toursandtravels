@@ -24,7 +24,7 @@ export const TagsCard = ({ control, tags, noTags }: Props) => {
 			<CardHeader>
 				<CardTitle>Tags</CardTitle>
 				<CardDescription>
-					These tags are used to filter out and sub categorize the tours.
+					These tags are used to filter out and sub categorize the pilgrimage journeys.
 				</CardDescription>
 			</CardHeader>
 			<Separator />

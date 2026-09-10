@@ -12,11 +12,11 @@ const getTopAnalytics = (
 			value: formatCurrencyCompact(Number(total_revenue)),
 		},
 		{
-			title: "Total Bookings",
+			title: "Total Registrations",
 			value: total_bookings,
 		},
 		{
-			title: "Total Tours",
+			title: "Total Pilgrimage Journeys",
 			value: total_tours,
 		},
 		{

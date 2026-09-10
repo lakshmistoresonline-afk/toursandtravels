@@ -40,12 +40,12 @@ export class BookingService extends Service {
 				const tourRef = doc(this.db, this.TOURS_COLLECTION, tourId);
 				const tourDoc = await transaction.get(tourRef);
 
-				if (!tourDoc.exists()) throw new ApiError("Tour not found", 404);
+				if (!tourDoc.exists()) throw new ApiError("Pilgrimage journey not found", 404);
 				const tourData = tourDoc.data();
 
 				const currentParticipants = tourData.currentParticipants || 0;
 				if (tourData.max_participants && (currentParticipants + travellersCount > tourData.max_participants)) {
-					throw new ApiError("Tour is full", 400);
+					throw new ApiError("Pilgrimage journey is full", 400);
 				}
 
 				const userRef = doc(this.db, this.USERS_COLLECTION, customerId);

@@ -25,7 +25,7 @@ export const GeneralDetailsCard = ({ control, cities, categories, providers }: P
 					name="name"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Tour Name</FormLabel>
+							<FormLabel>Pilgrimage Journey Name</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="e.g. Ferrari World, Abu Dhabi"
@@ -100,12 +100,12 @@ export const GeneralDetailsCard = ({ control, cities, categories, providers }: P
 					name="provider"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Tour Provider</FormLabel>
+							<FormLabel>Pilgrimage Journey Provider</FormLabel>
 							<FormControl>
 								<div className="*:w-full flex-1">
 									<Select onValueChange={field.onChange} value={field.value}>
 										<SelectTrigger>
-											<SelectValue placeholder="Select Tour Provider" />
+											<SelectValue placeholder="Select Pilgrimage Journey Provider" />
 										</SelectTrigger>
 										<SelectContent>
 											{providers.map((c) => (

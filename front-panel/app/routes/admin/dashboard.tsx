@@ -1,10 +1,11 @@
 import { useLoaderData, Link } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Users, MapPin, ClipboardList, TrendingUp, PlusCircle, ArrowRight } from "lucide-react";
-import { collection, getDocs } from "firebase/firestore";
+import { Users, MapPin, ClipboardList, PlusCircle, ArrowRight, Calendar, User, IndianRupee } from "lucide-react";
+import { collection, getDocs, limit, query, orderBy } from "firebase/firestore";
 import { db } from "@workspace/shared/lib/firebase";
 import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
 
 export const clientLoader = async () => {
 	try {
@@ -12,123 +13,167 @@ export const clientLoader = async () => {
 		const toursSnap = await getDocs(collection(db, "tours"));
 		const regsSnap = await getDocs(collection(db, "registrations"));
 
+		// Fetch recent registrations
+		const recentRegsQuery = query(collection(db, "registrations"), orderBy("createdAt", "desc"), limit(5));
+		const recentRegsSnap = await getDocs(recentRegsQuery);
+		const recentRegistrations = recentRegsSnap.docs.map(doc => ({
+			id: doc.id,
+			...doc.data()
+		}));
+
 		return {
 			stats: {
 				users: usersSnap.size,
 				tours: toursSnap.size,
 				registrations: regsSnap.size,
-			}
+			},
+			recentRegistrations
 		};
 	} catch (error) {
-		return { stats: { users: 0, tours: 0, registrations: 0 } };
+		console.error("Dashboard loader error:", error);
+		return { stats: { users: 0, tours: 0, registrations: 0 }, recentRegistrations: [] };
 	}
 };
 
 export default function AdminDashboard() {
-	const { stats } = useLoaderData<typeof clientLoader>();
+	const { stats, recentRegistrations } = useLoaderData<any>();
 
 	const cards = [
 		{
-			title: "Total Customers",
+			title: "Pilgrims",
 			value: stats.users,
 			icon: Users,
-			color: "bg-blue-500",
-			textColor: "text-blue-600",
+			color: "text-blue-400",
 			link: "#",
-			desc: "Registered users on platform"
 		},
 		{
-			title: "Active Tours",
+			title: "Journeys",
 			value: stats.tours,
 			icon: MapPin,
-			color: "bg-emerald-500",
-			textColor: "text-emerald-600",
+			color: "text-[#d4af37]",
 			link: "/admin/tours",
-			desc: "Tours currently initiated"
 		},
 		{
 			title: "Registrations",
 			value: stats.registrations,
 			icon: ClipboardList,
-			color: "bg-purple-500",
-			textColor: "text-purple-600",
+			color: "text-emerald-400",
 			link: "/admin/registrations",
-			desc: "Confirmed bookings by users"
 		},
 	];
 
 	return (
-		<div className="space-y-10 animate-in fade-in duration-500">
-			<MetaDetails metaTitle="Dashboard | Ambady Tours and Travels Admin" />
+		<div className="space-y-12 animate-in fade-in duration-700">
+			<MetaDetails metaTitle="Sanctuary | Admin Dashboard" />
 
-			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-				<div>
-					<h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Dashboard</h1>
-					<p className="text-slate-500 mt-2 text-lg">Welcome back! Here's what's happening today.</p>
+			<div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-[#d4af37]/10 pb-10">
+				<div className="space-y-2">
+					<h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">Operational Sanctuary</h4>
+					<h1 className="text-5xl font-serif text-[#fdfcf0] tracking-tight">Admin Overview</h1>
+					<p className="text-[#fdfcf0]/40 text-sm font-sans font-light uppercase tracking-widest leading-relaxed">Overseeing sacred paths and spiritual journeys.</p>
 				</div>
-				<div className="flex gap-3">
-					<Button asChild size="lg" className="rounded-2xl px-8 py-6 shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
-						<Link to="/admin/tours/add">
-							<PlusCircle className="mr-2 h-5 w-5" />
-							Initiate New Tour
-						</Link>
+				<div className="flex gap-6">
+					<Button asChild className="rounded-full px-8 py-7 bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] shadow-2xl shadow-[#d4af37]/20 hover:bg-[#b8860b] transition-all">
+						<Link to="/admin/tours/add"><PlusCircle className="mr-3 h-4 w-4" /> Initiate Journey</Link>
 					</Button>
 				</div>
 			</div>
 
-			<div className="grid md:grid-cols-3 gap-8">
+			{/* Stats Grid */}
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 				{cards.map((card) => (
-					<Card key={card.title} className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-3xl overflow-hidden group">
-						<CardContent className="p-8">
-							<div className="flex justify-between items-start mb-6">
-								<div className={`p-4 rounded-2xl ${card.color} text-white shadow-lg`}>
-									<card.icon className="h-6 w-6" />
-								</div>
-								<div className="text-right">
-									<p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{card.title}</p>
-									<p className="text-4xl font-black text-slate-900 mt-1 tracking-tighter">{card.value}</p>
-								</div>
+					<Card key={card.title} className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/30 transition-all duration-500">
+						<CardContent className="p-10 flex items-center justify-between">
+							<div className="space-y-2">
+								<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">{card.title}</p>
+								<p className="text-5xl font-serif text-[#fdfcf0] tracking-tight">{card.value}</p>
 							</div>
-							<p className="text-slate-500 text-sm mb-6">{card.desc}</p>
-							<Link to={card.link} className={`flex items-center gap-2 text-sm font-bold ${card.textColor} hover:opacity-80 transition-opacity`}>
-								Explore Details <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-							</Link>
+							<div className={`p-5 rounded-full glass-card border border-[#d4af37]/20 ${card.color}`}>
+								<card.icon className="h-8 w-8" />
+							</div>
 						</CardContent>
+						<div className="px-10 pb-6">
+							<Link to={card.link} className="text-[9px] font-bold text-[#d4af37]/60 uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors flex items-center gap-2">
+								Enter Sanctuary <ArrowRight className="h-3 w-3" />
+							</Link>
+						</div>
 					</Card>
 				))}
 			</div>
 
-			<div className="grid lg:grid-cols-2 gap-8">
-				<Card className="rounded-3xl border-none shadow-sm bg-gradient-to-br from-slate-900 to-slate-800 text-white overflow-hidden relative">
-					<div className="absolute top-0 right-0 p-12 opacity-10">
-						<TrendingUp className="h-48 w-48" />
-					</div>
-					<CardHeader className="p-10 pb-0">
-						<CardTitle className="text-2xl font-bold">Admin Insights</CardTitle>
-					</CardHeader>
-					<CardContent className="p-10 pt-6 relative z-10">
-						<p className="text-slate-300 text-lg leading-relaxed max-w-md">
-							Your tour registration rate is growing. Use the **Manual Registration** tool in the bookings section to help users who call in directly.
-						</p>
-						<Button asChild variant="secondary" className="mt-10 rounded-2xl px-8 font-bold">
-							<Link to="/admin/registrations">Open Bookings</Link>
+			<div className="grid lg:grid-cols-3 gap-12">
+				{/* Recent Activity */}
+				<Card className="lg:col-span-2 glass-card border border-[#d4af37]/10 rounded-[2.5rem] overflow-hidden">
+					<CardHeader className="px-10 py-8 border-b border-white/5 flex flex-row items-center justify-between bg-white/5">
+						<div className="flex items-center gap-4">
+							<Calendar className="h-5 w-5 text-[#d4af37]" />
+							<CardTitle className="text-sm font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/80">Recent Pilgrim Registrations</CardTitle>
+						</div>
+						<Button variant="ghost" asChild className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#d4af37] hover:text-[#fdfcf0] hover:bg-transparent">
+							<Link to="/admin/registrations">View All</Link>
 						</Button>
+					</CardHeader>
+					<CardContent className="p-0">
+						{recentRegistrations.length > 0 ? (
+							<div className="divide-y divide-white/5">
+								{recentRegistrations.map((reg: any) => (
+									<div key={reg.id} className="p-8 flex items-center justify-between hover:bg-white/5 transition-all duration-300">
+										<div className="flex items-center gap-6">
+											<div className="h-12 w-12 rounded-full glass-card border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]/40">
+												<User className="h-6 w-6" />
+											</div>
+											<div className="space-y-1">
+												<p className="font-serif text-[#fdfcf0] text-lg">{(reg as any).profileSnapshot?.first_name} {(reg as any).profileSnapshot?.last_name}</p>
+												<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest">{(reg as any).tours?.name}</p>
+											</div>
+										</div>
+										<div className="text-right space-y-2">
+											<div className="flex items-center gap-1 text-[#d4af37] font-serif text-lg justify-end">
+												<IndianRupee className="h-3.5 w-3.5" />
+												{((reg as any).tours?.price * (reg as any).travellersCount).toLocaleString()}
+											</div>
+											<Badge className={`text-[8px] uppercase tracking-widest border font-bold px-3 py-1 rounded-full bg-transparent ${reg.status === 'CONFIRMED' ? 'text-emerald-400 border-emerald-400/20' : 'text-[#d4af37] border-[#d4af37]/20'}`}>{(reg as any).status}</Badge>
+										</div>
+									</div>
+								))}
+							</div>
+						) : (
+							<div className="p-32 text-center space-y-4">
+								<p className="text-[#fdfcf0]/20 font-serif italic text-2xl uppercase tracking-widest">No recent pilgrims found.</p>
+							</div>
+						)}
 					</CardContent>
 				</Card>
 
-				<Card className="rounded-3xl border-none shadow-sm bg-white p-10 flex flex-col justify-center items-center text-center space-y-6">
-					<div className="bg-primary/10 p-6 rounded-full">
-						<MapPin className="h-10 w-10 text-primary" />
-					</div>
-					<div className="space-y-2">
-						<h3 className="text-2xl font-bold text-slate-900">Inventory Status</h3>
-						<p className="text-slate-500">Currently managing {stats.tours} unique destinations.</p>
-					</div>
-					<Button asChild variant="outline" className="rounded-2xl px-8 border-2 font-bold hover:bg-slate-50">
-						<Link to="/admin/tours">Manage Inventory</Link>
-					</Button>
-				</Card>
+				{/* Quick Links / Actions */}
+				<div className="space-y-8">
+					<Card className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] p-10 space-y-8 shadow-2xl">
+						<h3 className="text-[10px] font-bold text-[#d4af37] uppercase tracking-[0.4em]">Sanctuary Ops</h3>
+						<div className="grid gap-4">
+							<Button asChild className="justify-start h-16 rounded-2xl bg-white/5 hover:bg-white/10 text-[#fdfcf0] font-bold uppercase tracking-widest text-[9px] border border-[#d4af37]/20 transition-all">
+								<Link to="/admin/tours/add"><PlusCircle className="mr-4 h-4 w-4 text-[#d4af37]" /> Create New Journey</Link>
+							</Button>
+							<Button asChild className="justify-start h-16 rounded-2xl bg-white/5 hover:bg-white/10 text-[#fdfcf0] font-bold uppercase tracking-widest text-[9px] border border-[#d4af37]/20 transition-all">
+								<Link to="/admin/registrations"><ClipboardList className="mr-4 h-4 w-4 text-emerald-400" /> Manage Pilgrims</Link>
+							</Button>
+						</div>
+					</Card>
+
+					<Card className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] p-10 flex flex-col items-center text-center space-y-6">
+						<div className="h-20 w-20 rounded-full glass-card border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]/40">
+							<MapPin className="h-10 w-10" />
+						</div>
+						<div className="space-y-2">
+							<p className="text-[#fdfcf0] font-serif text-xl tracking-tight">Sacred Inventory</p>
+							<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest leading-relaxed">Update pricing, sacred paths, and pilgrimage details.</p>
+						</div>
+						<Button asChild variant="link" className="text-[#d4af37] font-bold uppercase text-[9px] tracking-[0.3em] border-b border-[#d4af37]/40 pb-1 h-auto hover:text-[#fdfcf0] hover:border-[#fdfcf0]">
+							<Link to="/admin/tours">Path Inventory</Link>
+						</Button>
+					</Card>
+				</div>
 			</div>
 		</div>
 	);
 }
+

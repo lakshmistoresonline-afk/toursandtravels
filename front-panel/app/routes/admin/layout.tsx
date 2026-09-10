@@ -2,6 +2,8 @@ import { Outlet, redirect, type LoaderFunctionArgs, Link, NavLink, Form } from "
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { LayoutDashboard, MapPin, ClipboardList, Globe, LogOut } from "lucide-react";
 
+const logo = "/brand/amady-logo.png";
+
 export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 	const { user } = await getCurrentUser(request);
 	if (!user || user.role !== "admin") {
@@ -12,66 +14,65 @@ export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function AdminLayout() {
 	return (
-		<div className="admin-container min-h-screen bg-slate-50/50 flex flex-col">
+		<div className="admin-container min-h-screen flex flex-col">
 			{/* Admin Header / Navigation */}
-			<nav className="bg-white border-b px-8 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
-				<div className="flex items-center gap-10">
-					<Link to="/admin" className="flex items-center gap-2">
-						<div className="bg-primary h-8 w-8 rounded-lg flex items-center justify-center">
-							<span className="text-white font-bold">W</span>
+			<nav className="bg-[#0a0e1a]/90 backdrop-blur-2xl border-b border-[#d4af37]/20 px-8 py-4 flex justify-between items-center sticky top-0 z-50 shadow-2xl">
+				<div className="flex items-center gap-12">
+					<Link to="/admin" className="flex items-center gap-4 group">
+						<div className="h-12 w-12 transition-transform duration-500 group-hover:scale-110">
+							<img src={logo} alt="Amady Logo" className="h-full w-full object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" />
 						</div>
-						<h2 className="font-bold text-xl tracking-tight hidden sm:block">Ambady Tours and Travels Admin</h2>
+						<div className="flex flex-col leading-none">
+							<span className="text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMADY</span>
+							<span className="text-[8px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em] mt-1">Admin Sanctuary</span>
+						</div>
 					</Link>
 
-					<div className="flex items-center gap-6">
+					<div className="flex items-center gap-4">
 						<NavLink
 							to="/admin"
 							end
-							className={({ isActive }) => `flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${isActive ? "text-primary" : "text-muted-foreground"}`}
+							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<LayoutDashboard className="h-4 w-4" />
 							<span className="hidden lg:inline">Dashboard</span>
 						</NavLink>
 						<NavLink
 							to="/admin/tours"
-							className={({ isActive }) => `flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${isActive ? "text-primary" : "text-muted-foreground"}`}
+							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<MapPin className="h-4 w-4" />
-							<span className="hidden lg:inline">Manage Tours</span>
+							<span className="hidden lg:inline">Journeys</span>
 						</NavLink>
 						<NavLink
 							to="/admin/registrations"
-							className={({ isActive }) => `flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${isActive ? "text-primary" : "text-muted-foreground"}`}
+							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<ClipboardList className="h-4 w-4" />
-							<span className="hidden lg:inline">Registrations</span>
+							<span className="hidden lg:inline">Pilgrims</span>
 						</NavLink>
 					</div>
 				</div>
 
-				<div className="flex items-center gap-6">
-					<Link to="/" className="text-sm font-medium flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+				<div className="flex items-center gap-8">
+					<Link to="/" className="text-[9px] font-bold uppercase tracking-[0.2em] flex items-center gap-3 text-[#fdfcf0]/40 hover:text-[#d4af37] transition-all">
 						<Globe className="h-4 w-4" />
-						<span className="hidden sm:inline">View Site</span>
+						<span className="hidden sm:inline">Portal Sight</span>
 					</Link>
-					<Separator orientation="vertical" className="h-6" />
+					<div className="h-8 w-[1px] bg-white/10" />
 					<Form action="/logout" method="POST">
-						<button type="submit" className="text-sm font-medium text-destructive flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer">
+						<button type="submit" className="text-[9px] font-bold uppercase tracking-[0.2em] text-red-400/60 flex items-center gap-3 hover:text-red-400 transition-all cursor-pointer">
 							<LogOut className="h-4 w-4" />
-							<span className="hidden sm:inline">Logout</span>
+							<span className="hidden sm:inline">Depart</span>
 						</button>
 					</Form>
 				</div>
 			</nav>
 
 			{/* Content Area */}
-			<main className="p-8 flex-1 container mx-auto">
+			<main className="p-10 flex-1 container mx-auto relative z-10">
 				<Outlet />
 			</main>
 		</div>
 	);
-}
-
-function Separator({ orientation = "horizontal", className = "" }) {
-	return <div className={`bg-border ${orientation === "horizontal" ? "h-[1px] w-full" : "w-[1px] h-full"} ${className}`} />;
 }

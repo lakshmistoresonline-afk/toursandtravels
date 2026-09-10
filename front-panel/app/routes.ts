@@ -21,7 +21,9 @@ export default [
 		]),
 
 		route("about", "./routes/About/about.tsx"),
-		route("faqs", "./routes/FAQs/faqs.tsx"),
+		route("contact-us", "./routes/Contact/contact-us.tsx"),
+		route("privacy-policy", "./routes/Miscellaneous/PrivacyPolicy.tsx"),
+		route("terms-of-usage", "./routes/Miscellaneous/TermsOfUsage.tsx"),
 	]),
 
 	// Admin routes

@@ -12,8 +12,10 @@ export const TourSchema = z.object({
 	price: z.number().nonnegative("Price must be a positive number"),
 	max_participants: z.number().int().positive("Max participants must be at least 1"),
 	status: z.enum(["DRAFT", "PUBLISHED", "REGISTRATION_OPEN", "REGISTRATION_CLOSED", "CANCELLED", "COMPLETED"]).default("DRAFT"),
-	start_date: z.string().optional().nullable(),
-	end_date: z.string().optional().nullable(),
+	start_date: z.string().min(1, "Start date is required"),
+	start_time: z.string().min(1, "Start time is required"),
+	end_date: z.string().min(1, "End date is required"),
+	end_time: z.string().min(1, "End time is required"),
 	cover_image: z.string().optional().nullable(),
 	images: z.array(z.string()).optional().default([]),
 	itinerary: z.array(z.object({

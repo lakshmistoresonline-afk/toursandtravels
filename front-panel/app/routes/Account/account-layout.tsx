@@ -1,6 +1,6 @@
 import { type LoaderFunctionArgs, Outlet, redirect } from "react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Link, NavLink } from "react-router";
+import { Card, CardContent } from "~/components/ui/card";
+import { NavLink } from "react-router";
 import { User, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 
@@ -12,49 +12,52 @@ export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function AccountLayout() {
 	const navItems = [
-		{ to: "/account/details", label: "Account Profile", icon: User },
-		{ to: "/account/bookings", label: "My Registrations", icon: Calendar },
+		{ to: "/account/details", label: "Pilgrim Profile", icon: User },
+		{ to: "/account/bookings", label: "My Pilgrimage Journeys", icon: Calendar },
 	];
 
 	return (
-		<div className="container mx-auto py-12 px-4 animate-in fade-in duration-500">
-			<div className="grid gap-12 lg:grid-cols-[280px_1fr]">
-				<aside className="space-y-6">
-					<div className="px-4">
-						<h1 className="text-3xl font-black text-slate-900 tracking-tight">Settings</h1>
-						<p className="text-slate-500 mt-2 text-sm">Manage your personal data and tour history.</p>
+		<div className="container mx-auto py-20 px-4 animate-in fade-in duration-1000">
+			<div className="grid gap-16 lg:grid-cols-[320px_1fr]">
+				<aside className="space-y-10">
+					<div className="px-4 space-y-4">
+						<h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">Personal</h4>
+						<h1 className="text-5xl font-serif text-[#fdfcf0] tracking-tight">Pilgrim Hub</h1>
+						<p className="text-[#fdfcf0]/40 text-sm font-sans font-light uppercase tracking-widest leading-relaxed">Manage your sacred data and journey history.</p>
 					</div>
 
-					<Card className="border-none shadow-sm rounded-3xl overflow-hidden bg-slate-50/50">
-						<CardContent className="p-2">
-							<nav className="flex flex-col gap-1">
+					<Card className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] overflow-hidden">
+						<CardContent className="p-3">
+							<nav className="flex flex-col gap-2">
 								{navItems.map((item) => (
 									<NavLink
 										key={item.to}
 										to={item.to}
 										className={({ isActive }) =>
-											`flex items-center justify-between px-5 py-4 rounded-2xl transition-all font-bold text-sm ${
+											`flex items-center justify-between px-6 py-5 rounded-[1.5rem] transition-all font-bold text-[10px] uppercase tracking-[0.2em] ${
 												isActive
-													? "bg-white text-primary shadow-sm ring-1 ring-slate-100"
-													: "text-slate-500 hover:bg-white hover:text-slate-900"
+													? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20"
+													: "text-[#fdfcf0]/60 hover:bg-white/5 hover:text-[#fdfcf0]"
 											}`
 										}
 									>
-										<div className="flex items-center gap-3">
-											<item.icon className="w-5 h-5" />
+										<div className="flex items-center gap-4">
+											<item.icon className="w-4 h-4" />
 											{item.label}
 										</div>
-										<ChevronRight className="w-4 h-4 opacity-30" />
+										<ChevronRight className="w-3.5 h-3.5 opacity-30" />
 									</NavLink>
 								))}
 							</nav>
 						</CardContent>
 					</Card>
 
-					<div className="p-6 rounded-3xl bg-primary/5 border border-primary/10 space-y-3">
-						<ShieldCheck className="h-8 w-8 text-primary" />
-						<p className="font-bold text-slate-900 text-sm">Profile Verified</p>
-						<p className="text-xs text-slate-500 leading-relaxed">Your data is stored securely in our private Firebase cloud.</p>
+					<div className="p-8 rounded-[2rem] bg-[#d4af37]/5 border border-[#d4af37]/10 space-y-4 shadow-xl">
+						<ShieldCheck className="h-10 w-10 text-[#d4af37]" />
+						<div className="space-y-2">
+							<p className="font-bold text-[#fdfcf0] text-[10px] uppercase tracking-widest">Profile Verified</p>
+							<p className="text-xs text-[#fdfcf0]/40 leading-relaxed font-light">Your sacred journey data is stored securely in our private cloud.</p>
+						</div>
 					</div>
 				</aside>
 

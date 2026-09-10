@@ -1,188 +1,57 @@
-import AutoScroll from "embla-carousel-auto-scroll";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { Carousel, CarouselContent, CarouselItem } from "~/components/ui/carousel";
 
 export const clientLoader = () => {
 	return null;
 };
 
-const partners = [
-	{
-		name: "TripAdvisor",
-		logo: "https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg",
-	},
-	{
-		name: "SkyDive Abu Dhabi",
-		logo: "https://www.exponentpe.com/sites/default/files/2021-02/bigbus.png",
-	},
-	{
-		name: "GetYourGuide",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDjrweI1ZN9LIJ22QuWwmbdBUViMSg0CpYMQ&	",
-	},
-	{
-		name: "At the Top - Burj Khalifa",
-		logo: "https://www.prologicfirst.com/wp-content/uploads/2024/10/atthetop.png",
-	},
-	{
-		name: "Qasr Al Watan",
-		logo: "https://static.myconnect.ae/-/media/yasconnect/project/ppad/header/logo.svg?w=500",
-	},
-	{
-		name: "Partner",
-		logo: "https://i.pinimg.com/564x/23/30/d9/2330d96d19f458c4c3a962cb6da64d43.jpg",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvzxoxmqS5GrXATd8Cj4pf1Iqm6-KYx_HPAA&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmSsXywYJeIxm9UEn4AeUubDK2P22EDNixxg&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo0bT74bfe1W2IZMqa3WjPOoQJDwoHa_TeYg&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsVCp4kdBL5J5-3TlAVe9bH9TbvgY_z7Nt1Q&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://falconhelitours.com/wp-content/uploads/2021/09/cropped-Falcon-tours-logo-1-1.png",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://www.insideburjalarabphotos.com/assets/images/new-logo.png",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://www.cdnlogo.com/logos/s/65/seaworld.svg",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDlST7T3cHvFQp_G414GeOwALrbTpxFK0-hg&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Museum_of_the_Future_logo.svg/1200px-Museum_of_the_Future_logo.svg.png",
-	},
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGTnKDmzk5ZYfn8lmuwYiB4coE2s0qnwSC6A&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBnEl9Nurt0qCnDIdckfJ8qA0zJ9Uc5vfjrQ&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc08VGtY38SB--s_gCtJbncvglUDI1z5L9DQ&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP8_MJqxiI4RCXvoENm5PAomSZ5wzTD4Zixw&s",
-	},
-
-	{
-		name: "Partner",
-		logo: "https://mir-s3-cdn-cf.behance.net/projects/404/4e1785165133093.Y3JvcCwxMDY4LDgzNSwwLDEwMA.jpg",
-	},
-];
-
 export default function About() {
 	return (
-		<>
+		<div className="min-h-screen animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle="About Us | Ambady Tours and Travels"
-				metaDescription="Discover who we are - your trusted partner for unforgettable experiences in Dubai and the UAE."
-				metaKeywords="About us, Ambady Tours and Travels, Dubai tours, UAE travel"
-				ogType="website"
-				ogUrl={`${process.env.VITE_MAIN_APP_URL}/about`}
-				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/about`}
+				metaTitle="Our Story | AMADY"
+				metaDescription="Learn about AMADY PILGRIMAGE EXPERIENCES - your trusted partner for sacred and meaningful pilgrimage journeys."
+				metaKeywords="About us, AMADY PILGRIMAGE EXPERIENCES, pilgrimage journeys, faith, heritage"
 			/>
 
-			<div className="min-h-screen bg-card">
-				{/* Hero-like intro section */}
-				<div className="pt-16 pb-20 md:pt-24 md:pb-28 border-b">
-					<div className="container mx-auto px-5 md:px-8 max-w-4xl">
-						<h1 className="text-3xl md:text-4xl font-medium text-gray-900 mb-6 text-center md:text-left">
-							About Us
-						</h1>
-						<div className="space-y-6 text-muted-foreground leading-relaxed text-lg">
-							<p>
-								Our goal is simple: to help you create memorable travel experiences. For many
-								years, we have been carefully crafting tour packages and delivering essential
-								tourism services that turn ordinary trips into something special.
+			<div className="pt-32 pb-20">
+				<div className="container mx-auto px-6 max-w-5xl space-y-16">
+					<div className="text-center space-y-4">
+						<h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">The Essence</h4>
+						<h1 className="text-5xl md:text-7xl font-serif text-[#fdfcf0] tracking-tight">Our Sacred Story</h1>
+					</div>
+
+					<div className="glass-card p-12 md:p-20 rounded-[3rem] border border-[#d4af37]/10 space-y-12 shadow-2xl">
+						<div className="space-y-8 text-[#fdfcf0]/70 font-sans font-light leading-relaxed text-lg md:text-xl text-center md:text-left">
+							<p className="first-letter:text-5xl first-letter:font-serif first-letter:text-[#d4af37] first-letter:mr-3 first-letter:float-left">
+								AMADY was born from a profound realization: that travel, at its highest form, is a spiritual endeavor. We believe that every journey should be more than just a change of scenery—it should be a path to inner peace, a connection to our heritage, and a strengthening of faith.
 							</p>
 
 							<p>
-								We are passionate about providing exceptional service at every step of your
-								journey. Our dedicated team is here to help you explore Dubai and the Emirates
-								with comfort and ease — from futuristic cityscapes to golden deserts and
-								stunning natural landscapes.
+								For years, we have dedicated ourselves to crafting experiences that honor the sacred traditions of the lands we visit. Our pilgrimage journeys are meticulously designed to provide not just comfort and ease, but the space and silence necessary for true spiritual reflection.
 							</p>
 
 							<p>
-								The love for travel keeps us moving forward — constantly improving, listening,
-								and evolving. Today we are proud to be a trusted name in the industry,
-								offering everything you need for theme parks, desert safaris, city tours, and
-								more — all in one place.
+								From the ancient temples that have stood for millennia to the quiet moments of devotion in nature, we invite you to join us on a journey that transcends the physical. With AMADY, the pilgrimage begins the moment you decide to seek the divine within.
 							</p>
+						</div>
+
+						<div className="pt-12 border-t border-[#d4af37]/10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+							<div className="space-y-2">
+								<p className="text-3xl font-serif text-[#d4af37]">Faith</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Foundation</p>
+							</div>
+							<div className="space-y-2">
+								<p className="text-3xl font-serif text-[#d4af37]">Heritage</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Identity</p>
+							</div>
+							<div className="space-y-2">
+								<p className="text-3xl font-serif text-[#d4af37]">Inner Journeys</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Mission</p>
+							</div>
 						</div>
 					</div>
 				</div>
-
-				{/* Trusted by / Partners section */}
-				<div className="py-16 md:py-20 bg-card">
-					<div className="container mx-auto px-5 md:px-8 space-y-10">
-						<h2 className="text-center text-sm uppercase tracking-wider text-muted-foreground font-medium">
-							Trusted Partners & Platforms
-						</h2>
-
-						<Carousel
-							opts={{
-								align: "start",
-								loop: true,
-							}}
-							plugins={[
-								AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: false }),
-							]}
-							className="w-full"
-						>
-							<CarouselContent className="-ml-2 md:-ml-4">
-								{partners.map((partner) => (
-									<CarouselItem
-										key={partner.name}
-										className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
-									>
-										<div className="h-20 flex items-center select-none justify-center px-4">
-											<img
-												src={partner.logo}
-												alt={`${partner.name} logo`}
-												className="h-18 w-auto"
-												loading="lazy"
-											/>
-										</div>
-									</CarouselItem>
-								))}
-							</CarouselContent>
-						</Carousel>
-					</div>
-				</div>
 			</div>
-		</>
+		</div>
 	);
 }

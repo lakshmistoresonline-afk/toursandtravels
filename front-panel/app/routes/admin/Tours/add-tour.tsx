@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "~/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
@@ -52,6 +53,10 @@ export default function AddTourPage() {
 			price: 0,
 			max_participants: 20,
 			status: "REGISTRATION_OPEN",
+			start_date: "",
+			start_time: "",
+			end_date: "",
+			end_time: "",
 			itinerary: [{ day_number: 1, title: "Day 1: Arrival & Welcome", description: "" }],
 		},
 	});
@@ -78,12 +83,12 @@ export default function AddTourPage() {
 
 	return (
 		<div className="space-y-10 max-w-5xl mx-auto pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
-			<MetaDetails metaTitle="Initiate Tour | Admin" />
+			<MetaDetails metaTitle="Initiate Pilgrimage Journey | Admin" />
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 				<div className="space-y-1">
-					<h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Initiate Tour</h1>
-					<p className="text-slate-500 text-lg italic">Draft or Publish a new experience for your customers.</p>
+					<h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Initiate Pilgrimage Journey</h1>
+					<p className="text-slate-500 text-lg italic">Draft or Publish a new sacred experience for your pilgrims.</p>
 				</div>
 				<Button variant="outline" size="lg" className="rounded-2xl px-6 border-2 font-bold" asChild>
 					<Link to="/admin/tours"><ArrowLeft className="mr-2 h-4 w-4" /> Cancel & Back</Link>
@@ -99,16 +104,16 @@ export default function AddTourPage() {
 								<div className="p-2 bg-primary/10 rounded-lg"><Info className="h-5 w-5 text-primary" /></div>
 								<div>
 									<CardTitle className="text-xl font-bold">General Information</CardTitle>
-									<CardDescription>Basic tour identifiers and descriptions.</CardDescription>
+									<CardDescription>Basic pilgrimage journey identifiers and descriptions.</CardDescription>
 								</div>
 							</div>
 						</CardHeader>
 						<CardContent className="p-8 grid md:grid-cols-2 gap-8">
 							<FormField control={control} name="tour_code" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-700">Unique Tour Code</FormLabel><FormControl><Input placeholder="e.g. KER-001" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-700">Unique Pilgrimage Journey Code</FormLabel><FormControl><Input placeholder="e.g. KER-001" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={control} name="name" render={({ field }) => (
-								<FormItem><FormLabel className="font-bold text-slate-700">Tour Title</FormLabel><FormControl><Input placeholder="e.g. Magical Kerala Backwaters" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+								<FormItem><FormLabel className="font-bold text-slate-700">Pilgrimage Journey Title</FormLabel><FormControl><Input placeholder="e.g. Magical Kerala Backwaters" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
 							)} />
 							<FormField control={control} name="destination" render={({ field }) => (
 								<FormItem><FormLabel className="font-bold text-slate-700">Primary Destination</FormLabel><FormControl><Input placeholder="e.g. Munnar, Kerala" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
@@ -127,9 +132,21 @@ export default function AddTourPage() {
 									</Select>
 								</FormItem>
 							)} />
+							<FormField control={control} name="start_date" render={({ field }) => (
+								<FormItem><FormLabel className="font-bold text-slate-700">Start Date</FormLabel><FormControl><Input type="date" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="start_time" render={({ field }) => (
+								<FormItem><FormLabel className="font-bold text-slate-700">Start Time</FormLabel><FormControl><Input type="time" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="end_date" render={({ field }) => (
+								<FormItem><FormLabel className="font-bold text-slate-700">End Date</FormLabel><FormControl><Input type="date" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+							)} />
+							<FormField control={control} name="end_time" render={({ field }) => (
+								<FormItem><FormLabel className="font-bold text-slate-700">End Time</FormLabel><FormControl><Input type="time" className="h-12 rounded-xl" {...field} /></FormControl></FormItem>
+							)} />
 							<div className="md:col-span-2">
 								<FormField control={control} name="overview" render={({ field }) => (
-									<FormItem><FormLabel className="font-bold text-slate-700">Tour Overview</FormLabel><FormControl><Textarea placeholder="Describe the amazing journey..." className="min-h-[150px] rounded-xl p-4" {...field} /></FormControl></FormItem>
+									<FormItem><FormLabel className="font-bold text-slate-700">Pilgrimage Journey Overview</FormLabel><FormControl><Textarea placeholder="Describe the amazing journey..." className="min-h-[150px] rounded-xl p-4" {...field} /></FormControl></FormItem>
 								)} />
 							</div>
 						</CardContent>
@@ -162,7 +179,7 @@ export default function AddTourPage() {
 							<div className="flex items-center gap-3">
 								<div className="p-2 bg-purple-500/10 rounded-lg"><MapPin className="h-5 w-5 text-purple-600" /></div>
 								<div>
-									<CardTitle className="text-xl font-bold">Tour Schedule</CardTitle>
+									<CardTitle className="text-xl font-bold">Journey Schedule</CardTitle>
 									<CardDescription>Add the day-by-day breakdown.</CardDescription>
 								</div>
 							</div>
@@ -208,7 +225,7 @@ export default function AddTourPage() {
 
 					<div className="flex justify-end pt-6">
 						<Button type="submit" size="lg" className="rounded-2xl px-12 py-7 text-xl font-black shadow-2xl shadow-primary/30 hover:scale-105 transition-transform" disabled={isSubmitting}>
-							{isSubmitting ? <Loader2 className="animate-spin mr-2 h-6 w-6" /> : "Initiate Tour Now"}
+							{isSubmitting ? <Loader2 className="animate-spin mr-2 h-6 w-6" /> : "Initiate Pilgrimage Journey Now"}
 						</Button>
 					</div>
 				</form>

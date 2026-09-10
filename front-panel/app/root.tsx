@@ -16,7 +16,7 @@ export const links: Route.LinksFunction = () => [
 	},
 	{
 		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
+		href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
 	},
 ];
 
@@ -32,7 +32,7 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
 export function HydrateFallback() {
 	return (
 		<div className="flex h-screen w-screen items-center justify-center">
-			<Loader2 className="h-10 w-10 animate-spin text-primary" />
+			<Loader2 className="h-10 w-10 animate-spin text-[#d4af37]" />
 		</div>
 	);
 }
@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body>
+			<body className="min-h-screen font-sans antialiased selection:bg-[#d4af37] selection:text-white">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
@@ -59,9 +59,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
 	return (
 		<>
+			{/* Persistent Brand Background Layer */}
+			<div className="amady-bg-layer">
+				<img
+					src="/brand/amady-background.png"
+					alt="Amady Background"
+					className="w-full h-full object-cover"
+				/>
+			</div>
+			<div className="amady-bg-overlay" />
+
 			<TopLoadingBar />
-			<Outlet />
-			<Toaster />
+			<div className="amady-content-wrapper">
+				<Outlet />
+			</div>
+			<Toaster position="top-center" expand={false} richColors />
 		</>
 	);
 }

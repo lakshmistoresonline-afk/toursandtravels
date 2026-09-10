@@ -29,7 +29,7 @@ export const DashboardMainChart = memo(({ chartData }: { chartData: MainBarChart
 					<BarChart
 						accessibilityLayer
 						data={chartData}
-						title={"Bookings"}
+						title={"Registrations"}
 						margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
 					>
 						<CartesianGrid vertical={false} horizontal={true} />
@@ -59,7 +59,7 @@ export const DashboardMainChart = memo(({ chartData }: { chartData: MainBarChart
 								<ChartTooltipContent
 									className="w-37.5 bg-background py-2"
 									nameKey={"bookings"}
-									title={"Bookings"}
+									title={"Registrations"}
 									labelFormatter={(value) => {
 										return new Date(value).toLocaleDateString("en-US", {
 											month: "short",
@@ -70,7 +70,7 @@ export const DashboardMainChart = memo(({ chartData }: { chartData: MainBarChart
 									formatter={(value) => {
 										return (
 											<div className="flex w-full justify-between gap-1">
-												<p>Bookings</p>
+												<p>Registrations</p>
 												<p>{value}</p>
 											</div>
 										);
