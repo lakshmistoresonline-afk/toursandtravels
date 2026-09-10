@@ -17,22 +17,6 @@ export default function HeroSection({ hero_sections = [] }: { hero_sections: any
 							Connect with sacred traditions through curated spiritual journeys.
 						</p>
 					</div>
-
-					{/* Live Application Actions */}
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-						<Button size="xl" className="w-full sm:w-auto rounded-full bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] px-12 py-8 text-sm font-bold uppercase tracking-widest shadow-2xl shadow-[#d4af37]/30 group transition-all" asChild>
-							<Link to="/tours">
-								Explore Pilgrimage Journeys
-								<Compass className="ml-3 h-5 w-5 group-hover:rotate-45 transition-transform" />
-							</Link>
-						</Button>
-						<Button size="xl" variant="outline" className="w-full sm:w-auto rounded-full border-[#d4af37]/40 text-[#fdfcf0] hover:bg-[#d4af37]/10 px-12 py-8 text-sm font-bold uppercase tracking-widest backdrop-blur-md transition-all shadow-lg" asChild>
-							<Link to="/contact-us">
-								Contact Us
-								<ArrowRight className="ml-3 h-5 w-5" />
-							</Link>
-						</Button>
-					</div>
 				</div>
 			</div>
 
