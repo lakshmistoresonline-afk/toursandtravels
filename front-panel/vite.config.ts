@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		optimizeDeps: {
+			force: process.env.FORCE_OPTIMIZE === "true",
 			include: [
 				"@tabler/icons-react",
 				"lucide-react",
