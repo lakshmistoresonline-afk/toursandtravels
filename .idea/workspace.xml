@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Home/FeaturedTours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Home/FeaturedTours.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Home/HeroSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/shared/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/ui/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/ui/button.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

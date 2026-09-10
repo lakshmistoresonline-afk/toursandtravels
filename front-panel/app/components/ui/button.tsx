@@ -32,6 +32,8 @@ const buttonVariants = cva(
 	},
 );
 
+const MotionSlot = motion(Slot);
+
 function Button({
 	className,
 	variant = "default",
@@ -44,28 +46,16 @@ function Button({
 		asChild?: boolean;
 		noEffect?: boolean;
 	}) {
-	const Comp = asChild ? Slot : "button";
+	const Comp = asChild ? MotionSlot : (motion.button as any);
 
-	return !noEffect ? (
-		<motion.div
-			whileTap={{ scale: 0.95 }}
-			transition={{ duration: 0.1, ease: "easeInOut" }}
-			tabIndex={-1}
-		>
-			<Comp
-				data-slot="button"
-				data-size={size}
-				data-variant={variant}
-				className={cn(buttonVariants({ variant, size, className }))}
-				{...props}
-			/>
-		</motion.div>
-	) : (
+	return (
 		<Comp
 			data-slot="button"
 			data-size={size}
 			data-variant={variant}
 			className={cn(buttonVariants({ variant, size, className }))}
+			whileTap={!noEffect ? { scale: 0.95 } : undefined}
+			transition={{ duration: 0.1, ease: "easeInOut" }}
 			{...props}
 		/>
 	);
