@@ -18,12 +18,6 @@ export const links: Route.LinksFunction = () => [
 		rel: "stylesheet",
 		href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
 	},
-	{
-		rel: "preload",
-		as: "image",
-		href: "/brand/ambady-background.png",
-		fetchPriority: "high",
-	},
 ];
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
@@ -71,8 +65,8 @@ export default function App() {
 					src="/brand/ambady-background.png"
 					alt="Ambady Background"
 					className="w-full h-full object-cover"
-					fetchPriority="high"
-					decoding="async"
+					loading="eager"
+					decoding="sync"
 				/>
 			</div>
 			<div className="ambady-bg-overlay" />

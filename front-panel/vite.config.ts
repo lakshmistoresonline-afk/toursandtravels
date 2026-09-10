@@ -55,6 +55,7 @@ export default defineConfig(({ mode }) => {
 		},
 		optimizeDeps: {
 			force: process.env.FORCE_OPTIMIZE === "true",
+			holdUntilResolved: true,
 			include: [
 				"@tabler/icons-react",
 				"lucide-react",
@@ -79,6 +80,11 @@ export default defineConfig(({ mode }) => {
 		},
 		server: {
 			port: 5175,
+			// Prevent the browser from caching optimized dependencies during development
+			// to avoid the 504 "Outdated Optimize Dep" error.
+			headers: {
+				"Cache-Control": "no-store",
+			},
 		},
 	};
 });
