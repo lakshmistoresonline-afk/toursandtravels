@@ -88,7 +88,7 @@ export default function AdminDashboard() {
 							</div>
 						</CardContent>
 						<div className="px-10 pb-6">
-							<Link to={card.link} className="text-[9px] font-bold text-[#d4af37]/60 uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors flex items-center gap-2">
+							<Link to={card.link} prefetch="intent" viewTransition className="text-[9px] font-bold text-[#d4af37]/60 uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors flex items-center gap-2">
 								Manage {card.title} <ArrowRight className="h-3 w-3" />
 							</Link>
 						</div>
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
 							<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest leading-relaxed">Initiate new sacred paths and pilgrimage experiences.</p>
 						</div>
 						<Button asChild className="rounded-full bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] px-8 h-14 hover:bg-[#b8860b] transition-all">
-							<Link to="/admin/tours/add">Initiate Journey</Link>
+							<Link to="/admin/tours/add" prefetch="intent" viewTransition>Initiate Journey</Link>
 						</Button>
 					</Card>
 				</div>

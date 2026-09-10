@@ -32,6 +32,8 @@ export default function AdminLayout() {
 						<NavLink
 							to="/admin"
 							end
+							prefetch="intent"
+							viewTransition
 							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<LayoutDashboard className="h-4 w-4" />
@@ -39,6 +41,8 @@ export default function AdminLayout() {
 						</NavLink>
 						<NavLink
 							to="/admin/tours"
+							prefetch="intent"
+							viewTransition
 							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<MapPin className="h-4 w-4" />
@@ -46,6 +50,8 @@ export default function AdminLayout() {
 						</NavLink>
 						<NavLink
 							to="/admin/registrations"
+							prefetch="intent"
+							viewTransition
 							className={({ isActive }) => `flex items-center gap-3 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a] shadow-lg shadow-[#d4af37]/20" : "text-[#fdfcf0]/40 hover:bg-white/5 hover:text-[#fdfcf0]"}`}
 						>
 							<ClipboardList className="h-4 w-4" />

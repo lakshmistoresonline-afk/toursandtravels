@@ -104,7 +104,7 @@ export default function AdminToursPage() {
 						<Button variant="ghost" className="h-10 w-10 p-0 rounded-xl hover:bg-slate-100"><MoreHorizontal className="h-5 w-5 text-slate-400" /></Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" className="w-48 rounded-2xl p-2 shadow-xl border-slate-100">
-						<Link to={`edit/${row.original.id}`}>
+						<Link to={`edit/${row.original.id}`} prefetch="intent">
 							<DropdownMenuItem className="rounded-xl cursor-pointer py-2.5">
 								<Edit3 className="mr-2 h-4 w-4" /> Edit Details
 							</DropdownMenuItem>
@@ -140,7 +140,7 @@ export default function AdminToursPage() {
 					<p className="text-slate-500 mt-2 text-lg">Manage and track all initiated experiences.</p>
 				</div>
 				<Button asChild size="lg" className="rounded-2xl px-8 shadow-lg shadow-primary/20">
-					<Link to="add"><PlusCircle className="mr-2 h-5 w-5" /> Initiate New Pilgrimage Journey</Link>
+					<Link to="add" prefetch="intent"><PlusCircle className="mr-2 h-5 w-5" /> Initiate New Pilgrimage Journey</Link>
 				</Button>
 			</div>
 

@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Footer/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Tour/TourCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Tour/TourCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

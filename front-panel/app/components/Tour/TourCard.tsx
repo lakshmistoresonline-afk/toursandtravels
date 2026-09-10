@@ -19,13 +19,15 @@ export const TourCard = memo(
 		};
 
 		return (
-			<Link to={"/tours/tour/" + tour.id} className="group block h-full">
+			<Link to={"/tours/tour/" + tour.id} prefetch="intent" viewTransition className="group block h-full">
 				<div className={`h-full flex flex-col ivory-glass-card rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#d4af37]/20 hover:-translate-y-2 border border-[#d4af37]/20 ${className ?? ""}`}>
 					{/* Image Section */}
 					<div className="relative aspect-[5/4] overflow-hidden">
 						<img
 							src={tour.cover_image || "https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&w=800&q=80"}
 							alt={tour.name}
+							loading="lazy"
+							decoding="async"
 							className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/40 via-transparent to-transparent" />

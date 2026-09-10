@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Heart } from "lucide-react";
 
 export default function Footer() {
@@ -19,15 +20,15 @@ export default function Footer() {
 						<div className="space-y-4">
 							<h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">Explore</h4>
 							<ul className="space-y-2 text-sm text-[#fdfcf0]/50 font-medium">
-								<li><a href="/" className="hover:text-[#d4af37] transition-colors">Home</a></li>
-								<li><a href="/tours" className="hover:text-[#d4af37] transition-colors">Pilgrimage Journeys</a></li>
-								<li><a href="/about" className="hover:text-[#d4af37] transition-colors">About Us</a></li>
+								<li><Link to="/" prefetch="intent" className="hover:text-[#d4af37] transition-colors">Home</Link></li>
+								<li><Link to="/tours" prefetch="intent" className="hover:text-[#d4af37] transition-colors">Pilgrimage Journeys</Link></li>
+								<li><Link to="/about" prefetch="intent" className="hover:text-[#d4af37] transition-colors">About Us</Link></li>
 							</ul>
 						</div>
 						<div className="space-y-4">
 							<h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">Support</h4>
 							<ul className="space-y-2 text-sm text-[#fdfcf0]/50 font-medium">
-								<li><a href="/contact-us" className="hover:text-[#d4af37] transition-colors">Contact</a></li>
+								<li><Link to="/contact-us" prefetch="intent" className="hover:text-[#d4af37] transition-colors">Contact</Link></li>
 							</ul>
 						</div>
 					</div>
@@ -36,8 +37,8 @@ export default function Footer() {
 				<div className="flex flex-col gap-6 border-t border-[#d4af37]/10 mt-16 pt-8 text-[10px] font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/40 sm:flex-row sm:items-center sm:justify-between">
 					<p>© {new Date().getFullYear()} AMBADY PILGRIMAGE EXPERIENCES. ALL RIGHTS RESERVED.</p>
 					<div className="flex items-center gap-6">
-						<a href="/privacy-policy" className="hover:text-[#d4af37] transition-colors">Privacy</a>
-						<a href="/terms-of-usage" className="hover:text-[#d4af37] transition-colors">Terms</a>
+						<Link to="/privacy-policy" prefetch="intent" className="hover:text-[#d4af37] transition-colors">Privacy</Link>
+						<Link to="/terms-of-usage" prefetch="intent" className="hover:text-[#d4af37] transition-colors">Terms</Link>
 						<span className="flex gap-2 items-center text-[#d4af37]/60">
 							<span>Faith Journey</span>
 							<Heart className="size-3 fill-[#d4af37]/60" />

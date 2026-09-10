@@ -24,7 +24,28 @@ export default defineConfig(({ mode }) => {
 				algorithm: "brotliCompress",
 				ext: ".br",
 			}),
+			viteCompression({
+				verbose: true,
+				disable: false,
+				algorithm: "gzip",
+				ext: ".gz",
+			}),
 		],
+		build: {
+			reportCompressedSize: false,
+			rollupOptions: {
+				output: {
+					manualChunks(id) {
+						if (id.includes("node_modules")) {
+							if (id.includes("lucide-react")) return "icons";
+							if (id.includes("firebase")) return "firebase";
+							if (id.includes("@radix-ui")) return "ui-core";
+							return "vendor";
+						}
+					},
+				},
+			},
+		},
 		resolve: {
 			alias: {
 				"~": path.resolve(__dirname, "./app"),

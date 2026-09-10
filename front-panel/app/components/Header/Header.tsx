@@ -49,7 +49,7 @@ export default function Header() {
 							</SheetHeader>
 							<nav className="flex flex-col gap-6 mt-12">
 								{NAV_LINKS.map((link) => (
-									<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-lg font-sans font-medium transition-all ${isActive ? "text-[#d4af37] translate-x-2" : "text-[#fdfcf0]/70 hover:text-[#d4af37]"}`}>
+									<NavLink key={link.to} to={link.to} prefetch="intent" className={({ isActive }) => `text-lg font-sans font-medium transition-all ${isActive ? "text-[#d4af37] translate-x-2" : "text-[#fdfcf0]/70 hover:text-[#d4af37]"}`}>
 										{link.label}
 									</NavLink>
 								))}
@@ -75,7 +75,7 @@ export default function Header() {
 
 				<nav className="ml-16 hidden lg:flex items-center gap-10">
 					{NAV_LINKS.map((link) => (
-						<NavLink key={link.to} to={link.to} className={({ isActive }) => `text-sm font-sans font-semibold tracking-[0.1em] uppercase transition-all hover:text-[#d4af37] relative py-1 ${isActive ? "text-[#d4af37] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#d4af37]" : "text-[#fdfcf0]/80"}`}>
+						<NavLink key={link.to} to={link.to} prefetch="intent" className={({ isActive }) => `text-sm font-sans font-semibold tracking-[0.1em] uppercase transition-all hover:text-[#d4af37] relative py-1 ${isActive ? "text-[#d4af37] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#d4af37]" : "text-[#fdfcf0]/80"}`}>
 							{link.label}
 						</NavLink>
 					))}
