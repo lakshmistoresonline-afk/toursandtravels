@@ -72,11 +72,6 @@ export default function AdminDashboard() {
 					<h1 className="text-5xl font-serif text-[#fdfcf0] tracking-tight">Admin Overview</h1>
 					<p className="text-[#fdfcf0]/40 text-sm font-sans font-light uppercase tracking-widest leading-relaxed">Overseeing sacred paths and spiritual journeys.</p>
 				</div>
-				<div className="flex gap-6">
-					<Button asChild className="rounded-full px-8 py-7 bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] shadow-2xl shadow-[#d4af37]/20 hover:bg-[#b8860b] transition-all">
-						<Link to="/admin/tours/add"><PlusCircle className="mr-3 h-4 w-4" /> Initiate Journey</Link>
-					</Button>
-				</div>
 			</div>
 
 			{/* Stats Grid */}
@@ -94,7 +89,7 @@ export default function AdminDashboard() {
 						</CardContent>
 						<div className="px-10 pb-6">
 							<Link to={card.link} className="text-[9px] font-bold text-[#d4af37]/60 uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors flex items-center gap-2">
-								Enter Sanctuary <ArrowRight className="h-3 w-3" />
+								Manage {card.title} <ArrowRight className="h-3 w-3" />
 							</Link>
 						</div>
 					</Card>
@@ -109,9 +104,6 @@ export default function AdminDashboard() {
 							<Calendar className="h-5 w-5 text-[#d4af37]" />
 							<CardTitle className="text-sm font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/80">Recent Pilgrim Registrations</CardTitle>
 						</div>
-						<Button variant="ghost" asChild className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#d4af37] hover:text-[#fdfcf0] hover:bg-transparent">
-							<Link to="/admin/registrations">View All</Link>
-						</Button>
 					</CardHeader>
 					<CardContent className="p-0">
 						{recentRegistrations.length > 0 ? (
@@ -145,30 +137,18 @@ export default function AdminDashboard() {
 					</CardContent>
 				</Card>
 
-				{/* Quick Links / Actions */}
+				{/* Secondary Information & Paths */}
 				<div className="space-y-8">
-					<Card className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] p-10 space-y-8 shadow-2xl">
-						<h3 className="text-[10px] font-bold text-[#d4af37] uppercase tracking-[0.4em]">Sanctuary Ops</h3>
-						<div className="grid gap-4">
-							<Button asChild className="justify-start h-16 rounded-2xl bg-white/5 hover:bg-white/10 text-[#fdfcf0] font-bold uppercase tracking-widest text-[9px] border border-[#d4af37]/20 transition-all">
-								<Link to="/admin/tours/add"><PlusCircle className="mr-4 h-4 w-4 text-[#d4af37]" /> Create New Journey</Link>
-							</Button>
-							<Button asChild className="justify-start h-16 rounded-2xl bg-white/5 hover:bg-white/10 text-[#fdfcf0] font-bold uppercase tracking-widest text-[9px] border border-[#d4af37]/20 transition-all">
-								<Link to="/admin/registrations"><ClipboardList className="mr-4 h-4 w-4 text-emerald-400" /> Manage Pilgrims</Link>
-							</Button>
-						</div>
-					</Card>
-
 					<Card className="glass-card border border-[#d4af37]/10 rounded-[2.5rem] p-10 flex flex-col items-center text-center space-y-6">
 						<div className="h-20 w-20 rounded-full glass-card border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]/40">
-							<MapPin className="h-10 w-10" />
+							<PlusCircle className="h-10 w-10" />
 						</div>
 						<div className="space-y-2">
-							<p className="text-[#fdfcf0] font-serif text-xl tracking-tight">Sacred Inventory</p>
-							<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest leading-relaxed">Update pricing, sacred paths, and pilgrimage details.</p>
+							<p className="text-[#fdfcf0] font-serif text-xl tracking-tight">Expand Sanctuary</p>
+							<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest leading-relaxed">Initiate new sacred paths and pilgrimage experiences.</p>
 						</div>
-						<Button asChild variant="link" className="text-[#d4af37] font-bold uppercase text-[9px] tracking-[0.3em] border-b border-[#d4af37]/40 pb-1 h-auto hover:text-[#fdfcf0] hover:border-[#fdfcf0]">
-							<Link to="/admin/tours">Path Inventory</Link>
+						<Button asChild className="rounded-full bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] px-8 h-14 hover:bg-[#b8860b] transition-all">
+							<Link to="/admin/tours/add">Initiate Journey</Link>
 						</Button>
 					</Card>
 				</div>

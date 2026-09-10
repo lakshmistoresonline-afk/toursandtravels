@@ -102,16 +102,16 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 					</div>
 				</section>
 
-				{/* Call to Action - Begin Your Journey */}
+				{/* Call to Action - Contact Us for Guidance */}
 				<section className="py-24 text-center space-y-10">
 					<div className="space-y-4">
-						<h2 className="text-4xl md:text-6xl font-serif text-[#fdfcf0]">Begin Your Journey</h2>
+						<h2 className="text-4xl md:text-6xl font-serif text-[#fdfcf0]">Seek Guidance</h2>
 						<p className="text-[#fdfcf0]/50 font-sans font-light uppercase tracking-[0.3em] text-sm">
-							The path to a higher you starts today.
+							Our team is here to support your spiritual quest.
 						</p>
 					</div>
-					<Button size="xl" className="rounded-full bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] px-16 py-8 text-sm font-bold uppercase tracking-widest shadow-2xl shadow-[#d4af37]/30 transition-all" asChild>
-						<Link to="/tours">Start My Pilgrimage</Link>
+					<Button size="xl" variant="outline" className="rounded-full border-[#d4af37]/40 text-[#fdfcf0] hover:bg-[#d4af37]/10 px-16 py-8 text-sm font-bold uppercase tracking-widest shadow-2xl transition-all" asChild>
+						<Link to="/contact-us">Contact Us</Link>
 					</Button>
 				</section>
 			</div>

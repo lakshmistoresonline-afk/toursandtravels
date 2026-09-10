@@ -8,15 +8,9 @@ export default function FeaturedToursSection({ tours }: { tours: any[] }) {
 		<section className="space-y-12 container mx-auto px-4 py-24 min-h-[400px] flex flex-col justify-center">
 			{tours && tours.length > 0 ? (
 				<>
-					<div className="flex flex-col md:flex-row justify-between items-end gap-6">
-						<div className="space-y-4">
-							<h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#d4af37]">Recommended</h4>
-							<h2 className="text-4xl md:text-5xl font-serif text-[#fdfcf0]">Featured Pilgrimage Journeys</h2>
-						</div>
-						<Link to="/tours" className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#d4af37] hover:text-[#fdfcf0] transition-colors">
-							View All Pilgrimage Journeys
-							<ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-						</Link>
+					<div className="space-y-4">
+						<h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#d4af37]">Recommended</h4>
+						<h2 className="text-4xl md:text-5xl font-serif text-[#fdfcf0]">Featured Pilgrimage Journeys</h2>
 					</div>
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

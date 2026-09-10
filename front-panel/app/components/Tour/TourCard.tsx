@@ -68,8 +68,8 @@ export const TourCard = memo(
 								<p className="text-[10px] text-[#0a0e1a]/40 font-bold uppercase tracking-[0.2em] mb-1">Exchange</p>
 								<p className="font-serif text-3xl text-[#b8860b]">₹{tour.price?.toLocaleString()}</p>
 							</div>
-							<div className="h-14 w-14 rounded-full border border-[#d4af37]/30 flex items-center justify-center text-[#b8860b] group-hover:bg-[#d4af37] group-hover:text-[#0a0e1a] transition-all duration-500 shadow-lg">
-								<ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
+							<div className="text-[10px] font-bold uppercase tracking-widest text-[#b8860b] group-hover:text-[#d4af37] transition-colors flex items-center gap-2">
+								View Journey <ArrowRight className="h-4 w-4" />
 							</div>
 						</div>
 					</div>
