@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Table/data-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Table/data-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/Table/data-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/Table/data-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/ui/input-otp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/ui/input-otp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/ui/input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/admin/ui/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/admin/ui/textarea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/ui/input-otp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/ui/input-otp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/ui/input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/ui/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/ui/textarea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

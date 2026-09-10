@@ -11,6 +11,7 @@ ui-debug.log
 # User requested to keep these in Git for portability
 # .env
 # .env.*
-# toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
-# bootstrap.cjs
-# reset-db.cjs
+# Push protection usually blocks these, ignore them to prevent push failures
+toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
+.artifacts/
+
