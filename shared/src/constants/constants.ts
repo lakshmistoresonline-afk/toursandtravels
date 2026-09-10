@@ -4,7 +4,7 @@
  */
 
 export const CONTACT_NUMBER_1 = "971556130581" as const;
-export const EMAIL_ADDRESS_1 = "amady.pilgrimage@gmail.com" as const;
+export const EMAIL_ADDRESS_1 = "ambady.pilgrimage@gmail.com" as const;
 
 export const TOUR_STATUSES = ["DRAFT", "PUBLISHED", "REGISTRATION_OPEN", "REGISTRATION_CLOSED", "CANCELLED", "COMPLETED"] as const;
 export const REGISTRATION_STATUSES = ["PENDING", "CONFIRMED", "CANCELLED", "COMPLETED"] as const;

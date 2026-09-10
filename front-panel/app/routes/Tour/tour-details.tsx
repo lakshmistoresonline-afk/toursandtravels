@@ -88,7 +88,7 @@ export default function TourDetailsPage() {
 	return (
 		<div className="min-h-screen pb-20 animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle={tour.name + " | AMADY Pilgrimage"}
+				metaTitle={tour.name + " | AMBADY Pilgrimage"}
 				metaDescription={tour.overview?.slice(0, 320)}
 			/>
 

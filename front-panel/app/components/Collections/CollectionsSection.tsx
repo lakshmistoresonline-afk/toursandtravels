@@ -24,7 +24,7 @@ export default function CollectionsSection({
 					<h2 className="text-4xl md:text-6xl font-serif text-[#fdfcf0]">{title}</h2>
 					<p className="text-[#fdfcf0]/40 font-sans font-light uppercase tracking-[0.2em] text-xs">
 						{!isCity
-							? "Handpicked spiritual experiences curated by AMADY PILGRIMAGE EXPERIENCES"
+							? "Handpicked spiritual experiences curated by AMBADY PILGRIMAGE EXPERIENCES"
 							: "Explore sacred destinations for your next spiritual journey"}
 					</p>
 				</div>

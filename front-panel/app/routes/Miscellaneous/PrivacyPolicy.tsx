@@ -6,9 +6,9 @@ export default function PrivacyPolicyPage() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="Privacy Policy | AMADY PILGRIMAGE EXPERIENCES"
+				metaTitle="Privacy Policy | AMBADY PILGRIMAGE EXPERIENCES"
 				metaDescription="Our privacy policy explains how we collect, use, and protect your personal information when you use our services."
-				metaKeywords="Privacy Policy, Data Protection, AMADY PILGRIMAGE EXPERIENCES"
+				metaKeywords="Privacy Policy, Data Protection, AMBADY PILGRIMAGE EXPERIENCES"
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/privacy-policy`}
 			/>
 
@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">1. Introduction</h2>
 							<p>
-								At AMADY PILGRIMAGE EXPERIENCES, we value your privacy and are committed to protecting your
+								At AMBADY PILGRIMAGE EXPERIENCES, we value your privacy and are committed to protecting your
 								personal information. This Privacy Policy explains how we collect, use,
 								disclose, and safeguard your information when you visit our website, register for
 								pilgrimage journeys, or interact with our services. By using our site, you consent to the

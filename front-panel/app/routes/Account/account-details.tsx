@@ -80,7 +80,7 @@ export default function AccountDetailsPage() {
 
 	return (
 		<div className="space-y-12 max-w-4xl animate-in slide-in-from-right-8 duration-700">
-			<MetaDetails metaTitle="Pilgrim Profile | AMADY" />
+			<MetaDetails metaTitle="Pilgrim Profile | AMBADY" />
 
 			<div className="glass-card p-10 rounded-[2.5rem] flex items-center gap-8 border border-[#d4af37]/10 shadow-2xl">
 				<div className="h-24 w-24 rounded-full glass-card border-2 border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] text-4xl font-serif shadow-xl">

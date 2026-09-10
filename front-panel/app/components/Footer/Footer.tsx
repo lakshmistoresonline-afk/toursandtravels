@@ -7,7 +7,7 @@ export default function Footer() {
 				<div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
 					<div className="space-y-4 max-w-sm">
 						<div className="flex flex-col">
-							<span className="text-3xl font-display font-bold tracking-widest text-[#d4af37]">AMADY</span>
+							<span className="text-3xl font-display font-bold tracking-widest text-[#d4af37]">AMBADY</span>
 							<span className="text-[10px] font-sans font-bold text-[#fdfcf0]/60 uppercase tracking-[0.3em] mt-1">Pilgrimage Experiences</span>
 						</div>
 						<p className="text-sm text-[#fdfcf0]/60 font-sans leading-relaxed">
@@ -34,7 +34,7 @@ export default function Footer() {
 				</div>
 
 				<div className="flex flex-col gap-6 border-t border-[#d4af37]/10 mt-16 pt-8 text-[10px] font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/40 sm:flex-row sm:items-center sm:justify-between">
-					<p>© {new Date().getFullYear()} AMADY PILGRIMAGE EXPERIENCES. ALL RIGHTS RESERVED.</p>
+					<p>© {new Date().getFullYear()} AMBADY PILGRIMAGE EXPERIENCES. ALL RIGHTS RESERVED.</p>
 					<div className="flex items-center gap-6">
 						<a href="/privacy-policy" className="hover:text-[#d4af37] transition-colors">Privacy</a>
 						<a href="/terms-of-usage" className="hover:text-[#d4af37] transition-colors">Terms</a>

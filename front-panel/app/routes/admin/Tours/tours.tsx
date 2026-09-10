@@ -132,7 +132,7 @@ export default function AdminToursPage() {
 
 	return (
 		<div className="flex flex-col gap-8 animate-in fade-in duration-500">
-			<MetaDetails metaTitle="Manage Inventory | AMADY PILGRIMAGE EXPERIENCES Admin" />
+			<MetaDetails metaTitle="Manage Inventory | AMBADY PILGRIMAGE EXPERIENCES Admin" />
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 				<div>

@@ -20,7 +20,7 @@ export function MetaDetails({
 	canonicalUrl,
 	ogUrl,
 	ogImage,
-	siteName = "AMADY PILGRIMAGE EXPERIENCES",
+	siteName = "AMBADY PILGRIMAGE EXPERIENCES",
 	ogType = "website",
 	hasPricing = false,
 	pricing = null,

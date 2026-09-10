@@ -42,7 +42,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	return (
 		<div className="bg-transparent">
 			<MetaDetails
-				metaTitle="AMADY PILGRIMAGE EXPERIENCES | Premium Pilgrimage Journeys"
+				metaTitle="AMBADY PILGRIMAGE EXPERIENCES | Premium Pilgrimage Journeys"
 				metaDescription="Book curated pilgrimage journeys and unforgettable sacred experiences with ease."
 			/>
 

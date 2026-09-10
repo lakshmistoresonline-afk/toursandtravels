@@ -50,7 +50,7 @@ export default function UpdatePassword() {
 
 	return (
 		<div className="container max-w-md mx-auto py-20 px-4">
-			<MetaDetails metaTitle="Update Password | AMADY PILGRIMAGE EXPERIENCES" />
+			<MetaDetails metaTitle="Update Password | AMBADY PILGRIMAGE EXPERIENCES" />
 			<Card>
 				<CardHeader><CardTitle className="text-2xl">Set New Password</CardTitle></CardHeader>
 				<CardContent>

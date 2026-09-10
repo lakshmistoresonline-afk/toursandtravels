@@ -60,17 +60,17 @@ export default function App() {
 	return (
 		<>
 			{/* Persistent Brand Background Layer */}
-			<div className="amady-bg-layer">
+			<div className="ambady-bg-layer">
 				<img
-					src="/brand/amady-background.png"
-					alt="Amady Background"
+					src="/brand/ambady-background.png"
+					alt="Ambady Background"
 					className="w-full h-full object-cover"
 				/>
 			</div>
-			<div className="amady-bg-overlay" />
+			<div className="ambady-bg-overlay" />
 
 			<TopLoadingBar />
-			<div className="amady-content-wrapper">
+			<div className="ambady-content-wrapper">
 				<Outlet />
 			</div>
 			<Toaster position="top-center" expand={false} richColors />

@@ -2,7 +2,7 @@ import { Button } from "~/components/ui/button";
 import { Link } from "react-router";
 import { ArrowRight, Compass } from "lucide-react";
 
-const logo = "/brand/amady-logo.png";
+const logo = "/brand/ambady-logo.png";
 
 export default function HeroSection({ hero_sections = [] }: { hero_sections: any[] }) {
 	return (
@@ -11,12 +11,12 @@ export default function HeroSection({ hero_sections = [] }: { hero_sections: any
 			<div className="relative z-20 container mx-auto px-4 text-center text-[#fdfcf0] space-y-12">
 				<div className="space-y-8 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-12 duration-1000">
 					<div className="mx-auto w-40 h-40 transition-transform duration-700 hover:rotate-[360deg]">
-						<img src={logo} alt="Amady Logo" className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
+						<img src={logo} alt="Ambady Logo" className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
 					</div>
 
 					<div className="space-y-4">
 						<h1 className="text-6xl md:text-9xl font-display font-bold tracking-[0.2em] leading-tight text-[#d4af37]">
-							AMADY
+							AMBADY
 						</h1>
 						<p className="text-[10px] md:text-xs font-sans font-bold text-[#fdfcf0]/60 uppercase tracking-[0.8em] mb-8">
 							Pilgrimage Experiences

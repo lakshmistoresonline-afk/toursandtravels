@@ -25,7 +25,7 @@ export default function MyBookingsPage() {
 
 	return (
 		<div className="container mx-auto max-w-5xl px-4 animate-in fade-in duration-700">
-			<MetaDetails metaTitle="My Pilgrimage Journeys | AMADY" />
+			<MetaDetails metaTitle="My Pilgrimage Journeys | AMBADY" />
 			<div className="mb-12">
 				<h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#d4af37] mb-2">History</h4>
 				<h1 className="text-4xl font-serif text-[#fdfcf0]">My Pilgrimage History</h1>

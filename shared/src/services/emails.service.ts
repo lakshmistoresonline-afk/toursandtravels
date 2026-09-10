@@ -37,7 +37,7 @@ class EmailService {
 	public async sendInquiry(payload: any) {
 		const { full_name, email, subject, message } = payload;
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <inquiries@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <inquiries@ambadypilgrimage.com>`,
 			to: EMAIL_ADDRESS_1,
 			subject: `New Inquiry: ${subject}`,
 			text: `New Inquiry from ${full_name} (${email})\n\nSubject: ${subject}\n\nMessage: ${message}`,
@@ -48,7 +48,7 @@ class EmailService {
 	public async sendSoftBookingCreationEmail(payload: any) {
 		const { booking_ref, customer_email, customer_name, total, customer_phone, tour_name } = payload;
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <bookings@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <bookings@ambadypilgrimage.com>`,
 			to: EMAIL_ADDRESS_1,
 			subject: `New Registration: #${booking_ref} - ${tour_name}`,
 			text: `A new pilgrimage journey registration has been placed!\n\nReference: ${booking_ref}\nCustomer: ${customer_name} (${customer_email}, ${customer_phone})\nTotal: $${total?.toFixed(2)}`,
@@ -59,19 +59,19 @@ class EmailService {
 	public async sendBookingConfirmation(payload: any) {
 		const { booking_ref, customer_name, customer_email } = payload;
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <bookings@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <bookings@ambadypilgrimage.com>`,
 			to: customer_email,
 			subject: `Registration Confirmed – #${booking_ref}`,
-			text: `Dear ${customer_name},\n\nYour registration #${booking_ref} has been confirmed.\n\nThank you for choosing AMADY PILGRIMAGE EXPERIENCES!`,
+			text: `Dear ${customer_name},\n\nYour registration #${booking_ref} has been confirmed.\n\nThank you for choosing AMBADY PILGRIMAGE EXPERIENCES!`,
 		});
 	}
 
 	/** Send password reset link email */
 	public async sendPasswordResetLink(recoveryLink: string, email: string) {
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <no-reply@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <no-reply@ambadypilgrimage.com>`,
 			to: email,
-			subject: `Password Reset Request - AMADY PILGRIMAGE EXPERIENCES`,
+			subject: `Password Reset Request - AMBADY PILGRIMAGE EXPERIENCES`,
 			text: `Your password reset link: ${recoveryLink}`,
 		});
 	}
@@ -79,9 +79,9 @@ class EmailService {
 	/** Send otp for admin login */
 	public async sendAdminLoginOtpEmail(code: string, email: string) {
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <no-reply@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <no-reply@ambadypilgrimage.com>`,
 			to: email,
-			subject: `Login Verification Code - AMADY PILGRIMAGE EXPERIENCES`,
+			subject: `Login Verification Code - AMBADY PILGRIMAGE EXPERIENCES`,
 			text: `Your login verification code is: ${code}`,
 		});
 	}
@@ -89,10 +89,10 @@ class EmailService {
 	/** Send welcome email on signup */
 	public async sendWelcomeEmail(firstName: string, email: string) {
 		return this.sendEmail({
-			from: `AMADY PILGRIMAGE EXPERIENCES <no-reply@amadypilgrimage.com>`,
+			from: `AMBADY PILGRIMAGE EXPERIENCES <no-reply@ambadypilgrimage.com>`,
 			to: email,
-			subject: `👋 Welcome to AMADY PILGRIMAGE EXPERIENCES, ${firstName}!`,
-			text: `Welcome to AMADY PILGRIMAGE EXPERIENCES, ${firstName}! We're excited to have you on board.`,
+			subject: `👋 Welcome to AMBADY PILGRIMAGE EXPERIENCES, ${firstName}!`,
+			text: `Welcome to AMBADY PILGRIMAGE EXPERIENCES, ${firstName}! We're excited to have you on board.`,
 		});
 	}
 }

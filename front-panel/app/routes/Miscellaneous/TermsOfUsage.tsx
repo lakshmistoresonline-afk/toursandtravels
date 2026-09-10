@@ -7,9 +7,9 @@ export default function TermsOfUsePage() {
 	return (
 		<>
 			<MetaDetails
-				metaTitle="Terms of Use | AMADY PILGRIMAGE EXPERIENCES"
+				metaTitle="Terms of Use | AMBADY PILGRIMAGE EXPERIENCES"
 				metaDescription="Our terms of use outline the rules and guidelines for using our website and services."
-				metaKeywords="Terms of Use, User Agreement, AMADY PILGRIMAGE EXPERIENCES"
+				metaKeywords="Terms of Use, User Agreement, AMBADY PILGRIMAGE EXPERIENCES"
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/terms-of-use`}
 			/>
 
@@ -35,7 +35,7 @@ export default function TermsOfUsePage() {
 								1. Acceptance of Terms
 							</h2>
 							<p>
-								By accessing or using AMADY PILGRIMAGE EXPERIENCES's website and services, you agree to be bound
+								By accessing or using AMBADY PILGRIMAGE EXPERIENCES's website and services, you agree to be bound
 								by these Terms of Use. If you do not agree, please do not use our services.
 							</p>
 						</section>
@@ -84,7 +84,7 @@ export default function TermsOfUsePage() {
 								6. Intellectual Property
 							</h2>
 							<p>
-								All content on our site, including images, text, and logos, is owned by AMADY PILGRIMAGE EXPERIENCES or its partners. Unauthorized use is prohibited.
+								All content on our site, including images, text, and logos, is owned by AMBADY PILGRIMAGE EXPERIENCES or its partners. Unauthorized use is prohibited.
 							</p>
 						</section>
 

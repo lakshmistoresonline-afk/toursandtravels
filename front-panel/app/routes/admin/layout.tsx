@@ -2,7 +2,7 @@ import { Outlet, redirect, type LoaderFunctionArgs, Link, NavLink, Form } from "
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { LayoutDashboard, MapPin, ClipboardList, Globe, LogOut } from "lucide-react";
 
-const logo = "/brand/amady-logo.png";
+const logo = "/brand/ambady-logo.png";
 
 export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 	const { user } = await getCurrentUser(request);
@@ -20,10 +20,10 @@ export default function AdminLayout() {
 				<div className="flex items-center gap-12">
 					<Link to="/admin" className="flex items-center gap-4 group">
 						<div className="h-12 w-12 transition-transform duration-500 group-hover:scale-110">
-							<img src={logo} alt="Amady Logo" className="h-full w-full object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" />
+							<img src={logo} alt="Ambady Logo" className="h-full w-full object-contain drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]" />
 						</div>
 						<div className="flex flex-col leading-none">
-							<span className="text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMADY</span>
+							<span className="text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMBADY</span>
 							<span className="text-[8px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em] mt-1">Admin Sanctuary</span>
 						</div>
 					</Link>

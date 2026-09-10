@@ -15,7 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
 
-const logo = "/brand/amady-logo.png";
+const logo = "/brand/ambady-logo.png";
 
 const NAV_LINKS = [
 	{ label: "Home", to: "/" },
@@ -40,9 +40,9 @@ export default function Header() {
 						<SheetContent side="left" className="w-[300px] bg-[#0a0e1a] border-r border-[#d4af37]/20">
 							<SheetHeader className="mt-8">
 								<div className="flex items-center gap-3">
-									<img src={logo} alt="Amady" className="h-12 w-12 object-contain" />
+									<img src={logo} alt="Ambady" className="h-12 w-12 object-contain" />
 									<div className="text-left">
-										<span className="block text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMADY</span>
+										<span className="block text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMBADY</span>
 										<span className="block text-[8px] font-sans font-bold tracking-[0.2em] text-[#fdfcf0]/60 uppercase">Pilgrimage Experiences</span>
 									</div>
 								</div>
@@ -65,10 +65,10 @@ export default function Header() {
 
 				<Link to="/" className="flex items-center gap-4 group">
 					<div className="h-16 w-16 overflow-hidden transition-transform duration-500 group-hover:scale-105">
-						<img src={logo} alt="Amady Logo" className="h-full w-full object-contain" />
+						<img src={logo} alt="Ambady Logo" className="h-full w-full object-contain" />
 					</div>
 					<div className="flex flex-col leading-none">
-						<span className="text-3xl font-display font-bold tracking-[0.15em] text-[#d4af37]">AMADY</span>
+						<span className="text-3xl font-display font-bold tracking-[0.15em] text-[#d4af37]">AMBADY</span>
 						<span className="text-[9px] font-sans font-bold text-[#fdfcf0]/70 uppercase tracking-[0.3em] mt-1">Pilgrimage Experiences</span>
 					</div>
 				</Link>
@@ -111,7 +111,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 			<DropdownMenuTrigger asChild className="cursor-pointer">
 				<div className="flex items-center gap-3 p-1 pr-3 rounded-full hover:bg-white/5 transition-colors border border-transparent hover:border-[#d4af37]/20">
 					<Avatar className="h-10 w-10 border border-[#d4af37]/30 shadow-sm ring-1 ring-[#d4af37]/20">
-						<AvatarImage src={user.avatar_url || "/brand/amady-logo.png"} />
+						<AvatarImage src={user.avatar_url || "/brand/ambady-logo.png"} />
 						<AvatarFallback className="bg-[#d4af37] text-[#0a0e1a] font-bold">{user.first_name?.charAt(0) ?? "A"}</AvatarFallback>
 					</Avatar>
 					<div className="hidden sm:block text-left">

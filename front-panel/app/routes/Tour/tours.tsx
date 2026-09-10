@@ -22,7 +22,7 @@ export default function ToursPage() {
 	return (
 		<div className="animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle="Pilgrimage Journeys | AMADY"
+				metaTitle="Pilgrimage Journeys | AMBADY"
 				metaDescription="Explore our sacred journeys and spiritual experiences curated for you."
 			/>
 

@@ -19,7 +19,7 @@ body {
 }
 
 /* Global Application Background System */
-.amady-bg-layer {
+.ambady-bg-layer {
 	position: fixed;
 	inset: 0;
 	z-index: 0; /* Above HTML background */
@@ -29,7 +29,7 @@ body {
 	background-color: #0a0e1a; /* Fallback if image fails */
 }
 
-.amady-bg-overlay {
+.ambady-bg-overlay {
 	position: fixed;
 	inset: 0;
 	z-index: 1; /* Above image */
@@ -42,7 +42,7 @@ body {
 	);
 }
 
-.amady-content-wrapper {
+.ambady-content-wrapper {
 	position: relative;
 	z-index: 10; /* Above everything */
 }

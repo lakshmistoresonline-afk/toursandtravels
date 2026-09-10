@@ -8,9 +8,9 @@ export default function About() {
 	return (
 		<div className="min-h-screen animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle="Our Story | AMADY"
-				metaDescription="Learn about AMADY PILGRIMAGE EXPERIENCES - your trusted partner for sacred and meaningful pilgrimage journeys."
-				metaKeywords="About us, AMADY PILGRIMAGE EXPERIENCES, pilgrimage journeys, faith, heritage"
+				metaTitle="Our Story | AMBADY"
+				metaDescription="Learn about AMBADY PILGRIMAGE EXPERIENCES - your trusted partner for sacred and meaningful pilgrimage journeys."
+				metaKeywords="About us, AMBADY PILGRIMAGE EXPERIENCES, pilgrimage journeys, faith, heritage"
 			/>
 
 			<div className="pt-32 pb-20">
@@ -23,7 +23,7 @@ export default function About() {
 					<div className="glass-card p-12 md:p-20 rounded-[3rem] border border-[#d4af37]/10 space-y-12 shadow-2xl">
 						<div className="space-y-8 text-[#fdfcf0]/70 font-sans font-light leading-relaxed text-lg md:text-xl text-center md:text-left">
 							<p className="first-letter:text-5xl first-letter:font-serif first-letter:text-[#d4af37] first-letter:mr-3 first-letter:float-left">
-								AMADY was born from a profound realization: that travel, at its highest form, is a spiritual endeavor. We believe that every journey should be more than just a change of scenery—it should be a path to inner peace, a connection to our heritage, and a strengthening of faith.
+								AMBADY was born from a profound realization: that travel, at its highest form, is a spiritual endeavor. We believe that every journey should be more than just a change of scenery—it should be a path to inner peace, a connection to our heritage, and a strengthening of faith.
 							</p>
 
 							<p>
@@ -31,7 +31,7 @@ export default function About() {
 							</p>
 
 							<p>
-								From the ancient temples that have stood for millennia to the quiet moments of devotion in nature, we invite you to join us on a journey that transcends the physical. With AMADY, the pilgrimage begins the moment you decide to seek the divine within.
+								From the ancient temples that have stood for millennia to the quiet moments of devotion in nature, we invite you to join us on a journey that transcends the physical. With AMBADY, the pilgrimage begins the moment you decide to seek the divine within.
 							</p>
 						</div>
 

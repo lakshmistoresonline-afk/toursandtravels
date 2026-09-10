@@ -1,0 +1,5 @@
+- [x] Fix `Route` type import in `home.tsx`
+- [x] Add missing `Card` imports in `signup.tsx`
+- [x] Update root loader imports in `account-details.tsx` and `Header.tsx`
+- [x] Add missing routes to `routes.ts`
+- [x] Verify changes with `analyze_file`

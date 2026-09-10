@@ -26,7 +26,7 @@ const contactInfo = [
 	{
 		title: "The Sanctuary",
 		icon: MapPinIcon,
-		description: "802 AMADY Rd, Dubai\n96812, UAE",
+		description: "802 AMBADY Rd, Dubai\n96812, UAE",
 	},
 	{
 		title: "Direct Path",
@@ -78,9 +78,9 @@ export default function ContactUs() {
 	return (
 		<div className="min-h-screen animate-in fade-in duration-1000">
 			<MetaDetails
-				metaTitle="Contact | AMADY"
-				metaDescription="Get in touch with AMADY PILGRIMAGE EXPERIENCES for inquiries about our pilgrimage journeys and services."
-				metaKeywords="AMADY PILGRIMAGE EXPERIENCES, Contact, Faith, Heritage"
+				metaTitle="Contact | AMBADY"
+				metaDescription="Get in touch with AMBADY PILGRIMAGE EXPERIENCES for inquiries about our pilgrimage journeys and services."
+				metaKeywords="AMBADY PILGRIMAGE EXPERIENCES, Contact, Faith, Heritage"
 			/>
 
 			<section className="pt-32 pb-20">

@@ -21,7 +21,7 @@ import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 
-const logo = "/brand/amady-logo.png";
+const logo = "/brand/ambady-logo.png";
 
 export async function clientAction({ request }: ActionFunctionArgs) {
 	const formData = await request.formData();
@@ -97,11 +97,11 @@ export default function SignupPage() {
 	return (
 		<div className="relative min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-20 px-4 overflow-hidden">
 			<div className="relative z-10 w-full max-w-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000">
-				<MetaDetails metaTitle="Begin Registration | AMADY" />
+				<MetaDetails metaTitle="Begin Registration | AMBADY" />
 				<Card className="glass-card border border-[#d4af37]/20 rounded-[3rem] overflow-hidden shadow-2xl shadow-black/50">
 					<CardHeader className="text-center pt-12 pb-8 px-10">
 						<div className="mx-auto w-24 h-24 mb-6 hover:scale-105 transition-transform duration-500">
-							<img src={logo} alt="Amady Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+							<img src={logo} alt="Ambady Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
 						</div>
 						<h2 className="text-4xl font-serif text-[#fdfcf0] tracking-tight mb-2 uppercase">Begin Your Journey</h2>
 						<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.4em]">
