@@ -23,7 +23,7 @@ import { ToursService } from "@workspace/shared/services/tours.service";
 import { AuthService } from "@workspace/shared/services/auth.service";
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
-import { maskAadhar } from "@workspace/shared/utils/ui";
+import { maskAadhar, cn } from "@workspace/shared/utils/ui";
 import { type TourRegistration } from "@workspace/shared/types/booking";
 
 export const clientLoader = async () => {
@@ -352,219 +352,235 @@ export default function BookingsPage() {
 
 			{/* Manual Registration Dialog */}
 			<Dialog open={isManualRegOpen} onOpenChange={setIsManualRegOpen}>
-				<DialogContent className="max-w-2xl bg-white border-primary/10 text-foreground shadow-2xl rounded-[3rem] p-0 overflow-hidden">
-					<DialogHeader className="p-12 bg-primary/5 border-b border-primary/10">
+				<DialogContent className="max-w-2xl bg-white border-primary/10 text-foreground shadow-2xl rounded-[3rem] p-0 overflow-hidden max-h-[90vh] flex flex-col">
+					<DialogHeader className="p-12 bg-primary/5 border-b border-primary/10 shrink-0">
 						<DialogTitle className="text-3xl font-serif text-foreground">
 							Manual Registration
 						</DialogTitle>
 						<DialogDescription className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] mt-3">
-							Register a pilgrim for a sacred journey manually.
+							Assisting pilgrims with their sacred registration.
 						</DialogDescription>
 					</DialogHeader>
-					<form onSubmit={handleManualSubmit} className="p-12 space-y-10">
-						<div className="space-y-4">
-							<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-								Select Pilgrimage Journey
-							</Label>
-							<Select name="tourId" required>
-								<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm">
-									<SelectValue placeholder="Choose a pilgrimage journey" />
-								</SelectTrigger>
-								<SelectContent className="bg-white border-primary/20 text-foreground">
-									{tours.map((t: any) => (
-										<SelectItem key={t.id} value={t.id} className="focus:bg-primary/5">
-											{t.name} ({t.tour_code})
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-						</div>
 
-						<div className="flex items-center gap-4 p-4 bg-primary/5 rounded-2xl border border-primary/10">
-							<input
-								type="checkbox"
-								id="isNewUser"
-								name="isNewUser"
-								value="true"
-								checked={isNewUser}
-								onChange={(e) => setIsNewUser(e.target.checked)}
-								className="h-5 w-5 ml-2 rounded border-primary/30 text-primary focus:ring-primary/20 cursor-pointer"
-							/>
-							<Label
-								htmlFor="isNewUser"
-								className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary cursor-pointer"
-							>
-								Register New Pilgrim Profile
-							</Label>
-						</div>
-
-						{isNewUser ? (
-							<div className="space-y-8 animate-in slide-in-from-top-4 duration-500">
-								<div className="grid grid-cols-2 gap-8">
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											First Name
-										</Label>
-										<Input
-											name="firstName"
-											placeholder="First Name"
-											required
-											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-										/>
-									</div>
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											Last Name
-										</Label>
-										<Input
-											name="lastName"
-											placeholder="Last Name"
-											required
-											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-										/>
-									</div>
-								</div>
-								<div className="grid grid-cols-2 gap-8">
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											Email Address
-										</Label>
-										<Input
-											name="email"
-											type="email"
-											placeholder="pilgrim@example.com"
-											required
-											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-										/>
-									</div>
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											Phone Number
-										</Label>
-										<Input
-											name="phone"
-											placeholder="9876543210"
-											required
-											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-										/>
-									</div>
-								</div>
-								<div className="space-y-3">
-									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-										Aadhar Number (12 Digits)
-									</Label>
-									<Input
-										name="aadharNumber"
-										placeholder="0000 0000 0000"
-										required
-										maxLength={12}
-										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-									/>
-								</div>
-
-								<div className="grid grid-cols-2 gap-8">
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											Gender
-										</Label>
-										<Select name="gender" required>
-											<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm">
-												<SelectValue placeholder="Select gender" />
-											</SelectTrigger>
-											<SelectContent className="bg-white border-primary/20 text-foreground">
-												<SelectItem value="Male">Male</SelectItem>
-												<SelectItem value="Female">Female</SelectItem>
-												<SelectItem value="Other">Other</SelectItem>
-											</SelectContent>
-										</Select>
-									</div>
-									<div className="space-y-3">
-										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-											Date of Birth
-										</Label>
-										<Input
-											name="dateOfBirth"
-											type="date"
-											required
-											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
-										/>
-									</div>
-								</div>
-								<p className="text-[10px] text-primary/60 font-bold uppercase tracking-widest text-center italic border border-primary/10 py-3 rounded-xl bg-primary/5">
-									Default Security Code: Password123
-								</p>
-							</div>
-						) : (
-							<div className="space-y-4 animate-in slide-in-from-top-4 duration-500">
+					<div className="flex-1 overflow-y-auto">
+						<form onSubmit={handleManualSubmit} id="manual-reg-form" className="p-12 space-y-10">
+							<div className="space-y-4">
 								<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-									Select Existing Pilgrim
+									Select Pilgrimage Journey
 								</Label>
-								<Select name="customerId" required>
-									<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-6">
-										<SelectValue placeholder="Choose a pilgrim profile" />
+								<Select name="tourId" required>
+									<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm">
+										<SelectValue placeholder="Choose a pilgrimage journey" />
 									</SelectTrigger>
 									<SelectContent className="bg-white border-primary/20 text-foreground">
-										{users.map((u: any) => (
-											<SelectItem
-												key={u.uid}
-												value={u.uid}
-												className="focus:bg-primary/5"
-											>
-												{u.first_name} {u.last_name} ({u.email})
+										{tours.map((t: any) => (
+											<SelectItem key={t.id} value={t.id} className="focus:bg-primary/5">
+												{t.name} ({t.tour_code})
 											</SelectItem>
 										))}
 									</SelectContent>
 								</Select>
 							</div>
-						)}
 
-						<div className="grid grid-cols-2 gap-8">
-							<div className="space-y-4">
+							<div className="space-y-6">
 								<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-									Pilgrims Count
+									Pilgrim Profile Mode
 								</Label>
-								<Input
-									type="number"
-									name="travellersCount"
-									defaultValue={1}
-									min={1}
-									required
-									className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-8 font-serif text-2xl text-primary"
-								/>
+								<div className="grid grid-cols-2 gap-4 p-1.5 bg-primary/5 rounded-2xl border border-primary/10">
+									<button
+										type="button"
+										onClick={() => setIsNewUser(false)}
+										className={cn(
+											"py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+											!isNewUser ? "bg-white text-primary shadow-sm" : "text-foreground/40 hover:text-foreground"
+										)}
+									>
+										Existing Pilgrim
+									</button>
+									<button
+										type="button"
+										onClick={() => setIsNewUser(true)}
+										className={cn(
+											"py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
+											isNewUser ? "bg-white text-primary shadow-sm" : "text-foreground/40 hover:text-foreground"
+										)}
+									>
+										New Pilgrim
+									</button>
+								</div>
+								<input type="hidden" name="isNewUser" value={isNewUser ? "true" : "false"} />
 							</div>
-							<div className="space-y-4">
-								<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
-									Administrative Notes
-								</Label>
-								<Input
-									name="notes"
-									placeholder="e.g. VIP handling..."
-									className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-6"
-								/>
+
+							{isNewUser ? (
+								<div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500 bg-primary/[0.02] p-8 rounded-[2rem] border border-primary/10">
+									<div className="grid grid-cols-2 gap-8">
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												First Name
+											</Label>
+											<Input
+												name="firstName"
+												placeholder="First Name"
+												required={isNewUser}
+												className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+											/>
+										</div>
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												Last Name
+											</Label>
+											<Input
+												name="lastName"
+												placeholder="Last Name"
+												required={isNewUser}
+												className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+											/>
+										</div>
+									</div>
+									<div className="grid grid-cols-2 gap-8">
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												Email Address
+											</Label>
+											<Input
+												name="email"
+												type="email"
+												placeholder="pilgrim@example.com"
+												required={isNewUser}
+												className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+											/>
+										</div>
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												Phone Number
+											</Label>
+											<Input
+												name="phone"
+												placeholder="9876543210"
+												required={isNewUser}
+												className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+											/>
+										</div>
+									</div>
+									<div className="space-y-3">
+										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+											Aadhar Number (12 Digits)
+										</Label>
+										<Input
+											name="aadharNumber"
+											placeholder="0000 0000 0000"
+											required={isNewUser}
+											maxLength={12}
+											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+										/>
+									</div>
+
+									<div className="grid grid-cols-2 gap-8">
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												Gender
+											</Label>
+											<Select name="gender" required={isNewUser}>
+												<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm">
+													<SelectValue placeholder="Select gender" />
+												</SelectTrigger>
+												<SelectContent className="bg-white border-primary/20 text-foreground">
+													<SelectItem value="Male">Male</SelectItem>
+													<SelectItem value="Female">Female</SelectItem>
+													<SelectItem value="Other">Other</SelectItem>
+												</SelectContent>
+											</Select>
+										</div>
+										<div className="space-y-3">
+											<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+												Date of Birth
+											</Label>
+											<Input
+												name="dateOfBirth"
+												type="date"
+												required={isNewUser}
+												className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+											/>
+										</div>
+									</div>
+									<p className="text-[9px] text-primary/60 font-bold uppercase tracking-widest text-center italic border border-primary/10 py-3 rounded-xl bg-white/50">
+										Security Code will be generated automatically.
+									</p>
+								</div>
+							) : (
+								<div className="space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
+									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+										Select Existing Pilgrim
+									</Label>
+									<Select name="customerId" required={!isNewUser}>
+										<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-6">
+											<SelectValue placeholder="Choose a pilgrim profile" />
+										</SelectTrigger>
+										<SelectContent className="bg-white border-primary/20 text-foreground">
+											{users.map((u: any) => (
+												<SelectItem
+													key={u.uid}
+													value={u.uid}
+													className="focus:bg-primary/5"
+												>
+													{u.first_name} {u.last_name} ({u.email})
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								</div>
+							)}
+
+							<div className="grid grid-cols-2 gap-8">
+								<div className="space-y-4">
+									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+										Pilgrims Count
+									</Label>
+									<Input
+										type="number"
+										name="travellersCount"
+										defaultValue={1}
+										min={1}
+										required
+										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-8 font-serif text-2xl text-primary"
+									/>
+								</div>
+								<div className="space-y-4">
+									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+										Administrative Notes
+									</Label>
+									<Input
+										name="notes"
+										placeholder="e.g. Needs assistance..."
+										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-6"
+									/>
+								</div>
 							</div>
-						</div>
-						<div className="flex justify-end gap-6 pt-6">
-							<Button
-								type="button"
-								variant="ghost"
-								onClick={() => setIsManualRegOpen(false)}
-								className="text-foreground/40 hover:text-foreground h-12 uppercase tracking-widest font-bold text-[10px]"
-							>
-								Discard
-							</Button>
-							<Button
-								type="submit"
-								disabled={isSubmitting}
-								className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest text-[11px] px-12 h-16 rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-all"
-							>
-								{isSubmitting ? (
-									<Loader2 className="mr-3 h-5 w-5 animate-spin" />
-								) : (
-									"Complete Registration"
-								)}
-							</Button>
-						</div>
-					</form>
+						</form>
+					</div>
+
+					<div className="p-12 bg-primary/5 border-t border-primary/10 flex justify-end gap-6 shrink-0">
+						<Button
+							type="button"
+							variant="ghost"
+							onClick={() => setIsManualRegOpen(false)}
+							className="text-foreground/40 hover:text-foreground h-12 uppercase tracking-widest font-bold text-[10px]"
+						>
+							Discard
+						</Button>
+						<Button
+							form="manual-reg-form"
+							type="submit"
+							disabled={isSubmitting}
+							className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest text-[11px] px-12 h-16 rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-all"
+						>
+							{isSubmitting ? (
+								<Loader2 className="mr-3 h-5 w-5 animate-spin" />
+							) : (
+								"Complete Registration"
+							)}
+						</Button>
+					</div>
 				</DialogContent>
 			</Dialog>
 
