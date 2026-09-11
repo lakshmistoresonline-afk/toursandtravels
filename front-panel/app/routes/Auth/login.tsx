@@ -85,21 +85,28 @@ export default function LoginPage() {
 	}, [actionData]);
 
 	return (
-		<div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-16 px-4">
-			<div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-				<MetaDetails metaTitle="Login | AMBADY" metaDescription="Access your sacred journey portal." />
+		<div className="min-h-[80vh] w-full flex items-center justify-center py-20 px-6 bg-background">
+			<div className="w-full max-w-md space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+				<MetaDetails
+					metaTitle="Login | AMBADY"
+					metaDescription="Access your sacred journey portal."
+				/>
 
-				<div className="text-center space-y-3">
-					<div className="mx-auto w-16 h-16 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]">
-						<Compass className="h-8 w-8" />
+				<div className="text-center space-y-4">
+					<Link to="/" className="inline-flex items-center gap-3 group">
+						<div className="w-16 h-16 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-primary group-hover:rotate-12 transition-transform duration-500 shadow-sm">
+							<Compass className="h-8 w-8" />
+						</div>
+					</Link>
+					<div className="space-y-2">
+						<h2 className="text-4xl font-serif text-foreground tracking-tight">Welcome Back</h2>
+						<p className="text-[11px] font-bold text-primary uppercase tracking-[0.4em]">
+							Your Sacred Journey Awaits
+						</p>
 					</div>
-					<h2 className="text-3xl font-serif text-[#fdfcf0] tracking-tight uppercase">Welcome Back</h2>
-					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">
-						Your Sacred Journey Awaits
-					</p>
 				</div>
 
-				<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
+				<div className="bg-card p-10 md:p-14 rounded-[3rem] shadow-xl border border-primary/10">
 					<Form {...form}>
 						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
 							<FormField
@@ -107,18 +114,20 @@ export default function LoginPage() {
 								name="email"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
+										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+											Email Address
+										</FormLabel>
 										<FormControl>
-											<div className="relative">
-												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+											<div className="relative group">
+												<MailIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													placeholder="name@pilgrimage.com"
-													className="h-14 pl-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base"
+													className="h-14 pl-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base shadow-sm"
 													{...field}
 												/>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 									</FormItem>
 								)}
 							/>
@@ -127,41 +136,64 @@ export default function LoginPage() {
 								name="password"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<div className="flex justify-between items-center px-1">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em]">Secret Code</FormLabel>
-											<Link to="/forgot-password" title="Forgot Password" className="text-[9px] font-bold text-[#d4af37] hover:text-[#fdfcf0] uppercase tracking-widest transition-all">Forgot?</Link>
+										<div className="flex justify-between items-center px-2">
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+												Secret Code
+											</FormLabel>
+											<Link
+												to="/forgot-password"
+												title="Forgot Password"
+												className="text-[9px] font-bold text-primary hover:text-foreground uppercase tracking-[0.1em] transition-all"
+											>
+												Forgot?
+											</Link>
 										</div>
 										<FormControl>
-											<div className="relative">
-												<LockIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+											<div className="relative group">
+												<LockIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													type={showPassword ? "text" : "password"}
 													placeholder="••••••••"
-													className="h-14 pl-14 pr-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base"
+													className="h-14 pl-14 pr-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base shadow-sm"
 													{...field}
 												/>
 												<button
 													type="button"
 													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-5 top-1/2 -translate-y-1/2 text-[#d4af37]/60 hover:text-[#d4af37] transition-colors"
+													className="absolute right-6 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
 												>
-													{showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+													{showPassword ? (
+														<EyeOffIcon className="h-5 w-5" />
+													) : (
+														<EyeIcon className="h-5 w-5" />
+													)}
 												</button>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 									</FormItem>
 								)}
 							/>
-							<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Sign In to Journey"}
+							<Button
+								type="submit"
+								className="w-full h-16 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:scale-[1.02]"
+								disabled={isSubmitting}
+							>
+								{isSubmitting ? (
+									<Loader2 className="mr-3 h-5 w-5 animate-spin" />
+								) : (
+									"Sign In to Journey"
+								)}
 							</Button>
 						</form>
 					</Form>
-					<div className="mt-8 text-center">
-						<p className="text-[#fdfcf0]/30 text-[9px] font-bold uppercase tracking-widest">
+					<div className="mt-10 text-center">
+						<p className="text-foreground/30 text-[10px] font-bold uppercase tracking-widest">
 							New to Ambady?{" "}
-							<Link to="/signup" className="text-[#d4af37] hover:text-[#fdfcf0] transition-colors ml-1">
+							<Link
+								to="/signup"
+								className="text-primary hover:text-foreground transition-colors ml-1 underline underline-offset-4 decoration-primary/30"
+							>
 								Begin Registration
 							</Link>
 						</p>

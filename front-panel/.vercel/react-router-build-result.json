@@ -1,0 +1,788 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/robots.txt": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/sitemap.xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/health": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/logout": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/google-login": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/google-login-callback": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Home/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/login": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/forgot-password": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/update-password": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Auth/signup": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tour/tours": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Tour/tour-details": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/City/city": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Booking/booking": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Payment/PaymentSuccess": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Payment/PaymentCancel": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/retry-stripe-checkout": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/get-stripe-checkout-session": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Booking/track-booking": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Cart/cart": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/add-to-cart": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/remove-from-cart": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/clear-cart": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Favourites/my-favourites": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Contact/contact-us": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/About/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/FAQs/faqs": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Miscellaneous/PrivacyPolicy": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Miscellaneous/TermsOfUsage": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/email-preview": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Account/account-details": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Account/my-bookings": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Account/my-reviews": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/add-review": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/_actions/delete-review": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Collections/collection-tours": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/Error/404": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/robots.txt": {
+        "id": "routes/robots.txt",
+        "parentId": "root",
+        "file": "app/routes/robots.txt.ts",
+        "path": "robots.txt",
+        "config": {}
+      },
+      "routes/sitemap.xml": {
+        "id": "routes/sitemap.xml",
+        "parentId": "root",
+        "file": "app/routes/sitemap.xml.ts",
+        "path": "sitemap.xml",
+        "config": {}
+      },
+      "routes/health": {
+        "id": "routes/health",
+        "parentId": "root",
+        "file": "app/routes/health.ts",
+        "path": "health",
+        "config": {}
+      },
+      "routes/_actions/logout": {
+        "id": "routes/_actions/logout",
+        "parentId": "root",
+        "file": "app/routes/_actions/logout.tsx",
+        "path": "/logout",
+        "config": {}
+      },
+      "routes/_actions/google-login": {
+        "id": "routes/_actions/google-login",
+        "parentId": "root",
+        "file": "app/routes/_actions/google-login.tsx",
+        "path": "/login/google",
+        "config": {}
+      },
+      "routes/Auth/google-login-callback": {
+        "id": "routes/Auth/google-login-callback",
+        "parentId": "root",
+        "file": "app/routes/Auth/google-login-callback.tsx",
+        "path": "/auth/callback",
+        "config": {}
+      },
+      "routes/layout": {
+        "id": "routes/layout",
+        "parentId": "root",
+        "file": "app/routes/layout.tsx",
+        "config": {}
+      },
+      "routes/Home/home": {
+        "id": "routes/Home/home",
+        "parentId": "routes/layout",
+        "file": "app/routes/Home/home.tsx",
+        "index": true,
+        "config": {}
+      },
+      "routes/Auth/login": {
+        "id": "routes/Auth/login",
+        "parentId": "routes/layout",
+        "file": "app/routes/Auth/login.tsx",
+        "path": "/login",
+        "config": {}
+      },
+      "routes/Auth/forgot-password": {
+        "id": "routes/Auth/forgot-password",
+        "parentId": "routes/layout",
+        "file": "app/routes/Auth/forgot-password.tsx",
+        "path": "/forgot-password",
+        "config": {}
+      },
+      "routes/Auth/update-password": {
+        "id": "routes/Auth/update-password",
+        "parentId": "routes/layout",
+        "file": "app/routes/Auth/update-password.tsx",
+        "path": "/update-password",
+        "config": {}
+      },
+      "routes/Auth/signup": {
+        "id": "routes/Auth/signup",
+        "parentId": "routes/layout",
+        "file": "app/routes/Auth/signup.tsx",
+        "path": "/signup",
+        "config": {}
+      },
+      "routes/Tour/tours": {
+        "id": "routes/Tour/tours",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tour/tours.tsx",
+        "path": "tours",
+        "index": true,
+        "config": {}
+      },
+      "routes/Tour/tour-details": {
+        "id": "routes/Tour/tour-details",
+        "parentId": "routes/layout",
+        "file": "app/routes/Tour/tour-details.tsx",
+        "path": "tours/tour/:id/:url_key",
+        "config": {}
+      },
+      "routes/City/city": {
+        "id": "routes/City/city",
+        "parentId": "routes/layout",
+        "file": "app/routes/City/city.tsx",
+        "path": "city/:id/:url_key",
+        "config": {}
+      },
+      "routes/Booking/booking": {
+        "id": "routes/Booking/booking",
+        "parentId": "routes/layout",
+        "file": "app/routes/Booking/booking.tsx",
+        "path": "booking",
+        "config": {}
+      },
+      "routes/Payment/PaymentSuccess": {
+        "id": "routes/Payment/PaymentSuccess",
+        "parentId": "routes/layout",
+        "file": "app/routes/Payment/PaymentSuccess.tsx",
+        "path": "booking/:bookingRef/payment-success",
+        "config": {}
+      },
+      "routes/Payment/PaymentCancel": {
+        "id": "routes/Payment/PaymentCancel",
+        "parentId": "routes/layout",
+        "file": "app/routes/Payment/PaymentCancel.tsx",
+        "path": "booking/:bookingRef/payment-cancel",
+        "config": {}
+      },
+      "routes/_actions/retry-stripe-checkout": {
+        "id": "routes/_actions/retry-stripe-checkout",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/retry-stripe-checkout.tsx",
+        "path": "retry-stripe-checkout",
+        "config": {}
+      },
+      "routes/_actions/get-stripe-checkout-session": {
+        "id": "routes/_actions/get-stripe-checkout-session",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/get-stripe-checkout-session.tsx",
+        "path": "get-stripe-checkout-session",
+        "config": {}
+      },
+      "routes/Booking/track-booking": {
+        "id": "routes/Booking/track-booking",
+        "parentId": "routes/layout",
+        "file": "app/routes/Booking/track-booking.tsx",
+        "path": "track-booking",
+        "config": {}
+      },
+      "routes/Cart/cart": {
+        "id": "routes/Cart/cart",
+        "parentId": "routes/layout",
+        "file": "app/routes/Cart/cart.tsx",
+        "path": "cart",
+        "config": {}
+      },
+      "routes/_actions/add-to-cart": {
+        "id": "routes/_actions/add-to-cart",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/add-to-cart.tsx",
+        "path": "add-to-cart",
+        "config": {}
+      },
+      "routes/_actions/remove-from-cart": {
+        "id": "routes/_actions/remove-from-cart",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/remove-from-cart.tsx",
+        "path": "remove-from-cart/:cart_item_id/:user_id",
+        "config": {}
+      },
+      "routes/_actions/clear-cart": {
+        "id": "routes/_actions/clear-cart",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/clear-cart.tsx",
+        "path": "clear-cart/:user_id",
+        "config": {}
+      },
+      "routes/Favourites/my-favourites": {
+        "id": "routes/Favourites/my-favourites",
+        "parentId": "routes/layout",
+        "file": "app/routes/Favourites/my-favourites.tsx",
+        "path": "my-favourites",
+        "config": {}
+      },
+      "routes/Contact/contact-us": {
+        "id": "routes/Contact/contact-us",
+        "parentId": "routes/layout",
+        "file": "app/routes/Contact/contact-us.tsx",
+        "path": "contact-us",
+        "config": {}
+      },
+      "routes/About/about": {
+        "id": "routes/About/about",
+        "parentId": "routes/layout",
+        "file": "app/routes/About/about.tsx",
+        "path": "about",
+        "config": {}
+      },
+      "routes/FAQs/faqs": {
+        "id": "routes/FAQs/faqs",
+        "parentId": "routes/layout",
+        "file": "app/routes/FAQs/faqs.tsx",
+        "path": "faqs",
+        "config": {}
+      },
+      "routes/Miscellaneous/PrivacyPolicy": {
+        "id": "routes/Miscellaneous/PrivacyPolicy",
+        "parentId": "routes/layout",
+        "file": "app/routes/Miscellaneous/PrivacyPolicy.tsx",
+        "path": "privacy-policy",
+        "config": {}
+      },
+      "routes/Miscellaneous/TermsOfUsage": {
+        "id": "routes/Miscellaneous/TermsOfUsage",
+        "parentId": "routes/layout",
+        "file": "app/routes/Miscellaneous/TermsOfUsage.tsx",
+        "path": "terms-of-usage",
+        "config": {}
+      },
+      "routes/email-preview": {
+        "id": "routes/email-preview",
+        "parentId": "routes/layout",
+        "file": "app/routes/email-preview.tsx",
+        "path": "email-preview",
+        "config": {}
+      },
+      "routes/Account/account-layout": {
+        "id": "routes/Account/account-layout",
+        "parentId": "routes/layout",
+        "file": "app/routes/Account/account-layout.tsx",
+        "config": {}
+      },
+      "routes/Account/account-details": {
+        "id": "routes/Account/account-details",
+        "parentId": "routes/Account/account-layout",
+        "file": "app/routes/Account/account-details.tsx",
+        "path": "account/details",
+        "config": {}
+      },
+      "routes/Account/my-bookings": {
+        "id": "routes/Account/my-bookings",
+        "parentId": "routes/Account/account-layout",
+        "file": "app/routes/Account/my-bookings.tsx",
+        "path": "account/bookings",
+        "config": {}
+      },
+      "routes/Account/my-reviews": {
+        "id": "routes/Account/my-reviews",
+        "parentId": "routes/Account/account-layout",
+        "file": "app/routes/Account/my-reviews.tsx",
+        "path": "account/reviews",
+        "config": {}
+      },
+      "routes/_actions/add-review": {
+        "id": "routes/_actions/add-review",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/add-review.tsx",
+        "path": "add-review",
+        "config": {}
+      },
+      "routes/_actions/delete-review": {
+        "id": "routes/_actions/delete-review",
+        "parentId": "routes/layout",
+        "file": "app/routes/_actions/delete-review.tsx",
+        "path": "delete-review",
+        "config": {}
+      },
+      "routes/Collections/collection-tours": {
+        "id": "routes/Collections/collection-tours",
+        "parentId": "routes/layout",
+        "file": "app/routes/Collections/collection-tours.tsx",
+        "path": "collection/:id",
+        "config": {}
+      },
+      "routes/Error/404": {
+        "id": "routes/Error/404",
+        "parentId": "root",
+        "file": "app/routes/Error/404.tsx",
+        "path": "*",
+        "config": {}
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "E:/Tour/rr-tours-app-main/front-panel/app",
+    "basename": "/",
+    "buildDirectory": "E:/Tour/rr-tours-app-main/front-panel/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/robots.txt": {
+        "id": "routes/robots.txt",
+        "parentId": "root",
+        "file": "./routes/robots.txt.ts",
+        "path": "robots.txt"
+      },
+      "routes/sitemap.xml": {
+        "id": "routes/sitemap.xml",
+        "parentId": "root",
+        "file": "./routes/sitemap.xml.ts",
+        "path": "sitemap.xml"
+      },
+      "routes/health": {
+        "id": "routes/health",
+        "parentId": "root",
+        "file": "./routes/health.ts",
+        "path": "health"
+      },
+      "routes/_actions/logout": {
+        "id": "routes/_actions/logout",
+        "parentId": "root",
+        "file": "./routes/_actions/logout.tsx",
+        "path": "/logout"
+      },
+      "routes/_actions/google-login": {
+        "id": "routes/_actions/google-login",
+        "parentId": "root",
+        "file": "./routes/_actions/google-login.tsx",
+        "path": "/login/google"
+      },
+      "routes/Auth/google-login-callback": {
+        "id": "routes/Auth/google-login-callback",
+        "parentId": "root",
+        "file": "./routes/Auth/google-login-callback.tsx",
+        "path": "/auth/callback"
+      },
+      "routes/layout": {
+        "id": "routes/layout",
+        "parentId": "root",
+        "file": "./routes/layout.tsx"
+      },
+      "routes/Home/home": {
+        "id": "routes/Home/home",
+        "parentId": "routes/layout",
+        "file": "routes/Home/home.tsx",
+        "index": true
+      },
+      "routes/Auth/login": {
+        "id": "routes/Auth/login",
+        "parentId": "routes/layout",
+        "file": "./routes/Auth/login.tsx",
+        "path": "/login"
+      },
+      "routes/Auth/forgot-password": {
+        "id": "routes/Auth/forgot-password",
+        "parentId": "routes/layout",
+        "file": "./routes/Auth/forgot-password.tsx",
+        "path": "/forgot-password"
+      },
+      "routes/Auth/update-password": {
+        "id": "routes/Auth/update-password",
+        "parentId": "routes/layout",
+        "file": "./routes/Auth/update-password.tsx",
+        "path": "/update-password"
+      },
+      "routes/Auth/signup": {
+        "id": "routes/Auth/signup",
+        "parentId": "routes/layout",
+        "file": "./routes/Auth/signup.tsx",
+        "path": "/signup"
+      },
+      "routes/Tour/tours": {
+        "id": "routes/Tour/tours",
+        "parentId": "routes/layout",
+        "file": "./routes/Tour/tours.tsx",
+        "path": "tours",
+        "index": true
+      },
+      "routes/Tour/tour-details": {
+        "id": "routes/Tour/tour-details",
+        "parentId": "routes/layout",
+        "file": "./routes/Tour/tour-details.tsx",
+        "path": "tours/tour/:id/:url_key"
+      },
+      "routes/City/city": {
+        "id": "routes/City/city",
+        "parentId": "routes/layout",
+        "file": "./routes/City/city.tsx",
+        "path": "city/:id/:url_key"
+      },
+      "routes/Booking/booking": {
+        "id": "routes/Booking/booking",
+        "parentId": "routes/layout",
+        "file": "./routes/Booking/booking.tsx",
+        "path": "booking"
+      },
+      "routes/Payment/PaymentSuccess": {
+        "id": "routes/Payment/PaymentSuccess",
+        "parentId": "routes/layout",
+        "file": "./routes/Payment/PaymentSuccess.tsx",
+        "path": "booking/:bookingRef/payment-success"
+      },
+      "routes/Payment/PaymentCancel": {
+        "id": "routes/Payment/PaymentCancel",
+        "parentId": "routes/layout",
+        "file": "./routes/Payment/PaymentCancel.tsx",
+        "path": "booking/:bookingRef/payment-cancel"
+      },
+      "routes/_actions/retry-stripe-checkout": {
+        "id": "routes/_actions/retry-stripe-checkout",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/retry-stripe-checkout.tsx",
+        "path": "retry-stripe-checkout"
+      },
+      "routes/_actions/get-stripe-checkout-session": {
+        "id": "routes/_actions/get-stripe-checkout-session",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/get-stripe-checkout-session.tsx",
+        "path": "get-stripe-checkout-session"
+      },
+      "routes/Booking/track-booking": {
+        "id": "routes/Booking/track-booking",
+        "parentId": "routes/layout",
+        "file": "./routes/Booking/track-booking.tsx",
+        "path": "track-booking"
+      },
+      "routes/Cart/cart": {
+        "id": "routes/Cart/cart",
+        "parentId": "routes/layout",
+        "file": "./routes/Cart/cart.tsx",
+        "path": "cart"
+      },
+      "routes/_actions/add-to-cart": {
+        "id": "routes/_actions/add-to-cart",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/add-to-cart.tsx",
+        "path": "add-to-cart"
+      },
+      "routes/_actions/remove-from-cart": {
+        "id": "routes/_actions/remove-from-cart",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/remove-from-cart.tsx",
+        "path": "remove-from-cart/:cart_item_id/:user_id"
+      },
+      "routes/_actions/clear-cart": {
+        "id": "routes/_actions/clear-cart",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/clear-cart.tsx",
+        "path": "clear-cart/:user_id"
+      },
+      "routes/Favourites/my-favourites": {
+        "id": "routes/Favourites/my-favourites",
+        "parentId": "routes/layout",
+        "file": "./routes/Favourites/my-favourites.tsx",
+        "path": "my-favourites"
+      },
+      "routes/Contact/contact-us": {
+        "id": "routes/Contact/contact-us",
+        "parentId": "routes/layout",
+        "file": "./routes/Contact/contact-us.tsx",
+        "path": "contact-us"
+      },
+      "routes/About/about": {
+        "id": "routes/About/about",
+        "parentId": "routes/layout",
+        "file": "./routes/About/about.tsx",
+        "path": "about"
+      },
+      "routes/FAQs/faqs": {
+        "id": "routes/FAQs/faqs",
+        "parentId": "routes/layout",
+        "file": "./routes/FAQs/faqs.tsx",
+        "path": "faqs"
+      },
+      "routes/Miscellaneous/PrivacyPolicy": {
+        "id": "routes/Miscellaneous/PrivacyPolicy",
+        "parentId": "routes/layout",
+        "file": "./routes/Miscellaneous/PrivacyPolicy.tsx",
+        "path": "privacy-policy"
+      },
+      "routes/Miscellaneous/TermsOfUsage": {
+        "id": "routes/Miscellaneous/TermsOfUsage",
+        "parentId": "routes/layout",
+        "file": "./routes/Miscellaneous/TermsOfUsage.tsx",
+        "path": "terms-of-usage"
+      },
+      "routes/email-preview": {
+        "id": "routes/email-preview",
+        "parentId": "routes/layout",
+        "file": "./routes/email-preview.tsx",
+        "path": "email-preview"
+      },
+      "routes/Account/account-layout": {
+        "id": "routes/Account/account-layout",
+        "parentId": "routes/layout",
+        "file": "./routes/Account/account-layout.tsx"
+      },
+      "routes/Account/account-details": {
+        "id": "routes/Account/account-details",
+        "parentId": "routes/Account/account-layout",
+        "file": "./routes/Account/account-details.tsx",
+        "path": "account/details"
+      },
+      "routes/Account/my-bookings": {
+        "id": "routes/Account/my-bookings",
+        "parentId": "routes/Account/account-layout",
+        "file": "./routes/Account/my-bookings.tsx",
+        "path": "account/bookings"
+      },
+      "routes/Account/my-reviews": {
+        "id": "routes/Account/my-reviews",
+        "parentId": "routes/Account/account-layout",
+        "file": "./routes/Account/my-reviews.tsx",
+        "path": "account/reviews"
+      },
+      "routes/_actions/add-review": {
+        "id": "routes/_actions/add-review",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/add-review.tsx",
+        "path": "add-review"
+      },
+      "routes/_actions/delete-review": {
+        "id": "routes/_actions/delete-review",
+        "parentId": "routes/layout",
+        "file": "./routes/_actions/delete-review.tsx",
+        "path": "delete-review"
+      },
+      "routes/Collections/collection-tours": {
+        "id": "routes/Collections/collection-tours",
+        "parentId": "routes/layout",
+        "file": "./routes/Collections/collection-tours.tsx",
+        "path": "collection/:id"
+      },
+      "routes/Error/404": {
+        "id": "routes/Error/404",
+        "parentId": "root",
+        "file": "./routes/Error/404.tsx",
+        "path": "*"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "./routes/robots.txt.ts",
+            "path": "robots.txt"
+          },
+          {
+            "file": "./routes/sitemap.xml.ts",
+            "path": "sitemap.xml"
+          },
+          {
+            "file": "./routes/health.ts",
+            "path": "health"
+          },
+          {
+            "file": "./routes/_actions/logout.tsx",
+            "path": "/logout"
+          },
+          {
+            "file": "./routes/_actions/google-login.tsx",
+            "path": "/login/google"
+          },
+          {
+            "file": "./routes/Auth/google-login-callback.tsx",
+            "path": "/auth/callback"
+          },
+          {
+            "file": "./routes/layout.tsx",
+            "children": [
+              {
+                "file": "routes/Home/home.tsx",
+                "index": true
+              },
+              {
+                "file": "./routes/Auth/login.tsx",
+                "path": "/login"
+              },
+              {
+                "file": "./routes/Auth/forgot-password.tsx",
+                "path": "/forgot-password"
+              },
+              {
+                "file": "./routes/Auth/update-password.tsx",
+                "path": "/update-password"
+              },
+              {
+                "file": "./routes/Auth/signup.tsx",
+                "path": "/signup"
+              },
+              {
+                "file": "./routes/Tour/tours.tsx",
+                "index": true,
+                "path": "tours"
+              },
+              {
+                "file": "./routes/Tour/tour-details.tsx",
+                "path": "tours/tour/:id/:url_key"
+              },
+              {
+                "file": "./routes/City/city.tsx",
+                "path": "city/:id/:url_key"
+              },
+              {
+                "file": "./routes/Booking/booking.tsx",
+                "path": "booking"
+              },
+              {
+                "file": "./routes/Payment/PaymentSuccess.tsx",
+                "path": "booking/:bookingRef/payment-success"
+              },
+              {
+                "file": "./routes/Payment/PaymentCancel.tsx",
+                "path": "booking/:bookingRef/payment-cancel"
+              },
+              {
+                "file": "./routes/_actions/retry-stripe-checkout.tsx",
+                "path": "retry-stripe-checkout"
+              },
+              {
+                "file": "./routes/_actions/get-stripe-checkout-session.tsx",
+                "path": "get-stripe-checkout-session"
+              },
+              {
+                "file": "./routes/Booking/track-booking.tsx",
+                "path": "track-booking"
+              },
+              {
+                "file": "./routes/Cart/cart.tsx",
+                "path": "cart"
+              },
+              {
+                "file": "./routes/_actions/add-to-cart.tsx",
+                "path": "add-to-cart"
+              },
+              {
+                "file": "./routes/_actions/remove-from-cart.tsx",
+                "path": "remove-from-cart/:cart_item_id/:user_id"
+              },
+              {
+                "file": "./routes/_actions/clear-cart.tsx",
+                "path": "clear-cart/:user_id"
+              },
+              {
+                "file": "./routes/Favourites/my-favourites.tsx",
+                "path": "my-favourites"
+              },
+              {
+                "file": "./routes/Contact/contact-us.tsx",
+                "path": "contact-us"
+              },
+              {
+                "file": "./routes/About/about.tsx",
+                "path": "about"
+              },
+              {
+                "file": "./routes/FAQs/faqs.tsx",
+                "path": "faqs"
+              },
+              {
+                "file": "./routes/Miscellaneous/PrivacyPolicy.tsx",
+                "path": "privacy-policy"
+              },
+              {
+                "file": "./routes/Miscellaneous/TermsOfUsage.tsx",
+                "path": "terms-of-usage"
+              },
+              {
+                "file": "./routes/email-preview.tsx",
+                "path": "email-preview"
+              },
+              {
+                "file": "./routes/Account/account-layout.tsx",
+                "children": [
+                  {
+                    "file": "./routes/Account/account-details.tsx",
+                    "path": "account/details"
+                  },
+                  {
+                    "file": "./routes/Account/my-bookings.tsx",
+                    "path": "account/bookings"
+                  },
+                  {
+                    "file": "./routes/Account/my-reviews.tsx",
+                    "path": "account/reviews"
+                  }
+                ]
+              },
+              {
+                "file": "./routes/_actions/add-review.tsx",
+                "path": "add-review"
+              },
+              {
+                "file": "./routes/_actions/delete-review.tsx",
+                "path": "delete-review"
+              },
+              {
+                "file": "./routes/Collections/collection-tours.tsx",
+                "path": "collection/:id"
+              }
+            ]
+          },
+          {
+            "file": "./routes/Error/404.tsx",
+            "path": "*"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}

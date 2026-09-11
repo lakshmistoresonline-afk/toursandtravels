@@ -60,34 +60,44 @@ export const clientLoader = () => {
 
 export default function ContactUs() {
 	return (
-		<div className="min-h-screen animate-in fade-in duration-700">
+		<div className="min-h-screen bg-background animate-in fade-in duration-700">
 			<MetaDetails
 				metaTitle="Contact | AMBADY"
 				metaDescription="Get in touch with AMBADY PILGRIMAGE EXPERIENCES for inquiries about our pilgrimage journeys and services."
 			/>
 
-			<section className="pt-32 pb-20">
-				<div className="container mx-auto px-6 max-w-4xl space-y-16">
-					<div className="text-center space-y-3">
-						<h1 className="text-4xl md:text-5xl font-serif text-[#fdfcf0]">Seek Guidance</h1>
-						<p className="text-[#fdfcf0]/40 text-[10px] font-bold uppercase tracking-[0.3em] font-sans">
+			<section className="pt-32 pb-24">
+				<div className="container mx-auto px-6 max-w-5xl space-y-20">
+					<div className="text-center space-y-4">
+						<h1 className="text-5xl md:text-6xl font-serif text-foreground leading-tight">
+							Seek Guidance
+						</h1>
+						<div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+						<p className="text-foreground/40 text-[11px] font-bold uppercase tracking-[0.4em] font-sans">
 							Our team is here to support your spiritual quest.
 						</p>
 					</div>
 
-					<div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
-						<div className="space-y-8 py-4">
+					<div className="grid gap-16 lg:grid-cols-[1fr_1.8fr] items-start">
+						<div className="space-y-12 py-6">
 							{contactInfo.map((info, index) => (
-								<div key={index} className="space-y-1">
-									<h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">{info.title}</h4>
-									<div className="text-[#fdfcf0]/60 text-sm font-sans font-light leading-relaxed whitespace-pre-wrap">
-										{info.description}
+								<div key={index} className="flex gap-6 items-start group">
+									<div className="h-12 w-12 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground shrink-0">
+										<info.icon className="h-6 w-6" />
+									</div>
+									<div className="space-y-2 pt-1">
+										<h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+											{info.title}
+										</h4>
+										<div className="text-foreground/60 text-base font-sans leading-relaxed whitespace-pre-wrap">
+											{info.description}
+										</div>
 									</div>
 								</div>
 							))}
 						</div>
 
-						<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
+						<div className="bg-card p-10 md:p-16 rounded-[3rem] shadow-xl border border-primary/10">
 							<InquiryForm />
 						</div>
 					</div>
@@ -139,18 +149,24 @@ const InquiryForm = () => {
 	return (
 		<div className="space-y-8">
 			<Form {...form}>
-				<form method="POST" className="space-y-6" onSubmit={handleSubmit(handleFormSubmittion)}>
-					<div className="grid sm:grid-cols-2 gap-6">
+				<form method="POST" className="space-y-8" onSubmit={handleSubmit(handleFormSubmittion)}>
+					<div className="grid sm:grid-cols-2 gap-8">
 						<FormField
 							control={control}
 							name="full_name"
 							render={({ field }) => (
-								<FormItem className="space-y-2">
-									<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Full Name</FormLabel>
+								<FormItem className="space-y-3">
+									<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+										Full Name
+									</FormLabel>
 									<FormControl>
-										<Input placeholder="Your Name" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
+										<Input
+											placeholder="Your Name"
+											className="h-14 rounded-2xl border-primary/20 bg-white text-foreground text-base focus-visible:ring-primary/20 px-6 shadow-sm"
+											{...field}
+										/>
 									</FormControl>
-									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
+									<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 								</FormItem>
 							)}
 						/>
@@ -159,11 +175,17 @@ const InquiryForm = () => {
 							name="email"
 							render={({ field }) => (
 								<FormItem className="space-y-3">
-									<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Email</FormLabel>
+									<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+										Email
+									</FormLabel>
 									<FormControl>
-										<Input placeholder="email@example.com" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
+										<Input
+											placeholder="email@example.com"
+											className="h-14 rounded-2xl border-primary/20 bg-white text-foreground text-base focus-visible:ring-primary/20 px-6 shadow-sm"
+											{...field}
+										/>
 									</FormControl>
-									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
+									<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 								</FormItem>
 							)}
 						/>
@@ -173,11 +195,17 @@ const InquiryForm = () => {
 						name="subject"
 						render={({ field }) => (
 							<FormItem className="space-y-3">
-								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Subject</FormLabel>
+								<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+									Subject
+								</FormLabel>
 								<FormControl>
-									<Input placeholder="Inquiry Topic" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
+									<Input
+										placeholder="Inquiry Topic"
+										className="h-14 rounded-2xl border-primary/20 bg-white text-foreground text-base focus-visible:ring-primary/20 px-6 shadow-sm"
+										{...field}
+									/>
 								</FormControl>
-								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
+								<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 							</FormItem>
 						)}
 					/>
@@ -186,17 +214,27 @@ const InquiryForm = () => {
 						name="message"
 						render={({ field }) => (
 							<FormItem className="space-y-3">
-								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Message</FormLabel>
+								<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+									Message
+								</FormLabel>
 								<FormControl>
-									<Textarea placeholder="Share your thoughts..." className="min-h-[160px] p-8 rounded-[2rem] border-white/10 bg-black/40 text-[#fdfcf0] text-sm resize-none focus:ring-[#d4af37]/20 focus:border-[#d4af37]/40 leading-relaxed" {...field} />
+									<Textarea
+										placeholder="Share your thoughts or spiritual needs..."
+										className="min-h-[180px] p-8 rounded-[2.5rem] border-primary/20 bg-white text-foreground text-base resize-none focus:ring-primary/20 leading-relaxed shadow-sm"
+										{...field}
+									/>
 								</FormControl>
-								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
+								<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 							</FormItem>
 						)}
 					/>
 
-					<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSending}>
-						{isSending ? <Loader2 className="animate-spin mr-3 h-5 w-5" /> : null}
+					<Button
+						type="submit"
+						className="w-full h-20 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:scale-[1.02]"
+						disabled={isSending}
+					>
+						{isSending ? <Loader2 className="animate-spin mr-3 h-6 w-6" /> : null}
 						Send Inquiry Now
 					</Button>
 				</form>

@@ -7,13 +7,11 @@ import {
 	orderBy,
 	limit,
 	serverTimestamp,
-	runTransaction
+	runTransaction,
 } from "firebase/firestore";
 import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
-import type {
-	GetTourRegistrationsResponse
-} from "@workspace/shared/types/booking";
+import type { GetTourRegistrationsResponse } from "@workspace/shared/types/booking";
 
 export class BookingService extends Service {
 	/**
@@ -27,20 +25,30 @@ export class BookingService extends Service {
 	/**
 	 * Create registration on behalf of a user (Admin)
 	 */
-	async adminCreateRegistration(tourId: string, customerId: string, travellersCount: number, notes?: string): Promise<string> {
+	async adminCreateRegistration(
+		tourId: string,
+		customerId: string,
+		travellersCount: number,
+		notes?: string,
+	): Promise<string> {
 		return this.performRegistration(tourId, customerId, travellersCount, notes);
 	}
 
 	/**
 	 * Shared registration logic
 	 */
-	private async performRegistration(tourId: string, customerId: string, travellersCount: number, notes?: string): Promise<string> {
+	private async performRegistration(
+		tourId: string,
+		customerId: string,
+		travellersCount: number,
+		notes?: string,
+	): Promise<string> {
 		try {
 			// Check for existing registration before starting transaction
 			const existingRegQuery = query(
 				collection(this.db, this.REGISTRATIONS_COLLECTION),
 				where("tourId", "==", tourId),
-				where("customerId", "==", customerId)
+				where("customerId", "==", customerId),
 			);
 			const existingRegSnap = await getDocs(existingRegQuery);
 			if (!existingRegSnap.empty) {
@@ -55,7 +63,10 @@ export class BookingService extends Service {
 				const tourData = tourDoc.data();
 
 				const currentParticipants = tourData.currentParticipants || 0;
-				if (tourData.max_participants && (currentParticipants + travellersCount > tourData.max_participants)) {
+				if (
+					tourData.max_participants &&
+					currentParticipants + travellersCount > tourData.max_participants
+				) {
 					throw new ApiError("Pilgrimage journey is full", 400);
 				}
 
@@ -72,7 +83,7 @@ export class BookingService extends Service {
 				const existingRegQuery = query(
 					collection(this.db, this.REGISTRATIONS_COLLECTION),
 					where("tourId", "==", tourId),
-					where("customerId", "==", customerId)
+					where("customerId", "==", customerId),
 				);
 				const existingRegSnap = await getDocs(existingRegQuery);
 				if (!existingRegSnap.empty) {
@@ -91,7 +102,7 @@ export class BookingService extends Service {
 						first_name: userData.first_name,
 						last_name: userData.last_name,
 						email: userData.email,
-						phone_number: userData.phone_number
+						phone_number: userData.phone_number,
 					},
 					tourSnapshot: {
 						name: tourData.name,
@@ -99,14 +110,14 @@ export class BookingService extends Service {
 						destination: tourData.destination,
 						start_date: tourData.start_date,
 						price: tourData.price,
-						cover_image: tourData.cover_image
+						cover_image: tourData.cover_image,
 					},
 					createdAt: serverTimestamp(),
-					updatedAt: serverTimestamp()
+					updatedAt: serverTimestamp(),
 				});
 
 				transaction.update(tourRef, {
-					currentParticipants: currentParticipants + travellersCount
+					currentParticipants: currentParticipants + travellersCount,
 				});
 
 				return newRegDoc.id;
@@ -122,7 +133,7 @@ export class BookingService extends Service {
 		// Use simple query to avoid composite index requirement
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
-			where("customerId", "==", this.currentUid)
+			where("customerId", "==", this.currentUid),
 		);
 
 		const snap = await getDocs(q);
@@ -131,7 +142,7 @@ export class BookingService extends Service {
 			return {
 				id: d.id,
 				...data,
-				tours: data.tourSnapshot || null
+				tours: data.tourSnapshot || null,
 			};
 		}) as any[];
 
@@ -154,7 +165,7 @@ export class BookingService extends Service {
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
 			orderBy("createdAt", "desc"),
-			limit(pageSize)
+			limit(pageSize),
 		);
 		const snap = await getDocs(q);
 		const registrations = snap.docs.map((d) => {
@@ -162,15 +173,19 @@ export class BookingService extends Service {
 			return {
 				id: d.id,
 				...data,
-				tours: data.tourSnapshot || null
+				tours: data.tourSnapshot || null,
 			};
 		});
 		return { registrations, total: registrations.length } as any;
 	}
 
 	async getRegistrationsByTour(tourId: string): Promise<any[]> {
-		const q = query(collection(this.db, this.REGISTRATIONS_COLLECTION), where("tourId", "==", tourId), orderBy("createdAt", "desc"));
+		const q = query(
+			collection(this.db, this.REGISTRATIONS_COLLECTION),
+			where("tourId", "==", tourId),
+			orderBy("createdAt", "desc"),
+		);
 		const snap = await getDocs(q);
-		return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+		return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 	}
 }

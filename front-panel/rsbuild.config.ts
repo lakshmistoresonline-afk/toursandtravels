@@ -12,10 +12,7 @@ const { publicVars, rawPublicVars } = loadEnv({
 Object.assign(process.env, rawPublicVars);
 
 export default defineConfig({
-	plugins: [
-		pluginReact(),
-		pluginTailwindcss(),
-	],
+	plugins: [pluginReact(), pluginTailwindcss()],
 	source: {
 		entry: {
 			index: "./app/main.tsx",

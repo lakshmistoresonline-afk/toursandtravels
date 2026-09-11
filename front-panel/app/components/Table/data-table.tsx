@@ -1,4 +1,4 @@
-import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import {
 	ColumnDef,
 	flexRender,
@@ -60,16 +60,13 @@ export const DataTable = ({
 	pageSize,
 	total,
 	customEmptyMessage,
-	// cellClassName = "**:data-[slot=table-cell]:last:bg-background",
 	cellClassName = "",
-	headerClassName = "bg-[#d4af37]/5 text-[#d4af37]/60",
+	headerClassName = "bg-primary/5 text-primary",
 }: DataTableProps) => {
 	if (!table) {
 		return (
-			<div>
-				<p className="text-center text-muted-foreground">
-					Table not initialized. Please check the data source.
-				</p>
+			<div className="p-8 text-center text-foreground/40 font-bold uppercase tracking-widest text-[10px]">
+				Table not initialized.
 			</div>
 		);
 	}
@@ -77,13 +74,13 @@ export const DataTable = ({
 	const PAGE_VALUES = [10, 20, 30, 40, 50];
 
 	return (
-		<section>
+		<section className="bg-card">
 			<TableComponent>
-				<TableHeader className={`sticky top-0 z-10`}>
+				<TableHeader className="sticky top-0 z-10 border-b border-primary/10">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow
 							key={headerGroup.id}
-							className="*:whitespace-nowrap sticky top-0 bg-background after:content-[''] after:inset-x-0 after:h-px after:bg-border after:absolute after:bottom-0"
+							className="*:whitespace-nowrap sticky top-0 bg-primary/5 after:content-[''] after:inset-x-0 after:h-px after:bg-primary/10 after:absolute after:bottom-0"
 						>
 							{headerGroup.headers.map((header, index) => {
 								const isFirst = index === 0;
@@ -92,10 +89,12 @@ export const DataTable = ({
 								return (
 									<TableHead
 										key={header.id}
-										className={`
-											${cn(headerClassName)}
-											${isFirst && "rounded-tl-lg"}
-											${isLast && "rounded-tr-lg"}`}
+										className={cn(
+											"text-[10px] font-bold uppercase tracking-[0.2em] py-5 px-6",
+											headerClassName,
+											isFirst && "pl-8",
+											isLast && "pr-8",
+										)}
 									>
 										{header.isPlaceholder
 											? null
@@ -107,7 +106,10 @@ export const DataTable = ({
 					))}
 				</TableHeader>
 				<TableBody
-					className={`**:data-[slot=table-cell]:first:w-8 **:data-[slot=table-cell]:last:sticky **:data-[slot=table-cell]:last:right-0 **:data-[slot=table-cell]:last:z-10 ${cellClassName}`}
+					className={cn(
+						"**:data-[slot=table-cell]:last:sticky **:data-[slot=table-cell]:last:right-0 **:data-[slot=table-cell]:last:z-10",
+						cellClassName,
+					)}
 				>
 					{table.getRowModel().rows?.length > 0 ? (
 						table.getRowModel().rows.map((row) => (
@@ -116,10 +118,17 @@ export const DataTable = ({
 								id={row.id}
 								data-state={row.getIsSelected() && "selected"}
 								data-slot="table-row"
-								className="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+								className="hover:bg-primary/[0.02] data-[state=selected]:bg-primary/5 border-b border-primary/5 transition-colors"
 							>
-								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id}>
+								{row.getVisibleCells().map((cell, idx) => (
+									<TableCell
+										key={cell.id}
+										className={cn(
+											"py-5 px-6 text-foreground font-medium",
+											idx === 0 && "pl-8",
+											idx === row.getVisibleCells().length - 1 && "pr-8",
+										)}
+									>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}
@@ -131,88 +140,86 @@ export const DataTable = ({
 								colSpan={table.getAllColumns().length}
 								className="h-64 text-center select-none"
 							>
-								<div className="flex flex-col items-center justify-center gap-4 opacity-20">
-									<Settings2 className="h-10 w-10" />
-									<p className="text-xs font-bold uppercase tracking-[0.3em]">{customEmptyMessage ?? "No Sacred Records Found"}</p>
+								<div className="flex flex-col items-center justify-center gap-6 opacity-20">
+									<Settings2 className="h-12 w-12 text-primary" />
+									<p className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary">
+										{customEmptyMessage ?? "No Sacred Records Found"}
+									</p>
 								</div>
 							</TableCell>
 						</TableRow>
 					)}
 				</TableBody>
 			</TableComponent>
-			<div className="mt-4">
-				<div className="px-4">
-					<p>{ShowTotalMessage(total)}</p>
-				</div>
 
-				{onPageSizeChange && onPageChange && pageSize ? (
-					<div className="mt-4 flex w-full items-center gap-8 justify-between px-4">
-						<div className="hidden items-center gap-2 sm:flex">
-							<Label htmlFor="rows-per-page" className="text-sm font-medium">
-								Rows per page
-							</Label>
-							<Select
-								value={`${pageSize}`}
-								onValueChange={(value) => onPageSizeChange(Number(value))}
-							>
-								<SelectTrigger size="sm" className="w-20" id="rows-per-page">
-									<SelectValue placeholder={table.getState().pagination.pageSize} />
-								</SelectTrigger>
-								<SelectContent side="top" defaultValue={`${pageSize}`}>
-									{PAGE_VALUES.map((size) => (
-										<SelectItem key={size} value={`${size}`}>
-											{size}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-						</div>
-						<div className="flex w-fit items-center justify-center text-sm font-medium">
-							Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
-						</div>
-						<div className="ml-auto flex items-center gap-2 sm:ml-0">
-							<Button
-								variant="outline"
-								className="hidden h-8 w-8 p-0 sm:flex"
-								onClick={() => onPageChange(0)}
-								disabled={!table.getCanPreviousPage()}
-							>
-								<span className="sr-only">Go to first page</span>
-								<IconChevronsLeft />
-							</Button>
-							<Button
-								variant="outline"
-								className="size-8"
-								size="icon"
-								onClick={() => onPageChange(table.getState().pagination.pageIndex - 1)}
-								disabled={!table.getCanPreviousPage()}
-							>
-								<span className="sr-only">Go to previous page</span>
-								<IconChevronLeft />
-							</Button>
-							<Button
-								variant="outline"
-								className="size-8"
-								size="icon"
-								onClick={() => onPageChange(table.getState().pagination.pageIndex + 1)}
-								disabled={!table.getCanNextPage()}
-							>
-								<span className="sr-only">Go to next page</span>
-								<IconChevronRight />
-							</Button>
-							<Button
-								variant="outline"
-								className="hidden size-8 sm:flex"
-								size="icon"
-								onClick={() => onPageChange(table.getPageCount() - 1)}
-								disabled={!table.getCanNextPage()}
-							>
-								<span className="sr-only">Go to last page</span>
-								<IconChevronsRight />
-							</Button>
-						</div>
+			{/* Pagination */}
+			<div className="py-6 px-8 border-t border-primary/10">
+				<div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+					<div className="flex items-center gap-8">
+						<p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+							{ShowTotalMessage(total)}
+						</p>
+
+						{onPageSizeChange && pageSize && (
+							<div className="flex items-center gap-3">
+								<Label
+									htmlFor="rows-per-page"
+									className="text-[10px] font-bold uppercase tracking-widest text-foreground/40"
+								>
+									Rows:
+								</Label>
+								<Select
+									value={`${pageSize}`}
+									onValueChange={(value) => onPageSizeChange(Number(value))}
+								>
+									<SelectTrigger
+										size="sm"
+										className="w-20 h-8 rounded-lg border-primary/20 bg-white"
+										id="rows-per-page"
+									>
+										<SelectValue placeholder={table.getState().pagination.pageSize} />
+									</SelectTrigger>
+									<SelectContent side="top">
+										{PAGE_VALUES.map((size) => (
+											<SelectItem key={size} value={`${size}`}>
+												{size}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+						)}
 					</div>
-				) : null}
+
+					<div className="flex items-center gap-6">
+						<div className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+							Page {table.getState().pagination.pageIndex + 1} / {table.getPageCount() || 1}
+						</div>
+
+						{onPageChange && (
+							<div className="flex items-center gap-2">
+								<Button
+									variant="outline"
+									className="size-8 rounded-lg border-primary/20 hover:bg-primary/5"
+									size="icon"
+									onClick={() => onPageChange(table.getState().pagination.pageIndex - 1)}
+									disabled={!table.getCanPreviousPage()}
+								>
+									<IconChevronLeft className="size-4" />
+								</Button>
+								<Button
+									variant="outline"
+									className="size-8 rounded-lg border-primary/20 hover:bg-primary/5"
+									size="icon"
+									onClick={() => onPageChange(table.getState().pagination.pageIndex + 1)}
+									disabled={!table.getCanNextPage()}
+								>
+									<IconChevronRight className="size-4" />
+								</Button>
+							</div>
+						)}
+					</div>
+				</div>
 			</div>
 		</section>
 	);
@@ -240,12 +247,15 @@ export const DataTableSkeleton = memo(function DataTableSkeleton({
 
 	return (
 		<TableComponent>
-			<TableHeader className="bg-[#d4af37]/5 sticky top-0 z-10">
+			<TableHeader className="bg-primary/5 sticky top-0 z-10 border-b border-primary/10">
 				{table.getHeaderGroups().map((headerGroup) => (
 					<TableRow key={headerGroup.id}>
 						{headerGroup.headers.map((header) => {
 							return (
-								<TableHead key={header.id}>
+								<TableHead
+									key={header.id}
+									className="text-[10px] font-bold uppercase tracking-[0.2em] py-5 px-6 text-primary"
+								>
 									{header.isPlaceholder
 										? null
 										: flexRender(header.column.columnDef.header, header.getContext())}
@@ -257,11 +267,11 @@ export const DataTableSkeleton = memo(function DataTableSkeleton({
 			</TableHeader>
 			<TableBody className="**:data-[slot=table-cell]:first:w-8">
 				{Array.from({ length: noOfSkeletons }, (_, i) => i + 1).map((i) => (
-					<TableRow key={i}>
+					<TableRow key={i} className="border-b border-primary/5">
 						{Array.from({ length: columns.length }, (_, i) => i + 1).map((index) => {
 							return (
-								<TableCell key={index + index}>
-									<Skeleton className="h-4 w-full bg-white/5" />
+								<TableCell key={index + index} className="py-5 px-6">
+									<Skeleton className="h-5 w-full bg-primary/5 rounded-lg" />
 								</TableCell>
 							);
 						})}

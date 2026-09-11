@@ -1,7 +1,13 @@
 import { MailIcon, Loader2, Compass } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { type ActionFunctionArgs, Form as RouterForm, useActionData, useNavigation, Link } from "react-router";
+import {
+	type ActionFunctionArgs,
+	Form as RouterForm,
+	useActionData,
+	useNavigation,
+	Link,
+} from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
@@ -47,13 +53,18 @@ export default function ForgotPassword() {
 	return (
 		<div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-16 px-4">
 			<div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-				<MetaDetails metaTitle="Forgot Password | AMBADY" metaDescription="Reset your pilgrimage portal access." />
+				<MetaDetails
+					metaTitle="Forgot Password | AMBADY"
+					metaDescription="Reset your pilgrimage portal access."
+				/>
 
 				<div className="text-center space-y-3">
 					<div className="mx-auto w-16 h-16 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]">
 						<Compass className="h-8 w-8" />
 					</div>
-					<h2 className="text-3xl font-serif text-[#fdfcf0] tracking-tight uppercase">Reset Password</h2>
+					<h2 className="text-3xl font-serif text-[#fdfcf0] tracking-tight uppercase">
+						Reset Password
+					</h2>
 					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">
 						Recover Your Sacred Access
 					</p>
@@ -67,7 +78,9 @@ export default function ForgotPassword() {
 								name="email"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
+										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">
+											Email Address
+										</FormLabel>
 										<FormControl>
 											<div className="relative">
 												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
@@ -82,13 +95,24 @@ export default function ForgotPassword() {
 									</FormItem>
 								)}
 							/>
-							<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Send Reset Link"}
+							<Button
+								type="submit"
+								className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20"
+								disabled={isSubmitting}
+							>
+								{isSubmitting ? (
+									<Loader2 className="mr-3 h-5 w-5 animate-spin" />
+								) : (
+									"Send Reset Link"
+								)}
 							</Button>
 						</RouterForm>
 					</Form>
 					<div className="mt-8 text-center">
-						<Link to="/login" className="text-[#d4af37] hover:text-[#fdfcf0] text-[9px] font-bold uppercase tracking-widest transition-all">
+						<Link
+							to="/login"
+							className="text-[#d4af37] hover:text-[#fdfcf0] text-[9px] font-bold uppercase tracking-widest transition-all"
+						>
 							Back to Sign In
 						</Link>
 					</div>

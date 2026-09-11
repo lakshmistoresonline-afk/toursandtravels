@@ -13,13 +13,15 @@ import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "@workspace/shared/lib/firebase";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 
-const updatePasswordSchema = z.object({
-	password: z.string().min(8, "Minimum 8 characters"),
-	confirmPassword: z.string()
-}).refine(data => data.password === data.confirmPassword, {
-	message: "Passwords don't match",
-	path: ["confirmPassword"]
-});
+const updatePasswordSchema = z
+	.object({
+		password: z.string().min(8, "Minimum 8 characters"),
+		confirmPassword: z.string(),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "Passwords don't match",
+		path: ["confirmPassword"],
+	});
 
 export default function UpdatePassword() {
 	const navigate = useNavigate();
@@ -50,36 +52,71 @@ export default function UpdatePassword() {
 
 	return (
 		<div className="container max-w-md mx-auto py-20 px-4">
-			<MetaDetails metaTitle="Update Password | AMBADY PILGRIMAGE EXPERIENCES" metaDescription="Secure your pilgrimage portal account." />
+			<MetaDetails
+				metaTitle="Update Password | AMBADY PILGRIMAGE EXPERIENCES"
+				metaDescription="Secure your pilgrimage portal account."
+			/>
 			<Card>
-				<CardHeader><CardTitle className="text-2xl">Set New Password</CardTitle></CardHeader>
+				<CardHeader>
+					<CardTitle className="text-2xl">Set New Password</CardTitle>
+				</CardHeader>
 				<CardContent>
 					<Form {...form}>
 						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-							<FormField control={form.control} name="password" render={({ field }) => (
-								<FormItem>
-									<FormLabel>New Password</FormLabel>
-									<FormControl>
-										<div className="relative">
-											<LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-											<Input type={showPassword ? "text" : "password"} className="pl-10" {...field} />
-											<button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2">
-												{showPassword ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
-											</button>
-										</div>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)} />
-							<FormField control={form.control} name="confirmPassword" render={({ field }) => (
-								<FormItem>
-									<FormLabel>Confirm Password</FormLabel>
-									<FormControl><Input type="password" {...field} /></FormControl>
-									<FormMessage />
-								</FormItem>
-							)} />
-							<Button type="submit" className="w-full h-11" disabled={form.formState.isSubmitting}>
-								{form.formState.isSubmitting ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : "Update Password"}
+							<FormField
+								control={form.control}
+								name="password"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>New Password</FormLabel>
+										<FormControl>
+											<div className="relative">
+												<LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+												<Input
+													type={showPassword ? "text" : "password"}
+													className="pl-10"
+													{...field}
+												/>
+												<button
+													type="button"
+													onClick={() => setShowPassword(!showPassword)}
+													className="absolute right-3 top-1/2 -translate-y-1/2"
+												>
+													{showPassword ? (
+														<EyeOffIcon className="h-4 w-4" />
+													) : (
+														<EyeIcon className="h-4 w-4" />
+													)}
+												</button>
+											</div>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="confirmPassword"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Confirm Password</FormLabel>
+										<FormControl>
+											<Input type="password" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<Button
+								type="submit"
+								className="w-full h-11"
+								disabled={form.formState.isSubmitting}
+							>
+								{form.formState.isSubmitting ? (
+									<Loader2 className="animate-spin mr-2 h-4 w-4" />
+								) : (
+									"Update Password"
+								)}
 							</Button>
 						</form>
 					</Form>

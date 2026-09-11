@@ -25,7 +25,8 @@ type ThumbPropType = {
 	title?: string;
 };
 
-const DEFAULT_PLACEHOLDER_URL = "https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&w=800&q=80";
+const DEFAULT_PLACEHOLDER_URL =
+	"https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&w=800&q=80";
 
 const handleImgError = (event: React.SyntheticEvent<HTMLImageElement>) => {
 	const target = event.currentTarget;
@@ -64,7 +65,7 @@ const ImageContainer: React.FC<{
 				<DialogTrigger asChild>
 					<div className={`cursor-pointer rounded-lg`}>
 						<img
-							src={ image.url}
+							src={image.url}
 							alt={image.title || alt}
 							title={image.title || alt}
 							width={500}
@@ -93,7 +94,7 @@ const ImageContainer: React.FC<{
 									<>
 										<TransformComponent>
 											<img
-												src={ image.url}
+												src={image.url}
 												alt={image.title || alt}
 												title={image.title || alt}
 												className={cn(
@@ -166,7 +167,7 @@ const Thumb: React.FC<ThumbPropType> = (props) => {
 					)}
 				>
 					<img
-						src={ imgUrl}
+						src={imgUrl}
 						alt={title || `Image ${index + 1}`}
 						title={title || `Image ${index + 1}`}
 						width={400}

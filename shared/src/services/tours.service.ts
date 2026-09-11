@@ -7,16 +7,12 @@ import {
 	updateDoc,
 	query,
 	orderBy,
-	serverTimestamp
+	serverTimestamp,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
-import type {
-	GetHighLevelToursResponse,
-	GetTourDetails,
-	HighLevelTour
-} from "@workspace/shared/types/tours";
+import type { GetHighLevelToursResponse, GetTourDetails, HighLevelTour } from "@workspace/shared/types/tours";
 
 export class ToursService extends Service {
 	async addTour(input: any): Promise<string | null> {
@@ -27,7 +23,7 @@ export class ToursService extends Service {
 				currentParticipants: 0,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
-				added_by: this.currentUid
+				added_by: this.currentUid,
 			});
 
 			return docRef.id;
@@ -41,7 +37,7 @@ export class ToursService extends Service {
 			const tourRef = doc(this.db, this.TOURS_COLLECTION, tourId);
 			await updateDoc(tourRef, {
 				...data,
-				updatedAt: serverTimestamp()
+				updatedAt: serverTimestamp(),
 			});
 			return { success: true };
 		} catch (err: any) {
@@ -61,7 +57,7 @@ export class ToursService extends Service {
 			if (itinerary.length === 0) {
 				const itineraryRef = collection(this.db, this.TOURS_COLLECTION, tourId, "itineraries");
 				const itinerarySnap = await getDocs(query(itineraryRef, orderBy("day_number", "asc")));
-				itinerary = itinerarySnap.docs.map(d => ({ id: d.id, ...d.data() }));
+				itinerary = itinerarySnap.docs.map((d) => ({ id: d.id, ...d.data() }));
 			}
 
 			return { id: tourDoc.id, ...tourData, itinerary } as any;
@@ -81,17 +77,17 @@ export class ToursService extends Service {
 			const q = query(toursRef, orderBy("createdAt", "desc"));
 			const snap = await getDocs(q);
 
-			let tours = snap.docs.map(d => ({
+			let tours = snap.docs.map((d) => ({
 				id: d.id,
 				...d.data(),
-				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
+				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt,
 			})) as HighLevelTour[];
 
 			// Filter statuses in-memory
-			tours = tours.filter(t => ["PUBLISHED", "REGISTRATION_OPEN"].includes(t.status));
+			tours = tours.filter((t) => ["PUBLISHED", "REGISTRATION_OPEN"].includes(t.status));
 
 			if (qText) {
-				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+				tours = tours.filter((t) => t.name.toLowerCase().includes(qText.toLowerCase()));
 			}
 
 			return { tours, total: tours.length };
@@ -106,14 +102,14 @@ export class ToursService extends Service {
 			const toursRef = collection(this.db, this.TOURS_COLLECTION);
 			const q = query(toursRef, orderBy("createdAt", "desc"));
 			const snap = await getDocs(q);
-			let tours = snap.docs.map(d => ({
+			let tours = snap.docs.map((d) => ({
 				id: d.id,
 				...d.data(),
-				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
+				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt,
 			})) as HighLevelTour[];
 
 			if (qText) {
-				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
+				tours = tours.filter((t) => t.name.toLowerCase().includes(qText.toLowerCase()));
 			}
 
 			return { tours, total: tours.length };

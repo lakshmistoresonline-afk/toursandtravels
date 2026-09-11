@@ -15,12 +15,7 @@ export const getMyBookingsQuery = async ({
 	return await svc.getMyRegistrations(pageIndex, pageSize);
 };
 
-export const bookingByRefQuery = async ({
-	ref,
-}: {
-	ref: string;
-	request: Request;
-}) => {
+export const bookingByRefQuery = async ({ ref }: { ref: string; request: Request }) => {
 	console.warn("bookingByRefQuery called - this is a legacy method. Ref:", ref);
 	// In Simple mode, we might just return null or try to find a registration by ID
 	return null;

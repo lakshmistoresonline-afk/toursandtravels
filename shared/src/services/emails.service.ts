@@ -19,18 +19,71 @@ class EmailService {
 		to,
 		subject,
 		text,
+		html,
 	}: {
 		from: string;
 		to: string | string[];
 		subject: string;
 		text?: string;
+		html?: string;
 	}) {
+		const gasUrl = (import.meta as any).env?.VITE_GMAIL_APPS_SCRIPT_URL;
+		const gasSecret = (import.meta as any).env?.VITE_GMAIL_APPS_SCRIPT_SECRET;
+
+		if (gasUrl) {
+			try {
+				const response = await fetch(gasUrl, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						action: "sendEmail",
+						secret: gasSecret,
+						from,
+						to: Array.isArray(to) ? to.join(",") : to,
+						subject,
+						text,
+						html,
+					}),
+				});
+				const result = await response.json();
+				if (!result.success) throw new Error(result.error);
+				return { id: result.messageId || "sent-via-gas" };
+			} catch (err: any) {
+				console.error("❌ [GAS EMAIL ERROR]", err);
+				// Fallback to console log in dev or re-throw
+				if ((import.meta as any).env?.DEV) {
+					this.logEmail({ from, to, subject, text });
+					return { id: "logged-to-console-fallback" };
+				}
+				throw err;
+			}
+		}
+
+		this.logEmail({ from, to, subject, text });
+		return { id: "logged-to-console" };
+	}
+
+	private logEmail({ from, to, subject, text }: any) {
 		console.log("📧 [EMAIL LOG]");
 		console.log(`From: ${from}`);
 		console.log(`To: ${to}`);
 		console.log(`Subject: ${subject}`);
 		console.log(`Body: ${text || "(No text content)"}`);
-		return { id: "logged-to-console" };
+	}
+
+	/** Send journey announcement campaign batch */
+	public async sendJourneyAnnouncementBatch(payload: {
+		tourName: string;
+		recipients: string[];
+		subject: string;
+		html: string;
+	}) {
+		return this.sendEmail({
+			from: `AMBADY PILGRIMAGE EXPERIENCES <announcements@ambadypilgrimage.com>`,
+			to: payload.recipients,
+			subject: payload.subject,
+			html: payload.html,
+		});
 	}
 
 	/** Send inquiry from website visitor */

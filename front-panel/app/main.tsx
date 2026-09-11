@@ -17,7 +17,10 @@ import Login, { clientAction as loginAction } from "./routes/Auth/login";
 import Signup, { clientAction as signupAction } from "./routes/Auth/signup";
 import ForgotPassword, { clientAction as forgotPasswordAction } from "./routes/Auth/forgot-password";
 import UpdatePassword from "./routes/Auth/update-password";
-import TourDetails, { clientLoader as tourDetailsLoader, clientAction as tourDetailsAction } from "./routes/Tour/tour-details";
+import TourDetails, {
+	clientLoader as tourDetailsLoader,
+	clientAction as tourDetailsAction,
+} from "./routes/Tour/tour-details";
 import AccountDetails, { clientAction as accountDetailsAction } from "./routes/Account/account-details";
 import MyBookings, { clientLoader as myBookingsLoader } from "./routes/Account/my-bookings";
 import About from "./routes/About/about";
@@ -27,8 +30,14 @@ import TermsOfUsage from "./routes/Miscellaneous/TermsOfUsage";
 import AdminDashboard, { clientLoader as adminDashboardLoader } from "./routes/admin/dashboard";
 import AdminTours, { clientLoader as adminToursLoader } from "./routes/admin/Tours/tours";
 import AddTour, { clientAction as addTourAction } from "./routes/admin/Tours/add-tour";
-import UpdateTour, { clientLoader as updateTourLoader, clientAction as updateTourAction } from "./routes/admin/Tours/update-tour";
-import AdminBookings, { clientLoader as adminBookingsLoader, clientAction as adminBookingsAction } from "./routes/admin/Booking/bookings";
+import UpdateTour, {
+	clientLoader as updateTourLoader,
+	clientAction as updateTourAction,
+} from "./routes/admin/Tours/update-tour";
+import AdminBookings, {
+	clientLoader as adminBookingsLoader,
+	clientAction as adminBookingsAction,
+} from "./routes/admin/Booking/bookings";
 import NotFound from "./routes/Error/404";
 import { clientAction as logoutAction } from "./routes/_actions/logout";
 

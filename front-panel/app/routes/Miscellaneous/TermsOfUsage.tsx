@@ -35,17 +35,18 @@ export default function TermsOfUsePage() {
 								1. Acceptance of Terms
 							</h2>
 							<p>
-								By accessing or using AMBADY PILGRIMAGE EXPERIENCES's website and services, you agree to be bound
-								by these Terms of Use. If you do not agree, please do not use our services.
+								By accessing or using AMBADY PILGRIMAGE EXPERIENCES's website and services,
+								you agree to be bound by these Terms of Use. If you do not agree, please do
+								not use our services.
 							</p>
 						</section>
 
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">2. User Accounts</h2>
 							<p>
-								You may need to create an account to register for pilgrimage journeys. You are responsible for
-								maintaining the confidentiality of your account information and for all
-								activities that occur under your account.
+								You may need to create an account to register for pilgrimage journeys. You are
+								responsible for maintaining the confidentiality of your account information
+								and for all activities that occur under your account.
 							</p>
 						</section>
 
@@ -65,9 +66,9 @@ export default function TermsOfUsePage() {
 								4. Cancellations and Refunds
 							</h2>
 							<p>
-								Cancellation policies vary by pilgrimage journey. Please check the specific pilgrimage journey's policy
-								before registering. Refunds, if applicable, will be processed within 7–10 business
-								days.
+								Cancellation policies vary by pilgrimage journey. Please check the specific
+								pilgrimage journey's policy before registering. Refunds, if applicable, will
+								be processed within 7–10 business days.
 							</p>
 						</section>
 
@@ -84,7 +85,8 @@ export default function TermsOfUsePage() {
 								6. Intellectual Property
 							</h2>
 							<p>
-								All content on our site, including images, text, and logos, is owned by AMBADY PILGRIMAGE EXPERIENCES or its partners. Unauthorized use is prohibited.
+								All content on our site, including images, text, and logos, is owned by AMBADY
+								PILGRIMAGE EXPERIENCES or its partners. Unauthorized use is prohibited.
 							</p>
 						</section>
 

@@ -25,6 +25,11 @@ export type AppUser = {
 	emergency_contact_number: string | null;
 	aadhar_number: string | null;
 	avatar_url?: string | null;
+	notifications?: {
+		journeyAnnouncements: boolean;
+		registrationUpdates: boolean;
+		journeyChanges: boolean;
+	};
 	createdAt: string;
 	updatedAt: string;
 };

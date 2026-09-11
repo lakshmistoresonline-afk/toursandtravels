@@ -8,28 +8,34 @@
 }
 
 html {
-	background-color: #0a0e1a;
+	background-color: #fdfcf0;
 	scroll-behavior: smooth;
 }
 
 body {
-	background-color: #0a0e1a !important;
-	background-image: url("./assets/ambady-background.png");
-	background-attachment: fixed;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size: cover;
+	background-color: #fdfcf0;
+	color: #0a0e1a;
 	min-height: 100vh;
 	margin: 0;
 	position: relative;
 }
 
-body::before {
+.ambady-home-bg {
+	background-color: #0a0e1a;
+	background-image: url("./assets/ambady-background.png");
+	background-attachment: fixed;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #fdfcf0;
+}
+
+.ambady-home-bg::before {
 	content: "";
 	position: fixed;
 	inset: 0;
 	background: #0a0e1a;
-	opacity: 0.9;
+	opacity: 0.85;
 	z-index: -1;
 }
 
@@ -38,27 +44,40 @@ body::before {
 }
 
 :root {
+	--background: #fdfcf0;
+	--foreground: #0a0e1a;
+	--card: #ffffff;
+	--card-foreground: #0a0e1a;
+	--popover: #ffffff;
+	--popover-foreground: #0a0e1a;
+	--primary: #d4af37;
+	--primary-foreground: #0a0e1a;
+	--secondary: rgba(212, 175, 55, 0.1);
+	--secondary-foreground: #d4af37;
+	--muted: rgba(10, 14, 26, 0.05);
+	--muted-foreground: rgba(10, 14, 26, 0.6);
+	--accent: #d4af37;
+	--accent-foreground: #ffffff;
+	--warning: #f59e0b;
+	--destructive: #ef4444;
+	--destructive-foreground: #ffffff;
+	--border: rgba(10, 14, 26, 0.1);
+	--input: #ffffff;
+	--ring: #d4af37;
+	--radius: 0.75rem;
+}
+
+.theme-home {
 	--background: transparent;
 	--foreground: #fdfcf0;
 	--card: rgba(10, 14, 26, 0.7);
 	--card-foreground: #fdfcf0;
 	--popover: rgba(10, 14, 26, 0.9);
 	--popover-foreground: #fdfcf0;
-	--primary: #d4af37;
-	--primary-foreground: #0a0e1a;
-	--secondary: rgba(212, 175, 55, 0.1);
-	--secondary-foreground: #d4af37;
 	--muted: rgba(253, 252, 240, 0.1);
 	--muted-foreground: rgba(253, 252, 240, 0.6);
-	--accent: #d4af37;
-	--accent-foreground: #0a0e1a;
-	--warning: #f59e0b;
-	--destructive: #ef4444;
-	--destructive-foreground: #ffffff;
 	--border: rgba(212, 175, 55, 0.4);
 	--input: rgba(212, 175, 55, 0.2);
-	--ring: #d4af37;
-	--radius: 0.75rem;
 }
 
 @theme inline {
@@ -97,7 +116,12 @@ body::before {
 		@apply text-foreground font-sans;
 	}
 
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		@apply font-serif tracking-tight;
 	}
 }

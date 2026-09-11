@@ -46,15 +46,21 @@ export default function Home() {
 	return (
 		<div className="bg-transparent min-h-screen">
 			<MetaDetails
-				metaTitle="AMBADY | Sacred Journeys"
-				metaDescription="Curated pilgrimage experiences."
+				metaTitle="AMBADY | Pilgrimage Experiences"
+				metaDescription="Faith, Heritage, and Inner Journeys. Curated pilgrimage experiences."
 			/>
 
 			{user ? (
-				<div className="pt-32 pb-6 container mx-auto px-4 animate-in fade-in slide-in-from-top-4 duration-1000">
-					<div className="space-y-1">
-						<h1 className="text-4xl font-serif text-[#fdfcf0]">Welcome back, {user.first_name}</h1>
-						<p className="text-[10px] text-[#d4af37] uppercase tracking-[0.3em] font-bold">Your spiritual path continues here.</p>
+				<div className="pt-32 pb-12 bg-transparent relative z-10">
+					<div className="container mx-auto px-6 animate-in fade-in slide-in-from-top-4 duration-1000">
+						<div className="space-y-2">
+							<h1 className="text-5xl md:text-6xl font-serif text-[#fdfcf0]">
+								Welcome back, {user.first_name}
+							</h1>
+							<p className="text-xs text-primary uppercase tracking-[0.4em] font-bold">
+								Your spiritual path continues here.
+							</p>
+						</div>
 					</div>
 				</div>
 			) : (
@@ -63,33 +69,50 @@ export default function Home() {
 					<HeroSection user={user} />
 
 					{/* Section 2: The AMBADY Way */}
-					<section className="py-24 container mx-auto px-4">
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-							<div className="text-center space-y-4">
-								<h3 className="text-3xl font-serif text-[#d4af37]">Faith</h3>
-								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
-									Deeply rooted in spiritual traditions and divine connection.
-								</p>
+					<section className="py-32 bg-background relative z-10 border-t border-primary/10">
+						<div className="container mx-auto px-6">
+							<div className="text-center max-w-3xl mx-auto mb-24 space-y-6">
+								<h2 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
+									The Ambady Way
+								</h2>
+								<div className="w-24 h-1 bg-primary mx-auto rounded-full" />
 							</div>
-							<div className="text-center space-y-4">
-								<h3 className="text-3xl font-serif text-[#d4af37]">Heritage</h3>
-								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
-									Preserving the sacred stories and architectural wonders of our past.
-								</p>
-							</div>
-							<div className="text-center space-y-4">
-								<h3 className="text-3xl font-serif text-[#d4af37]">Inner Journeys</h3>
-								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
-									More than travel—a path to introspection and enlightenment.
-								</p>
+							<div className="grid grid-cols-1 md:grid-cols-3 gap-20">
+								<div className="text-center space-y-6 group">
+									<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
+										<h3 className="text-4xl font-serif text-primary">F</h3>
+									</div>
+									<h3 className="text-2xl font-serif text-foreground">Faith</h3>
+									<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+										Deeply rooted in spiritual traditions and divine connection.
+									</p>
+								</div>
+								<div className="text-center space-y-6 group">
+									<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
+										<h3 className="text-4xl font-serif text-primary">H</h3>
+									</div>
+									<h3 className="text-2xl font-serif text-foreground">Heritage</h3>
+									<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+										Preserving the sacred stories and architectural wonders of our past.
+									</p>
+								</div>
+								<div className="text-center space-y-6 group">
+									<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
+										<h3 className="text-4xl font-serif text-primary">I</h3>
+									</div>
+									<h3 className="text-2xl font-serif text-foreground">Inner Journeys</h3>
+									<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+										More than travel—a path to introspection and enlightenment.
+									</p>
+								</div>
 							</div>
 						</div>
 					</section>
 				</>
 			)}
 
-			{/* Section 2: Journeys */}
-			<div className={user ? "pb-20" : ""}>
+			{/* Section: Journeys */}
+			<div className="bg-background relative z-10 border-t border-primary/5 py-24">
 				<FeaturedToursSection tours={loaderData.featuredToursResp.tours ?? []} />
 			</div>
 		</div>

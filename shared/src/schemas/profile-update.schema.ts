@@ -22,6 +22,13 @@ export const profileUpdateSchema = z.object({
 	emergency_contact_number: z.string().optional().nullable(),
 	emergency_contact_relationship: z.string().optional().nullable(),
 	avatar_url: z.string().optional().nullable(),
+	notifications: z
+		.object({
+			journeyAnnouncements: z.boolean().default(true),
+			registrationUpdates: z.boolean().default(true),
+			journeyChanges: z.boolean().default(true),
+		})
+		.optional(),
 });
 
 export type ProfileUpdateForm = z.infer<typeof profileUpdateSchema>;

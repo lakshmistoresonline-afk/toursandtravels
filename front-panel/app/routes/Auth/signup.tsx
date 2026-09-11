@@ -1,4 +1,15 @@
-import { EyeIcon, EyeOffIcon, Loader2, LockIcon, MailIcon, UserIcon, IdCard, Compass, PhoneIcon, CalendarIcon } from "lucide-react";
+import {
+	EyeIcon,
+	EyeOffIcon,
+	Loader2,
+	LockIcon,
+	MailIcon,
+	UserIcon,
+	IdCard,
+	Compass,
+	PhoneIcon,
+	CalendarIcon,
+} from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -13,13 +24,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "~/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { AuthService } from "@workspace/shared/services/auth.service";
@@ -38,7 +43,16 @@ export async function clientAction({ request }: ActionFunctionArgs) {
 	const gender = (formData.get("gender") as string)?.trim();
 	const dateOfBirth = (formData.get("dateOfBirth") as string)?.trim();
 
-	if (!firstName || !lastName || !email || !phone || !password || !aadharNumber || !gender || !dateOfBirth) {
+	if (
+		!firstName ||
+		!lastName ||
+		!email ||
+		!phone ||
+		!password ||
+		!aadharNumber ||
+		!gender ||
+		!dateOfBirth
+	) {
 		return { error: "Required fields are missing", success: false };
 	}
 
@@ -111,41 +125,52 @@ export default function SignupPage() {
 	}, [actionData]);
 
 	return (
-		<div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-16 px-4">
-			<div className="w-full max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-				<MetaDetails metaTitle="Begin Registration | AMBADY" metaDescription="Join our sacred pilgrimage community." />
+		<div className="min-h-[90vh] w-full flex items-center justify-center py-24 px-6 bg-background">
+			<div className="w-full max-w-3xl space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+				<MetaDetails
+					metaTitle="Begin Registration | AMBADY"
+					metaDescription="Join our sacred pilgrimage community."
+				/>
 
-				<div className="text-center space-y-3">
-					<div className="mx-auto w-16 h-16 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37]">
-						<Compass className="h-8 w-8" />
+				<div className="text-center space-y-4">
+					<Link to="/" className="inline-flex items-center gap-3 group">
+						<div className="w-16 h-16 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center text-primary group-hover:rotate-12 transition-transform duration-500 shadow-sm">
+							<Compass className="h-8 w-8" />
+						</div>
+					</Link>
+					<div className="space-y-2">
+						<h2 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
+							Begin Your Journey
+						</h2>
+						<p className="text-[11px] font-bold text-primary uppercase tracking-[0.4em]">
+							Create Your Pilgrim Profile
+						</p>
 					</div>
-					<h2 className="text-3xl font-serif text-[#fdfcf0] tracking-tight uppercase">Begin Your Journey</h2>
-					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">
-						Create Your Pilgrim Profile
-					</p>
 				</div>
 
-				<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
+				<div className="bg-card p-10 md:p-16 rounded-[3rem] shadow-xl border border-primary/10">
 					<Form {...form}>
-						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-10">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 								<FormField
 									control={control}
 									name="firstName"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">First Name</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												First Name
+											</FormLabel>
 											<FormControl>
-												<div className="relative">
-													<UserIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+												<div className="relative group">
+													<UserIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 													<Input
 														placeholder="First Name"
-														className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+														className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 														{...field}
 													/>
 												</div>
 											</FormControl>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
@@ -154,41 +179,45 @@ export default function SignupPage() {
 									name="lastName"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Last Name</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												Last Name
+											</FormLabel>
 											<FormControl>
-												<div className="relative">
-													<UserIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+												<div className="relative group">
+													<UserIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 													<Input
 														placeholder="Last Name"
-														className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+														className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 														{...field}
 													/>
 												</div>
 											</FormControl>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
 							</div>
 
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 								<FormField
 									control={control}
 									name="email"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												Email Address
+											</FormLabel>
 											<FormControl>
-												<div className="relative">
-													<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+												<div className="relative group">
+													<MailIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 													<Input
 														placeholder="pilgrim@example.com"
-														className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+														className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 														{...field}
 													/>
 												</div>
 											</FormControl>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
@@ -197,18 +226,20 @@ export default function SignupPage() {
 									name="phone"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Phone Number</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												Phone Number
+											</FormLabel>
 											<FormControl>
-												<div className="relative">
-													<PhoneIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+												<div className="relative group">
+													<PhoneIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 													<Input
 														placeholder="9876543210"
-														className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+														className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 														{...field}
 													/>
 												</div>
 											</FormControl>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
@@ -219,44 +250,50 @@ export default function SignupPage() {
 								name="aadharNumber"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Aadhar Number (12 Digits)</FormLabel>
+										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+											Aadhar Number (12 Digits)
+										</FormLabel>
 										<FormControl>
-											<div className="relative">
-												<IdCard className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+											<div className="relative group">
+												<IdCard className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													placeholder="0000 0000 0000"
 													maxLength={12}
-													className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+													className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 													{...field}
 												/>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 									</FormItem>
 								)}
 							/>
 
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 								<FormField
 									control={control}
 									name="gender"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Gender</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												Gender
+											</FormLabel>
 											<Select onValueChange={field.onChange} defaultValue={field.value}>
 												<FormControl>
-													<SelectTrigger className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus:ring-[#d4af37]/20 focus:border-[#d4af37]/40 text-base px-6">
+													<SelectTrigger className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus:ring-primary/20 text-base px-6 shadow-sm">
 														<SelectValue placeholder="Select gender" />
 													</SelectTrigger>
 												</FormControl>
-												<SelectContent className="bg-[#0a0e1a] border-white/10 text-[#fdfcf0]">
+												<SelectContent className="bg-white border-primary/20 text-foreground">
 													<SelectItem value="Male">Male</SelectItem>
 													<SelectItem value="Female">Female</SelectItem>
 													<SelectItem value="Other">Other</SelectItem>
-													<SelectItem value="Prefer not to say">Prefer not to say</SelectItem>
+													<SelectItem value="Prefer not to say">
+														Prefer not to say
+													</SelectItem>
 												</SelectContent>
 											</Select>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
@@ -265,18 +302,20 @@ export default function SignupPage() {
 									name="dateOfBirth"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Date of Birth</FormLabel>
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+												Date of Birth
+											</FormLabel>
 											<FormControl>
-												<div className="relative">
-													<CalendarIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+												<div className="relative group">
+													<CalendarIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 													<Input
 														type="date"
-														className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+														className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 														{...field}
 													/>
 												</div>
 											</FormControl>
-											<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 										</FormItem>
 									)}
 								/>
@@ -287,39 +326,56 @@ export default function SignupPage() {
 								name="password"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Create Secret Code</FormLabel>
+										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+											Create Secret Code
+										</FormLabel>
 										<FormControl>
-											<div className="relative">
-												<LockIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+											<div className="relative group">
+												<LockIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													type={showPassword ? "text" : "password"}
 													placeholder="••••••••"
-													className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
+													className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base px-14 shadow-sm"
 													{...field}
 												/>
 												<button
 													type="button"
 													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-5 top-1/2 -translate-y-1/2 text-[#d4af37]/60 hover:text-[#d4af37] transition-colors"
+													className="absolute right-6 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
 												>
-													{showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+													{showPassword ? (
+														<EyeOffIcon className="h-5 w-5" />
+													) : (
+														<EyeIcon className="h-5 w-5" />
+													)}
 												</button>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-400 text-[10px] font-bold uppercase tracking-widest ml-1" />
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
 									</FormItem>
 								)}
 							/>
-							<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Complete Registration"}
+							<Button
+								type="submit"
+								className="w-full h-20 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:scale-[1.01]"
+								disabled={isSubmitting}
+							>
+								{isSubmitting ? (
+									<Loader2 className="mr-3 h-6 w-6 animate-spin" />
+								) : (
+									"Complete Registration"
+								)}
 							</Button>
 						</form>
 					</Form>
 
-					<div className="mt-8 text-center">
-						<p className="text-[#fdfcf0]/30 text-[9px] font-bold uppercase tracking-widest">
+					<div className="mt-10 text-center">
+						<p className="text-foreground/30 text-[10px] font-bold uppercase tracking-widest">
 							Already a pilgrim?{" "}
-							<Link to="/login" className="text-[#d4af37] hover:text-[#fdfcf0] transition-colors ml-1">
+							<Link
+								to="/login"
+								className="text-primary hover:text-foreground transition-colors ml-1 underline underline-offset-4 decoration-primary/30"
+							>
 								Sign In
 							</Link>
 						</p>

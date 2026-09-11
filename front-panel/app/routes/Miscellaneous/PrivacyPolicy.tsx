@@ -32,11 +32,11 @@ export default function PrivacyPolicyPage() {
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">1. Introduction</h2>
 							<p>
-								At AMBADY PILGRIMAGE EXPERIENCES, we value your privacy and are committed to protecting your
-								personal information. This Privacy Policy explains how we collect, use,
-								disclose, and safeguard your information when you visit our website, register for
-								pilgrimage journeys, or interact with our services. By using our site, you consent to the
-								practices described in this policy.
+								At AMBADY PILGRIMAGE EXPERIENCES, we value your privacy and are committed to
+								protecting your personal information. This Privacy Policy explains how we
+								collect, use, disclose, and safeguard your information when you visit our
+								website, register for pilgrimage journeys, or interact with our services. By
+								using our site, you consent to the practices described in this policy.
 							</p>
 						</section>
 
@@ -46,9 +46,9 @@ export default function PrivacyPolicyPage() {
 							</h2>
 							<ul className="list-disc pl-5 space-y-2">
 								<li>
-									<strong>Personal Information:</strong> When you register for a pilgrimage journey or create an
-									account, we may collect your name, email address, phone number, payment
-									information, and billing details.
+									<strong>Personal Information:</strong> When you register for a pilgrimage
+									journey or create an account, we may collect your name, email address,
+									phone number, payment information, and billing details.
 								</li>
 								<li>
 									<strong>Usage Data:</strong> We collect information about how you interact
@@ -68,7 +68,10 @@ export default function PrivacyPolicyPage() {
 								3. How We Use Your Information
 							</h2>
 							<ul className="list-disc pl-5 space-y-2">
-								<li>Process registrations and payments for pilgrimage journeys and attractions.</li>
+								<li>
+									Process registrations and payments for pilgrimage journeys and
+									attractions.
+								</li>
 								<li>Send registration confirmations, updates, and promotional emails.</li>
 								<li>Improve our website and services based on usage data.</li>
 								<li>Prevent fraud and ensure security.</li>
@@ -81,7 +84,9 @@ export default function PrivacyPolicyPage() {
 							</h2>
 							<p>We may share your information with:</p>
 							<ul className="list-disc pl-5 space-y-2">
-								<li>Pilgrimage journey providers and partners to fulfill your registrations.</li>
+								<li>
+									Pilgrimage journey providers and partners to fulfill your registrations.
+								</li>
 								<li>Payment processors (e.g., Stripe) for secure transactions.</li>
 								<li>Legal authorities if required by law.</li>
 							</ul>

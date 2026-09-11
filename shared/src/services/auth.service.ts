@@ -5,10 +5,20 @@ import {
 	sendPasswordResetEmail,
 	onAuthStateChanged,
 	getAuth,
-	User as FirebaseUser
+	User as FirebaseUser,
 } from "firebase/auth";
 import { initializeApp, getApps } from "firebase/app";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp, collection, getDocs, query, orderBy } from "firebase/firestore";
+import {
+	doc,
+	getDoc,
+	setDoc,
+	updateDoc,
+	serverTimestamp,
+	collection,
+	getDocs,
+	query,
+	orderBy,
+} from "firebase/firestore";
 import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
 import type { AppUser } from "@workspace/shared/types/user.d";
@@ -41,7 +51,7 @@ export class AuthService extends Service {
 		try {
 			const q = query(collection(this.db, this.USERS_COLLECTION), orderBy("first_name", "asc"));
 			const snap = await getDocs(q);
-			return snap.docs.map(d => d.data() as AppUser);
+			return snap.docs.map((d) => d.data() as AppUser);
 		} catch (err: any) {
 			throw new ApiError(err.message, 500);
 		}
@@ -97,7 +107,7 @@ export class AuthService extends Service {
 			await setDoc(doc(this.db, this.USERS_COLLECTION, uid), {
 				...profile,
 				createdAt: serverTimestamp(),
-				updatedAt: serverTimestamp()
+				updatedAt: serverTimestamp(),
 			});
 
 			return { success: true, user: userCredential.user, profile };
@@ -116,14 +126,27 @@ export class AuthService extends Service {
 			// Allow-list of updateable fields
 			const updateData: any = {};
 			const allowedFields: (keyof AppUser)[] = [
-				"first_name", "last_name", "phone_number", "whatsapp_number",
-				"gender", "date_of_birth", "address_house", "address_street",
-				"address_locality", "address_district", "address_state",
-				"address_pin_code", "country", "emergency_contact_name",
-				"emergency_contact_number", "aadhar_number", "avatar_url"
+				"first_name",
+				"last_name",
+				"phone_number",
+				"whatsapp_number",
+				"gender",
+				"date_of_birth",
+				"address_house",
+				"address_street",
+				"address_locality",
+				"address_district",
+				"address_state",
+				"address_pin_code",
+				"country",
+				"emergency_contact_name",
+				"emergency_contact_number",
+				"aadhar_number",
+				"avatar_url",
+				"notifications",
 			];
 
-			allowedFields.forEach(field => {
+			allowedFields.forEach((field) => {
 				if (data[field] !== undefined) {
 					updateData[field] = data[field];
 				}
@@ -131,7 +154,7 @@ export class AuthService extends Service {
 
 			await updateDoc(userRef, {
 				...updateData,
-				updatedAt: serverTimestamp()
+				updatedAt: serverTimestamp(),
 			});
 			return { success: true };
 		} catch (err: any) {
@@ -162,15 +185,26 @@ export class AuthService extends Service {
 	/**
 	 * Admin: Create a new user without signing out current user
 	 */
-	async adminCreateUserAndProfile(data: { firstName: string, lastName: string, email: string, aadharNumber: string, phone: string }) {
+	async adminCreateUserAndProfile(data: {
+		firstName: string;
+		lastName: string;
+		email: string;
+		aadharNumber: string;
+		phone: string;
+	}) {
 		try {
 			// This is a hack to create a user in Firebase Auth without signing out the current admin.
 			// We initialize a secondary app.
-			const secondaryApp = getApps().find(app => app.name === "Secondary")
-				|| initializeApp(this.auth.app.options, "Secondary");
+			const secondaryApp =
+				getApps().find((app) => app.name === "Secondary") ||
+				initializeApp(this.auth.app.options, "Secondary");
 			const secondaryAuth = getAuth(secondaryApp);
 
-			const userCredential = await createUserWithEmailAndPassword(secondaryAuth, data.email, "Password123");
+			const userCredential = await createUserWithEmailAndPassword(
+				secondaryAuth,
+				data.email,
+				"Password123",
+			);
 			const uid = userCredential.user.uid;
 
 			const profile: AppUser = {
@@ -202,7 +236,7 @@ export class AuthService extends Service {
 			await setDoc(doc(this.db, this.USERS_COLLECTION, uid), {
 				...profile,
 				createdAt: serverTimestamp(),
-				updatedAt: serverTimestamp()
+				updatedAt: serverTimestamp(),
 			});
 
 			// Sign out the secondary app immediately to be safe

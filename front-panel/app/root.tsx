@@ -1,7 +1,5 @@
 import { Outlet, ScrollRestoration } from "react-router";
 import "./app.css";
-import ErrorPage from "~/components/Error/ErrorPage";
-import { TopLoadingBar } from "~/components/Loaders/TopLoadingBar";
 import { Toaster } from "~/components/ui/sonner";
 import { Loader2 } from "lucide-react";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
@@ -13,8 +11,8 @@ export const clientLoader = async ({ request }: { request: Request }) => {
 
 export function HydrateFallback() {
 	return (
-		<div className="flex h-screen w-screen items-center justify-center">
-			<Loader2 className="h-10 w-10 animate-spin text-[#d4af37]" />
+		<div className="flex h-screen w-screen items-center justify-center bg-background">
+			<Loader2 className="h-10 w-10 animate-spin text-primary" />
 		</div>
 	);
 }
@@ -22,7 +20,6 @@ export function HydrateFallback() {
 export default function App() {
 	return (
 		<>
-			<TopLoadingBar />
 			<div className="ambady-content-wrapper">
 				<Outlet />
 			</div>
@@ -33,5 +30,18 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-	return <ErrorPage />;
+	return (
+		<div className="flex h-screen w-screen flex-col items-center justify-center bg-background p-6 text-center">
+			<h1 className="text-4xl font-serif text-foreground mb-4">Sacred Connection Lost</h1>
+			<p className="text-foreground/60 mb-8 max-w-md">
+				The path you were seeking has vanished. Please return to the home sanctuary.
+			</p>
+			<a
+				href="/"
+				className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-bold uppercase tracking-widest text-[10px]"
+			>
+				Return Home
+			</a>
+		</div>
+	);
 }
