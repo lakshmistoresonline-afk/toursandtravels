@@ -1,7 +1,8 @@
-import { useLoaderData, useSubmit, useActionData, Link } from "react-router";
+import { useLoaderData, useSubmit, useActionData } from "react-router";
 import { useState, useEffect, useMemo } from "react";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Card, CardContent } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -25,7 +26,6 @@ import {
 	Search,
 	Eye,
 	Send,
-	ArrowLeft,
 	CheckCircle2,
 	XCircle,
 	Users,
@@ -221,16 +221,7 @@ export default function JourneyAnnouncementPage() {
 
 			<div className="flex items-center justify-between border-b border-primary/10 pb-8">
 				<div className="flex items-center gap-4">
-					<Button
-						asChild
-						variant="ghost"
-						size="icon"
-						className="rounded-full hover:bg-primary/5 text-primary"
-					>
-						<Link to="/admin/tours">
-							<ArrowLeft className="h-5 w-5" />
-						</Link>
-					</Button>
+					<BackButton fallbackUrl="/admin/tours" />
 					<div>
 						<h1 className="text-4xl font-serif text-foreground tracking-tight leading-tight">
 							Journey Announcement

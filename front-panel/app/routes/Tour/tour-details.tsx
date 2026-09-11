@@ -14,6 +14,7 @@ import { tourDetailsQuery } from "~/queries/tours.q";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Badge } from "~/components/ui/badge";
 import { Input } from "~/components/ui/input";
+import { BackButton } from "~/components/ui/back-button";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { toast } from "sonner";
@@ -111,6 +112,9 @@ export default function TourDetailsPage() {
 
 			{/* Hero/Cover Section */}
 			<div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+				<div className="absolute top-6 left-6 z-30">
+					<BackButton className="bg-background/20 backdrop-blur-md text-white hover:bg-background/40 hover:text-white border border-white/10" fallbackUrl="/tours" label="Back to Journeys" />
+				</div>
 				{tour.cover_image ? (
 					<img src={tour.cover_image} alt={tour.name} className="w-full h-full object-cover" />
 				) : (

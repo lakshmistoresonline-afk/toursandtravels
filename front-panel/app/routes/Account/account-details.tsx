@@ -2,6 +2,7 @@ import { useRouteLoaderData, useActionData, useSubmit, useNavigation } from "rea
 import { clientLoader as rootLoader } from "~/root";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Input } from "~/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
@@ -10,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { Loader2, Save, User as UserIcon, MapPin, Bell } from "lucide-react";
-import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { profileUpdateSchema } from "@workspace/shared/schemas/profile-update.schema";
 import { AuthService } from "@workspace/shared/services/auth.service";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
@@ -103,11 +103,10 @@ export default function AccountDetailsPage() {
 	if (!user) return null;
 
 	return (
-		<div className="space-y-12 max-w-4xl animate-in slide-in-from-right-8 duration-700">
-			<MetaDetails
-				metaTitle="Pilgrim Profile | AMBADY"
-				metaDescription="Manage your sacred journey profile."
-			/>
+		<div className="space-y-12 max-w-4xl animate-in slide-in-from-right-8 duration-700 relative">
+			<div className="flex items-center justify-between">
+				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+			</div>
 
 			<div className="bg-card p-10 md:p-14 rounded-[3rem] flex items-center gap-10 border border-primary/10 shadow-xl">
 				<div className="h-28 w-28 rounded-full bg-primary/5 border-2 border-primary/20 flex items-center justify-center text-primary text-4xl font-serif shadow-sm">

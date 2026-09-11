@@ -11,6 +11,7 @@ import {
 	CalendarIcon,
 } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Input } from "~/components/ui/input";
 import {
 	type ActionFunctionArgs,
@@ -125,7 +126,10 @@ export default function SignupPage() {
 	}, [actionData]);
 
 	return (
-		<div className="min-h-[90vh] w-full flex items-center justify-center py-24 px-6 bg-background">
+		<div className="min-h-[90vh] w-full flex items-center justify-center py-24 px-6 bg-background relative">
+			<div className="absolute top-10 left-10">
+				<BackButton fallbackUrl="/login" label="Back to Login" />
+			</div>
 			<div className="w-full max-w-3xl space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
 				<MetaDetails
 					metaTitle="Begin Registration | AMBADY"

@@ -4,7 +4,6 @@ import { ToursService } from "@workspace/shared/services/tours.service";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import {
 	Loader2,
-	ArrowLeft,
 	Plus,
 	Trash2,
 	Info,
@@ -24,11 +23,11 @@ import {
 	useNavigate,
 	useNavigation,
 	useSubmit,
-	Link,
 } from "react-router";
 import { toast } from "sonner";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
@@ -115,16 +114,7 @@ export default function UpdateTourPage() {
 
 			<div className="flex items-center justify-between border-b border-primary/10 pb-8">
 				<div className="flex items-center gap-4">
-					<Button
-						asChild
-						variant="ghost"
-						size="icon"
-						className="rounded-full hover:bg-primary/5 text-primary"
-					>
-						<Link to="/admin/tours">
-							<ArrowLeft className="h-5 w-5" />
-						</Link>
-					</Button>
+					<BackButton fallbackUrl="/admin/tours" />
 					<div>
 						<h1 className="text-4xl font-serif text-foreground tracking-tight leading-tight">
 							Update Journey

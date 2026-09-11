@@ -1,5 +1,6 @@
 import { EyeIcon, EyeOffIcon, Loader2, LockIcon, MailIcon, Compass } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Input } from "~/components/ui/input";
 import {
 	type ActionFunctionArgs,
@@ -85,7 +86,10 @@ export default function LoginPage() {
 	}, [actionData]);
 
 	return (
-		<div className="min-h-[80vh] w-full flex items-center justify-center py-20 px-6 bg-background">
+		<div className="min-h-[80vh] w-full flex items-center justify-center py-20 px-6 bg-background relative">
+			<div className="absolute top-8 left-8">
+				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+			</div>
 			<div className="w-full max-w-md space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
 				<MetaDetails
 					metaTitle="Login | AMBADY"

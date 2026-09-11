@@ -6,8 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/account-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/forgot-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Auth/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/announcement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/announcement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/users.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

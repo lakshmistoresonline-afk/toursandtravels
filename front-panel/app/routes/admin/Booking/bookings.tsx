@@ -7,6 +7,7 @@ import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { DataTable, DataTableSkeleton } from "~/components/Table/data-table";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "~/components/ui/dialog";
 import {
 	DropdownMenu,
@@ -294,14 +295,17 @@ export default function BookingsPage() {
 			/>
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-primary/10 pb-8">
-				<div>
-					<h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight leading-tight">
-						Pilgrim Registrations
-					</h1>
-					<p className="text-foreground/40 mt-3 text-sm uppercase tracking-[0.2em] font-bold">
-						Manage and track all spiritual journey participants.
-					</p>
+				<div className="flex items-center gap-4">
+					<BackButton fallbackUrl="/admin" label="Dashboard" />
+					<div>
+						<h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight leading-tight">
+							Pilgrim Registrations
+						</h1>
+					</div>
 				</div>
+				<p className="text-foreground/40 text-sm uppercase tracking-[0.2em] font-bold">
+					Manage and track all spiritual journey participants.
+				</p>
 				<div className="flex flex-wrap gap-4">
 					<Button
 						className="rounded-full bg-white border border-primary/20 text-primary hover:bg-primary/5 px-8 h-14 text-[11px] font-bold uppercase tracking-widest shadow-sm"

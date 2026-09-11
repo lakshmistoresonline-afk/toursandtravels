@@ -1,6 +1,7 @@
 import { useLoaderData, redirect, type LoaderFunctionArgs, Link } from "react-router";
 import { format } from "date-fns";
 import { Badge } from "~/components/ui/badge";
+import { BackButton } from "~/components/ui/back-button";
 import { Card, CardContent } from "~/components/ui/card";
 import { Calendar, MapPin, Compass } from "lucide-react";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
@@ -30,7 +31,10 @@ export default function MyBookingsPage() {
 	};
 
 	return (
-		<div className="container mx-auto max-w-5xl px-6 animate-in fade-in duration-700 bg-background">
+		<div className="container mx-auto max-w-5xl px-6 animate-in fade-in duration-700 bg-background relative">
+			<div className="mb-8">
+				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+			</div>
 			<MetaDetails
 				metaTitle="My Pilgrimage Journeys | AMBADY"
 				metaDescription="View your upcoming and past sacred journeys."

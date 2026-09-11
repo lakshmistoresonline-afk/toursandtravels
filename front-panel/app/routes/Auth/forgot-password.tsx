@@ -1,5 +1,6 @@
 import { MailIcon, Loader2, Compass } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Input } from "~/components/ui/input";
 import {
 	type ActionFunctionArgs,
@@ -51,7 +52,10 @@ export default function ForgotPassword() {
 	}, [actionData]);
 
 	return (
-		<div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-16 px-4">
+		<div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center py-16 px-4 relative">
+			<div className="absolute top-8 left-8">
+				<BackButton fallbackUrl="/login" label="Return to Sign In" />
+			</div>
 			<div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
 				<MetaDetails
 					metaTitle="Forgot Password | AMBADY"

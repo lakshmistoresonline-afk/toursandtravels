@@ -6,6 +6,7 @@ import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { DataTable, DataTableSkeleton } from "~/components/Table/data-table";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Input } from "~/components/ui/input";
 import {
 	DropdownMenu,
@@ -169,14 +170,17 @@ export default function AdminUsersPage() {
 			/>
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-primary/10 pb-8">
-				<div>
-					<h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
-						Pilgrim Inventory
-					</h1>
-					<p className="text-foreground/40 mt-3 text-sm uppercase tracking-[0.2em] font-bold">
-						Manage and oversee all members of the AMBADY community.
-					</p>
+				<div className="flex items-center gap-4">
+					<BackButton fallbackUrl="/admin" label="Dashboard" />
+					<div>
+						<h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
+							Pilgrim Inventory
+						</h1>
+					</div>
 				</div>
+				<p className="text-foreground/40 mt-3 text-sm uppercase tracking-[0.2em] font-bold">
+					Manage and oversee all members of the AMBADY community.
+				</p>
 			</div>
 
 			<div className="bg-card rounded-[2.5rem] overflow-hidden shadow-xl border border-primary/10">

@@ -5,7 +5,6 @@ import {
 	Loader2,
 	Plus,
 	Trash2,
-	ArrowLeft,
 	Image as ImageIcon,
 	Info,
 	MapPin,
@@ -16,7 +15,6 @@ import { useEffect } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import {
 	type ActionFunctionArgs,
-	Link,
 	useActionData,
 	useNavigate,
 	useNavigation,
@@ -25,6 +23,7 @@ import {
 import { toast } from "sonner";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { Button } from "~/components/ui/button";
+import { BackButton } from "~/components/ui/back-button";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
@@ -115,16 +114,7 @@ export default function AddTourPage() {
 
 			<div className="flex items-center justify-between border-b border-primary/10 pb-8">
 				<div className="flex items-center gap-4">
-					<Button
-						asChild
-						variant="ghost"
-						size="icon"
-						className="rounded-full hover:bg-primary/5 text-primary"
-					>
-						<Link to="/admin/tours">
-							<ArrowLeft className="h-5 w-5" />
-						</Link>
-					</Button>
+					<BackButton fallbackUrl="/admin/tours" />
 					<div>
 						<h1 className="text-4xl font-serif text-foreground tracking-tight leading-tight">
 							Initiate Journey
