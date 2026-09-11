@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Contact/contact-us.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Contact/contact-us.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/announcement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/announcement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/constants/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/constants/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/utils/email-templates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/utils/email-templates.ts" afterDir="false" />
-    </list>
+    <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
