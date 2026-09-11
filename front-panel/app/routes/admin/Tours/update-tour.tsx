@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddTourActionSchema } from "@workspace/shared/schemas/tour.schema";
 import { ToursService } from "@workspace/shared/services/tours.service";
+import { BookingService } from "@workspace/shared/services/booking.service";
 import {
 	Loader2,
 	ArrowLeft,
@@ -10,6 +11,8 @@ import {
 	MapPin,
 	IndianRupee,
 	Image as ImageIcon,
+	Users,
+	User,
 } from "lucide-react";
 import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -32,6 +35,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import { format } from "date-fns";
 
 export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
 	try {
@@ -50,12 +54,14 @@ export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
 
 export const clientLoader = async ({ params }: LoaderFunctionArgs) => {
 	const svc = new ToursService();
+	const bookingSvc = new BookingService();
 	const tour = await svc.getTourDetails(params.id!);
-	return { tour };
+	const registrations = await bookingSvc.getTourRegistrations(params.id!);
+	return { tour, registrations };
 };
 
 export default function UpdateTourPage() {
-	const { tour } = useLoaderData<typeof clientLoader>();
+	const { tour, registrations } = useLoaderData<typeof clientLoader>();
 	const navigate = useNavigate();
 	const submit = useSubmit();
 	const navigation = useNavigation();
@@ -488,6 +494,76 @@ export default function UpdateTourPage() {
 					</div>
 				</form>
 			</Form>
+
+			{/* Registered Pilgrims Section */}
+			<Card className="bg-card border border-primary/10 rounded-[3rem] overflow-hidden shadow-xl mt-12">
+				<div className="px-10 py-7 border-b border-primary/10 flex items-center justify-between bg-primary/5">
+					<div className="flex items-center gap-4">
+						<Users className="h-5 w-5 text-primary" />
+						<h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
+							Registered Pilgrims
+						</h3>
+					</div>
+					<Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-1 rounded-full text-[10px] font-bold">
+						{registrations.registrations.length} Total
+					</Badge>
+				</div>
+				<CardContent className="p-10">
+					{registrations.registrations.length === 0 ? (
+						<div className="py-20 text-center space-y-4 opacity-30">
+							<Users className="h-12 w-12 mx-auto" />
+							<p className="text-sm font-bold uppercase tracking-widest">
+								No pilgrims registered for this journey yet.
+							</p>
+						</div>
+					) : (
+						<div className="space-y-6">
+							{registrations.registrations.map((reg: any) => (
+								<div
+									key={reg.id}
+									className="p-6 rounded-[2rem] bg-background border border-primary/10 flex items-center justify-between group hover:border-primary/40 transition-all shadow-sm"
+								>
+									<div className="flex items-center gap-6">
+										<div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+											<User className="h-7 w-7" />
+										</div>
+										<div className="space-y-1">
+											<p className="font-bold text-lg text-foreground">
+												{reg.profileSnapshot?.first_name} {reg.profileSnapshot?.last_name}
+											</p>
+											<div className="flex flex-wrap items-center gap-4 text-[11px] text-foreground/50 font-bold uppercase tracking-widest">
+												<span>{reg.profileSnapshot?.email}</span>
+												<span className="h-1.5 w-1.5 rounded-full bg-primary/30" />
+												<span>{reg.profileSnapshot?.phone_number || "No Phone"}</span>
+											</div>
+										</div>
+									</div>
+									<div className="text-right space-y-3">
+										<Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">
+											{reg.travellersCount} Participants
+										</Badge>
+										<p className="text-[10px] text-foreground/30 font-bold uppercase tracking-widest">
+											{reg.createdAt
+												? (() => {
+														try {
+															const dateObj =
+																typeof reg.createdAt.toDate === "function"
+																	? reg.createdAt.toDate()
+																	: new Date(reg.createdAt);
+															return format(dateObj, "dd MMM yyyy");
+														} catch (e) {
+															return "Invalid Date";
+														}
+													})()
+												: "N/A"}
+										</p>
+									</div>
+								</div>
+							))}
+						</div>
+					)}
+				</CardContent>
+			</Card>
 		</div>
 	);
 }

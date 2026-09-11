@@ -116,7 +116,17 @@ export default function MyBookingsPage() {
 											<div className="text-foreground/30 font-medium">
 												Registered:{" "}
 												{reg.createdAt
-													? format(new Date(reg.createdAt), "PPP")
+													? (() => {
+															try {
+																const dateObj =
+																	typeof reg.createdAt.toDate === "function"
+																		? reg.createdAt.toDate()
+																		: new Date(reg.createdAt);
+																return format(dateObj, "PPP");
+															} catch (e) {
+																return "Recently";
+															}
+														})()
 													: "Recently"}
 											</div>
 										</div>

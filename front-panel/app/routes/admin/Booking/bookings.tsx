@@ -113,19 +113,32 @@ export default function BookingsPage() {
 	const handleExport = async () => {
 		setIsExporting(true);
 		try {
-			const exportData = data.registrations.map((reg: TourRegistration) => ({
-				"Tour Name": reg.tours?.name || "N/A",
-				"Tour Code": reg.tours?.tour_code || "N/A",
-				"Customer Name": `${reg.profileSnapshot?.first_name || ""} ${reg.profileSnapshot?.last_name || ""}`,
-				Email: reg.profileSnapshot?.email || "N/A",
-				Phone: reg.profileSnapshot?.phone_number || "N/A",
-				Travellers: reg.travellersCount,
-				Status: reg.status,
-				"Amount (INR)": reg.tours?.price * reg.travellersCount || 0,
-				"Registration Date": reg.createdAt
-					? format(new Date(reg.createdAt as any), "yyyy-MM-dd HH:mm")
-					: "N/A",
-			}));
+			const exportData = data.registrations.map((reg: TourRegistration) => {
+				let registrationDate = "N/A";
+				if (reg.createdAt) {
+					try {
+						const dateObj =
+							typeof (reg.createdAt as any).toDate === "function"
+								? (reg.createdAt as any).toDate()
+								: new Date(reg.createdAt as any);
+						registrationDate = format(dateObj, "yyyy-MM-dd HH:mm");
+					} catch (e) {
+						console.error("Date formatting failed for registration:", reg.id, e);
+					}
+				}
+
+				return {
+					"Tour Name": reg.tours?.name || "N/A",
+					"Tour Code": reg.tours?.tour_code || "N/A",
+					"Customer Name": `${reg.profileSnapshot?.first_name || ""} ${reg.profileSnapshot?.last_name || ""}`,
+					Email: reg.profileSnapshot?.email || "N/A",
+					Phone: reg.profileSnapshot?.phone_number || "N/A",
+					Travellers: reg.travellersCount,
+					Status: reg.status,
+					"Amount (INR)": (reg.tours?.price || 0) * reg.travellersCount || 0,
+					"Registration Date": registrationDate,
+				};
+			});
 
 			const worksheet = XLSX.utils.json_to_sheet(exportData);
 			const workbook = XLSX.utils.book_new();
@@ -157,17 +170,56 @@ export default function BookingsPage() {
 		{
 			id: "Customer",
 			accessorKey: "profileSnapshot.first_name",
-			header: "Pilgrim",
+			header: "Pilgrim Details",
 			cell: ({ row }) => (
 				<div className="flex flex-col gap-0.5">
 					<span className="font-bold text-foreground">
 						{row.original.profileSnapshot?.first_name} {row.original.profileSnapshot?.last_name}
 					</span>
-					<span className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">
-						{row.original.profileSnapshot?.phone_number}
-					</span>
+					<div className="flex flex-col text-[10px] text-foreground/40 font-bold uppercase tracking-widest gap-0.5">
+						<span>{row.original.profileSnapshot?.email}</span>
+						<span>{row.original.profileSnapshot?.phone_number}</span>
+					</div>
 				</div>
 			),
+		},
+		{
+			id: "Aadhar",
+			header: "Identity",
+			cell: ({ row }) => (
+				<span className="text-xs font-mono text-foreground/60">
+					{maskAadhar(row.original.profileSnapshot?.aadhar_number)}
+				</span>
+			),
+		},
+		{
+			id: "Travellers",
+			accessorKey: "travellersCount",
+			header: "Participants",
+			cell: (info) => (
+				<div className="text-center font-bold text-primary">
+					{info.getValue() as number}
+				</div>
+			),
+		},
+		{
+			id: "Date",
+			accessorKey: "createdAt",
+			header: "Reg. Date",
+			cell: (info) => {
+				const val = info.getValue();
+				if (!val) return "N/A";
+				try {
+					const dateObj = typeof (val as any).toDate === "function" ? (val as any).toDate() : new Date(val as any);
+					return (
+						<div className="text-[10px] text-foreground/40 font-bold uppercase">
+							{format(dateObj, "dd MMM yyyy")}
+						</div>
+					);
+				} catch (e) {
+					return <div className="text-[10px] text-foreground/40 font-bold uppercase">Invalid Date</div>;
+				}
+			},
 		},
 		{
 			id: "Amount",

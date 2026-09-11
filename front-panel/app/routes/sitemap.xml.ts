@@ -44,10 +44,23 @@ export async function loader({}: LoaderFunctionArgs) {
 	);
 
 	for (const tour of toursResp.tours) {
+		let lastmod = "";
+		if (tour.updatedAt) {
+			try {
+				const dateObj =
+					typeof (tour.updatedAt as any).toDate === "function"
+						? (tour.updatedAt as any).toDate()
+						: new Date(tour.updatedAt as any);
+				lastmod = `<lastmod>${format(dateObj, "yyyy-MM-dd")}</lastmod>`;
+			} catch (e) {
+				// Skip lastmod if invalid
+			}
+		}
+
 		urls.push(`
         <url>
             <loc>${baseUrl}/tours/tour/${tour.id}</loc>
-            ${tour.updatedAt ? `<lastmod>${format(new Date(tour.updatedAt), "yyyy-MM-dd")}</lastmod>` : ""}
+            ${lastmod}
             <changefreq>daily</changefreq>
             <priority>1.0</priority>
         </url>

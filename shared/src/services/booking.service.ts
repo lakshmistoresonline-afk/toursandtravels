@@ -179,6 +179,17 @@ export class BookingService extends Service {
 		return { registrations, total: registrations.length } as any;
 	}
 
+	async getTourRegistrations(tourId: string): Promise<GetTourRegistrationsResponse> {
+		const q = query(
+			collection(this.db, this.REGISTRATIONS_COLLECTION),
+			where("tourId", "==", tourId),
+			orderBy("createdAt", "desc"),
+		);
+		const snap = await getDocs(q);
+		const registrations = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+		return { registrations, total: registrations.length } as any;
+	}
+
 	async getRegistrationsByTour(tourId: string): Promise<any[]> {
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),

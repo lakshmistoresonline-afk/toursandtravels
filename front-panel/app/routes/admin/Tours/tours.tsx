@@ -9,9 +9,7 @@ import {
 	Edit3,
 	Trash2,
 	ExternalLink,
-	User,
 	Compass,
-	Users,
 	Megaphone,
 } from "lucide-react";
 import React from "react";
@@ -30,9 +28,6 @@ import { Input } from "~/components/ui/input";
 import { Badge } from "~/components/ui/badge";
 import { ToursService } from "@workspace/shared/services/tours.service";
 import { BookingService } from "@workspace/shared/services/booking.service";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "~/components/ui/dialog";
-import { useState } from "react";
-import { format } from "date-fns";
 
 export const clientLoader = async ({ request }: any) => {
 	const url = new URL(request.url);
@@ -60,10 +55,8 @@ export default function AdminToursPage() {
 	const navigation = useNavigation();
 	const location = useLocation();
 
-	const [selectedTourRegs, setSelectedTourRegs] = useState<any[] | null>(null);
-	const [selectedTourName, setSelectedTourName] = useState("");
-
-	const isFetching = navigation.state === "loading" && navigation.location?.pathname === location.pathname;
+	const isFetching =
+		navigation.state === "loading" && navigation.location?.pathname === location.pathname;
 
 	const columns: ColumnDef<HighLevelTour, unknown>[] = [
 		{
@@ -148,38 +141,6 @@ export default function AdminToursPage() {
 					</Badge>
 				);
 			},
-		},
-		{
-			id: "Pilgrims",
-			header: "Capacity",
-			cell: ({ row }) => (
-				<button
-					onClick={() => {
-						setSelectedTourRegs(row.original.registrations || []);
-						setSelectedTourName(row.original.name);
-					}}
-					className="flex flex-col items-center gap-1 hover:scale-110 transition-transform cursor-pointer group"
-				>
-					<div className="flex -space-x-2">
-						{[...Array(Math.min(row.original.registrations?.length || 0, 3))].map((_, i) => (
-							<div
-								key={i}
-								className="h-7 w-7 rounded-full border border-background bg-primary/10 flex items-center justify-center"
-							>
-								<User className="h-3.5 w-3.5 text-primary" />
-							</div>
-						))}
-						{(row.original.registrations?.length || 0) > 3 && (
-							<div className="h-7 w-7 rounded-full border border-background bg-foreground flex items-center justify-center text-[9px] font-bold text-background">
-								+{(row.original.registrations?.length || 0) - 3}
-							</div>
-						)}
-					</div>
-					<span className="text-[10px] font-bold text-foreground/40 group-hover:text-primary uppercase tracking-widest">
-						{row.original.pilgrimCount || 0} Joined
-					</span>
-				</button>
-			),
 		},
 		{
 			id: "actions",
@@ -284,70 +245,6 @@ export default function AdminToursPage() {
 					)}
 				</div>
 			</div>
-
-			{/* Pilgrims List Dialog */}
-			<Dialog open={!!selectedTourRegs} onOpenChange={() => setSelectedTourRegs(null)}>
-				<DialogContent className="max-w-2xl bg-white border-primary/10 text-foreground max-h-[85vh] flex flex-col p-0 overflow-hidden shadow-2xl rounded-[3rem]">
-					<DialogHeader className="p-12 bg-primary/5 border-b border-primary/10">
-						<DialogTitle className="text-4xl font-serif text-foreground">
-							{selectedTourName}
-						</DialogTitle>
-						<DialogDescription className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary mt-3">
-							Registered Pilgrims Inventory
-						</DialogDescription>
-					</DialogHeader>
-
-					<div className="flex-1 overflow-y-auto p-12 space-y-8">
-						{selectedTourRegs && selectedTourRegs.length > 0 ? (
-							<div className="space-y-6">
-								{selectedTourRegs.map((reg) => (
-									<div
-										key={reg.id}
-										className="p-8 rounded-[2rem] bg-background border border-primary/10 flex items-center justify-between group hover:border-primary/40 transition-all shadow-sm"
-									>
-										<div className="flex items-center gap-8">
-											<div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-transform group-hover:scale-110">
-												<User className="h-8 w-8" />
-											</div>
-											<div className="space-y-2">
-												<p className="font-bold text-xl text-foreground">
-													{reg.profileSnapshot?.first_name}{" "}
-													{reg.profileSnapshot?.last_name}
-												</p>
-												<div className="flex flex-wrap items-center gap-4 text-[11px] text-foreground/50 font-bold uppercase tracking-widest">
-													<span>{reg.profileSnapshot?.email}</span>
-													<span className="h-1.5 w-1.5 rounded-full bg-primary/30" />
-													<span>
-														{reg.profileSnapshot?.phone_number || "No Phone"}
-													</span>
-												</div>
-											</div>
-										</div>
-										<div className="text-right space-y-3">
-											<Badge className="bg-primary text-primary-foreground border-none px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
-												{reg.travellersCount} Pilgrims
-											</Badge>
-											<p className="text-[10px] text-foreground/30 font-bold uppercase tracking-widest">
-												Joined{" "}
-												{reg.createdAt
-													? format(new Date(reg.createdAt), "dd MMM yyyy")
-													: "Recent"}
-											</p>
-										</div>
-									</div>
-								))}
-							</div>
-						) : (
-							<div className="h-72 flex flex-col items-center justify-center gap-6 opacity-30">
-								<Users className="h-16 w-16 text-primary" />
-								<p className="text-sm font-bold uppercase tracking-[0.3em]">
-									No Pilgrims Registered
-								</p>
-							</div>
-						)}
-					</div>
-				</DialogContent>
-			</Dialog>
 		</div>
 	);
 }

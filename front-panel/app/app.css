@@ -20,23 +20,13 @@ body {
 	position: relative;
 }
 
-.ambady-home-bg {
+.ambady-home-hero {
 	background-color: #0a0e1a;
 	background-image: url("./assets/ambady-background.png");
-	background-attachment: fixed;
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	color: #fdfcf0;
-}
-
-.ambady-home-bg::before {
-	content: "";
-	position: fixed;
-	inset: 0;
-	background: #0a0e1a;
-	opacity: 0.85;
-	z-index: -1;
+	width: 100%;
 }
 
 .ambady-content-wrapper {

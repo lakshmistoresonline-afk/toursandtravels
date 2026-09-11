@@ -34,7 +34,7 @@ export default function Header() {
 			className={cn(
 				"sticky top-0 z-50 transition-all duration-500",
 				isHomePage
-					? "bg-transparent border-b border-white/10"
+					? "bg-black/40 backdrop-blur-md border-b border-white/10"
 					: "bg-background/95 backdrop-blur-md border-b border-primary/20 shadow-lg",
 			)}
 		>
