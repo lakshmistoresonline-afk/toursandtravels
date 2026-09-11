@@ -1,0 +1,100 @@
+import { MapPin, Calendar, Clock, Compass } from "lucide-react";
+import { memo, useState } from "react";
+import { Link } from "react-router";
+import { Badge } from "~/components/ui/badge";
+import type { HighLevelTour } from "@workspace/shared/types/tours";
+import { cn } from "@workspace/shared/utils/ui";
+
+export const TourCard = memo(
+	({
+		tour,
+		className,
+	}: {
+		tour: HighLevelTour;
+		className?: string;
+	}) => {
+		const [imgError, setImgError] = useState(false);
+
+		const statusColors: any = {
+			REGISTRATION_OPEN: "text-emerald-400 border-emerald-400/20 bg-emerald-400/5",
+			PUBLISHED: "text-[#d4af37] border-[#d4af37]/20 bg-[#d4af37]/5",
+			REGISTRATION_CLOSED: "text-red-400 border-red-400/20 bg-red-400/5",
+			DRAFT: "text-slate-400 border-slate-400/30 bg-slate-400/5",
+		};
+
+		const isUrlValid = (url: string | null | undefined) => {
+			return !!(url && url.length > 12 && url.startsWith("http") && !url.endsWith("-"));
+		};
+
+		const hasValidImage = !imgError && isUrlValid(tour.cover_image);
+
+		return (
+			<Link to={"/tours/tour/" + tour.id} prefetch="intent" viewTransition className="group block h-full">
+				<div className={cn(
+					"h-full flex flex-col bg-white/5 rounded-[2rem] overflow-hidden border border-white/10 transition-all duration-500",
+					"hover:border-[#d4af37]/40 hover:shadow-2xl hover:shadow-[#d4af37]/5 hover:-translate-y-1",
+					className
+				)}>
+					{/* Image Section */}
+					<div className="relative aspect-[4/3] overflow-hidden bg-[#0a0e1a]">
+						{hasValidImage ? (
+							<img
+								src={tour.cover_image!}
+								alt={tour.name}
+								onError={() => setImgError(true)}
+								className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+							/>
+						) : (
+							<div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-[#d4af37]/5">
+								<Compass className="h-10 w-10 text-[#d4af37] opacity-20" />
+								<span className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#d4af37]/20">Sacred Path</span>
+							</div>
+						)}
+
+						{/* Floating Status Badge */}
+						<div className="absolute top-5 left-5 z-20">
+							<Badge className={cn(
+								"px-3 py-1 text-[8px] font-bold uppercase tracking-widest border backdrop-blur-md rounded-full bg-[#0a0e1a]/40",
+								statusColors[tour.status] || ""
+							)}>
+								{tour.status?.replace('_', ' ')}
+							</Badge>
+						</div>
+					</div>
+
+					{/* Content Section */}
+					<div className="p-8 flex flex-col flex-1 gap-6">
+						<div className="flex-1 space-y-4">
+							<h3 className="font-serif text-xl leading-tight text-[#fdfcf0] group-hover:text-[#d4af37] transition-colors line-clamp-2">
+								{tour.name}
+							</h3>
+
+							<div className="flex items-center gap-5 text-[#fdfcf0]/40 text-[9px] font-bold uppercase tracking-widest">
+								<div className="flex items-center gap-2">
+									<MapPin className="h-3.5 w-3.5 text-[#d4af37]/40" />
+									<span>{tour.destination || 'Holy Land'}</span>
+								</div>
+								<div className="flex items-center gap-2">
+									<Calendar className="h-3.5 w-3.5 text-[#d4af37]/40" />
+									<span>{tour.start_date || 'Flexible'}</span>
+								</div>
+							</div>
+						</div>
+
+						<div className="pt-6 border-t border-white/5 flex items-center justify-between">
+							<div className="space-y-1">
+								<p className="text-[8px] text-[#fdfcf0]/20 uppercase tracking-widest font-bold">Exchange</p>
+								<p className="font-serif text-2xl text-[#d4af37]">
+									{tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquire"}
+								</p>
+							</div>
+							<div className="text-[8px] font-bold uppercase tracking-widest text-[#d4af37]/40 group-hover:text-[#d4af37] transition-colors">
+								View Journey
+							</div>
+						</div>
+					</div>
+				</div>
+			</Link>
+		);
+	},
+);

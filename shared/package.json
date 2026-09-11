@@ -1,0 +1,30 @@
+{
+	"name": "@workspace/shared",
+	"description": "This package contains shared code between the admin and front panel.",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "npx tsc -p tsconfig.json"
+	},
+	"exports": {
+		"./*": {
+			"import": "./src/*",
+			"require": "./src/*"
+		}
+	},
+	"types": "./src/*",
+	"dependencies": {
+		"firebase": "^11.4.0",
+		"date-fns": "^4.1.0",
+		"dotenv": "^17.2.3",
+		"js-sha256": "^0.11.1",
+		"sharp": "^0.34.5",
+		"slugify": "^1.6.6",
+		"uuid": "^13.0.0",
+		"xlsx": "^0.18.5",
+		"zod": "^3.25.48"
+	},
+	"devDependencies": {
+		"typescript": "^5.9.2"
+	}
+}

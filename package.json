@@ -1,0 +1,37 @@
+{
+	"name": "tours_web_app",
+	"version": "1.0.0",
+	"description": "Tours agency web application - Firebase Only",
+	"private": true,
+	"type": "module",
+	"license": "ISC",
+	"workspaces": [
+		"front-panel",
+		"shared"
+	],
+	"scripts": {
+		"bootstrap": "npm install",
+		"dev": "npm run dev -w front-panel",
+		"dev:clean": "npm run dev:clean -w front-panel",
+		"build:shared": "npm run build -w shared",
+		"build:app": "npm run build -w front-panel",
+		"build": "npm run build:shared && npm run build:app",
+		"typecheck": "npm -ws --if-present run typecheck",
+		"format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md,css,scss}\"",
+		"db:reset": "node shared/src/scripts/reset-db.cjs"
+	},
+	"devDependencies": {
+		"concurrently": "^9.2.1",
+		"firebase-admin": "^14.3.0",
+		"firebase-tools": "^13.31.1",
+		"prettier": "^3.7.4",
+		"typescript": "^5.9.2"
+	},
+	"allowScripts": {
+		"@firebase/util@1.12.1": true,
+		"@firebase/util@1.15.3": true,
+		"protobufjs@7.6.6": true,
+		"re2@1.26.1": true,
+		"sharp@0.34.5": true
+	}
+}

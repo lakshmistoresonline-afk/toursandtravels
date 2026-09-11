@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+	--font-sans: "Inter", sans-serif;
+	--font-serif: "Playfair Display", serif;
+	--font-display: "Cinzel", serif;
+}
+
+html {
+	background-color: #0a0e1a;
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: #0a0e1a !important;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.ambady-content-wrapper {
+	position: relative;
+}
+
+:root {
+	--background: transparent;
+	--foreground: #fdfcf0;
+	--card: rgba(10, 14, 26, 0.7);
+	--card-foreground: #fdfcf0;
+	--popover: rgba(10, 14, 26, 0.9);
+	--popover-foreground: #fdfcf0;
+	--primary: #d4af37;
+	--primary-foreground: #0a0e1a;
+	--secondary: rgba(212, 175, 55, 0.1);
+	--secondary-foreground: #d4af37;
+	--muted: rgba(253, 252, 240, 0.1);
+	--muted-foreground: rgba(253, 252, 240, 0.6);
+	--accent: #d4af37;
+	--accent-foreground: #0a0e1a;
+	--warning: #f59e0b;
+	--destructive: #ef4444;
+	--destructive-foreground: #ffffff;
+	--border: rgba(212, 175, 55, 0.4);
+	--input: rgba(212, 175, 55, 0.2);
+	--ring: #d4af37;
+	--radius: 0.75rem;
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-warning: var(--warning);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+
+	--font-sans: var(--font-sans);
+	--font-serif: var(--font-serif);
+	--font-display: var(--font-display);
+}
+
+@layer base {
+	* {
+		@apply border-border/40;
+	}
+
+	body {
+		@apply text-foreground font-sans;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		@apply font-serif tracking-tight;
+	}
+}
+
+.glass-card {
+	@apply bg-black/40 backdrop-blur-md border border-white/10 shadow-xl;
+}
+
+.ivory-glass-card {
+	@apply bg-[#fdfcf0]/90 backdrop-blur-md border border-[#d4af37]/20 shadow-xl;
+}
+
+.gold-gradient {
+	@apply bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#f4d03f];
+}
+
+.max-container {
+	@apply max-w-7xl mx-auto px-4;
+}
+
+.section-heading {
+	@apply text-2xl font-bold;
+}
+
+@media (min-width: 40rem) {
+	.section-heading {
+		@apply text-3xl;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--primary);
+}
+
+::-webkit-scrollbar-track {
+	background-color: var(--secondary);
+}
+
+table tr td {
+	padding-block: 1.3rem !important;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+::selection {
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+.booking-page-row {
+	@apply flex justify-between gap-2 flex-wrap;
+}

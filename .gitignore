@@ -1,0 +1,17 @@
+node_modules
+build
+dist
+.react-router
+.vercel
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.idea
+*.log
+# User requested to keep these in Git for portability
+# .env
+# .env.*
+# Push protection usually blocks these, ignore them to prevent push failures
+toursandtravels-73c62-firebase-adminsdk-fbsvc-7f445fae34.json
+.artifacts/
+
