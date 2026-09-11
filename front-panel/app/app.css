@@ -36,11 +36,16 @@ body {
 	}
 }
 
+#root {
+	width: 100%;
+}
+
 .ambady-content-wrapper {
 	position: relative;
 	min-height: 100vh;
 	display: flex;
-	flex-col: column;
+	flex-direction: column;
+	width: 100%;
 }
 
 :root {
