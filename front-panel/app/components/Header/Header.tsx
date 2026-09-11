@@ -26,7 +26,7 @@ export default function Header() {
 	const user = rootLoaderData?.user as FullCurrentUser | null;
 
 	return (
-		<header className="bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-[#d4af37]/30 sticky top-0 z-50 shadow-2xl">
+		<header className="bg-[#0a0e1a] border-b border-[#d4af37]/30 sticky top-0 z-50 shadow-2xl">
 			<div className="container mx-auto flex items-center h-20 px-6">
 				{/* Mobile menu */}
 				<div className="mr-4 lg:hidden">
