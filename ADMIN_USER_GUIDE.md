@@ -1,5 +1,9 @@
 # AMBADY Admin Management Guide
 
+**Application Address:** [https://toursandtravels-73c62.web.app](https://toursandtravels-73c62.web.app)
+
+---
+
 Welcome to the AMBADY administrative sanctuary. This guide provides step-by-step instructions for managing sacred journeys, pilgrims, and registrations.
 
 ## 1. Admin Dashboard
