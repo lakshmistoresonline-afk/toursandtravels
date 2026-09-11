@@ -30,7 +30,7 @@ export const signupSchema = z.object({
 		.string()
 		.min(1, "Aadhar number is required")
 		.regex(/^\d{12}$/, "Aadhar number must be exactly 12 digits"),
-	gender: z.enum(["Male", "Female", "Other", "Prefer not to say"], {
+	gender: z.enum(["Male", "Female", "Other"], {
 		errorMap: () => ({ message: "Please select your gender" }),
 	}),
 	dateOfBirth: z

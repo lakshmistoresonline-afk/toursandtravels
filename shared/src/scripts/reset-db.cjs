@@ -28,7 +28,8 @@ const testUsers = [
         firstName: "AMBADY",
         lastName: "Admin",
         phone: "9999988888",
-        aadhar: "111122223333"
+        aadhar: "111122223333",
+        gender: "Other"
     },
     {
         email: "john.doe@example.com",
@@ -37,7 +38,8 @@ const testUsers = [
         firstName: "John",
         lastName: "Doe",
         phone: "9876543210",
-        aadhar: "123456789012"
+        aadhar: "123456789012",
+        gender: "Male"
     },
     {
         email: "jane.smith@example.com",
@@ -46,7 +48,8 @@ const testUsers = [
         firstName: "Jane",
         lastName: "Smith",
         phone: "9876543211",
-        aadhar: "223344556677"
+        aadhar: "223344556677",
+        gender: "Female"
     },
     {
         email: "alice.v@example.com",
@@ -55,7 +58,8 @@ const testUsers = [
         firstName: "Alice",
         lastName: "V",
         phone: "9876543212",
-        aadhar: "334455667788"
+        aadhar: "334455667788",
+        gender: "Female"
     },
 ];
 
@@ -136,7 +140,7 @@ async function reset() {
                 role: u.role,
                 status: "active",
                 whatsapp_number: u.phone || null,
-                gender: "other",
+                gender: u.gender || "Other",
                 date_of_birth: "1990-01-01",
                 address_house: "Sacred Residency 108",
                 address_street: "Temple Road",

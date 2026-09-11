@@ -98,7 +98,7 @@ export default function SignupPage() {
 			phone: "",
 			password: "",
 			aadharNumber: "",
-			gender: "Prefer not to say" as any,
+			gender: "" as any,
 			dateOfBirth: "",
 		},
 	});
@@ -292,9 +292,6 @@ export default function SignupPage() {
 													<SelectItem value="Male">Male</SelectItem>
 													<SelectItem value="Female">Female</SelectItem>
 													<SelectItem value="Other">Other</SelectItem>
-													<SelectItem value="Prefer not to say">
-														Prefer not to say
-													</SelectItem>
 												</SelectContent>
 											</Select>
 											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
