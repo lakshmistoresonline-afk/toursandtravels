@@ -5,7 +5,8 @@
 		"**/.server/**/*",
 		"**/.client/**/*",
 		".react-router/types/**/*",
-		"app"
+		"app",
+		"../shared/src/**/*"
 	],
 	"exclude": ["node_modules", "build", "dist", ".react-router"],
 	"compilerOptions": {
@@ -22,8 +23,6 @@
 			"@workspace/shared/*": ["../shared/src/*"]
 		},
 		"esModuleInterop": true,
-		"verbatimModuleSyntax": false,
-		"rootDir": ".",
 		"outDir": "dist",
 		"noEmit": false,
 		"resolveJsonModule": true,

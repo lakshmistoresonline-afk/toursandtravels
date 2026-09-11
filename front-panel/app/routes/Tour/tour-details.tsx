@@ -6,7 +6,6 @@ import {
 	useNavigation,
 	Link,
 } from "react-router";
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import {
 	Calendar,
@@ -14,9 +13,7 @@ import {
 	MapPin,
 	ArrowLeft,
 	ShieldCheck,
-	CheckCircle2,
-	Clock,
-	Users
+	CheckCircle2
 } from "lucide-react";
 import { useMemo, useEffect } from "react";
 import TourImageCarousel from "~/components/Tour/TourImageCarousel";
@@ -86,12 +83,12 @@ export default function TourDetailsPage() {
 	if (!tour) return <div className="container py-20 text-center text-[#fdfcf0]/40">Journey not found</div>;
 
 	const tour_images = useMemo(() => {
-		const isUrlValid = (url: string | null) => {
-			return url && url !== "" && !url.includes("placeholder") && url.startsWith("http");
+		const isUrlValid = (url: string | null): url is string => {
+			return !!(url && url !== "" && !url.includes("placeholder") && url.startsWith("http"));
 		};
 
-		const filteredImages = tour?.images?.filter((i: string | null) => isUrlValid(i)) ?? [];
-		const images = [];
+		const filteredImages = tour?.images?.filter(isUrlValid) ?? [];
+		const images: Array<{ url: string; title: string }> = [];
 
 		if (isUrlValid(tour?.cover_image)) {
 			images.push({ url: tour.cover_image, title: tour.name });
@@ -194,25 +191,25 @@ export default function TourDetailsPage() {
 
 					{/* Sidebar Selection */}
 					<aside>
-						<div className="sticky top-24 bg-white/5 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
-							<div className="bg-[#d4af37]/5 border-b border-white/5 p-10 space-y-4">
+						<div className="sticky top-24 surface-card-strong border-[#d4af37]/20 rounded-[3rem] overflow-hidden shadow-2xl">
+							<div className="bg-[#d4af37]/10 border-b border-white/5 p-10 space-y-4">
 								<p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#d4af37]">Spiritual Exchange</p>
 								<div className="flex items-baseline gap-2">
 									<span className="text-5xl font-serif text-[#d4af37]">
 										{tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquiry Only"}
 									</span>
-									{tour.price > 0 && <span className="text-[#fdfcf0]/20 text-[10px] font-bold uppercase tracking-widest">/ pilgrim</span>}
+									{tour.price > 0 && <span className="text-[#fdfcf0]/40 text-[10px] font-bold uppercase tracking-widest">/ pilgrim</span>}
 								</div>
 							</div>
 
 							<div className="p-10 space-y-10">
 								<div className="grid grid-cols-2 gap-4">
-									<div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center space-y-1">
-										<p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#d4af37]/40">Departure</p>
+									<div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center space-y-1">
+										<p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">Departure</p>
 										<p className="font-bold text-[#fdfcf0] text-xs uppercase tracking-widest">{tour.start_date || 'Flexible'}</p>
 									</div>
-									<div className="p-5 rounded-2xl bg-white/5 border border-white/5 text-center space-y-1">
-										<p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#d4af37]/40">Limit</p>
+									<div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center space-y-1">
+										<p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">Limit</p>
 										<p className="font-bold text-[#fdfcf0] text-xs uppercase tracking-widest">{tour.max_participants || "20"}</p>
 									</div>
 								</div>

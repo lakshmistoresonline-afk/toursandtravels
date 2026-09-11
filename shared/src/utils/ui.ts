@@ -18,3 +18,10 @@ export function formatTourDurationHours(input: number): string {
 
 	return `${hours} hour${hours !== 1 ? "s" : ""} ${minutes} minute${minutes !== 1 ? "s" : ""}`;
 }
+
+export function maskAadhar(aadhar: string | null | undefined): string {
+	if (!aadhar) return "N/A";
+	const clean = aadhar.replace(/\s/g, "");
+	if (clean.length < 12) return aadhar;
+	return `XXXX XXXX ${clean.slice(-4)}`;
+}

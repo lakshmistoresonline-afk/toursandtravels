@@ -1,6 +1,5 @@
 import { useLoaderData, Link } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Users, MapPin, ClipboardList, PlusCircle, ArrowRight, Calendar, User, IndianRupee } from "lucide-react";
 import { collection, getDocs, limit, query, orderBy } from "firebase/firestore";
 import { db } from "@workspace/shared/lib/firebase";
@@ -77,18 +76,18 @@ export default function AdminDashboard() {
 			{/* Stats Grid */}
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 				{cards.map((card) => (
-					<div key={card.title} className="bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/30 transition-all duration-500 shadow-2xl">
+					<div key={card.title} className="surface-card rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/30 transition-all duration-500 shadow-2xl">
 						<div className="p-10 flex items-center justify-between">
 							<div className="space-y-2">
-								<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">{card.title}</p>
+								<p className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.3em]">{card.title}</p>
 								<p className="text-5xl font-serif text-[#fdfcf0] tracking-tight">{card.value}</p>
 							</div>
 							<div className={`p-5 rounded-full bg-white/5 border border-white/10 ${card.color}`}>
 								<card.icon className="h-8 w-8" />
 							</div>
 						</div>
-						<div className="px-10 pb-6">
-							<Link to={card.link} prefetch="intent" viewTransition className="text-[9px] font-bold text-[#d4af37]/60 uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors flex items-center gap-2">
+						<div className="px-10 pb-6 border-t border-white/5 pt-4">
+							<Link to={card.link} prefetch="intent" viewTransition className="text-[9px] font-bold text-[#d4af37] uppercase tracking-[0.3em] hover:text-[#fdfcf0] transition-colors flex items-center gap-2">
 								Manage {card.title} <ArrowRight className="h-3 w-3" />
 							</Link>
 						</div>
@@ -98,11 +97,11 @@ export default function AdminDashboard() {
 
 			<div className="grid lg:grid-cols-3 gap-12">
 				{/* Recent Activity */}
-				<div className="lg:col-span-2 bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
-					<div className="px-10 py-8 border-b border-white/5 flex flex-row items-center justify-between bg-white/[0.02]">
+				<div className="lg:col-span-2 surface-card rounded-[2.5rem] overflow-hidden shadow-2xl">
+					<div className="px-10 py-8 border-b border-white/5 flex flex-row items-center justify-between bg-white/5">
 						<div className="flex items-center gap-4">
 							<Calendar className="h-5 w-5 text-[#d4af37]" />
-							<h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/80">Recent Pilgrim Registrations</h3>
+							<h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[#fdfcf0]">Recent Pilgrim Registrations</h3>
 						</div>
 					</div>
 					<div className="p-0">
@@ -111,12 +110,12 @@ export default function AdminDashboard() {
 								{recentRegistrations.map((reg: any) => (
 									<div key={reg.id} className="p-8 flex items-center justify-between hover:bg-white/5 transition-all duration-300">
 										<div className="flex items-center gap-6">
-											<div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37]/40">
+											<div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37]">
 												<User className="h-6 w-6" />
 											</div>
 											<div className="space-y-1">
 												<p className="font-serif text-[#fdfcf0] text-lg">{(reg as any).profileSnapshot?.first_name} {(reg as any).profileSnapshot?.last_name}</p>
-												<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest">{(reg as any).tours?.name}</p>
+												<p className="text-[10px] text-[#fdfcf0]/60 font-bold uppercase tracking-widest">{(reg as any).tours?.name}</p>
 											</div>
 										</div>
 										<div className="text-right space-y-2">
@@ -124,14 +123,14 @@ export default function AdminDashboard() {
 												<IndianRupee className="h-3.5 w-3.5" />
 												{((reg as any).tours?.price * (reg as any).travellersCount).toLocaleString()}
 											</div>
-											<Badge className={`text-[8px] uppercase tracking-widest border font-bold px-3 py-1 rounded-full bg-transparent ${reg.status === 'CONFIRMED' ? 'text-emerald-400 border-emerald-400/20' : 'text-[#d4af37] border-[#d4af37]/20'}`}>{(reg as any).status}</Badge>
+											<Badge className={`text-[8px] uppercase tracking-widest border font-bold px-3 py-1 rounded-full bg-black/20 ${reg.status === 'CONFIRMED' ? 'text-emerald-400 border-emerald-400/20' : 'text-[#d4af37] border-[#d4af37]/20'}`}>{(reg as any).status}</Badge>
 										</div>
 									</div>
 								))}
 							</div>
 						) : (
 							<div className="p-32 text-center space-y-4">
-								<p className="text-[#fdfcf0]/10 font-serif italic text-2xl uppercase tracking-widest">No recent pilgrims found.</p>
+								<p className="text-[#fdfcf0]/20 font-serif italic text-2xl uppercase tracking-widest">No recent pilgrims found.</p>
 							</div>
 						)}
 					</div>
@@ -139,15 +138,15 @@ export default function AdminDashboard() {
 
 				{/* Secondary Information & Paths */}
 				<div className="space-y-8">
-					<div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10 flex flex-col items-center text-center space-y-6 shadow-2xl">
-						<div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37]/40">
+					<div className="surface-card rounded-[2.5rem] p-10 flex flex-col items-center text-center space-y-6 shadow-2xl">
+						<div className="h-20 w-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37]">
 							<PlusCircle className="h-10 w-10" />
 						</div>
 						<div className="space-y-2">
 							<p className="text-[#fdfcf0] font-serif text-xl tracking-tight">Expand Sanctuary</p>
-							<p className="text-[10px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest leading-relaxed">Initiate new sacred paths and pilgrimage experiences.</p>
+							<p className="text-[10px] text-[#fdfcf0]/60 font-bold uppercase tracking-widest leading-relaxed">Initiate new sacred paths and pilgrimage experiences.</p>
 						</div>
-						<Button asChild className="rounded-full bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] px-8 h-14 hover:bg-[#b8860b] transition-all">
+						<Button asChild className="rounded-full bg-[#d4af37] text-[#0a0e1a] font-bold uppercase tracking-[0.2em] text-[10px] px-8 h-14 hover:bg-[#b8860b] transition-all shadow-lg shadow-[#d4af37]/20">
 							<Link to="/admin/tours/add" prefetch="intent" viewTransition>Initiate Journey</Link>
 						</Button>
 					</div>

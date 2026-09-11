@@ -1,6 +1,6 @@
 import { Form, Link, NavLink, useNavigation, useRouteLoaderData } from "react-router";
-import { Menu, LogIn, LogOutIcon, Loader2, Info, Calendar, LayoutDashboard, Compass } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "~/components/ui/sheet";
+import { Menu, Loader2, Compass } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
 import { clientLoader as loader } from "~/root";
 import {
@@ -26,18 +26,24 @@ export default function Header() {
 	const user = rootLoaderData?.user as FullCurrentUser | null;
 
 	return (
-		<header className="bg-[#0a0e1a]/80 backdrop-blur-md border-b border-[#d4af37]/10 sticky top-0 z-50">
-			<div className="container mx-auto flex items-center h-20 px-4">
+		<header className="bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-[#d4af37]/30 sticky top-0 z-50 shadow-2xl">
+			<div className="container mx-auto flex items-center h-20 px-6">
 				{/* Mobile menu */}
 				<div className="mr-4 lg:hidden">
 					<Sheet>
 						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon" className="rounded-full text-[#d4af37]"><Menu className="h-5 w-5" /></Button>
+							<Button variant="ghost" size="icon" className="rounded-full text-[#d4af37] hover:bg-white/5"><Menu className="h-5 w-5" /></Button>
 						</SheetTrigger>
-						<SheetContent side="left" className="w-[280px] bg-[#0a0e1a] border-r border-[#d4af37]/10">
-							<nav className="flex flex-col gap-6 mt-12">
+						<SheetContent side="left" className="w-[300px] bg-[#0a0e1a] border-r border-[#d4af37]/20 p-8 shadow-2xl">
+							<div className="mb-12">
+								<Link to="/" className="flex items-center gap-3">
+									<Compass className="h-8 w-8 text-[#d4af37]" />
+									<span className="text-2xl font-display font-bold tracking-widest text-[#d4af37]">AMBADY</span>
+								</Link>
+							</div>
+							<nav className="flex flex-col gap-8">
 								{NAV_LINKS.map((link) => (
-									<NavLink key={link.to} to={link.to} prefetch="intent" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest transition-all ${isActive ? "text-[#d4af37]" : "text-[#fdfcf0]/60 hover:text-[#d4af37]"}`}>
+									<NavLink key={link.to} to={link.to} prefetch="intent" className={({ isActive }) => `text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${isActive ? "text-[#d4af37] pl-4 border-l-2 border-[#d4af37]" : "text-[#fdfcf0]/60 hover:text-[#d4af37]"}`}>
 										{link.label}
 									</NavLink>
 								))}
@@ -46,9 +52,11 @@ export default function Header() {
 					</Sheet>
 				</div>
 
-				<Link to="/" className="flex items-center gap-3">
-					<Compass className="h-6 w-6 text-[#d4af37]" />
-					<span className="text-xl font-display font-bold tracking-widest text-[#d4af37]">AMBADY</span>
+				<Link to="/" className="flex items-center gap-4 group">
+					<div className="h-10 w-10 rounded-full bg-black/40 border border-[#d4af37]/40 flex items-center justify-center text-[#d4af37] shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-transform duration-500 group-hover:rotate-12">
+						<Compass className="h-6 w-6" />
+					</div>
+					<span className="text-2xl font-display font-bold tracking-[0.2em] text-[#d4af37]">AMBADY</span>
 				</Link>
 
 				<nav className="ml-12 hidden lg:flex items-center gap-8">
@@ -84,7 +92,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 			<DropdownMenuTrigger asChild className="cursor-pointer">
 				<div className="flex items-center gap-2 p-1 rounded-full hover:bg-white/5 transition-colors">
 					<Avatar className="h-8 w-8 border border-[#d4af37]/30">
-						<AvatarImage src={user.avatar_url} />
+						<AvatarImage src={user.avatar_url || undefined} />
 						<AvatarFallback className="bg-[#d4af37] text-[#0a0e1a] font-bold text-xs">{user.first_name?.charAt(0) ?? "A"}</AvatarFallback>
 					</Avatar>
 				</div>

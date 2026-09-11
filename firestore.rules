@@ -15,8 +15,17 @@ service cloud.firestore {
     // Users collection
     match /users/{userId} {
       allow read: if isOwner(userId) || isAdmin();
-      allow create: if request.auth != null && request.resource.data.role == 'user';
-      allow update: if (isOwner(userId) && request.resource.data.role == resource.data.role) || isAdmin();
+      // Allow creation during signup, but enforce role and status
+      allow create: if request.auth != null &&
+                      request.auth.uid == userId &&
+                      request.resource.data.role == 'user' &&
+                      request.resource.data.status == 'active';
+      // Allow updates to own profile, but protect sensitive fields
+      allow update: if (isOwner(userId) &&
+                        request.resource.data.role == resource.data.role &&
+                        request.resource.data.uid == resource.data.uid &&
+                        request.resource.data.createdAt == resource.data.createdAt) ||
+                      isAdmin();
       allow delete: if isAdmin();
     }
 
@@ -35,9 +44,11 @@ service cloud.firestore {
     // Registrations collection
     match /registrations/{regId} {
       allow read: if isAdmin() || (request.auth != null && resource.data.customerId == request.auth.uid);
+      // Prevent normal users from confirming their own registration or setting custom timestamps
       allow create: if request.auth != null &&
                       request.resource.data.customerId == request.auth.uid &&
-                      get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role != 'admin';
+                      get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role != 'admin' &&
+                      request.resource.data.status == 'PENDING';
       allow update: if isAdmin();
       allow delete: if isAdmin();
     }

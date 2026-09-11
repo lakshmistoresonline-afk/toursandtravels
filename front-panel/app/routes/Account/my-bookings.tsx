@@ -39,18 +39,18 @@ export default function MyBookingsPage() {
 			</div>
 
 			{registrations.length === 0 ? (
-				<div className="py-32 text-center glass-card rounded-[3rem] border border-dashed border-[#d4af37]/20">
+				<div className="py-32 text-center surface-card rounded-[3rem] border border-dashed border-[#d4af37]/20">
 					<Compass className="h-12 w-12 text-[#d4af37]/20 mx-auto mb-6" />
-					<p className="text-[#fdfcf0]/40 text-sm font-bold uppercase tracking-widest">You haven't joined any pilgrimage journeys yet.</p>
-					<Link to="/tours" className="text-[#d4af37] hover:text-[#fdfcf0] mt-6 inline-block text-[10px] font-bold uppercase tracking-[0.2em] border-b border-[#d4af37]/40 pb-1 transition-all">Explore Sacred Pilgrimage Journeys</Link>
+					<p className="text-[#fdfcf0]/60 text-sm font-bold uppercase tracking-widest">You haven't joined any pilgrimage journeys yet.</p>
+					<Link to="/" className="text-[#d4af37] hover:text-[#fdfcf0] mt-6 inline-block text-[10px] font-bold uppercase tracking-[0.2em] border-b border-[#d4af37]/40 pb-1 transition-all">Explore Sacred Pilgrimage Journeys</Link>
 				</div>
 			) : (
 				<div className="grid gap-8">
 					{registrations.map((reg: any) => (
-						<Card key={reg.id} className="glass-card border border-white/5 rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/20 transition-all duration-500">
+						<Card key={reg.id} className="surface-card border border-white/5 rounded-[2.5rem] overflow-hidden group hover:border-[#d4af37]/20 transition-all duration-500 shadow-2xl">
 							<CardContent className="p-0">
 								<div className="flex flex-col md:flex-row">
-									<div className="w-full md:w-64 h-48 md:h-auto overflow-hidden bg-[#0a0e1a] flex items-center justify-center border-r border-white/5">
+									<div className="w-full md:w-64 h-48 md:h-auto overflow-hidden bg-black/40 flex items-center justify-center border-r border-white/5">
 										{(!imgErrors[reg.id] && isUrlValid(reg.tours?.cover_image)) ? (
 											<img
 												src={reg.tours.cover_image!}

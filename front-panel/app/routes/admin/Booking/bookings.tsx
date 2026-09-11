@@ -8,13 +8,11 @@ import {
 	useNavigation,
 	useActionData,
 	useSubmit,
-	Form,
 } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import {
 	DataTable,
 	DataTableSkeleton,
-	TableColumnsToggle,
 } from "~/components/Table/data-table";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -33,6 +31,8 @@ import { ToursService } from "@workspace/shared/services/tours.service";
 import { AuthService } from "@workspace/shared/services/auth.service";
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
+import { maskAadhar } from "@workspace/shared/utils/ui";
+import { type TourRegistration } from "@workspace/shared/types/booking";
 
 export const clientLoader = async () => {
 	const bookingSvc = new BookingService();
@@ -116,7 +116,7 @@ export default function BookingsPage() {
 	const handleExport = async () => {
 		setIsExporting(true);
 		try {
-			const exportData = data.registrations.map((reg: any) => ({
+			const exportData = data.registrations.map((reg: TourRegistration) => ({
 				"Tour Name": reg.tours?.name || "N/A",
 				"Tour Code": reg.tours?.tour_code || "N/A",
 				"Customer Name": `${reg.profileSnapshot?.first_name || ""} ${reg.profileSnapshot?.last_name || ""}`,
@@ -125,13 +125,13 @@ export default function BookingsPage() {
 				"Travellers": reg.travellersCount,
 				"Status": reg.status,
 				"Amount (INR)": (reg.tours?.price * reg.travellersCount) || 0,
-				"Registration Date": reg.createdAt ? format(new Date(reg.createdAt), "yyyy-MM-dd HH:mm") : "N/A",
+				"Registration Date": reg.createdAt ? format(new Date(reg.createdAt as any), "yyyy-MM-dd HH:mm") : "N/A",
 			}));
 
 			const worksheet = XLSX.utils.json_to_sheet(exportData);
 			const workbook = XLSX.utils.book_new();
 			XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
-			XLSX.writeFile(workbook, `AMBADY PILGRIMAGE EXPERIENCES_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
+			XLSX.writeFile(workbook, `AMBADY_Registrations_${format(new Date(), "yyyyMMdd")}.xlsx`);
 		} catch (error) {
 			console.error("Export failed:", error);
 		} finally {
@@ -234,11 +234,11 @@ export default function BookingsPage() {
 				</div>
 			</div>
 
-			<div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+			<div className="surface-card-strong rounded-[2rem] overflow-hidden shadow-2xl">
 				{isFetching ? (
-					<div className="p-8 bg-[#0a0e1a]"><DataTableSkeleton noOfSkeletons={10} columns={tableColumns} /></div>
+					<div className="p-8 bg-black/20"><DataTableSkeleton noOfSkeletons={10} columns={tableColumns} /></div>
 				) : (
-					<div className="bg-[#0a0e1a]">
+					<div className="bg-black/20">
 						<DataTable
 							table={table}
 							pageSize={10}
@@ -251,25 +251,25 @@ export default function BookingsPage() {
 
 			{/* Manual Registration Dialog */}
 			<Dialog open={isManualRegOpen} onOpenChange={setIsManualRegOpen}>
-				<DialogContent className="max-w-md bg-[#0a0e1a] border-white/10 text-[#fdfcf0]">
-					<DialogHeader>
-						<DialogTitle className="text-xl font-serif">Manual Registration</DialogTitle>
-						<DialogDescription className="text-[#fdfcf0]/40 text-xs">Register a pilgrim for a pilgrimage journey manually.</DialogDescription>
+				<DialogContent className="max-w-md surface-card-solid border-white/10 text-[#fdfcf0] shadow-2xl">
+					<DialogHeader className="p-2 border-b border-white/5 mb-4">
+						<DialogTitle className="text-2xl font-serif">Manual Registration</DialogTitle>
+						<DialogDescription className="text-[#fdfcf0]/60 text-[10px] uppercase tracking-widest mt-1">Register a pilgrim for a journey manually.</DialogDescription>
 					</DialogHeader>
-					<form onSubmit={handleManualSubmit} className="space-y-4 py-4">
-						<div className="space-y-2">
-							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Select Pilgrimage Journey</Label>
+					<form onSubmit={handleManualSubmit} className="space-y-6 py-2">
+						<div className="space-y-3">
+							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Select Pilgrimage Journey</Label>
 							<Select name="tourId" required>
-								<SelectTrigger className="bg-white/5 border-white/10 text-[#fdfcf0]"><SelectValue placeholder="Choose a pilgrimage journey" /></SelectTrigger>
-								<SelectContent className="bg-[#0a0e1a] border-white/10 text-[#fdfcf0]">
+								<SelectTrigger className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl focus:ring-[#d4af37]/20"><SelectValue placeholder="Choose a pilgrimage journey" /></SelectTrigger>
+								<SelectContent className="surface-card-solid border-white/10 text-[#fdfcf0]">
 									{tours.map((t: any) => (
-										<SelectItem key={t.id} value={t.id}>{t.name} ({t.tour_code})</SelectItem>
+										<SelectItem key={t.id} value={t.id} className="focus:bg-[#d4af37]/10">{t.name} ({t.tour_code})</SelectItem>
 									))}
 								</SelectContent>
 							</Select>
 						</div>
 
-						<div className="flex items-center gap-3 p-1">
+						<div className="flex items-center gap-3 p-1 bg-white/5 rounded-xl border border-white/5">
 							<input
 								type="checkbox"
 								id="isNewUser"
@@ -277,7 +277,7 @@ export default function BookingsPage() {
 								value="true"
 								checked={isNewUser}
 								onChange={(e) => setIsNewUser(e.target.checked)}
-								className="h-4 w-4 rounded border-white/10 bg-white/5 text-[#d4af37] focus:ring-[#d4af37]/20"
+								className="h-4 w-4 ml-2 rounded border-white/20 bg-black/40 text-[#d4af37] focus:ring-[#d4af37]/20"
 							/>
 							<Label htmlFor="isNewUser" className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37] cursor-pointer">Register New Pilgrim</Label>
 						</div>
@@ -286,53 +286,53 @@ export default function BookingsPage() {
 							<div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
 								<div className="grid grid-cols-2 gap-4">
 									<div className="space-y-2">
-										<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">First Name</Label>
-										<Input name="firstName" placeholder="First Name" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+										<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">First Name</Label>
+										<Input name="firstName" placeholder="First Name" required className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl" />
 									</div>
 									<div className="space-y-2">
-										<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Last Name</Label>
-										<Input name="lastName" placeholder="Last Name" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+										<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Last Name</Label>
+										<Input name="lastName" placeholder="Last Name" required className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl" />
 									</div>
 								</div>
 								<div className="space-y-2">
-									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Email Address</Label>
-									<Input name="email" type="email" placeholder="pilgrim@example.com" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Email Address</Label>
+									<Input name="email" type="email" placeholder="pilgrim@example.com" required className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl" />
 								</div>
 								<div className="space-y-2">
-									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Phone Number</Label>
-									<Input name="phone" placeholder="10 Digit Number" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Phone Number</Label>
+									<Input name="phone" placeholder="10 Digit Number" required className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl" />
 								</div>
 								<div className="space-y-2">
-									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Aadhar Number</Label>
-									<Input name="aadharNumber" placeholder="12 Digit Number" required maxLength={12} className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Aadhar Number</Label>
+									<Input name="aadharNumber" placeholder="12 Digit Number" required maxLength={12} className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl" />
 								</div>
 								<p className="text-[9px] text-[#d4af37]/60 font-bold uppercase tracking-widest text-center italic">Default Password: Password123</p>
 							</div>
 						) : (
-							<div className="space-y-2 animate-in slide-in-from-top-2 duration-300">
-								<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Select Existing Pilgrim</Label>
+							<div className="space-y-3 animate-in slide-in-from-top-2 duration-300">
+								<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Select Existing Pilgrim</Label>
 								<Select name="customerId" required>
-									<SelectTrigger className="bg-white/5 border-white/10 text-[#fdfcf0]"><SelectValue placeholder="Choose a pilgrim" /></SelectTrigger>
-									<SelectContent className="bg-[#0a0e1a] border-white/10 text-[#fdfcf0]">
+									<SelectTrigger className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl focus:ring-[#d4af37]/20"><SelectValue placeholder="Choose a pilgrim" /></SelectTrigger>
+									<SelectContent className="surface-card-solid border-white/10 text-[#fdfcf0]">
 										{users.map((u: any) => (
-											<SelectItem key={u.uid} value={u.uid}>{u.first_name} {u.last_name} ({u.email})</SelectItem>
+											<SelectItem key={u.uid} value={u.uid} className="focus:bg-[#d4af37]/10">{u.first_name} {u.last_name} ({u.email})</SelectItem>
 										))}
 									</SelectContent>
 								</Select>
 							</div>
 						)}
 
-						<div className="space-y-2">
-							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Pilgrims Count</Label>
-							<Input type="number" name="travellersCount" defaultValue={1} min={1} required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+						<div className="space-y-3">
+							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Pilgrims Count</Label>
+							<Input type="number" name="travellersCount" defaultValue={1} min={1} required className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl focus:ring-[#d4af37]/20" />
 						</div>
-						<div className="space-y-2">
-							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Notes</Label>
-							<Input name="notes" placeholder="Optional notes..." className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+						<div className="space-y-3">
+							<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40 ml-1">Notes</Label>
+							<Input name="notes" placeholder="Optional notes..." className="h-12 bg-black/40 border-white/10 text-[#fdfcf0] rounded-xl focus:ring-[#d4af37]/20" />
 						</div>
-						<DialogFooter className="pt-4">
-							<Button type="button" variant="ghost" onClick={() => setIsManualRegOpen(false)} className="text-[#fdfcf0]/40 hover:text-[#fdfcf0]">Cancel</Button>
-							<Button type="submit" disabled={isSubmitting} className="bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] font-bold uppercase tracking-widest text-[10px] px-8 h-12 rounded-full">
+						<DialogFooter className="pt-6">
+							<Button type="button" variant="ghost" onClick={() => setIsManualRegOpen(false)} className="text-[#fdfcf0]/40 hover:text-[#fdfcf0] h-12">Cancel</Button>
+							<Button type="submit" disabled={isSubmitting} className="bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] font-bold uppercase tracking-widest text-[10px] px-10 h-14 rounded-full shadow-lg shadow-[#d4af37]/10">
 								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Register Pilgrim"}
 							</Button>
 						</DialogFooter>
@@ -342,34 +342,44 @@ export default function BookingsPage() {
 
 			<Dialog open={!!selectedReg} onOpenChange={() => setSelectedReg(null)}>
 				{selectedReg && (
-					<DialogContent className="max-w-2xl">
-						<DialogHeader>
-							<DialogTitle>Registration Details</DialogTitle>
-							<DialogDescription>Full details for registration on {selectedReg.tours?.name}</DialogDescription>
+					<DialogContent className="max-w-2xl surface-card-solid border-white/10 text-[#fdfcf0] shadow-2xl">
+						<DialogHeader className="p-2 border-b border-white/5 mb-6">
+							<DialogTitle className="text-3xl font-serif text-[#d4af37]">Registration Details</DialogTitle>
+							<DialogDescription className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#fdfcf0]/40 mt-1">Full details for registration on {selectedReg.tours?.name}</DialogDescription>
 						</DialogHeader>
 
-						<div className="grid md:grid-cols-2 gap-6 py-4">
+						<div className="grid md:grid-cols-2 gap-8 py-2">
 							<div className="space-y-4">
-								<h4 className="font-bold flex items-center gap-2"><User className="h-4 w-4" /> Customer Profile Snapshot</h4>
-								<div className="text-sm space-y-2 bg-muted p-4 rounded-lg">
-									<p><strong>Name:</strong> {selectedReg.profileSnapshot?.first_name} {selectedReg.profileSnapshot?.last_name}</p>
-									<p><strong>Email:</strong> {selectedReg.profileSnapshot?.email}</p>
-									<p><strong>Phone:</strong> {selectedReg.profileSnapshot?.phone_number}</p>
+								<h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37] flex items-center gap-2">
+									<User className="h-4 w-4" /> Pilgrim Profile
+								</h4>
+								<div className="text-sm space-y-3 bg-black/40 p-6 rounded-[1.5rem] border border-white/5">
+									<p className="flex justify-between items-center"><span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest">Name</span> <span className="font-serif text-lg">{selectedReg.profileSnapshot?.first_name} {selectedReg.profileSnapshot?.last_name}</span></p>
+									<p className="flex justify-between items-center"><span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest">Email</span> <span className="text-xs">{selectedReg.profileSnapshot?.email}</span></p>
+									<p className="flex justify-between items-center"><span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest">Phone</span> <span className="text-xs">{selectedReg.profileSnapshot?.phone_number}</span></p>
+									<p className="flex justify-between items-center"><span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest">Aadhar</span> <span className="font-mono text-xs">{maskAadhar(selectedReg.profileSnapshot?.aadhar_number)}</span></p>
 								</div>
 							</div>
 
 							<div className="space-y-4">
-								<h4 className="font-bold flex items-center gap-2"><MapPin className="h-4 w-4" /> Address</h4>
-								<div className="text-sm space-y-2 bg-muted p-4 rounded-lg">
-									<p><strong>Address:</strong> {selectedReg.profileSnapshot?.address_house}, {selectedReg.profileSnapshot?.address_street}</p>
-									<p><strong>Country:</strong> {selectedReg.profileSnapshot?.country}</p>
+								<h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37] flex items-center gap-2">
+									<MapPin className="h-4 w-4" /> Residency
+								</h4>
+								<div className="text-sm space-y-3 bg-black/40 p-6 rounded-[1.5rem] border border-white/5">
+									<p className="flex justify-between items-start gap-4">
+										<span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest mt-1">Location</span>
+										<span className="text-right leading-relaxed text-xs">{selectedReg.profileSnapshot?.address_house},<br/>{selectedReg.profileSnapshot?.address_street}</span>
+									</p>
+									<p className="flex justify-between items-center"><span className="text-[#fdfcf0]/40 font-bold uppercase text-[9px] tracking-widest">Country</span> <span className="text-xs">{selectedReg.profileSnapshot?.country || "Not Provided"}</span></p>
 								</div>
 							</div>
 						</div>
 
-						<div className="flex justify-end gap-2">
-							<Button variant="outline" onClick={() => setSelectedReg(null)}>Close</Button>
-							<Button>Confirm Registration</Button>
+						<div className="flex justify-end gap-4 pt-8">
+							<Button variant="ghost" onClick={() => setSelectedReg(null)} className="text-[#fdfcf0]/40 hover:text-[#fdfcf0] h-12">Close Details</Button>
+							<Button className="bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] font-bold uppercase tracking-widest text-[10px] px-12 h-16 rounded-full shadow-lg shadow-[#d4af37]/20">
+								Confirm Registration
+							</Button>
 						</div>
 					</DialogContent>
 				)}

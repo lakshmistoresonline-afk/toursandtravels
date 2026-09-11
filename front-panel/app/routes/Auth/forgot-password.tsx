@@ -1,14 +1,13 @@
-import { MailIcon, Loader2 } from "lucide-react";
+import { MailIcon, Loader2, Compass } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { type ActionFunctionArgs, Form as RouterForm, useActionData, useNavigation } from "react-router";
+import { type ActionFunctionArgs, Form as RouterForm, useActionData, useNavigation, Link } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { AuthService } from "@workspace/shared/services/auth.service";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { useEffect } from "react";
 
@@ -60,21 +59,21 @@ export default function ForgotPassword() {
 					</p>
 				</div>
 
-				<div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 shadow-xl">
+				<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
 					<Form {...form}>
-						<RouterForm method="POST" className="space-y-6">
+						<RouterForm method="POST" className="space-y-8">
 							<FormField
 								control={form.control}
 								name="email"
 								render={({ field }) => (
-									<FormItem className="space-y-2">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
+									<FormItem className="space-y-3">
+										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
 										<FormControl>
 											<div className="relative">
-												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]/40" />
+												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
 												<Input
 													placeholder="name@pilgrimage.com"
-													className="h-12 pl-12 rounded-xl border-white/5 bg-white/5 focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 text-sm"
+													className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base px-14"
 													{...field}
 												/>
 											</div>
@@ -83,8 +82,8 @@ export default function ForgotPassword() {
 									</FormItem>
 								)}
 							/>
-							<Button type="submit" className="w-full h-14 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-lg shadow-[#d4af37]/10" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Send Reset Link"}
+							<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSubmitting}>
+								{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Send Reset Link"}
 							</Button>
 						</RouterForm>
 					</Form>

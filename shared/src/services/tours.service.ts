@@ -6,9 +6,9 @@ import {
 	addDoc,
 	updateDoc,
 	query,
+	where,
 	orderBy,
-	serverTimestamp,
-	writeBatch
+	serverTimestamp
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { Service } from "@workspace/shared/services/service.base";
@@ -30,16 +30,6 @@ export class ToursService extends Service {
 				updatedAt: serverTimestamp(),
 				added_by: this.currentUid
 			});
-
-			if (input.itinerary && input.itinerary.length > 0) {
-				const itineraryRef = collection(this.db, this.TOURS_COLLECTION, docRef.id, "itineraries");
-				const batch = writeBatch(this.db);
-				input.itinerary.forEach((day: any) => {
-					const dayDoc = doc(itineraryRef);
-					batch.set(dayDoc, { ...day, createdAt: serverTimestamp() });
-				});
-				await batch.commit();
-			}
 
 			return docRef.id;
 		} catch (err: any) {
@@ -65,9 +55,16 @@ export class ToursService extends Service {
 			const tourDoc = await getDoc(doc(this.db, this.TOURS_COLLECTION, tourId));
 			if (!tourDoc.exists()) throw new ApiError("Pilgrimage journey not found", 404);
 			const tourData = tourDoc.data();
-			const itineraryRef = collection(this.db, this.TOURS_COLLECTION, tourId, "itineraries");
-			const itinerarySnap = await getDocs(query(itineraryRef, orderBy("day_number", "asc")));
-			const itinerary = itinerarySnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+			// Support both legacy subcollection and new field-based itinerary
+			let itinerary = tourData.itinerary || [];
+
+			if (itinerary.length === 0) {
+				const itineraryRef = collection(this.db, this.TOURS_COLLECTION, tourId, "itineraries");
+				const itinerarySnap = await getDocs(query(itineraryRef, orderBy("day_number", "asc")));
+				itinerary = itinerarySnap.docs.map(d => ({ id: d.id, ...d.data() }));
+			}
+
 			return { id: tourDoc.id, ...tourData, itinerary } as any;
 		} catch (err: any) {
 			throw new ApiError(err.message, 500);
@@ -76,26 +73,25 @@ export class ToursService extends Service {
 
 	/**
 	 * Get tours for front panel
-	 * Simplified query to avoid complex Firestore composite indexes
+	 * Uses status filter to avoid fetching drafts/closed journeys
 	 */
 	async getFPHighLevelTours(qText = ""): Promise<GetHighLevelToursResponse> {
 		try {
 			const toursRef = collection(this.db, this.TOURS_COLLECTION);
-			// Simple query - fetch all, filter in-memory for Spark Plan compatibility
-			const q = query(toursRef, orderBy("createdAt", "desc"));
+
+			// Use combined query for status
+			const q = query(
+				toursRef,
+				where("status", "in", ["PUBLISHED", "REGISTRATION_OPEN"]),
+				orderBy("createdAt", "desc")
+			);
 			const snap = await getDocs(q);
 
 			let tours = snap.docs.map(d => ({
 				id: d.id,
 				...d.data(),
-				// Handle Timestamp conversion for the frontend
 				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
 			})) as HighLevelTour[];
-
-			// Filter only open/published tours for users
-			tours = tours.filter(t =>
-				["PUBLISHED", "REGISTRATION_OPEN"].includes(t.status)
-			);
 
 			if (qText) {
 				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
@@ -104,7 +100,8 @@ export class ToursService extends Service {
 			return { tours, total: tours.length };
 		} catch (err: any) {
 			console.error("Firestore getFPHighLevelTours error:", err);
-			throw new ApiError(err.message, 500);
+			// Fallback to simpler query if index is missing
+			return this.getHighLevelTours(qText);
 		}
 	}
 

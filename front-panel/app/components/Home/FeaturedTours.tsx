@@ -1,7 +1,4 @@
 import { TourCard } from "~/components/Tour/TourCard";
-import { Link } from "react-router";
-import { ArrowRight, Compass } from "lucide-react";
-import { Button } from "~/components/ui/button";
 
 export default function FeaturedToursSection({ tours }: { tours: any[] }) {
 	if (!tours || tours.length === 0) return null;

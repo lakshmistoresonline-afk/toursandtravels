@@ -16,12 +16,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { AuthService } from "@workspace/shared/services/auth.service";
+import { mapAuthError } from "@workspace/shared/utils/auth-helper";
 import {
 	type emailPasswordLoginFormData,
 	emailPasswordLoginSchema,
 } from "@workspace/shared/schemas/login.schema";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 
 export async function clientAction({ request }: ActionFunctionArgs) {
@@ -37,7 +37,7 @@ export async function clientAction({ request }: ActionFunctionArgs) {
 	const { profile, error } = await authSvc.loginWithPassword({ email, password });
 
 	if (error) {
-		return { error: error.message, success: false };
+		return { error: mapAuthError(error.message), success: false };
 	}
 
 	// Redirect based on role
@@ -99,21 +99,21 @@ export default function LoginPage() {
 					</p>
 				</div>
 
-				<div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 shadow-xl">
+				<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
 					<Form {...form}>
-						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
+						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
 							<FormField
 								control={control}
 								name="email"
 								render={({ field }) => (
-									<FormItem className="space-y-2">
-										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
+									<FormItem className="space-y-3">
+										<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-1">Email Address</FormLabel>
 										<FormControl>
 											<div className="relative">
-												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]/40" />
+												<MailIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
 												<Input
 													placeholder="name@pilgrimage.com"
-													className="h-12 pl-12 rounded-xl border-white/5 bg-white/5 focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 text-sm"
+													className="h-14 pl-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base"
 													{...field}
 												/>
 											</div>
@@ -126,26 +126,26 @@ export default function LoginPage() {
 								control={control}
 								name="password"
 								render={({ field }) => (
-									<FormItem className="space-y-2">
+									<FormItem className="space-y-3">
 										<div className="flex justify-between items-center px-1">
-											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em]">Secret Code</FormLabel>
-											<Link to="/forgot-password" size="sm" className="text-[9px] font-bold text-[#d4af37]/60 hover:text-[#d4af37] uppercase tracking-widest transition-all">Forgot?</Link>
+											<FormLabel className="text-[10px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em]">Secret Code</FormLabel>
+											<Link to="/forgot-password" title="Forgot Password" className="text-[9px] font-bold text-[#d4af37] hover:text-[#fdfcf0] uppercase tracking-widest transition-all">Forgot?</Link>
 										</div>
 										<FormControl>
 											<div className="relative">
-												<LockIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]/40" />
+												<LockIcon className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
 												<Input
 													type={showPassword ? "text" : "password"}
 													placeholder="••••••••"
-													className="h-12 pl-12 pr-12 rounded-xl border-white/5 bg-white/5 focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 text-sm"
+													className="h-14 pl-14 pr-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 text-base"
 													{...field}
 												/>
 												<button
 													type="button"
 													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-5 top-1/2 -translate-y-1/2 text-[#d4af37]/40 hover:text-[#d4af37] transition-colors"
+													className="absolute right-5 top-1/2 -translate-y-1/2 text-[#d4af37]/60 hover:text-[#d4af37] transition-colors"
 												>
-													{showPassword ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
+													{showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
 												</button>
 											</div>
 										</FormControl>
@@ -153,8 +153,8 @@ export default function LoginPage() {
 									</FormItem>
 								)}
 							/>
-							<Button type="submit" className="w-full h-14 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-lg shadow-[#d4af37]/10" disabled={isSubmitting}>
-								{isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Sign In to Journey"}
+							<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSubmitting}>
+								{isSubmitting ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : "Sign In to Journey"}
 							</Button>
 						</form>
 					</Form>

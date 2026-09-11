@@ -1,11 +1,11 @@
 import {
 	collection,
 	doc,
-	getDoc,
 	getDocs,
 	query,
 	where,
 	orderBy,
+	limit,
 	serverTimestamp,
 	runTransaction
 } from "firebase/firestore";
@@ -86,8 +86,21 @@ export class BookingService extends Service {
 					customerId,
 					travellersCount,
 					notes: notes || null,
-					status: "CONFIRMED", // Admin registrations are confirmed by default
-					profileSnapshot: userDoc.data(),
+					status: customerId === this.currentUid ? "PENDING" : "CONFIRMED",
+					profileSnapshot: {
+						first_name: userData.first_name,
+						last_name: userData.last_name,
+						email: userData.email,
+						phone_number: userData.phone_number
+					},
+					tourSnapshot: {
+						name: tourData.name,
+						tour_code: tourData.tour_code,
+						destination: tourData.destination,
+						start_date: tourData.start_date,
+						price: tourData.price,
+						cover_image: tourData.cover_image
+					},
 					createdAt: serverTimestamp(),
 					updatedAt: serverTimestamp()
 				});
@@ -103,26 +116,41 @@ export class BookingService extends Service {
 		}
 	}
 
-	async getMyRegistrations(): Promise<GetTourRegistrationsResponse> {
+	async getMyRegistrations(_pageIndex = 0, pageSize = 10): Promise<GetTourRegistrationsResponse> {
 		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
-		const q = query(collection(this.db, this.REGISTRATIONS_COLLECTION), where("customerId", "==", this.currentUid), orderBy("createdAt", "desc"));
+		const q = query(
+			collection(this.db, this.REGISTRATIONS_COLLECTION),
+			where("customerId", "==", this.currentUid),
+			orderBy("createdAt", "desc"),
+			limit(pageSize)
+		);
 		const snap = await getDocs(q);
-		const registrations = await Promise.all(snap.docs.map(async (d) => {
+		const registrations = snap.docs.map((d) => {
 			const data = d.data();
-			const tourSnap = await getDoc(doc(this.db, this.TOURS_COLLECTION, data.tourId));
-			return { id: d.id, ...data, tours: tourSnap.exists() ? { id: tourSnap.id, ...tourSnap.data() } : null };
-		}));
+			return {
+				id: d.id,
+				...data,
+				tours: data.tourSnapshot || null
+			};
+		});
 		return { registrations, total: registrations.length } as any;
 	}
 
-	async getAllRegistrations(): Promise<GetTourRegistrationsResponse> {
-		const q = query(collection(this.db, this.REGISTRATIONS_COLLECTION), orderBy("createdAt", "desc"));
+	async getAllRegistrations(_pageIndex = 0, pageSize = 20): Promise<GetTourRegistrationsResponse> {
+		const q = query(
+			collection(this.db, this.REGISTRATIONS_COLLECTION),
+			orderBy("createdAt", "desc"),
+			limit(pageSize)
+		);
 		const snap = await getDocs(q);
-		const registrations = await Promise.all(snap.docs.map(async (d) => {
+		const registrations = snap.docs.map((d) => {
 			const data = d.data();
-			const tourSnap = await getDoc(doc(this.db, this.TOURS_COLLECTION, data.tourId));
-			return { id: d.id, ...data, tours: tourSnap.exists() ? { id: tourSnap.id, ...tourSnap.data() } : null };
-		}));
+			return {
+				id: d.id,
+				...data,
+				tours: data.tourSnapshot || null
+			};
+		});
 		return { registrations, total: registrations.length } as any;
 	}
 

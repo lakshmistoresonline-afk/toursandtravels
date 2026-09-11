@@ -58,8 +58,34 @@ export default function Home() {
 					</div>
 				</div>
 			) : (
-				/* Section 1: Hero for Guests */
-				<HeroSection hero_sections={[]} user={user} />
+				<>
+					{/* Section 1: Hero for Guests */}
+					<HeroSection user={user} />
+
+					{/* Section 2: The AMBADY Way */}
+					<section className="py-24 container mx-auto px-4">
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+							<div className="text-center space-y-4">
+								<h3 className="text-3xl font-serif text-[#d4af37]">Faith</h3>
+								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
+									Deeply rooted in spiritual traditions and divine connection.
+								</p>
+							</div>
+							<div className="text-center space-y-4">
+								<h3 className="text-3xl font-serif text-[#d4af37]">Heritage</h3>
+								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
+									Preserving the sacred stories and architectural wonders of our past.
+								</p>
+							</div>
+							<div className="text-center space-y-4">
+								<h3 className="text-3xl font-serif text-[#d4af37]">Inner Journeys</h3>
+								<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold leading-relaxed">
+									More than travel—a path to introspection and enlightenment.
+								</p>
+							</div>
+						</div>
+					</section>
+				</>
 			)}
 
 			{/* Section 2: Journeys */}

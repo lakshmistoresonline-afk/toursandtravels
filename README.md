@@ -1,23 +1,25 @@
-# Ambady Tours and Travels — Simple Tour Management System (Firebase Edition)
+# AMBADY — PILGRIMAGE EXPERIENCES
 
-This is a complete Firebase-only architecture for the Ambady Tours and Travels Tour Management System.
+Faith | Heritage | Inner Journeys
+
+This is a complete Firebase-only architecture for the AMBADY Pilgrimage Experiences platform.
 
 ## Features
 - **Firebase Hosting**: High-performance static hosting for the React SPA.
-- **Firebase Auth**: Single login for both Customers and Administrators.
-- **Cloud Firestore**: Real-time NoSQL database for users, tours, and registrations.
-- **Firebase Storage**: Cloud storage for tour images.
-- **Role-Based Security**: Hardened Firestore rules for admin and user access control.
-- **Spark-Friendly**: Optimized to run within Firebase's no-cost tier.
+- **Firebase Auth**: Single login for both Pilgrims and Administrators.
+- **Cloud Firestore**: Real-time NoSQL database for users, journeys, and registrations.
+- **Firebase Storage**: Secure cloud storage for journey images and pilgrim documents.
+- **Security Hardened**: Robust Firestore and Storage rules for granular access control.
+- **Responsive Design**: Elegant spiritual aesthetic optimized for all devices.
 
 ## Project Structure
-- `front-panel/`: The unified React Router v7 application (includes both User and Admin interfaces).
-- `shared/`: Shared services and types.
+- `front-panel/`: The unified React Router v7 application.
+- `shared/`: Shared services, schemas, and types.
 
 ## Setup Instructions
 
 ### 1. Firebase Project
-- Use existing project: `toursandtravels-73c62`.
+- Use project: `toursandtravels-73c62`.
 - Ensure Email/Password Auth is enabled.
 - Ensure Cloud Firestore is in Native mode.
 
@@ -36,22 +38,12 @@ npm run dev
 ```
 
 ### 5. Deployment
-Ensure you have `firebase-tools` installed and are logged in.
 ```bash
 firebase deploy
 ```
 
-## Admin Bootstrap
-To make a user an admin:
-1. Register normally through the `/signup` page.
-2. Go to the Firebase Console -> Firestore.
-3. Find the user document in the `users` collection.
-4. Change the `role` field from `"user"` to `"admin"`.
-5. Refresh the app, and you will have access to `/admin`.
-
-## Removed Services
-- Supabase (All components removed)
-- Stripe (Disabled/Mocked)
-- Redis (Removed)
-- Resend (Logging only)
-- Husky (Removed)
+## Admin Sanctuary
+To access the Admin Sanctuary:
+1. Register as a user through the `/signup` page.
+2. In Firestore, change the user's `role` to `"admin"`.
+3. Refresh the application to access `/admin`.

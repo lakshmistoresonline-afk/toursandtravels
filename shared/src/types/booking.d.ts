@@ -5,10 +5,15 @@ export type TourRegistration = {
 	travellersCount: number;
 	status: "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED";
 	notes: string | null;
-	profileSnapshot: any;
-	createdAt: any;
-	updatedAt: any;
-	tours?: any; // Joined tour details
+	profileSnapshot: {
+		first_name: string | null;
+		last_name: string | null;
+		email: string;
+		phone_number: string | null;
+	};
+	createdAt: string | Date;
+	updatedAt: string | Date;
+	tours?: any;
 };
 
 export type GetTourRegistrationsResponse = {

@@ -10,8 +10,12 @@ export type HighLevelTour = {
 	start_time: string | null;
 	end_date: string | null;
 	end_time: string | null;
-	createdAt: any;
-	updatedAt: any;
+	max_participants?: number;
+	currentParticipants?: number;
+	registrations?: any[];
+	pilgrimCount?: number;
+	createdAt: string | Date;
+	updatedAt: string | Date;
 };
 
 export type GetTourDetails = HighLevelTour & {

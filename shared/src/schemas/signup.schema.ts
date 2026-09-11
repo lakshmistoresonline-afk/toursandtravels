@@ -18,36 +18,35 @@ export const signupSchema = z.object({
 	email: z
 		.string()
 		.min(1, "Email is required")
-		.email()
+		.email("Please enter a valid email address")
 		.refine((val) => val.trim().length > 0, {
 			message: "Email is required",
 		}),
+	phone: z
+		.string()
+		.min(1, "Phone number is required")
+		.regex(/^[6-9][0-9]{9}$/, "Please enter a valid 10-digit Indian mobile number"),
 	aadharNumber: z
 		.string()
 		.min(1, "Aadhar number is required")
 		.regex(/^\d{12}$/, "Aadhar number must be exactly 12 digits"),
-	phone: z
+	gender: z.enum(["Male", "Female", "Other", "Prefer not to say"], {
+		errorMap: () => ({ message: "Please select your gender" }),
+	}),
+	dateOfBirth: z
 		.string()
-		.optional()
-		.refine(
-			(value) => {
-				if (!value) return true;
-				return value.trim().length > 0 && /^\d{10,}$/.test(value.replace(/\D/g, ""));
-			},
-			{
-				message: "Phone number is required and must be at least 10 digits",
-			},
-		),
+		.min(1, "Date of birth is required")
+		.refine((val) => {
+			const date = new Date(val);
+			return !isNaN(date.getTime()) && date <= new Date();
+		}, "Date of birth cannot be in the future"),
 	password: z
 		.string({ required_error: "Password is required" })
+		.min(8, "Password must be at least 8 characters long")
 		.regex(
 			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-			"Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
-		)
-		.min(1, "Password is required")
-		.refine((val) => val.trim().length > 0, {
-			message: "Password is required",
-		}),
+			"Password must contain at least one uppercase letter, one lowercase letter, and one number",
+		),
 });
 
 export type SignupFormData = z.infer<typeof signupSchema>;

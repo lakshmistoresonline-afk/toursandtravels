@@ -1,7 +1,7 @@
 import { ColumnDef, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { HighLevelTour } from "@workspace/shared/types/tours";
-import { MoreHorizontal, PlusCircle, Search, MapPin, IndianRupee, Edit3, Trash2, ExternalLink } from "lucide-react";
-import { useMemo } from "react";
+import { MoreHorizontal, PlusCircle, Search, MapPin, IndianRupee, Edit3, Trash2, ExternalLink, User, Compass, Users } from "lucide-react";
+import React from "react";
 import {
 	Form,
 	Link,
@@ -23,7 +23,6 @@ import { Input } from "~/components/ui/input";
 import { Badge } from "~/components/ui/badge";
 import { ToursService } from "@workspace/shared/services/tours.service";
 import { BookingService } from "@workspace/shared/services/booking.service";
-import { Card, CardContent } from "~/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "~/components/ui/dialog";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -113,7 +112,7 @@ export default function AdminToursPage() {
 			cell: (info) => (
 				<div className="flex items-center font-serif text-lg text-[#d4af37]">
 					<IndianRupee className="h-3.5 w-3.5" />
-					<span>{(info.getValue() as number)?.toLocaleString()}</span>
+					<span className="ml-0.5">{(info.getValue() as number > 0) ? (info.getValue() as number).toLocaleString() : "Inquiry"}</span>
 				</div>
 			)
 		},
@@ -142,24 +141,24 @@ export default function AdminToursPage() {
 			cell: ({ row }) => (
 				<button
 					onClick={() => {
-						setSelectedTourRegs(row.original.registrations);
+						setSelectedTourRegs(row.original.registrations || []);
 						setSelectedTourName(row.original.name);
 					}}
 					className="flex flex-col items-center gap-1 hover:scale-110 transition-transform cursor-pointer group"
 				>
 					<div className="flex -space-x-2">
-						{[...Array(Math.min(row.original.registrations.length, 3))].map((_, i) => (
+						{[...Array(Math.min(row.original.registrations?.length || 0, 3))].map((_, i) => (
 							<div key={i} className="h-6 w-6 rounded-full border border-white/10 bg-[#d4af37]/10 flex items-center justify-center">
 								<User className="h-3 w-3 text-[#d4af37]/60" />
 							</div>
 						))}
-						{row.original.registrations.length > 3 && (
+						{(row.original.registrations?.length || 0) > 3 && (
 							<div className="h-6 w-6 rounded-full border border-white/10 bg-[#0a0e1a] flex items-center justify-center text-[8px] font-bold text-[#d4af37]">
-								+{row.original.registrations.length - 3}
+								+{(row.original.registrations?.length || 0) - 3}
 							</div>
 						)}
 					</div>
-					<span className="text-[10px] font-bold text-[#fdfcf0]/40 group-hover:text-[#d4af37]">{row.original.pilgrimCount} Total</span>
+					<span className="text-[10px] font-bold text-[#fdfcf0]/40 group-hover:text-[#d4af37]">{row.original.pilgrimCount || 0} Total</span>
 				</button>
 			)
 		},
@@ -211,20 +210,20 @@ export default function AdminToursPage() {
 				</Button>
 			</div>
 
-			<div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+			<div className="surface-card-strong rounded-[2rem] overflow-hidden shadow-2xl">
 				<div className="p-0">
-					<div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between gap-4 items-center bg-[#d4af37]/5">
+					<div className="p-8 border-b border-white/5 flex flex-col md:flex-row justify-between gap-6 items-center bg-white/5">
 						<Form method="get" className="relative w-full md:w-96">
-							<Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]/40" />
-							<Input name="q" placeholder="Search by name or code..." className="h-12 pl-12 rounded-xl bg-white/5 border-white/10 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20" defaultValue={query} />
+							<Search className="absolute left-5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#d4af37]" />
+							<Input name="q" placeholder="Search by name or code..." className="h-12 pl-12 rounded-xl bg-black/40 border-white/10 text-[#fdfcf0] focus-visible:ring-[#d4af37]/20 placeholder:text-[#fdfcf0]/30" defaultValue={query} />
 						</Form>
 						<TableColumnsToggle table={table} />
 					</div>
 
 					{isFetching ? (
-						<div className="p-6 bg-[#0a0e1a]"><DataTableSkeleton noOfSkeletons={5} columns={columns} /></div>
+						<div className="p-8 bg-black/20"><DataTableSkeleton noOfSkeletons={5} columns={columns} /></div>
 					) : (
-						<div className="bg-[#0a0e1a]">
+						<div className="bg-black/20">
 							<DataTable table={table} total={data.total} pageSize={10} onPageChange={() => {}} />
 						</div>
 					)}
@@ -233,41 +232,41 @@ export default function AdminToursPage() {
 
 			{/* Pilgrims List Dialog */}
 			<Dialog open={!!selectedTourRegs} onOpenChange={() => setSelectedTourRegs(null)}>
-				<DialogContent className="max-w-2xl bg-[#0a0e1a] border-white/10 text-[#fdfcf0] max-h-[80vh] flex flex-col p-0 overflow-hidden">
-					<DialogHeader className="p-8 bg-[#d4af37]/5 border-b border-white/5">
-						<DialogTitle className="text-2xl font-serif">{selectedTourName}</DialogTitle>
-						<DialogDescription className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]/60">Registered Pilgrims Inventory</DialogDescription>
+				<DialogContent className="max-w-2xl surface-card-solid border-white/10 text-[#fdfcf0] max-h-[80vh] flex flex-col p-0 overflow-hidden shadow-2xl">
+					<DialogHeader className="p-10 bg-[#d4af37]/10 border-b border-white/10">
+						<DialogTitle className="text-3xl font-serif">{selectedTourName}</DialogTitle>
+						<DialogDescription className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#d4af37] mt-2">Registered Pilgrims Inventory</DialogDescription>
 					</DialogHeader>
 
-					<div className="flex-1 overflow-y-auto p-8">
+					<div className="flex-1 overflow-y-auto p-10 bg-black/40">
 						{selectedTourRegs && selectedTourRegs.length > 0 ? (
-							<div className="space-y-4">
+							<div className="space-y-6">
 								{selectedTourRegs.map((reg) => (
-									<div key={reg.id} className="p-6 rounded-3xl bg-white/5 border border-white/5 flex items-center justify-between group hover:border-[#d4af37]/30 transition-all">
-										<div className="flex items-center gap-5">
-											<div className="h-12 w-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37]/60">
-												<User className="h-6 w-6" />
+									<div key={reg.id} className="p-8 rounded-[2rem] bg-[#0a0e1a] border border-white/5 flex items-center justify-between group hover:border-[#d4af37]/40 transition-all shadow-xl">
+										<div className="flex items-center gap-6">
+											<div className="h-14 w-14 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37]">
+												<User className="h-7 w-7" />
 											</div>
-											<div>
-												<p className="font-bold text-[#fdfcf0]">{reg.profileSnapshot?.first_name} {reg.profileSnapshot?.last_name}</p>
-												<div className="flex items-center gap-4 text-[10px] text-[#fdfcf0]/40 font-medium tracking-wide">
+											<div className="space-y-1">
+												<p className="font-bold text-lg text-[#fdfcf0]">{reg.profileSnapshot?.first_name} {reg.profileSnapshot?.last_name}</p>
+												<div className="flex items-center gap-4 text-[10px] text-[#fdfcf0]/60 font-medium tracking-wide">
 													<span>{reg.profileSnapshot?.email}</span>
-													<span className="h-1 w-1 rounded-full bg-white/10" />
+													<span className="h-1 w-1 rounded-full bg-white/20" />
 													<span>{reg.profileSnapshot?.phone_number || "No Phone"}</span>
 												</div>
 											</div>
 										</div>
-										<div className="text-right">
-											<Badge className="bg-[#d4af37]/10 text-[#d4af37] border-none px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">{reg.travellersCount} Pilgrims</Badge>
-											<p className="text-[8px] text-[#fdfcf0]/20 font-bold uppercase tracking-widest mt-2">{reg.createdAt ? format(new Date(reg.createdAt), "dd MMM yyyy") : "Recent"}</p>
+										<div className="text-right space-y-2">
+											<Badge className="bg-[#d4af37]/20 text-[#d4af37] border-none px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest">{reg.travellersCount} Pilgrims</Badge>
+											<p className="text-[9px] text-[#fdfcf0]/40 font-bold uppercase tracking-widest">{reg.createdAt ? format(new Date(reg.createdAt), "dd MMM yyyy") : "Recent"}</p>
 										</div>
 									</div>
 								))}
 							</div>
 						) : (
-							<div className="h-48 flex flex-col items-center justify-center gap-3 opacity-20">
-								<Users className="h-10 w-10" />
-								<p className="text-xs font-bold uppercase tracking-widest">No Pilgrims Registered</p>
+							<div className="h-64 flex flex-col items-center justify-center gap-4 opacity-20">
+								<Users className="h-12 w-12 text-[#d4af37]" />
+								<p className="text-sm font-bold uppercase tracking-[0.3em]">No Pilgrims Registered</p>
 							</div>
 						)}
 					</div>

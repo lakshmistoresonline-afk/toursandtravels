@@ -13,7 +13,6 @@ import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
 import type { AppUser } from "@workspace/shared/types/user.d";
 import { SignupFormData } from "@workspace/shared/schemas/signup.schema";
-import { ProfileUpdateForm } from "@workspace/shared/schemas/profile-update.schema";
 import { waitForAuth } from "@workspace/shared/utils/auth-helper";
 
 export class AuthService extends Service {
@@ -72,14 +71,14 @@ export class AuthService extends Service {
 			const profile: AppUser = {
 				uid,
 				email: data.email,
-				role: "user", // Default role
+				role: "user",
 				status: "active",
 				first_name: data.firstName,
 				last_name: data.lastName,
-				phone_number: data.phone ?? null,
+				phone_number: data.phone,
 				whatsapp_number: null,
-				gender: null,
-				date_of_birth: null,
+				gender: data.gender,
+				date_of_birth: data.dateOfBirth,
 				address_house: null,
 				address_street: null,
 				address_locality: null,
@@ -110,11 +109,28 @@ export class AuthService extends Service {
 	/**
 	 * Update Profile
 	 */
-	async updateUserProfile(data: ProfileUpdateForm & { uid: string }) {
+	async updateUserProfile(data: Partial<AppUser> & { uid: string }) {
 		try {
 			const userRef = doc(this.db, this.USERS_COLLECTION, data.uid);
+
+			// Allow-list of updateable fields
+			const updateData: any = {};
+			const allowedFields: (keyof AppUser)[] = [
+				"first_name", "last_name", "phone_number", "whatsapp_number",
+				"gender", "date_of_birth", "address_house", "address_street",
+				"address_locality", "address_district", "address_state",
+				"address_pin_code", "country", "emergency_contact_name",
+				"emergency_contact_number", "aadhar_number", "avatar_url"
+			];
+
+			allowedFields.forEach(field => {
+				if (data[field] !== undefined) {
+					updateData[field] = data[field];
+				}
+			});
+
 			await updateDoc(userRef, {
-				...data,
+				...updateData,
 				updatedAt: serverTimestamp()
 			});
 			return { success: true };

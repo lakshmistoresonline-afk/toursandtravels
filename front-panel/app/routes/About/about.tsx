@@ -30,8 +30,8 @@ export default function About() {
 						<h1 className="text-5xl md:text-7xl font-serif text-[#fdfcf0] tracking-tight">Our Sacred Story</h1>
 					</div>
 
-					<div className="glass-card p-12 md:p-20 rounded-[3rem] border border-[#d4af37]/10 space-y-12 shadow-2xl">
-						<div className="space-y-8 text-[#fdfcf0]/70 font-sans font-light leading-relaxed text-lg md:text-xl text-center md:text-left">
+					<div className="surface-card p-12 md:p-20 rounded-[3rem] border-[#d4af37]/20 space-y-12 shadow-2xl">
+						<div className="space-y-8 text-[#fdfcf0]/80 font-sans font-light leading-relaxed text-lg md:text-xl text-center md:text-left">
 							<p className="first-letter:text-5xl first-letter:font-serif first-letter:text-[#d4af37] first-letter:mr-3 first-letter:float-left">
 								AMBADY was born from a profound realization: that travel, at its highest form, is a spiritual endeavor. We believe that every journey should be more than just a change of scenery—it should be a path to inner peace, a connection to our heritage, and a strengthening of faith.
 							</p>
@@ -45,18 +45,18 @@ export default function About() {
 							</p>
 						</div>
 
-						<div className="pt-12 border-t border-[#d4af37]/10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+						<div className="pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
 							<div className="space-y-2">
 								<p className="text-3xl font-serif text-[#d4af37]">Faith</p>
-								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Foundation</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/60">Our Foundation</p>
 							</div>
 							<div className="space-y-2">
 								<p className="text-3xl font-serif text-[#d4af37]">Heritage</p>
-								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Identity</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/60">Our Identity</p>
 							</div>
 							<div className="space-y-2">
 								<p className="text-3xl font-serif text-[#d4af37]">Inner Journeys</p>
-								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Our Mission</p>
+								<p className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/60">Our Mission</p>
 							</div>
 						</div>
 					</div>

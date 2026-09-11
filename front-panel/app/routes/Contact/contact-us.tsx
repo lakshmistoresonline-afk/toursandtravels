@@ -1,12 +1,9 @@
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import { Clock8Icon, Loader2, MapPinIcon, PhoneIcon, Send } from "lucide-react";
+import { Clock8Icon, Loader2, MapPinIcon, PhoneIcon } from "lucide-react";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { CONTACT_NUMBER_1 } from "@workspace/shared/constants/constants";
 import { Button } from "~/components/ui/button";
-import { GoogleReCaptcha, verifyRecaptcha } from "~/components/ReCaptcha/GoogleReCaptcha";
-import { ActionResponse } from "@workspace/shared/types/action-data";
 import { type ActionFunctionArgs, useActionData, useNavigation, useSubmit } from "react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { contactFormData, contactSchema } from "@workspace/shared/schemas/contact.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +11,6 @@ import { toast } from "sonner";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { ApiError } from "@workspace/shared/utils/ApiError";
 import { emailService } from "@workspace/shared/services/emails.service";
 
 const contactInfo = [
@@ -38,17 +34,6 @@ const contactInfo = [
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
 		const formData = await request.formData();
-		const recaptchaToken = formData.get("recaptchaToken") as string;
-
-		if (!recaptchaToken || recaptchaToken == "") {
-			return { success: false, error: "Captcha identification failed" };
-		}
-
-		const captchaResult = await verifyRecaptcha(recaptchaToken);
-		if (!captchaResult.success) {
-			return { success: false, error: "Captcha verification failed" };
-		}
-
 		const data = {
 			full_name: formData.get("full_name") as string,
 			email: formData.get("email") as string,
@@ -65,8 +50,7 @@ export const clientAction = async ({ request }: ActionFunctionArgs) => {
 		await emailService.sendInquiry(data);
 		return { success: true };
 	} catch (error: any) {
-		const errorMessage = error instanceof ApiError ? error.message : error.message || "Failed to process request";
-		return { success: false, error: errorMessage };
+		return { success: false, error: error.message || "Failed to process request" };
 	}
 };
 
@@ -103,7 +87,7 @@ export default function ContactUs() {
 							))}
 						</div>
 
-						<div className="bg-white/5 border border-white/10 p-8 rounded-3xl">
+						<div className="surface-card p-8 md:p-12 rounded-[2.5rem] shadow-2xl border-[#d4af37]/10">
 							<InquiryForm />
 						</div>
 					</div>
@@ -114,11 +98,9 @@ export default function ContactUs() {
 }
 
 const InquiryForm = () => {
-	const actionData: ActionResponse = useActionData();
+	const actionData = useActionData() as any;
 	const submit = useSubmit();
 	const navigation = useNavigation();
-	const recaptchaRef = useRef(null);
-	const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
 	const isSending = navigation.state === "submitting" && navigation.formMethod === "POST";
 
@@ -134,37 +116,23 @@ const InquiryForm = () => {
 		},
 	});
 
-	const { setError, handleSubmit, control, reset } = form;
+	const { handleSubmit, control, reset } = form;
 
 	useEffect(() => {
-		if (actionData) {
-			if (actionData.success) {
-				toast.success("Your message has been received.");
-				setRecaptchaToken(null);
-				reset();
-				if (recaptchaRef.current !== null) {
-					// @ts-ignore
-					recaptchaRef.current.reset();
-				}
-			} else if (actionData.error) {
-				toast.error(actionData.error);
-				setRecaptchaToken(null);
-			}
+		if (actionData?.success) {
+			toast.success("Your message has been received.");
+			reset();
+		} else if (actionData?.error) {
+			toast.error(actionData.error);
 		}
-	}, [actionData, reset, setError]);
+	}, [actionData, reset]);
 
 	const handleFormSubmittion = (data: contactFormData) => {
-		if (!recaptchaToken) {
-			toast.error("Captcha Verification Needed");
-			return;
-		}
-
 		const formData = new FormData();
 		formData.append("email", data.email.trim());
 		formData.append("full_name", data.full_name.trim());
 		formData.append("subject", data.subject.trim());
 		formData.append("message", data.message.trim());
-		formData.append("recaptchaToken", recaptchaToken);
 		submit(formData, { method: "POST", action: "/contact-us" });
 	};
 
@@ -180,9 +148,9 @@ const InquiryForm = () => {
 								<FormItem className="space-y-2">
 									<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Full Name</FormLabel>
 									<FormControl>
-										<Input placeholder="Your Name" className="h-12 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] text-sm" {...field} />
+										<Input placeholder="Your Name" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
 									</FormControl>
-									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-1" />
+									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
 								</FormItem>
 							)}
 						/>
@@ -190,12 +158,12 @@ const InquiryForm = () => {
 							control={control}
 							name="email"
 							render={({ field }) => (
-								<FormItem className="space-y-2">
-									<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Email</FormLabel>
+								<FormItem className="space-y-3">
+									<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Email</FormLabel>
 									<FormControl>
-										<Input placeholder="email@example.com" className="h-12 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] text-sm" {...field} />
+										<Input placeholder="email@example.com" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
 									</FormControl>
-									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-1" />
+									<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
 								</FormItem>
 							)}
 						/>
@@ -204,12 +172,12 @@ const InquiryForm = () => {
 						control={control}
 						name="subject"
 						render={({ field }) => (
-							<FormItem className="space-y-2">
-								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Subject</FormLabel>
+							<FormItem className="space-y-3">
+								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Subject</FormLabel>
 								<FormControl>
-									<Input placeholder="Inquiry Topic" className="h-12 rounded-xl border-white/5 bg-white/5 text-[#fdfcf0] text-sm" {...field} />
+									<Input placeholder="Inquiry Topic" className="h-14 rounded-xl border-white/10 bg-black/40 text-[#fdfcf0] text-base focus-visible:ring-[#d4af37]/20 focus-visible:border-[#d4af37]/40 px-6" {...field} />
 								</FormControl>
-								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-1" />
+								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
 							</FormItem>
 						)}
 					/>
@@ -217,25 +185,19 @@ const InquiryForm = () => {
 						control={control}
 						name="message"
 						render={({ field }) => (
-							<FormItem className="space-y-2">
-								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.2em] ml-1">Message</FormLabel>
+							<FormItem className="space-y-3">
+								<FormLabel className="text-[9px] font-bold text-[#fdfcf0]/60 uppercase tracking-[0.2em] ml-2">Message</FormLabel>
 								<FormControl>
-									<Textarea placeholder="Share your thoughts..." className="min-h-[120px] p-5 rounded-2xl border-white/5 bg-white/5 text-[#fdfcf0] text-xs resize-none" {...field} />
+									<Textarea placeholder="Share your thoughts..." className="min-h-[160px] p-8 rounded-[2rem] border-white/10 bg-black/40 text-[#fdfcf0] text-sm resize-none focus:ring-[#d4af37]/20 focus:border-[#d4af37]/40 leading-relaxed" {...field} />
 								</FormControl>
-								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-1" />
+								<FormMessage className="text-red-400 text-[8px] font-bold uppercase tracking-widest ml-2" />
 							</FormItem>
 						)}
 					/>
 
-					<GoogleReCaptcha
-						siteKey={process.env.VITE_RECAPTCHA_SITE_KEY as string}
-						onChange={(token) => setRecaptchaToken(token)}
-						ref={recaptchaRef}
-					/>
-
-					<Button type="submit" className="w-full h-14 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all" disabled={isSending || !recaptchaToken}>
-						{isSending ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
-						Send Inquiry
+					<Button type="submit" className="w-full h-16 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] bg-[#d4af37] text-[#0a0e1a] hover:bg-[#b8860b] transition-all shadow-xl shadow-[#d4af37]/20" disabled={isSending}>
+						{isSending ? <Loader2 className="animate-spin mr-3 h-5 w-5" /> : null}
+						Send Inquiry Now
 					</Button>
 				</form>
 			</Form>

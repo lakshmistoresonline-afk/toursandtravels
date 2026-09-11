@@ -15,6 +15,8 @@ import AdminLayout, { clientLoader as adminLoader } from "./routes/admin/layout"
 import Home, { clientLoader as homeLoader } from "./routes/Home/home";
 import Login, { clientAction as loginAction } from "./routes/Auth/login";
 import Signup, { clientAction as signupAction } from "./routes/Auth/signup";
+import ForgotPassword, { clientAction as forgotPasswordAction } from "./routes/Auth/forgot-password";
+import UpdatePassword from "./routes/Auth/update-password";
 import TourDetails, { clientLoader as tourDetailsLoader, clientAction as tourDetailsAction } from "./routes/Tour/tour-details";
 import AccountDetails, { clientAction as accountDetailsAction } from "./routes/Account/account-details";
 import MyBookings, { clientLoader as myBookingsLoader } from "./routes/Account/my-bookings";
@@ -28,7 +30,7 @@ import AddTour, { clientAction as addTourAction } from "./routes/admin/Tours/add
 import UpdateTour, { clientLoader as updateTourLoader, clientAction as updateTourAction } from "./routes/admin/Tours/update-tour";
 import AdminBookings, { clientLoader as adminBookingsLoader, clientAction as adminBookingsAction } from "./routes/admin/Booking/bookings";
 import NotFound from "./routes/Error/404";
-import LogoutRoute, { clientAction as logoutAction } from "./routes/_actions/logout";
+import { clientAction as logoutAction } from "./routes/_actions/logout";
 
 const router = createBrowserRouter([
 	{
@@ -59,6 +61,15 @@ const router = createBrowserRouter([
 						path: "signup",
 						element: <Signup />,
 						action: signupAction as any,
+					},
+					{
+						path: "forgot-password",
+						element: <ForgotPassword />,
+						action: forgotPasswordAction as any,
+					},
+					{
+						path: "update-password",
+						element: <UpdatePassword />,
 					},
 					{
 						path: "tours",

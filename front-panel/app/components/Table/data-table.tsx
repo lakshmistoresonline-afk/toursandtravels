@@ -29,7 +29,6 @@ import {
 	DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Settings2 } from "lucide-react";
-import { motion } from "motion/react";
 import { type JSX, memo, useCallback } from "react";
 import { Checkbox } from "~/components/ui/checkbox";
 

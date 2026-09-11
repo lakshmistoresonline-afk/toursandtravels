@@ -1,8 +1,7 @@
 import { Button } from "~/components/ui/button";
 import { Link } from "react-router";
-import { ArrowRight, Compass } from "lucide-react";
 
-export default function HeroSection({ hero_sections = [], user }: { hero_sections: any[]; user?: any }) {
+export default function HeroSection({ user }: { user?: any }) {
 	return (
 		<section className="relative w-full overflow-hidden bg-[#0a0e1a] min-h-[70vh] flex items-center justify-center">
 			{/* Hero Visual - Clean Background */}
