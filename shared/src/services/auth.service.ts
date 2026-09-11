@@ -146,7 +146,7 @@ export class AuthService extends Service {
 	/**
 	 * Admin: Create a new user without signing out current user
 	 */
-	async adminCreateUserAndProfile(data: { firstName: string, lastName: string, email: string, aadharNumber: string }) {
+	async adminCreateUserAndProfile(data: { firstName: string, lastName: string, email: string, aadharNumber: string, phone: string }) {
 		try {
 			// This is a hack to create a user in Firebase Auth without signing out the current admin.
 			// We initialize a secondary app.
@@ -164,7 +164,7 @@ export class AuthService extends Service {
 				status: "active",
 				first_name: data.firstName,
 				last_name: data.lastName,
-				phone_number: null,
+				phone_number: data.phone,
 				whatsapp_number: null,
 				gender: null,
 				date_of_birth: null,

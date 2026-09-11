@@ -13,6 +13,7 @@ export default function Footer() {
 					<div className="flex gap-8 text-[9px] font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/40">
 						<Link to="/about" className="hover:text-[#d4af37] transition-colors">About</Link>
 						<Link to="/contact-us" className="hover:text-[#d4af37] transition-colors">Contact</Link>
+						<Link to="/forgot-password" size="sm" className="hover:text-[#d4af37] transition-colors">Reset Access</Link>
 						<Link to="/privacy-policy" className="hover:text-[#d4af37] transition-colors">Privacy</Link>
 						<Link to="/terms-of-usage" className="hover:text-[#d4af37] transition-colors">Terms</Link>
 					</div>

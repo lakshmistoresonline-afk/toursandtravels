@@ -73,8 +73,9 @@ export const clientAction = async ({ request }: any) => {
 				const lastName = formData.get("lastName") as string;
 				const email = formData.get("email") as string;
 				const aadharNumber = formData.get("aadharNumber") as string;
+				const phone = formData.get("phone") as string;
 
-				const res = await authSvc.adminCreateUserAndProfile({ firstName, lastName, email, aadharNumber });
+				const res = await authSvc.adminCreateUserAndProfile({ firstName, lastName, email, aadharNumber, phone });
 				if (!res.success) throw new Error(res.error);
 				customerId = res.uid!;
 			}
@@ -296,6 +297,10 @@ export default function BookingsPage() {
 								<div className="space-y-2">
 									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Email Address</Label>
 									<Input name="email" type="email" placeholder="pilgrim@example.com" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
+								</div>
+								<div className="space-y-2">
+									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Phone Number</Label>
+									<Input name="phone" placeholder="10 Digit Number" required className="bg-white/5 border-white/10 text-[#fdfcf0]" />
 								</div>
 								<div className="space-y-2">
 									<Label className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/40">Aadhar Number</Label>
