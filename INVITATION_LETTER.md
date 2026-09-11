@@ -13,9 +13,9 @@ We are delighted to invite you to join **AMBADY**, our dedicated platform design
 
 ### Embark on Your Journey Today
 
-We invite you to visit the sanctuary of our digital platform:
+We invite you to visit the sanctuary of our digital platform by clicking the link below:
 
-👉 **[https://toursandtravels-73c62.web.app](https://toursandtravels-73c62.web.app)**
+👉 **[AMBADY Pilgrimage Portal](https://toursandtravels-73c62.web.app)**
 
 **Next Steps:**
 1.  Click **"Begin Registration"** on the login page to create your pilgrim profile.
