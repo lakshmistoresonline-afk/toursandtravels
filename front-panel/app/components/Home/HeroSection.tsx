@@ -3,24 +3,14 @@ import { Link } from "react-router";
 
 export default function HeroSection({ user }: { user?: any }) {
 	return (
-		<section className="relative w-full overflow-hidden bg-[#0a0e1a] min-h-[70vh] flex items-center justify-center">
-			{/* Hero Visual - Clean Background */}
-			<div className="absolute inset-0 z-0">
-				<img
-					src="/brand/ambady-background.png"
-					alt="Ambady Pilgrimage"
-					className="w-full h-full object-cover object-top opacity-30 grayscale"
-				/>
-				<div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/80 via-[#0a0e1a]/40 to-[#0a0e1a]" />
-			</div>
-
-			{/* Hero Content - Clean & Minimal */}
-			<div className="relative z-10 text-center space-y-10 px-4 animate-in fade-in zoom-in-95 duration-1000">
+		<section className="relative w-full overflow-hidden bg-transparent min-h-[75vh] flex items-center justify-center">
+			{/* Content - Hero Visual identity already in global background */}
+			<div className="relative z-10 text-center space-y-12 px-6 animate-in fade-in zoom-in-95 duration-1000">
 				<div className="space-y-4">
-					<h2 className="text-5xl md:text-7xl font-serif text-[#fdfcf0] tracking-tight">
+					<h2 className="text-6xl md:text-8xl font-serif text-[#fdfcf0] tracking-tight drop-shadow-2xl">
 						Sacred Journeys
 					</h2>
-					<p className="text-[10px] text-[#d4af37] uppercase tracking-[0.6em] font-bold">
+					<p className="text-[12px] text-[#d4af37] uppercase tracking-[0.6em] font-bold">
 						Rooted in Faith | Heritage | Devotion
 					</p>
 				</div>

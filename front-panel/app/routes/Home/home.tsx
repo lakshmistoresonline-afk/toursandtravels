@@ -44,7 +44,7 @@ export default function Home() {
 	}, [loaderData]);
 
 	return (
-		<div className="bg-[#0a0e1a] min-h-screen">
+		<div className="bg-transparent min-h-screen">
 			<MetaDetails
 				metaTitle="AMBADY | Sacred Journeys"
 				metaDescription="Curated pilgrimage experiences."

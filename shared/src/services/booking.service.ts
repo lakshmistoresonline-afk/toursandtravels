@@ -118,25 +118,39 @@ export class BookingService extends Service {
 
 	async getMyRegistrations(_pageIndex = 0, pageSize = 10): Promise<GetTourRegistrationsResponse> {
 		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
+
+		// Use simple query to avoid composite index requirement
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
-			where("customerId", "==", this.currentUid),
-			orderBy("createdAt", "desc"),
-			limit(pageSize)
+			where("customerId", "==", this.currentUid)
 		);
+
 		const snap = await getDocs(q);
-		const registrations = snap.docs.map((d) => {
+		let registrations = snap.docs.map((d) => {
 			const data = d.data();
 			return {
 				id: d.id,
 				...data,
 				tours: data.tourSnapshot || null
 			};
+		}) as any[];
+
+		// Sort in-memory to avoid index requirement
+		registrations.sort((a, b) => {
+			const dateA = a.createdAt?.toDate?.()?.getTime() || new Date(a.createdAt).getTime();
+			const dateB = b.createdAt?.toDate?.()?.getTime() || new Date(b.createdAt).getTime();
+			return dateB - dateA;
 		});
+
+		// Apply limit manually
+		registrations = registrations.slice(0, pageSize);
+
 		return { registrations, total: registrations.length } as any;
 	}
 
 	async getAllRegistrations(_pageIndex = 0, pageSize = 20): Promise<GetTourRegistrationsResponse> {
+		// getAllRegistrations already used a simple query (just orderBy), which is fine.
+		// But to be consistent and safe on Spark plan:
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
 			orderBy("createdAt", "desc"),

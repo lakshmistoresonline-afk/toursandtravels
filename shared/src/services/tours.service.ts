@@ -6,7 +6,6 @@ import {
 	addDoc,
 	updateDoc,
 	query,
-	where,
 	orderBy,
 	serverTimestamp
 } from "firebase/firestore";
@@ -73,18 +72,13 @@ export class ToursService extends Service {
 
 	/**
 	 * Get tours for front panel
-	 * Uses status filter to avoid fetching drafts/closed journeys
+	 * REFACTORED: Filtering in-memory to avoid mandatory composite indexes on Spark Plan.
 	 */
 	async getFPHighLevelTours(qText = ""): Promise<GetHighLevelToursResponse> {
 		try {
 			const toursRef = collection(this.db, this.TOURS_COLLECTION);
-
-			// Use combined query for status
-			const q = query(
-				toursRef,
-				where("status", "in", ["PUBLISHED", "REGISTRATION_OPEN"]),
-				orderBy("createdAt", "desc")
-			);
+			// Use simple query that only requires single-field index (standard)
+			const q = query(toursRef, orderBy("createdAt", "desc"));
 			const snap = await getDocs(q);
 
 			let tours = snap.docs.map(d => ({
@@ -93,6 +87,9 @@ export class ToursService extends Service {
 				createdAt: d.data().createdAt?.toDate?.()?.toISOString() || d.data().createdAt
 			})) as HighLevelTour[];
 
+			// Filter statuses in-memory
+			tours = tours.filter(t => ["PUBLISHED", "REGISTRATION_OPEN"].includes(t.status));
+
 			if (qText) {
 				tours = tours.filter(t => t.name.toLowerCase().includes(qText.toLowerCase()));
 			}
@@ -100,8 +97,7 @@ export class ToursService extends Service {
 			return { tours, total: tours.length };
 		} catch (err: any) {
 			console.error("Firestore getFPHighLevelTours error:", err);
-			// Fallback to simpler query if index is missing
-			return this.getHighLevelTours(qText);
+			throw new ApiError(err.message, 500);
 		}
 	}
 
