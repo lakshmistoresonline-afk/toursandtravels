@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Account/my-bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Home/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/tours.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/sitemap.xml.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/sitemap.xml.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/services/booking.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/services/booking.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

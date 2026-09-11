@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 			icon: Users,
 			color: "text-blue-600",
 			bgColor: "bg-blue-50",
-			link: "/admin/registrations",
+			link: "/admin/users",
 		},
 		{
 			title: "Active Journeys",

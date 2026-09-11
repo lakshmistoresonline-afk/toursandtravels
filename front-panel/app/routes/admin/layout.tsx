@@ -1,6 +1,6 @@
 import { Outlet, redirect, type LoaderFunctionArgs, Link, NavLink, Form } from "react-router";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
-import { LayoutDashboard, MapPin, ClipboardList, Globe, LogOut, Compass } from "lucide-react";
+import { LayoutDashboard, MapPin, ClipboardList, Globe, LogOut, Compass, Users } from "lucide-react";
 
 export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 	const { user } = await getCurrentUser(request);
@@ -64,6 +64,17 @@ export default function AdminLayout() {
 						>
 							<ClipboardList className="h-3.5 w-3.5" />
 							<span className="hidden lg:inline">Registrations</span>
+						</NavLink>
+						<NavLink
+							to="/admin/users"
+							prefetch="intent"
+							viewTransition
+							className={({ isActive }) =>
+								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-[0.15em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
+							}
+						>
+							<Users className="h-3.5 w-3.5" />
+							<span className="hidden lg:inline">Pilgrims</span>
 						</NavLink>
 					</div>
 				</div>
