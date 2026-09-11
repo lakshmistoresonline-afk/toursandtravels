@@ -60,7 +60,7 @@ Run the following command from the project root:
 firebase deploy
 ```
 
-**Live URL:** [https://toursandtravels-73c62.web.app](https://toursandtravels-73c62.web.app)
+**Live URL:** [https://ambadypilgrimage.web.app](https://ambadypilgrimage.web.app)
 
 ## 📁 Project Structure (Unified)
 

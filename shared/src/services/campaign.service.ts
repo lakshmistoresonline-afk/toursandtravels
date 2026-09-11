@@ -70,7 +70,7 @@ export class CampaignService extends Service {
 			return;
 		}
 
-		const appUrl = (import.meta as any).env?.VITE_MAIN_APP_URL || "https://ambadypilgrimage.com";
+		const appUrl = (import.meta as any).env?.VITE_MAIN_APP_URL || "https://ambadypilgrimage.web.app";
 		const html = generateJourneyAnnouncementHtml(tour, appUrl);
 
 		const recipients = campaign.recipients;
@@ -125,7 +125,7 @@ export class CampaignService extends Service {
 		const tour = await toursSvc.getTourDetails(tourId);
 		if (!tour) throw new Error("Tour not found");
 
-		const appUrl = (import.meta as any).env?.VITE_MAIN_APP_URL || "http://localhost:5175";
+		const appUrl = (import.meta as any).env?.VITE_MAIN_APP_URL || "https://ambadypilgrimage.web.app";
 		const html = generateJourneyAnnouncementHtml(tour, appUrl);
 
 		return emailService.sendJourneyAnnouncementBatch({
