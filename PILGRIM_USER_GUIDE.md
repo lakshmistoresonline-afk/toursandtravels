@@ -1,6 +1,6 @@
 # AMBADY Pilgrim's Journey Guide
 
-**Application Address:** [https://toursandtravels-73c62.web.app](https://toursandtravels-73c62.web.app)
+**Application Address:** [https://ambadypilgrimage.web.app](https://ambadypilgrimage.web.app)
 
 ---
 
