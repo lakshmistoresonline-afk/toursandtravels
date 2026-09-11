@@ -151,3 +151,46 @@ export const generateJourneyAnnouncementHtml = (tour: GetTourDetails, appUrl: st
 </html>
     `;
 };
+
+export const generateJourneyAnnouncementText = (tour: GetTourDetails, appUrl: string) => {
+	const registrationUrl = `${appUrl}/tours/tour/${tour.id}`;
+
+	const itineraryText = tour.itinerary
+		.sort((a, b) => a.day_number - b.day_number)
+		.map((day) => `Day ${day.day_number}: ${day.title}\n${day.description}`)
+		.join("\n\n");
+
+	return `
+AMBADY - PILGRIMAGE EXPERIENCES
+Faith | Heritage | Inner Journeys
+
+---
+NEW JOURNEY ANNOUNCEMENT: ${tour.name}
+---
+
+Destination: ${tour.destination}
+Date: ${tour.start_date || "Flexible"}
+Exchange: ${tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquiry Only"}
+Availability: ${tour.max_participants || "Limited Seats"}
+
+THE SPIRITUAL CALLING
+${tour.overview}
+
+THE JOURNEY ROADMAP
+${itineraryText}
+
+HOW TO REGISTER
+1. Visit: ${registrationUrl}
+2. Sign in or create your AMBADY account.
+3. Review the journey details.
+4. Complete the registration form.
+
+We look forward to embarking on this sacred path with you.
+
+Blessings,
+AMBADY TEAM
+
+---
+Manage your email preferences at: ${appUrl}/account/details
+`;
+};

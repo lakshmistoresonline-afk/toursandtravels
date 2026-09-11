@@ -3,8 +3,8 @@
  * REFACTORED: Removed Supabase specific constants.
  */
 
-export const CONTACT_NUMBER_1 = "971556130581" as const;
-export const EMAIL_ADDRESS_1 = "ambady.pilgrimage@gmail.com" as const;
+export const CONTACT_NUMBER_1 = "919447735336" as const;
+export const EMAIL_ADDRESS_1 = "cspushpa.raman@gmail.com" as const;
 
 export const TOUR_STATUSES = [
 	"DRAFT",

@@ -114,6 +114,11 @@ export default function BookingsPage() {
 	const handleExport = async () => {
 		setIsExporting(true);
 		try {
+			const allEmails = data.registrations
+				.map((reg) => reg.profileSnapshot?.email)
+				.filter(Boolean)
+				.join(", ");
+
 			const exportData = data.registrations.map((reg: TourRegistration) => {
 				let registrationDate = "N/A";
 				if (reg.createdAt) {
@@ -138,6 +143,7 @@ export default function BookingsPage() {
 					Status: reg.status,
 					"Amount (INR)": (reg.tours?.price || 0) * reg.travellersCount || 0,
 					"Registration Date": registrationDate,
+					"ALL RECIPIENTS (BCC)": allEmails,
 				};
 			});
 

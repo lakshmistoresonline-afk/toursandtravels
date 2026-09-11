@@ -17,12 +17,12 @@ const contactInfo = [
 	{
 		title: "Sacred Hours",
 		icon: Clock8Icon,
-		description: "Mon-Fri: 8:00 AM - 11:00 PM\nSat-Sun: Spiritual Retreat",
+		description: "Mon-Fri: 8:00 AM - 5:00 PM",
 	},
 	{
 		title: "The Sanctuary",
 		icon: MapPinIcon,
-		description: "802 AMBADY Rd, Dubai\n96812, UAE",
+		description: "Surya Kiron, Shornoor Road,\nNext to Thiruvambady Temple,\nThrissur.",
 	},
 	{
 		title: "Direct Path",
