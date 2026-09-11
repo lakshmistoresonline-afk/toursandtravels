@@ -24,28 +24,29 @@ export default function ToursPage() {
 			/>
 
 			{/* Header Search Section */}
-			<div className="relative pt-32 pb-24 overflow-hidden bg-[#0a0e1a]">
+			<div className="relative pt-32 pb-24 overflow-hidden bg-[#0a0e1a] border-b border-[#d4af37]/20">
 				<div className="container mx-auto px-6 text-center space-y-8 relative z-10">
-					<div className="space-y-4">
-						<h4 className="text-[11px] font-bold uppercase tracking-[0.6em] text-primary">
+					<div className="space-y-6">
+						<h4 className="text-[11px] font-bold uppercase tracking-[0.6em] text-[#d4af37]">
 							Sacred Destinations
 						</h4>
-						<h1 className="text-5xl md:text-7xl font-serif text-[#fdfcf0] tracking-tight leading-tight">
+						<h1 className="text-5xl md:text-8xl font-serif text-[#fdfcf0] tracking-tight leading-tight">
 							Pilgrimage Journeys
 						</h1>
+						<div className="w-32 h-0.5 bg-[#d4af37]/30 mx-auto rounded-full" />
 					</div>
 
-					<p className="text-[#fdfcf0]/60 max-w-2xl mx-auto text-lg font-serif italic tracking-wide">
+					<p className="text-[#fdfcf0]/50 max-w-2xl mx-auto text-xl font-serif italic tracking-wide">
 						"Faith | Heritage | Inner Journeys"
 					</p>
 
-					<div className="max-w-2xl mx-auto pt-10">
+					<div className="max-w-2xl mx-auto pt-12">
 						<Form method="get" className="relative group">
-							<Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/60 group-focus-within:text-primary transition-colors" />
+							<Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-[#d4af37]/60 group-focus-within:text-[#d4af37] transition-colors" />
 							<Input
 								name="q"
 								placeholder="Search your sacred destination..."
-								className="h-16 pl-16 pr-8 rounded-full border border-primary/20 bg-white/5 backdrop-blur-xl focus-visible:border-primary focus-visible:ring-primary/20 transition-all text-lg text-[#fdfcf0] placeholder:text-[#fdfcf0]/30 shadow-2xl"
+								className="h-20 pl-16 pr-8 rounded-full border border-[#d4af37]/20 bg-white/5 backdrop-blur-2xl focus-visible:border-[#d4af37]/40 focus-visible:ring-[#d4af37]/20 transition-all text-xl text-[#fdfcf0] placeholder:text-[#fdfcf0]/20 shadow-2xl"
 								defaultValue={q}
 							/>
 						</Form>

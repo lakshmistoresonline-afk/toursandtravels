@@ -21,12 +21,42 @@ const auth = getAuth();
 const db = getFirestore();
 
 const testUsers = [
-    { email: "admin@ambady.com", password: "Password123", role: "admin", firstName: "AMBADY", lastName: "Admin" },
-    { email: "user1@example.com", password: "Password123", role: "user", firstName: "John", lastName: "Doe" },
-    { email: "user2@example.com", password: "Password123", role: "user", firstName: "Jane", lastName: "Smith" },
-    { email: "user3@example.com", password: "Password123", role: "user", firstName: "Alice", lastName: "Brown" },
-    { email: "user4@example.com", password: "Password123", role: "user", firstName: "Bob", lastName: "White" },
-    { email: "user5@example.com", password: "Password123", role: "user", firstName: "Charlie", lastName: "Green" },
+    {
+        email: "admin@ambady.com",
+        password: "Password123",
+        role: "admin",
+        firstName: "AMBADY",
+        lastName: "Admin",
+        phone: "9999988888",
+        aadhar: "111122223333"
+    },
+    {
+        email: "john.doe@example.com",
+        password: "Password123",
+        role: "user",
+        firstName: "John",
+        lastName: "Doe",
+        phone: "9876543210",
+        aadhar: "123456789012"
+    },
+    {
+        email: "jane.smith@example.com",
+        password: "Password123",
+        role: "user",
+        firstName: "Jane",
+        lastName: "Smith",
+        phone: "9876543211",
+        aadhar: "223344556677"
+    },
+    {
+        email: "alice.v@example.com",
+        password: "Password123",
+        role: "user",
+        firstName: "Alice",
+        lastName: "V",
+        phone: "9876543212",
+        aadhar: "334455667788"
+    },
 ];
 
 async function deleteCollection(collectionPath, batchSize = 100) {
@@ -76,7 +106,7 @@ async function reset() {
     }
 
     // 2. Delete other top-level collections
-    const otherCollections = ["users", "registrations"];
+    const otherCollections = ["users", "registrations", "notificationCampaigns"];
     for (const col of otherCollections) {
         console.log(`🗑️ Deleting collection: ${col}...`);
         await deleteCollection(col);
@@ -102,8 +132,28 @@ async function reset() {
                 email: u.email,
                 first_name: u.firstName,
                 last_name: u.lastName,
+                phone_number: u.phone || null,
                 role: u.role,
                 status: "active",
+                whatsapp_number: u.phone || null,
+                gender: "other",
+                date_of_birth: "1990-01-01",
+                address_house: "Sacred Residency 108",
+                address_street: "Temple Road",
+                address_locality: "Thiruvambady",
+                address_district: "Thrissur",
+                address_state: "Kerala",
+                address_pin_code: "680001",
+                country: "India",
+                emergency_contact_name: "Guardian",
+                emergency_contact_number: "9876543210",
+                aadhar_number: u.aadhar || "000000000000",
+                avatar_url: null,
+                notifications: {
+                    journeyAnnouncements: true,
+                    registrationUpdates: true,
+                    journeyChanges: true
+                },
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString(),
             });

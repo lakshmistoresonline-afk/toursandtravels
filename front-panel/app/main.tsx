@@ -34,6 +34,12 @@ import UpdateTour, {
 	clientLoader as updateTourLoader,
 	clientAction as updateTourAction,
 } from "./routes/admin/Tours/update-tour";
+import Tours, { clientLoader as toursLoader } from "./routes/Tour/tours";
+import AdminUsers, { clientLoader as adminUsersLoader } from "./routes/admin/users";
+import JourneyAnnouncement, {
+	clientLoader as announcementLoader,
+	clientAction as announcementAction,
+} from "./routes/admin/Tours/announcement";
 import AdminBookings, {
 	clientLoader as adminBookingsLoader,
 	clientAction as adminBookingsAction,
@@ -83,6 +89,11 @@ const router = createBrowserRouter([
 					{
 						path: "tours",
 						children: [
+							{
+								index: true,
+								element: <Tours />,
+								loader: toursLoader as any,
+							},
 							{
 								path: "tour/:id",
 								element: <TourDetails />,
@@ -142,6 +153,12 @@ const router = createBrowserRouter([
 								loader: updateTourLoader as any,
 								action: updateTourAction as any,
 							},
+							{
+								path: "announcement/:id",
+								element: <JourneyAnnouncement />,
+								loader: announcementLoader as any,
+								action: announcementAction as any,
+							},
 						],
 					},
 					{
@@ -149,6 +166,11 @@ const router = createBrowserRouter([
 						element: <AdminBookings />,
 						loader: adminBookingsLoader as any,
 						action: adminBookingsAction as any,
+					},
+					{
+						path: "users",
+						element: <AdminUsers />,
+						loader: adminUsersLoader as any,
 					},
 				],
 			},

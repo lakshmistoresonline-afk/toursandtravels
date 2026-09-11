@@ -14,6 +14,7 @@ import {
 	DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { AuthService } from "@workspace/shared/services/auth.service";
+import { maskAadhar } from "@workspace/shared/utils/ui";
 import type { AppUser } from "@workspace/shared/types/user";
 
 export const clientLoader = async ({ request }: any) => {
@@ -75,6 +76,20 @@ export default function AdminUsersPage() {
 			),
 		},
 		{
+			id: "Identity",
+			header: "Sacred Identity",
+			cell: ({ row }) => (
+				<div className="space-y-1">
+					<p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">
+						Aadhaar
+					</p>
+					<p className="font-mono text-xs tracking-wider">
+						{maskAadhar(row.original.aadhar_number)}
+					</p>
+				</div>
+			),
+		},
+		{
 			id: "Contact",
 			header: "Contact Details",
 			cell: ({ row }) => (
@@ -114,7 +129,7 @@ export default function AdminUsersPage() {
 		},
 		{
 			id: "actions",
-			cell: ({ row }) => (
+			cell: () => (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" className="h-10 w-10 p-0 rounded-full hover:bg-primary/5">

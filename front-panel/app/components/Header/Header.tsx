@@ -32,13 +32,13 @@ export default function Header() {
 	return (
 		<header
 			className={cn(
-				"sticky top-0 z-50 transition-all duration-500",
+				"sticky top-0 z-50 transition-all duration-500 w-full",
 				isHomePage
-					? "bg-black/40 backdrop-blur-md border-b border-white/10"
-					: "bg-background/95 backdrop-blur-md border-b border-primary/20 shadow-lg",
+					? "bg-[#0a0e1a]/80 backdrop-blur-lg border-b border-white/5"
+					: "bg-[#0a0e1a] border-b border-[#d4af37]/20 shadow-2xl",
 			)}
 		>
-			<div className="container mx-auto flex items-center h-20 px-6">
+			<div className="container mx-auto flex items-center h-20 md:h-24 px-6">
 				{/* Mobile menu */}
 				<div className="mr-4 lg:hidden">
 					<Sheet>
@@ -46,19 +46,19 @@ export default function Header() {
 							<Button
 								variant="ghost"
 								size="icon"
-								className="rounded-full text-primary hover:bg-primary/5"
+								className="rounded-full text-[#d4af37] hover:bg-white/5"
 							>
-								<Menu className="h-5 w-5" />
+								<Menu className="h-6 w-6" />
 							</Button>
 						</SheetTrigger>
 						<SheetContent
 							side="left"
-							className="w-[300px] bg-background border-r border-primary/20 p-8 shadow-2xl"
+							className="w-[300px] bg-[#0a0e1a] border-r border-[#d4af37]/20 p-8 shadow-2xl"
 						>
 							<div className="mb-12">
 								<Link to="/" className="flex items-center gap-3">
-									<Compass className="h-8 w-8 text-primary" />
-									<span className="text-2xl font-display font-bold tracking-widest text-primary">
+									<Compass className="h-8 w-8 text-[#d4af37]" />
+									<span className="text-2xl font-display font-bold tracking-widest text-[#d4af37]">
 										AMBADY
 									</span>
 								</Link>
@@ -70,7 +70,7 @@ export default function Header() {
 										to={link.to}
 										prefetch="intent"
 										className={({ isActive }) =>
-											`text-[10px] font-bold uppercase tracking-[0.3em] transition-all ${isActive ? "text-primary pl-4 border-l-2 border-primary" : "text-foreground/60 hover:text-primary"}`
+											`text-[11px] font-bold uppercase tracking-[0.3em] transition-all ${isActive ? "text-[#d4af37] pl-4 border-l-2 border-[#d4af37]" : "text-[#fdfcf0]/60 hover:text-[#d4af37]"}`
 										}
 									>
 										{link.label}
@@ -82,27 +82,27 @@ export default function Header() {
 				</div>
 
 				<Link to="/" className="flex items-center gap-4 group">
-					<div className="h-10 w-10 rounded-full bg-primary/5 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-transform duration-500 group-hover:rotate-12">
-						<Compass className="h-6 w-6" />
+					<div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/5 border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.1)] transition-transform duration-500 group-hover:rotate-12">
+						<Compass className="h-6 w-6 md:h-7 md:w-7" />
 					</div>
 					<div className="flex flex-col leading-none">
-						<span className="text-2xl font-display font-bold tracking-[0.2em] text-primary">
+						<span className="text-2xl md:text-3xl font-display font-bold tracking-[0.15em] text-[#d4af37]">
 							AMBADY
 						</span>
-						<span className="text-[7px] font-bold text-primary/60 uppercase tracking-[0.3em] mt-1">
+						<span className="text-[7px] md:text-[8px] font-bold text-[#d4af37]/60 uppercase tracking-[0.35em] mt-1">
 							Pilgrimage Experiences
 						</span>
 					</div>
 				</Link>
 
-				<nav className="ml-12 hidden lg:flex items-center gap-8">
+				<nav className="ml-12 hidden lg:flex items-center gap-12">
 					{NAV_LINKS.map((link) => (
 						<NavLink
 							key={link.to}
 							to={link.to}
 							prefetch="intent"
 							className={({ isActive }) =>
-								`text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-primary ${isActive ? "text-primary" : "text-foreground/60"}`
+								`text-[11px] font-bold uppercase tracking-[0.25em] transition-all hover:text-[#d4af37] ${isActive ? "text-[#d4af37]" : "text-[#fdfcf0]/70"}`
 							}
 						>
 							{link.label}
@@ -126,7 +126,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 		return (
 			<Button
 				size="sm"
-				className="rounded-full font-bold px-6 bg-primary text-primary-foreground hover:bg-primary/90 text-[9px] uppercase tracking-widest shadow-lg shadow-primary/10"
+				className="rounded-full font-bold px-8 bg-[#d4af37] text-[#0a0e1a] hover:bg-[#d4af37]/90 text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-yellow-900/20 h-12"
 				asChild
 			>
 				<Link to="/login">Sign In</Link>
@@ -137,57 +137,63 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="cursor-pointer">
-				<div className="flex items-center gap-2 p-1 rounded-full hover:bg-primary/5 transition-colors">
-					<Avatar className="h-8 w-8 border border-primary/30">
+				<div className="flex items-center gap-2 p-1 rounded-full hover:bg-white/5 transition-colors border border-white/10 pr-4">
+					<Avatar className="h-9 w-9 border border-[#d4af37]/30">
 						<AvatarImage src={user.avatar_url || undefined} />
-						<AvatarFallback className="bg-primary text-primary-foreground font-bold text-xs">
+						<AvatarFallback className="bg-[#d4af37] text-[#0a0e1a] font-bold text-xs">
 							{user.first_name?.charAt(0) ?? "A"}
 						</AvatarFallback>
 					</Avatar>
+					<span className="text-[9px] font-bold uppercase tracking-widest text-[#fdfcf0]/60 hidden sm:inline">
+						Menu
+					</span>
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
-				className="w-56 rounded-2xl p-2 bg-background border border-primary/20 shadow-2xl"
+				className="w-56 rounded-2xl p-2 bg-[#0a0e1a] border border-[#d4af37]/20 shadow-2xl"
 				align="end"
-				sideOffset={8}
+				sideOffset={12}
 			>
-				<DropdownMenuLabel className="px-4 py-3">
-					<p className="text-[10px] font-bold text-foreground truncate tracking-wide">
+				<DropdownMenuLabel className="px-4 py-4">
+					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-widest mb-1">
+						Logged in as
+					</p>
+					<p className="text-xs font-bold text-[#fdfcf0] truncate tracking-wide">
 						{user.email}
 					</p>
 				</DropdownMenuLabel>
-				<DropdownMenuSeparator className="bg-primary/10" />
+				<DropdownMenuSeparator className="bg-white/5" />
 				<DropdownMenuGroup>
 					<DropdownMenuItem
 						asChild
-						className="rounded-xl cursor-pointer py-2.5 text-[10px] uppercase tracking-widest text-foreground/70 focus:bg-primary/10"
+						className="rounded-xl cursor-pointer py-3 text-[10px] uppercase tracking-[0.2em] text-[#fdfcf0]/70 focus:bg-white/5 focus:text-[#d4af37]"
 					>
-						<Link to="/account/details">Profile</Link>
+						<Link to="/account/details">Profile Settings</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						asChild
-						className="rounded-xl cursor-pointer py-2.5 text-[10px] uppercase tracking-widest text-foreground/70 focus:bg-primary/10"
+						className="rounded-xl cursor-pointer py-3 text-[10px] uppercase tracking-[0.2em] text-[#fdfcf0]/70 focus:bg-white/5 focus:text-[#d4af37]"
 					>
-						<Link to="/account/bookings">My Journeys</Link>
+						<Link to="/account/bookings">My Sacred Journeys</Link>
 					</DropdownMenuItem>
 					{user.role === "admin" && (
 						<DropdownMenuItem
 							asChild
-							className="rounded-xl cursor-pointer py-2.5 text-[10px] uppercase tracking-widest bg-primary/5 text-primary focus:bg-primary/10"
+							className="rounded-xl cursor-pointer py-3 text-[10px] uppercase tracking-[0.2em] bg-[#d4af37]/5 text-[#d4af37] focus:bg-[#d4af37]/10"
 						>
-							<Link to="/admin">Admin Dashboard</Link>
+							<Link to="/admin">Admin Sanctuary</Link>
 						</DropdownMenuItem>
 					)}
 				</DropdownMenuGroup>
-				<DropdownMenuSeparator className="bg-primary/10" />
+				<DropdownMenuSeparator className="bg-white/5" />
 				<Form action="/logout" method="POST" className="p-1">
 					<button type="submit" className="w-full">
 						<DropdownMenuItem
 							variant="destructive"
-							className="rounded-xl cursor-pointer py-2.5 text-[10px] uppercase tracking-widest text-red-500"
+							className="rounded-xl cursor-pointer py-3 text-[10px] uppercase tracking-[0.2em] text-red-400 focus:bg-red-500/10"
 						>
 							{isLoggingOut ? <Loader2 className="mr-2 h-3 w-3 animate-spin" /> : null}
-							Logout
+							Sign Out
 						</DropdownMenuItem>
 					</button>
 				</Form>
