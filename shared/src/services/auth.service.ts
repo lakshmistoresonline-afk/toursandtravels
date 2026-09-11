@@ -191,6 +191,8 @@ export class AuthService extends Service {
 		email: string;
 		aadharNumber: string;
 		phone: string;
+		gender: string;
+		dateOfBirth: string;
 	}) {
 		try {
 			// This is a hack to create a user in Firebase Auth without signing out the current admin.
@@ -216,8 +218,8 @@ export class AuthService extends Service {
 				last_name: data.lastName,
 				phone_number: data.phone,
 				whatsapp_number: null,
-				gender: null,
-				date_of_birth: null,
+				gender: data.gender,
+				date_of_birth: data.dateOfBirth,
 				address_house: null,
 				address_street: null,
 				address_locality: null,

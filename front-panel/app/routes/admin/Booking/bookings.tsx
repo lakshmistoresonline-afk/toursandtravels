@@ -66,6 +66,8 @@ export const clientAction = async ({ request }: any) => {
 				const email = formData.get("email") as string;
 				const aadharNumber = formData.get("aadharNumber") as string;
 				const phone = formData.get("phone") as string;
+				const gender = formData.get("gender") as string;
+				const dateOfBirth = formData.get("dateOfBirth") as string;
 
 				const res = await authSvc.adminCreateUserAndProfile({
 					firstName,
@@ -73,6 +75,8 @@ export const clientAction = async ({ request }: any) => {
 					email,
 					aadharNumber,
 					phone,
+					gender,
+					dateOfBirth,
 				});
 				if (!res.success) throw new Error(res.error);
 				customerId = res.uid!;
@@ -456,6 +460,35 @@ export default function BookingsPage() {
 										maxLength={12}
 										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
 									/>
+								</div>
+
+								<div className="grid grid-cols-2 gap-8">
+									<div className="space-y-3">
+										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+											Gender
+										</Label>
+										<Select name="gender" required>
+											<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm">
+												<SelectValue placeholder="Select gender" />
+											</SelectTrigger>
+											<SelectContent className="bg-white border-primary/20 text-foreground">
+												<SelectItem value="Male">Male</SelectItem>
+												<SelectItem value="Female">Female</SelectItem>
+												<SelectItem value="Other">Other</SelectItem>
+											</SelectContent>
+										</Select>
+									</div>
+									<div className="space-y-3">
+										<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+											Date of Birth
+										</Label>
+										<Input
+											name="dateOfBirth"
+											type="date"
+											required
+											className="h-14 bg-white border-primary/20 text-foreground rounded-2xl shadow-sm px-6"
+										/>
+									</div>
 								</div>
 								<p className="text-[10px] text-primary/60 font-bold uppercase tracking-widest text-center italic border border-primary/10 py-3 rounded-xl bg-primary/5">
 									Default Security Code: Password123

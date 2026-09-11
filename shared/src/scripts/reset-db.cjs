@@ -29,7 +29,8 @@ const testUsers = [
         lastName: "Admin",
         phone: "9999988888",
         aadhar: "111122223333",
-        gender: "Other"
+        gender: "Other",
+        dob: "1980-01-01"
     },
     {
         email: "john.doe@example.com",
@@ -39,7 +40,8 @@ const testUsers = [
         lastName: "Doe",
         phone: "9876543210",
         aadhar: "123456789012",
-        gender: "Male"
+        gender: "Male",
+        dob: "1990-05-15"
     },
     {
         email: "jane.smith@example.com",
@@ -49,7 +51,8 @@ const testUsers = [
         lastName: "Smith",
         phone: "9876543211",
         aadhar: "223344556677",
-        gender: "Female"
+        gender: "Female",
+        dob: "1992-08-20"
     },
     {
         email: "alice.v@example.com",
@@ -59,7 +62,30 @@ const testUsers = [
         lastName: "V",
         phone: "9876543212",
         aadhar: "334455667788",
-        gender: "Female"
+        gender: "Female",
+        dob: "1988-12-10"
+    },
+    {
+        email: "bob.white@example.com",
+        password: "Password123",
+        role: "user",
+        firstName: "Bob",
+        lastName: "White",
+        phone: "9876543213",
+        aadhar: "445566778899",
+        gender: "Male",
+        dob: "1985-03-25"
+    },
+    {
+        email: "charlie.g@example.com",
+        password: "Password123",
+        role: "user",
+        firstName: "Charlie",
+        lastName: "G",
+        phone: "9876543214",
+        aadhar: "556677889900",
+        gender: "Other",
+        dob: "1995-11-05"
     },
 ];
 
@@ -141,7 +167,7 @@ async function reset() {
                 status: "active",
                 whatsapp_number: u.phone || null,
                 gender: u.gender || "Other",
-                date_of_birth: "1990-01-01",
+                date_of_birth: u.dob || "1990-01-01",
                 address_house: "Sacred Residency 108",
                 address_street: "Temple Road",
                 address_locality: "Thiruvambady",
