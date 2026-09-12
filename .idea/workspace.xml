@@ -7,15 +7,11 @@
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/Tour/tour-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Booking/bookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/constants/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/constants/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/schemas/tour.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/schemas/tour.schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/services/booking.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/services/booking.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/types/booking.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/types/booking.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/types/tours.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/types/tours.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FIREBASE_MIGRATION_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/FIREBASE_MIGRATION_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LOCAL_RUN_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/LOCAL_RUN_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEST_ACCOUNTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/TEST_ACCOUNTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/scripts/bootstrap.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/scripts/bootstrap.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/scripts/reset-db.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/scripts/reset-db.cjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

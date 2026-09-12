@@ -22,13 +22,11 @@ These accounts can access the `/admin` dashboard to manage tours and view all re
 
 These accounts are for testing the customer booking flow and profile reuse.
 
-| Name          | Email               | Role |
-| :------------ | :------------------ | :--- |
-| John Doe      | `user1@example.com` | User |
-| Jane Smith    | `user2@example.com` | User |
-| Alice Brown   | `user3@example.com` | User |
-| Bob White     | `user4@example.com` | User |
-| Charlie Green | `user5@example.com` | User |
+| Name       | Email              | Role |
+| :--------- | :----------------- | :--- |
+| Test One   | `test1@ambady.com` | User |
+| Test Two   | `test2@ambady.com` | User |
+| Test Three | `test3@ambady.com` | User |
 
 ---
 
@@ -36,7 +34,7 @@ These accounts are for testing the customer booking flow and profile reuse.
 
 ### 1. Test Profile Reuse
 
-- Login with `user1@example.com`.
+- Login with `test1@ambady.com`.
 - Go to **Account Details** and fill in the profile info.
 - Register for a Tour.
 - Note that when you register for a _second_ tour, your details are pulled automatically from your profile.
@@ -51,6 +49,6 @@ These accounts are for testing the customer booking flow and profile reuse.
 
 ### 3. Test Security
 
-- Login with `user1@example.com`.
+- Login with `test1@ambady.com`.
 - Try to manually navigate to `/admin`.
 - Verify that the application redirects you back to the login or home page (Access Denied).

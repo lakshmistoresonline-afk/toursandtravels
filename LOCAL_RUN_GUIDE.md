@@ -61,10 +61,10 @@ npm run dev -- --force
 The system uses a **Single Login** at `/login`.
 
 - **To test as a Customer**:
-    - Login with `user1@example.com` (Password: `Password123`).
+    - Login with `test1@ambady.com` (Password: `Password123`).
     - You will be able to browse tours and join them.
 - **To test as an Admin**:
-    - Login with `admin@Ambady Tours and Travels.com` (Password: `Password123`).
+    - Login with `admin@ambady.com` (Password: `Password123`).
     - You will be redirected to the **Admin Dashboard**.
     - You can also manually go to `/admin` once logged in.
 

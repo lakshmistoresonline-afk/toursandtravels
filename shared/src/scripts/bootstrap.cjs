@@ -22,11 +22,9 @@ const db = getFirestore();
 
 const testUsers = [
     { email: "admin@ambady.com", password: "Password123", role: "admin", firstName: "AMBADY", lastName: "Admin" },
-    { email: "user1@example.com", password: "Password123", role: "user", firstName: "John", lastName: "Doe" },
-    { email: "user2@example.com", password: "Password123", role: "user", firstName: "Jane", lastName: "Smith" },
-    { email: "user3@example.com", password: "Password123", role: "user", firstName: "Alice", lastName: "Brown" },
-    { email: "user4@example.com", password: "Password123", role: "user", firstName: "Bob", lastName: "White" },
-    { email: "user5@example.com", password: "Password123", role: "user", firstName: "Charlie", lastName: "Green" },
+    { email: "test1@ambady.com", password: "Password123", role: "user", firstName: "Test", lastName: "One" },
+    { email: "test2@ambady.com", password: "Password123", role: "user", firstName: "Test", lastName: "Two" },
+    { email: "test3@ambady.com", password: "Password123", role: "user", firstName: "Test", lastName: "Three" },
 ];
 
 async function bootstrap() {

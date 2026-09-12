@@ -27,9 +27,9 @@ stored in Firestore:
 
 | Account Type      | Email                                | Password      | Role      |
 | :---------------- | :----------------------------------- | :------------ | :-------- |
-| **Administrator** | `admin@Ambady Tours and Travels.com` | `Password123` | **admin** |
-| **Test User 1**   | `user1@example.com`                  | `Password123` | user      |
-| **Test User 2**   | `user2@example.com`                  | `Password123` | user      |
+| **Administrator** | `admin@ambady.com` | `Password123` | **admin** |
+| **Test User 1**   | `test1@ambady.com`                  | `Password123` | user      |
+| **Test User 2**   | `test2@ambady.com`                  | `Password123` | user      |
 
 ## 🛠️ Deployment Instructions
 

@@ -33,60 +33,97 @@ const testUsers = [
         dob: "1980-01-01"
     },
     {
-        email: "john.doe@example.com",
+        email: "test1@ambady.com",
         password: "Password123",
         role: "user",
-        firstName: "John",
-        lastName: "Doe",
-        phone: "9876543210",
-        aadhar: "123456789012",
+        firstName: "Test",
+        lastName: "One",
+        phone: "9000000001",
+        aadhar: "100000000001",
         gender: "Male",
-        dob: "1990-05-15"
+        dob: "1990-01-01"
     },
     {
-        email: "jane.smith@example.com",
+        email: "test2@ambady.com",
         password: "Password123",
         role: "user",
-        firstName: "Jane",
-        lastName: "Smith",
-        phone: "9876543211",
-        aadhar: "223344556677",
+        firstName: "Test",
+        lastName: "Two",
+        phone: "9000000002",
+        aadhar: "100000000002",
         gender: "Female",
-        dob: "1992-08-20"
+        dob: "1992-02-02"
     },
     {
-        email: "alice.v@example.com",
+        email: "test3@ambady.com",
         password: "Password123",
         role: "user",
-        firstName: "Alice",
-        lastName: "V",
-        phone: "9876543212",
-        aadhar: "334455667788",
-        gender: "Female",
-        dob: "1988-12-10"
-    },
-    {
-        email: "bob.white@example.com",
-        password: "Password123",
-        role: "user",
-        firstName: "Bob",
-        lastName: "White",
-        phone: "9876543213",
-        aadhar: "445566778899",
-        gender: "Male",
-        dob: "1985-03-25"
-    },
-    {
-        email: "charlie.g@example.com",
-        password: "Password123",
-        role: "user",
-        firstName: "Charlie",
-        lastName: "G",
-        phone: "9876543214",
-        aadhar: "556677889900",
+        firstName: "Test",
+        lastName: "Three",
+        phone: "9000000003",
+        aadhar: "100000000003",
         gender: "Other",
-        dob: "1995-11-05"
+        dob: "1995-03-03"
     },
+];
+
+const sampleTours = [
+    {
+        tour_code: "VARANASI-2026",
+        name: "Sacred Varanasi Pilgrimage",
+        overview: "Experience the spiritual heart of India with our guided tour of the holy city of Varanasi. Witness the Ganga Aarti and explore ancient temples.",
+        destination: "Varanasi, Uttar Pradesh",
+        price: 15000,
+        max_participants: 30,
+        status: "REGISTRATION_OPEN",
+        start_date: "2026-03-10",
+        start_time: "06:00",
+        end_date: "2026-03-15",
+        end_time: "20:00",
+        cover_image: "https://images.unsplash.com/photo-1561361058-c24cecae35ca?q=80&w=2070&auto=format&fit=crop",
+        qr_code_url: "/payment-qr.png",
+        itinerary: [
+            { day_number: 1, title: "Arrival & Evening Aarti", description: "Arrival at Varanasi airport, check-in to hotel, and witness the spectacular Ganga Aarti." },
+            { day_number: 2, title: "Temple Tour", description: "Visit the Kashi Vishwanath temple and other significant religious sites." }
+        ]
+    },
+    {
+        tour_code: "KEDARNATH-2026",
+        name: "Kedarnath Yatra 2026",
+        overview: "A divine trek to the Kedarnath temple, one of the Chardhams, nestled in the majestic Himalayas.",
+        destination: "Kedarnath, Uttarakhand",
+        price: 25000,
+        max_participants: 20,
+        status: "REGISTRATION_OPEN",
+        start_date: "2026-05-20",
+        start_time: "05:00",
+        end_date: "2026-05-27",
+        end_time: "18:00",
+        cover_image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1974&auto=format&fit=crop",
+        qr_code_url: "/payment-qr.png",
+        itinerary: [
+            { day_number: 1, title: "Haridwar Arrival", description: "Meet and greet at Haridwar and proceed to Rishikesh." },
+            { day_number: 2, title: "Drive to Sonprayag", description: "A scenic drive through the mountains to the base camp." }
+        ]
+    },
+    {
+        tour_code: "AMRITSAR-2026",
+        name: "Golden Temple Spiritual Journey",
+        overview: "Visit the serene Golden Temple in Amritsar and experience the peaceful atmosphere and community service.",
+        destination: "Amritsar, Punjab",
+        price: 12000,
+        max_participants: 25,
+        status: "PUBLISHED",
+        start_date: "2026-04-15",
+        start_time: "08:00",
+        end_date: "2026-04-17",
+        end_time: "22:00",
+        cover_image: "https://images.unsplash.com/photo-1514222134-b57cbb8ce073?q=80&w=2022&auto=format&fit=crop",
+        qr_code_url: "/payment-qr.png",
+        itinerary: [
+            { day_number: 1, title: "Golden Temple Visit", description: "Morning visit to Sri Harmandir Sahib and Langar participation." }
+        ]
+    }
 ];
 
 async function deleteCollection(collectionPath, batchSize = 100) {
@@ -191,6 +228,22 @@ async function reset() {
             console.log(`✅ Created: ${u.email} (${u.role})`);
         } catch (error) {
             console.error(`❌ Error creating ${u.email}:`, error.message);
+        }
+    }
+
+    console.log("\n🚀 Re-populating with Sample Tours...");
+    for (const t of sampleTours) {
+        try {
+            const tourRef = db.collection("tours").doc();
+            await tourRef.set({
+                ...t,
+                currentParticipants: 0,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+            });
+            console.log(`✅ Created Tour: ${t.name} (${t.tour_code})`);
+        } catch (error) {
+            console.error(`❌ Error creating tour ${t.name}:`, error.message);
         }
     }
 
