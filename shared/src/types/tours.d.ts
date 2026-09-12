@@ -7,6 +7,7 @@ export type HighLevelTour = {
 	price: number;
 	destination: string;
 	start_date: string | null;
+	qr_code_url?: string | null;
 	start_time: string | null;
 	end_date: string | null;
 	end_time: string | null;

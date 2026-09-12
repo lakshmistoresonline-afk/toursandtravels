@@ -21,6 +21,9 @@ export const PAYMENT_STATUS = ["PENDING", "PAID", "FAILED", "REFUNDED"] as const
 
 export const PAYMENT_CURRENCY = "INR" as const;
 
+export const PAYMENT_MODES = ["CASH", "GPAY", "OTHER_UPI"] as const;
+export type PaymentMode = (typeof PAYMENT_MODES)[number];
+
 export const MAX_META_KEYWORDS = 25;
 
 // Fallback image

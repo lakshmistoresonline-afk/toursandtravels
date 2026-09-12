@@ -7,8 +7,8 @@ import {
 	Link,
 } from "react-router";
 import { Button } from "~/components/ui/button";
-import { Calendar, Loader2, MapPin, ShieldCheck, CheckCircle2, Compass } from "lucide-react";
-import { useMemo, useEffect } from "react";
+import { Calendar, Loader2, MapPin, ShieldCheck, CheckCircle2, Compass, QrCode, CreditCard, Banknote } from "lucide-react";
+import { useMemo, useEffect, useState } from "react";
 import TourImageCarousel from "~/components/Tour/TourImageCarousel";
 import { tourDetailsQuery } from "~/queries/tours.q";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
@@ -47,9 +47,15 @@ export const clientAction = async ({ request, params }: any) => {
 		const bookingSvc = new BookingService();
 		const travellersCount = Number(formData.get("travellersCount") || 1);
 		const notes = formData.get("notes")?.toString();
+		const paymentMode = formData.get("paymentMode")?.toString();
 
 		try {
-			const regId = await bookingSvc.createRegistration(params.id!, travellersCount, notes);
+			const regId = await bookingSvc.createRegistration(
+				params.id!,
+				travellersCount,
+				notes,
+				paymentMode,
+			);
 			return { success: true, regId };
 		} catch (err: any) {
 			return { success: false, error: err.message };
@@ -66,6 +72,8 @@ export default function TourDetailsPage() {
 	const tour = loaderData?.tour;
 	const user = loaderData?.userData?.user;
 	const isAlreadyRegistered = loaderData?.isAlreadyRegistered;
+
+	const [paymentMode, setPaymentMode] = useState<"CASH" | "GPAY" | "OTHER_UPI">("CASH");
 
 	useEffect(() => {
 		if (actionData?.success) {
@@ -311,6 +319,83 @@ export default function TourDetailsPage() {
 													className="h-14 rounded-2xl bg-white border-primary/20 font-serif text-2xl px-6 text-primary focus-visible:ring-primary/20 shadow-sm"
 												/>
 											</div>
+
+											<div className="space-y-4">
+												<label className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] ml-2">
+													Payment Mode
+												</label>
+												<div className="grid grid-cols-1 gap-3">
+													{[
+														{ id: "CASH", label: "Cash Payment", icon: Banknote },
+														{ id: "GPAY", label: "Google Pay", icon: CreditCard },
+														{ id: "OTHER_UPI", label: "Other UPI", icon: QrCode },
+													].map((mode) => (
+														<label
+															key={mode.id}
+															className={`flex items-center gap-4 p-4 rounded-2xl border transition-all cursor-pointer ${
+																paymentMode === mode.id
+																	? "bg-primary/5 border-primary shadow-sm"
+																	: "bg-white border-primary/10 hover:border-primary/30"
+															}`}
+														>
+															<input
+																type="radio"
+																name="paymentMode"
+																value={mode.id}
+																className="sr-only"
+																checked={paymentMode === mode.id}
+																onChange={() => setPaymentMode(mode.id as any)}
+															/>
+															<div
+																className={`h-10 w-10 rounded-xl flex items-center justify-center ${
+																	paymentMode === mode.id
+																		? "bg-primary text-primary-foreground"
+																		: "bg-primary/5 text-primary"
+																}`}
+															>
+																<mode.icon className="h-5 w-5" />
+															</div>
+															<span
+																className={`text-[11px] font-bold uppercase tracking-widest ${
+																	paymentMode === mode.id ? "text-primary" : "text-foreground/60"
+																}`}
+															>
+																{mode.label}
+															</span>
+														</label>
+													))}
+												</div>
+											</div>
+
+											{paymentMode !== "CASH" && (
+												<div className="space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
+													<div className="p-6 bg-primary/5 border border-primary/10 rounded-3xl space-y-4 text-center">
+														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">
+															Scan to Pay
+														</p>
+														{(tour.qr_code_url || "/payment-qr.png") ? (
+															<div className="bg-white p-4 rounded-2xl shadow-inner inline-block mx-auto border border-primary/10">
+																<img
+																	src={tour.qr_code_url || "/payment-qr.png"}
+																	alt="Payment QR Code"
+																	className="h-48 w-48 object-contain"
+																/>
+															</div>
+														) : (
+															<div className="h-48 w-48 mx-auto bg-primary/5 border border-dashed border-primary/20 rounded-2xl flex flex-col items-center justify-center p-6 gap-3 opacity-60">
+																<QrCode className="h-10 w-10 text-primary" />
+																<p className="text-[8px] font-bold text-primary uppercase tracking-widest leading-relaxed">
+																	QR Code not set for this journey. Please contact admin.
+																</p>
+															</div>
+														)}
+														<p className="text-[9px] text-foreground/40 font-medium italic">
+															Please save the screenshot of payment confirmation.
+														</p>
+													</div>
+												</div>
+											)}
+
 											<div className="space-y-4">
 												<label className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] ml-2">
 													Sacred Requests

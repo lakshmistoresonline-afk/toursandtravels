@@ -53,6 +53,7 @@ export const clientAction = async ({ request }: any) => {
 		const isNewUser = formData.get("isNewUser") === "true";
 		const travellersCount = Number(formData.get("travellersCount"));
 		const notes = formData.get("notes") as string;
+		const paymentMode = formData.get("paymentMode") as string;
 
 		const bookingSvc = new BookingService();
 		const authSvc = new AuthService();
@@ -82,7 +83,13 @@ export const clientAction = async ({ request }: any) => {
 				customerId = res.uid!;
 			}
 
-			await bookingSvc.adminCreateRegistration(tourId, customerId, travellersCount, notes);
+			await bookingSvc.adminCreateRegistration(
+				tourId,
+				customerId,
+				travellersCount,
+				notes,
+				paymentMode,
+			);
 			return { success: true };
 		} catch (err: any) {
 			return { success: false, error: err.message };
@@ -233,6 +240,19 @@ export default function BookingsPage() {
 			},
 		},
 		{
+			id: "Payment",
+			accessorKey: "paymentMode",
+			header: "Method",
+			cell: ({ row }) => (
+				<Badge
+					variant="outline"
+					className="text-[9px] font-bold uppercase tracking-widest border-primary/20 text-primary/60"
+				>
+					{row.original.paymentMode || "CASH"}
+				</Badge>
+			),
+		},
+		{
 			id: "Amount",
 			header: "Total Exchange",
 			cell: ({ row }) => (
@@ -304,34 +324,36 @@ export default function BookingsPage() {
 				metaDescription="Manage pilgrim registrations and journeys."
 			/>
 
-			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-primary/10 pb-8">
-				<div className="flex items-center gap-4">
-					<BackButton fallbackUrl="/admin" label="Dashboard" />
-					<div>
+			<div className="flex flex-col md:flex-row justify-between items-end gap-8 border-b border-primary/10 pb-10">
+				<div className="flex flex-col gap-6">
+					<div className="flex items-center gap-4">
+						<BackButton fallbackUrl="/admin" label="Dashboard" />
 						<h1 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight leading-tight">
 							Pilgrim Registrations
 						</h1>
 					</div>
+					<p className="text-foreground/40 text-[10px] font-bold uppercase tracking-[0.3em] ml-2">
+						Manage and track all spiritual journey participants.
+					</p>
 				</div>
-				<p className="text-foreground/40 text-sm uppercase tracking-[0.2em] font-bold">
-					Manage and track all spiritual journey participants.
-				</p>
-				<div className="flex flex-wrap gap-4">
+
+				<div className="flex items-center gap-4 bg-primary/5 p-2 rounded-full border border-primary/10">
 					<Button
-						className="rounded-full bg-white border border-primary/20 text-primary hover:bg-primary/5 px-8 h-14 text-[11px] font-bold uppercase tracking-widest shadow-sm"
+						variant="ghost"
+						className="rounded-full text-primary hover:bg-white hover:shadow-sm px-6 h-12 text-[9px] font-bold uppercase tracking-widest transition-all"
 						onClick={() => setIsManualRegOpen(true)}
 					>
-						<Plus className="mr-3 h-5 w-5" /> Manual Entry
+						<Plus className="mr-2 h-4 w-4" /> Manual Entry
 					</Button>
 					<Button
-						className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-14 text-[11px] font-bold uppercase tracking-widest shadow-xl shadow-primary/20"
+						className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 text-[9px] font-bold uppercase tracking-widest shadow-lg shadow-primary/20 transition-all"
 						onClick={handleExport}
 						disabled={isExporting || data.registrations.length === 0}
 					>
 						{isExporting ? (
-							<Loader2 className="mr-3 h-5 w-5 animate-spin" />
+							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 						) : (
-							<Download className="mr-3 h-5 w-5" />
+							<Download className="mr-2 h-4 w-4" />
 						)}
 						Excel Export
 					</Button>
@@ -531,7 +553,7 @@ export default function BookingsPage() {
 								</div>
 							)}
 
-							<div className="grid grid-cols-2 gap-8">
+							<div className="grid grid-cols-2 md:grid-cols-3 gap-8">
 								<div className="space-y-4">
 									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
 										Pilgrims Count
@@ -544,6 +566,21 @@ export default function BookingsPage() {
 										required
 										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-8 font-serif text-2xl text-primary"
 									/>
+								</div>
+								<div className="space-y-4">
+									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">
+										Payment Mode
+									</Label>
+									<Select name="paymentMode" defaultValue="CASH">
+										<SelectTrigger className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-6">
+											<SelectValue />
+										</SelectTrigger>
+										<SelectContent className="bg-white border-primary/20 text-foreground">
+											<SelectItem value="CASH">Cash</SelectItem>
+											<SelectItem value="GPAY">GPay</SelectItem>
+											<SelectItem value="OTHER_UPI">Other UPI</SelectItem>
+										</SelectContent>
+									</Select>
 								</div>
 								<div className="space-y-4">
 									<Label className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-2">

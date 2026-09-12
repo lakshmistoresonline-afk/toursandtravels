@@ -82,6 +82,7 @@ export default function UpdateTourPage() {
 			end_time: tour?.end_time || "",
 			itinerary: tour?.itinerary || [],
 			cover_image: tour?.cover_image || "",
+			qr_code_url: tour?.qr_code_url || "",
 		},
 	});
 
@@ -446,10 +447,10 @@ export default function UpdateTourPage() {
 						<div className="px-10 py-7 border-b border-primary/10 flex items-center gap-4 bg-primary/5">
 							<ImageIcon className="h-4.5 w-4.5 text-primary" />
 							<h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
-								Visual Identity
+								Visual Identity & Assets
 							</h3>
 						</div>
-						<CardContent className="p-10">
+						<CardContent className="p-10 space-y-10">
 							<FormField
 								control={control}
 								name="cover_image"
@@ -460,7 +461,25 @@ export default function UpdateTourPage() {
 										</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="https://images.unsplash.com/..."
+												className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 shadow-sm px-8"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={control}
+								name="qr_code_url"
+								render={({ field }) => (
+									<FormItem className="space-y-3">
+										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+											Payment QR Code URL
+										</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="Link to GPay/UPI QR code image"
 												className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 shadow-sm px-8"
 												{...field}
 											/>

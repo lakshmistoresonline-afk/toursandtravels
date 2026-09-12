@@ -17,9 +17,14 @@ export class BookingService extends Service {
 	/**
 	 * Create a tour registration
 	 */
-	async createRegistration(tourId: string, travellersCount: number, notes?: string): Promise<string> {
+	async createRegistration(
+		tourId: string,
+		travellersCount: number,
+		notes?: string,
+		paymentMode?: string,
+	): Promise<string> {
 		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
-		return this.performRegistration(tourId, this.currentUid, travellersCount, notes);
+		return this.performRegistration(tourId, this.currentUid, travellersCount, notes, paymentMode);
 	}
 
 	/**
@@ -30,8 +35,9 @@ export class BookingService extends Service {
 		customerId: string,
 		travellersCount: number,
 		notes?: string,
+		paymentMode?: string,
 	): Promise<string> {
-		return this.performRegistration(tourId, customerId, travellersCount, notes);
+		return this.performRegistration(tourId, customerId, travellersCount, notes, paymentMode);
 	}
 
 	/**
@@ -42,6 +48,7 @@ export class BookingService extends Service {
 		customerId: string,
 		travellersCount: number,
 		notes?: string,
+		paymentMode?: string,
 	): Promise<string> {
 		try {
 			// Check for existing registration before starting transaction
@@ -96,6 +103,7 @@ export class BookingService extends Service {
 					tourId,
 					customerId,
 					travellersCount,
+					paymentMode: paymentMode || "CASH",
 					notes: notes || null,
 					status: customerId === this.currentUid ? "PENDING" : "CONFIRMED",
 					profileSnapshot: {

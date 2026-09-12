@@ -3,6 +3,7 @@ export type TourRegistration = {
 	tourId: string;
 	customerId: string;
 	travellersCount: number;
+	paymentMode?: "CASH" | "GPAY" | "OTHER_UPI";
 	status: "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED";
 	notes: string | null;
 	profileSnapshot: {
