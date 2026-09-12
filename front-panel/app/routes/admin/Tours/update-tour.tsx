@@ -14,7 +14,7 @@ import {
 	User,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import {
 	type ActionFunctionArgs,
 	type LoaderFunctionArgs,
@@ -333,7 +333,11 @@ export default function UpdateTourPage() {
 												type="number"
 												className="h-16 rounded-2xl border-primary/20 bg-white text-primary font-serif text-3xl px-8 focus-visible:ring-primary/20 shadow-sm"
 												{...field}
-												onChange={(e) => field.onChange(Number(e.target.value))}
+												value={field.value || ""}
+												onChange={(e) => {
+													const val = e.target.value;
+													field.onChange(val === "" ? 0 : Number(val));
+												}}
 											/>
 										</FormControl>
 										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
@@ -353,7 +357,11 @@ export default function UpdateTourPage() {
 												type="number"
 												className="h-16 rounded-2xl border-primary/20 bg-white text-primary font-serif text-3xl px-8 focus-visible:ring-primary/20 shadow-sm"
 												{...field}
-												onChange={(e) => field.onChange(Number(e.target.value))}
+												value={field.value || ""}
+												onChange={(e) => {
+													const val = e.target.value;
+													field.onChange(val === "" ? 0 : Number(val));
+												}}
 											/>
 										</FormControl>
 										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
