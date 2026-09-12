@@ -23,6 +23,8 @@ import {
 	useNavigate,
 	useNavigation,
 	useSubmit,
+	isRouteErrorResponse,
+	useRouteError,
 } from "react-router";
 import { toast } from "sonner";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
@@ -36,6 +38,7 @@ import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { format } from "date-fns";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
+import { AlertTriangle, RefreshCw, Map } from "lucide-react";
 
 export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
 	try {
@@ -653,6 +656,47 @@ export default function UpdateTourPage() {
 					)}
 				</CardContent>
 			</Card>
+		</div>
+	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	let message = "An error occurred while loading this journey's details.";
+
+	if (isRouteErrorResponse(error)) {
+		message = error.data?.message || message;
+	} else if (error instanceof Error) {
+		message = error.message;
+	}
+
+	return (
+		<div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-12 bg-red-50/20 rounded-[3rem] border border-red-100 border-dashed animate-in fade-in duration-500">
+			<div className="h-20 w-20 rounded-full bg-red-100/50 flex items-center justify-center text-red-600 mb-8">
+				<AlertTriangle className="h-10 w-10" />
+			</div>
+			<h2 className="text-2xl font-serif text-foreground mb-4">Journey Map Disturbance</h2>
+			<p className="text-foreground/50 max-w-md mb-10 text-sm font-medium leading-relaxed">
+				{message}
+			</p>
+			<div className="flex gap-4">
+				<Button
+					onClick={() => window.location.reload()}
+					variant="outline"
+					className="rounded-full px-8 h-12 border-red-200 text-red-600 hover:bg-red-50 font-bold uppercase tracking-widest text-[9px]"
+				>
+					<RefreshCw className="mr-2 h-3.5 w-3.5" /> Retry
+				</Button>
+				<Button
+					asChild
+					variant="ghost"
+					className="rounded-full px-8 h-12 text-foreground/40 font-bold uppercase tracking-widest text-[9px]"
+				>
+					<a href="/admin/tours">
+						<Map className="mr-2 h-3.5 w-3.5" /> Back to Inventory
+					</a>
+				</Button>
+			</div>
 		</div>
 	);
 }

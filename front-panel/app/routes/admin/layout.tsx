@@ -1,6 +1,26 @@
-import { Outlet, redirect, type LoaderFunctionArgs, Link, NavLink, Form } from "react-router";
+import {
+	Outlet,
+	redirect,
+	type LoaderFunctionArgs,
+	Link,
+	NavLink,
+	Form,
+	useRouteError,
+	isRouteErrorResponse,
+} from "react-router";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
-import { LayoutDashboard, MapPin, ClipboardList, Globe, LogOut, Compass, Users } from "lucide-react";
+import {
+	LayoutDashboard,
+	MapPin,
+	ClipboardList,
+	Globe,
+	LogOut,
+	Compass,
+	Users,
+	AlertTriangle,
+	RefreshCw,
+} from "lucide-react";
+import { Button } from "~/components/ui/button";
 
 export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 	const { user } = await getCurrentUser(request);
@@ -104,6 +124,41 @@ export default function AdminLayout() {
 			<main className="p-8 flex-1 container mx-auto">
 				<Outlet />
 			</main>
+		</div>
+	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+
+	let message = "An unexpected disturbance occurred while managing the sacred map.";
+	if (isRouteErrorResponse(error)) {
+		message = error.data?.message || message;
+	} else if (error instanceof Error) {
+		if (error.message.includes("index")) {
+			message =
+				"The management records are currently being optimized. Please try refreshing in a few moments.";
+		} else {
+			message = error.message;
+		}
+	}
+
+	return (
+		<div className="h-[60vh] flex flex-col items-center justify-center text-center p-12 bg-red-50/30 rounded-[3rem] border border-red-100 border-dashed animate-in fade-in duration-500">
+			<div className="h-20 w-20 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-8">
+				<AlertTriangle className="h-10 w-10" />
+			</div>
+			<h2 className="text-2xl font-serif text-foreground mb-4">Management Portal Disturbance</h2>
+			<p className="text-foreground/50 max-w-md mb-10 text-sm font-medium leading-relaxed">
+				{message}
+			</p>
+			<Button
+				onClick={() => window.location.reload()}
+				variant="outline"
+				className="rounded-full px-10 h-14 border-red-200 text-red-600 hover:bg-red-50 font-bold uppercase tracking-widest text-[10px]"
+			>
+				<RefreshCw className="mr-2 h-4 w-4" /> Resolve Disturbance
+			</Button>
 		</div>
 	);
 }
