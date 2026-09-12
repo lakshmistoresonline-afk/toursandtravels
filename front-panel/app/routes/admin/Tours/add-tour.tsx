@@ -497,9 +497,16 @@ export default function AddTourPage() {
 								name="cover_image"
 								render={({ field }) => (
 									<FormItem className="space-y-4">
-										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
-											Journey Cover Image
-										</FormLabel>
+										<div className="flex items-center justify-between ml-2">
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+												Journey Cover Image
+											</FormLabel>
+											{field.value && (
+												<p className="text-[8px] text-foreground/30 font-bold uppercase tracking-widest">
+													Selected via Unsplash
+												</p>
+											)}
+										</div>
 										<div className="space-y-4">
 											{field.value ? (
 												<div className="relative group aspect-[21/9] w-full rounded-[2rem] overflow-hidden border border-primary/20 shadow-lg">
@@ -522,7 +529,10 @@ export default function AddTourPage() {
 															type="button"
 															variant="destructive"
 															size="sm"
-															onClick={() => field.onChange("")}
+															onClick={() => {
+																setValue("cover_image", "");
+																setValue("cover_image_attribution", null);
+															}}
 															className="rounded-full font-bold uppercase tracking-widest text-[9px] px-6"
 														>
 															Remove

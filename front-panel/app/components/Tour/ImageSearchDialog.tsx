@@ -115,7 +115,17 @@ export function ImageSearchDialog({
 							{images.map((img) => (
 								<div
 									key={img.id}
-									className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/10 hover:border-primary transition-all shadow-sm"
+									onClick={() => {
+										onSelect({
+											url: img.urls.regular,
+											attribution: {
+												photographer_name: img.user.name,
+												photographer_url: img.user.links.html,
+											},
+										});
+										onOpenChange(false);
+									}}
+									className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/10 hover:border-primary transition-all shadow-sm cursor-pointer"
 								>
 									<img
 										src={img.urls.small}
@@ -123,24 +133,9 @@ export function ImageSearchDialog({
 										className="w-full h-full object-cover transition-transform group-hover:scale-105"
 									/>
 									<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
-										<Button
-											type="button"
-											variant="secondary"
-											size="sm"
-											onClick={() => {
-												onSelect({
-													url: img.urls.regular,
-													attribution: {
-														photographer_name: img.user.name,
-														photographer_url: img.user.links.html,
-													},
-												});
-												onOpenChange(false);
-											}}
-											className="rounded-full bg-white text-primary font-bold uppercase tracking-widest text-[8px] px-4"
-										>
+										<div className="rounded-full bg-white text-primary font-bold uppercase tracking-widest text-[8px] px-4 py-2 shadow-lg scale-90 group-hover:scale-100 transition-transform">
 											Select Image
-										</Button>
+										</div>
 										<div className="text-center px-4">
 											<p className="text-[8px] text-white/60 font-medium truncate w-full">
 												Photo by{" "}

@@ -64,10 +64,10 @@ export default function AdminToursPage() {
 			header: "Journey Details",
 			cell: ({ row }) => {
 				const [imgError, setImgError] = React.useState(false);
-				const isUrlValid = (url: string | null | undefined) => {
-					return !!(url && url.length > 12 && url.startsWith("http") && !url.endsWith("-"));
-				};
-				const hasValidImage = !imgError && isUrlValid(row.original.cover_image);
+				const hasValidImage =
+					!imgError &&
+					row.original.cover_image &&
+					row.original.cover_image.startsWith("http");
 
 				return (
 					<div className="flex items-center gap-4 py-1">

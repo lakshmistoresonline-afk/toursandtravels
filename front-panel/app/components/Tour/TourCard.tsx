@@ -15,11 +15,8 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 		DRAFT: "text-slate-500 border-slate-500/30 bg-slate-500/5",
 	};
 
-	const isUrlValid = (url: string | null | undefined) => {
-		return !!(url && url.length > 12 && url.startsWith("http") && !url.endsWith("-"));
-	};
-
-	const hasValidImage = !imgError && isUrlValid(tour.cover_image);
+	const hasValidImage =
+		!imgError && tour.cover_image && tour.cover_image.startsWith("http");
 
 	return (
 		<Link to={"/tours/tour/" + tour.id} prefetch="intent" viewTransition className="group block h-full">
