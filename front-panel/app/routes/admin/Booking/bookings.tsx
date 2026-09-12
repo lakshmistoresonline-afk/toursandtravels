@@ -1,6 +1,15 @@
 import { ColumnDef, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { MoreHorizontal, User, MapPin, Download, Loader2, Plus } from "lucide-react";
+import {
+	MoreHorizontal,
+	User,
+	MapPin,
+	Download,
+	Loader2,
+	Plus,
+	CheckCircle2,
+	Clock,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLoaderData, useLocation, useNavigation, useActionData, useSubmit } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
@@ -95,6 +104,20 @@ export const clientAction = async ({ request }: any) => {
 			return { success: false, error: err.message };
 		}
 	}
+
+	if (intent === "update-payment-status") {
+		const regId = formData.get("regId") as string;
+		const status = formData.get("status") as string;
+		const bookingSvc = new BookingService();
+
+		try {
+			await bookingSvc.updatePaymentStatus(regId, status);
+			return { success: true, message: `Payment marked as ${status}` };
+		} catch (err: any) {
+			return { success: false, error: err.message };
+		}
+	}
+
 	return null;
 };
 
@@ -115,7 +138,7 @@ export default function BookingsPage() {
 
 	useEffect(() => {
 		if (actionData?.success) {
-			toast.success("Registration created successfully");
+			toast.success(actionData.message || "Registration created successfully");
 			setIsManualRegOpen(false);
 		} else if (actionData?.error) {
 			toast.error(actionData.error);
@@ -242,14 +265,26 @@ export default function BookingsPage() {
 		{
 			id: "Payment",
 			accessorKey: "paymentMode",
-			header: "Method",
+			header: "Payment",
 			cell: ({ row }) => (
-				<Badge
-					variant="outline"
-					className="text-[9px] font-bold uppercase tracking-widest border-primary/20 text-primary/60"
-				>
-					{row.original.paymentMode || "CASH"}
-				</Badge>
+				<div className="flex flex-col gap-1.5">
+					<Badge
+						variant="outline"
+						className="text-[9px] font-bold uppercase tracking-widest border-primary/20 text-primary/60 w-fit"
+					>
+						{row.original.paymentMode || "CASH"}
+					</Badge>
+					<Badge
+						className={cn(
+							"px-2 py-0.5 rounded-full border shadow-none font-bold text-[8px] uppercase tracking-widest w-fit",
+							row.original.paymentStatus === "PAID"
+								? "text-emerald-600 border-emerald-500/20 bg-emerald-50"
+								: "text-amber-600 border-amber-500/20 bg-amber-50",
+						)}
+					>
+						{row.original.paymentStatus || "PENDING"}
+					</Badge>
+				</div>
 			),
 		},
 		{
@@ -295,6 +330,35 @@ export default function BookingsPage() {
 						>
 							View Full Details
 						</DropdownMenuItem>
+
+						{row.original.paymentStatus !== "PAID" ? (
+							<DropdownMenuItem
+								onClick={() => {
+									const fd = new FormData();
+									fd.append("intent", "update-payment-status");
+									fd.append("regId", row.original.id);
+									fd.append("status", "PAID");
+									submit(fd, { method: "post" });
+								}}
+								className="rounded-xl cursor-pointer py-3 text-emerald-600 focus:bg-emerald-50 font-bold"
+							>
+								<CheckCircle2 className="mr-3 h-4 w-4" /> Mark as Paid
+							</DropdownMenuItem>
+						) : (
+							<DropdownMenuItem
+								onClick={() => {
+									const fd = new FormData();
+									fd.append("intent", "update-payment-status");
+									fd.append("regId", row.original.id);
+									fd.append("status", "PENDING");
+									submit(fd, { method: "post" });
+								}}
+								className="rounded-xl cursor-pointer py-3 text-amber-600 focus:bg-amber-50 font-bold"
+							>
+								<Clock className="mr-3 h-4 w-4" /> Mark as Pending
+							</DropdownMenuItem>
+						)}
+
 						<DropdownMenuItem className="rounded-xl cursor-pointer py-3 text-red-600 focus:bg-red-50 font-medium">
 							Cancel Registration
 						</DropdownMenuItem>

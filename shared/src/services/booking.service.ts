@@ -41,6 +41,22 @@ export class BookingService extends Service {
 	}
 
 	/**
+	 * Update payment status
+	 */
+	async updatePaymentStatus(registrationId: string, status: string): Promise<void> {
+		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
+		try {
+			const regRef = doc(this.db, this.REGISTRATIONS_COLLECTION, registrationId);
+			await updateDoc(regRef, {
+				paymentStatus: status,
+				updatedAt: serverTimestamp(),
+			});
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
+		}
+	}
+
+	/**
 	 * Shared registration logic
 	 */
 	private async performRegistration(
@@ -104,6 +120,7 @@ export class BookingService extends Service {
 					customerId,
 					travellersCount,
 					paymentMode: paymentMode || "CASH",
+					paymentStatus: "PENDING",
 					notes: notes || null,
 					status: customerId === this.currentUid ? "PENDING" : "CONFIRMED",
 					profileSnapshot: {
