@@ -191,10 +191,17 @@ export class BookingService extends Service {
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
 			where("tourId", "==", tourId),
-			orderBy("createdAt", "desc"),
 		);
 		const snap = await getDocs(q);
-		const registrations = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+		let registrations = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any[];
+
+		// Sort in-memory to avoid mandatory composite index
+		registrations.sort((a, b) => {
+			const dateA = a.createdAt?.toDate?.()?.getTime() || new Date(a.createdAt).getTime();
+			const dateB = b.createdAt?.toDate?.()?.getTime() || new Date(b.createdAt).getTime();
+			return dateB - dateA;
+		});
+
 		return { registrations, total: registrations.length } as any;
 	}
 
@@ -202,9 +209,17 @@ export class BookingService extends Service {
 		const q = query(
 			collection(this.db, this.REGISTRATIONS_COLLECTION),
 			where("tourId", "==", tourId),
-			orderBy("createdAt", "desc"),
 		);
 		const snap = await getDocs(q);
-		return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+		let registrations = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any[];
+
+		// Sort in-memory to avoid mandatory composite index
+		registrations.sort((a, b) => {
+			const dateA = a.createdAt?.toDate?.()?.getTime() || new Date(a.createdAt).getTime();
+			const dateB = b.createdAt?.toDate?.()?.getTime() || new Date(b.createdAt).getTime();
+			return dateB - dateA;
+		});
+
+		return registrations;
 	}
 }
