@@ -19,6 +19,13 @@ export const TourSchema = z.object({
 	end_date: z.string().min(1, "End date is required"),
 	end_time: z.string().min(1, "End time is required"),
 	cover_image: z.string().optional().nullable(),
+	cover_image_attribution: z
+		.object({
+			photographer_name: z.string().optional(),
+			photographer_url: z.string().url().optional(),
+		})
+		.optional()
+		.nullable(),
 	qr_code_url: z.string().optional().nullable(),
 	images: z.array(z.string()).optional().default([]),
 	itinerary: z

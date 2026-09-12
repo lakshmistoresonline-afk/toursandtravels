@@ -85,12 +85,16 @@ export default function UpdateTourPage() {
 			end_time: tour?.end_time || "",
 			itinerary: tour?.itinerary || [],
 			cover_image: tour?.cover_image || "",
+			cover_image_attribution: tour?.cover_image_attribution || null,
 			qr_code_url: tour?.qr_code_url || "",
 		},
 	});
 
-	const { control, handleSubmit } = form;
+	const { control, handleSubmit, setValue } = form;
 	const { fields, append, remove } = useFieldArray({ control, name: "itinerary" });
+
+	const tourName = useWatch({ control, name: "name" });
+	const destination = useWatch({ control, name: "destination" });
 
 	useEffect(() => {
 		if (actionData?.success) {
@@ -515,8 +519,14 @@ export default function UpdateTourPage() {
 										<ImageSearchDialog
 											isOpen={isImageSearchOpen}
 											onOpenChange={setIsImageSearchOpen}
-											onSelect={field.onChange}
+											onSelect={(data) => {
+												setValue("cover_image", data.url, { shouldValidate: true });
+												setValue("cover_image_attribution", data.attribution, {
+													shouldValidate: true,
+												});
+											}}
 											currentValue={field.value}
+											initialQuery={destination || tourName}
 										/>
 									</FormItem>
 								)}

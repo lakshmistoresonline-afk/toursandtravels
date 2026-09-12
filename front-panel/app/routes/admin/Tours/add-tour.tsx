@@ -71,6 +71,7 @@ export default function AddTourPage() {
 			end_time: "",
 			itinerary: [{ day_number: 1, title: "Day 1: Arrival & Welcome", description: "" }],
 			cover_image: "",
+			cover_image_attribution: null,
 			qr_code_url: "",
 		},
 	});
@@ -79,6 +80,7 @@ export default function AddTourPage() {
 	const { fields, append, remove } = useFieldArray({ control, name: "itinerary" });
 
 	const tourName = useWatch({ control, name: "name" });
+	const destination = useWatch({ control, name: "destination" });
 	const startDate = useWatch({ control, name: "start_date" });
 
 	useEffect(() => {
@@ -551,8 +553,14 @@ export default function AddTourPage() {
 										<ImageSearchDialog
 											isOpen={isImageSearchOpen}
 											onOpenChange={setIsImageSearchOpen}
-											onSelect={field.onChange}
+											onSelect={(data) => {
+												setValue("cover_image", data.url, { shouldValidate: true });
+												setValue("cover_image_attribution", data.attribution, {
+													shouldValidate: true,
+												});
+											}}
 											currentValue={field.value}
+											initialQuery={destination || tourName}
 										/>
 									</FormItem>
 								)}

@@ -14,8 +14,9 @@ import { toast } from "sonner";
 interface ImageSearchDialogProps {
 	isOpen: boolean;
 	onOpenChange: (open: boolean) => void;
-	onSelect: (url: string) => void;
+	onSelect: (data: { url: string; attribution?: { photographer_name: string; photographer_url: string } }) => void;
 	currentValue?: string;
+	initialQuery?: string;
 }
 
 export function ImageSearchDialog({
@@ -23,8 +24,9 @@ export function ImageSearchDialog({
 	onOpenChange,
 	onSelect,
 	currentValue,
+	initialQuery,
 }: ImageSearchDialogProps) {
-	const [query, setQuery] = useState("");
+	const [query, setQuery] = useState(initialQuery || "");
 	const [images, setImages] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [accessKey, setAccessKey] = useState<string | null>(null);
@@ -33,6 +35,13 @@ export function ImageSearchDialog({
 		// @ts-ignore
 		setAccessKey(import.meta.env.VITE_UNSPLASH_ACCESS_KEY);
 	}, []);
+
+	useEffect(() => {
+		if (isOpen && initialQuery && !images.length) {
+			setQuery(initialQuery);
+			handleSearch();
+		}
+	}, [isOpen, initialQuery]);
 
 	const handleSearch = async (e?: React.FormEvent) => {
 		if (e) e.preventDefault();
@@ -104,28 +113,65 @@ export function ImageSearchDialog({
 					) : images.length > 0 ? (
 						<div className="grid grid-cols-2 md:grid-cols-3 gap-6">
 							{images.map((img) => (
-								<button
+								<div
 									key={img.id}
-									onClick={() => {
-										onSelect(img.urls.regular);
-										onOpenChange(false);
-									}}
 									className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/10 hover:border-primary transition-all shadow-sm"
 								>
 									<img
 										src={img.urls.small}
 										alt={img.alt_description}
-										className="w-full h-full object-cover transition-transform group-hover:scale-110"
+										className="w-full h-full object-cover transition-transform group-hover:scale-105"
 									/>
-									<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-										<Check className="text-white h-8 w-8" />
+									<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
+										<Button
+											type="button"
+											variant="secondary"
+											size="sm"
+											onClick={() => {
+												onSelect({
+													url: img.urls.regular,
+													attribution: {
+														photographer_name: img.user.name,
+														photographer_url: img.user.links.html,
+													},
+												});
+												onOpenChange(false);
+											}}
+											className="rounded-full bg-white text-primary font-bold uppercase tracking-widest text-[8px] px-4"
+										>
+											Select Image
+										</Button>
+										<div className="text-center px-4">
+											<p className="text-[8px] text-white/60 font-medium truncate w-full">
+												Photo by{" "}
+												<a
+													href={`${img.user.links.html}?utm_source=ambady_pilgrimage&utm_medium=referral`}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="underline hover:text-white"
+												>
+													{img.user.name}
+												</a>
+											</p>
+											<p className="text-[7px] text-white/40 font-bold uppercase tracking-tighter">
+												on{" "}
+												<a
+													href="https://unsplash.com/?utm_source=ambady_pilgrimage&utm_medium=referral"
+													target="_blank"
+													rel="noopener noreferrer"
+													className="underline hover:text-white"
+												>
+													Unsplash
+												</a>
+											</p>
+										</div>
 									</div>
 									{currentValue === img.urls.regular && (
-										<div className="absolute top-2 right-2 bg-primary text-primary-foreground p-1 rounded-full shadow-lg">
+										<div className="absolute top-2 right-2 bg-primary text-primary-foreground p-1 rounded-full shadow-lg z-10">
 											<Check className="h-3 w-3" />
 										</div>
 									)}
-								</button>
+								</div>
 							))}
 						</div>
 					) : (

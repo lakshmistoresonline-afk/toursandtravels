@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a782ac48-bf14-4027-8eb8-a65d95eb2d54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZnJvbnQtcGFuZWxcZGlzdA.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/components/Tour/ImageSearchDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/components/Tour/ImageSearchDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/add-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-panel/app/routes/admin/Tours/update-tour.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/schemas/tour.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/schemas/tour.schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
