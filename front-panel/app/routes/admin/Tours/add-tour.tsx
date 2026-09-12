@@ -11,7 +11,7 @@ import {
 	IndianRupee,
 	FileText,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import {
 	type ActionFunctionArgs,
@@ -30,6 +30,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
 
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
@@ -51,6 +52,8 @@ export default function AddTourPage() {
 	const submit = useSubmit();
 	const navigation = useNavigation();
 	const actionData = useActionData() as any;
+
+	const [isImageSearchOpen, setIsImageSearchOpen] = useState(false);
 
 	const form = useForm<any>({
 		resolver: zodResolver(AddTourActionSchema),
@@ -491,18 +494,66 @@ export default function AddTourPage() {
 								control={control}
 								name="cover_image"
 								render={({ field }) => (
-									<FormItem className="space-y-3">
+									<FormItem className="space-y-4">
 										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
-											Cover Image URL
+											Journey Cover Image
 										</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="https://images.unsplash.com/..."
-												className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 shadow-sm px-8"
-												{...field}
-											/>
-										</FormControl>
+										<div className="space-y-4">
+											{field.value ? (
+												<div className="relative group aspect-[21/9] w-full rounded-[2rem] overflow-hidden border border-primary/20 shadow-lg">
+													<img
+														src={field.value}
+														alt="Selected Journey Cover"
+														className="w-full h-full object-cover transition-transform group-hover:scale-105"
+													/>
+													<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+														<Button
+															type="button"
+															variant="secondary"
+															size="sm"
+															onClick={() => setIsImageSearchOpen(true)}
+															className="rounded-full bg-white text-primary font-bold uppercase tracking-widest text-[9px] px-6"
+														>
+															Change Image
+														</Button>
+														<Button
+															type="button"
+															variant="destructive"
+															size="sm"
+															onClick={() => field.onChange("")}
+															className="rounded-full font-bold uppercase tracking-widest text-[9px] px-6"
+														>
+															Remove
+														</Button>
+													</div>
+												</div>
+											) : (
+												<button
+													type="button"
+													onClick={() => setIsImageSearchOpen(true)}
+													className="w-full aspect-[21/9] rounded-[2rem] border-2 border-dashed border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all flex flex-col items-center justify-center gap-4 group"
+												>
+													<div className="h-16 w-16 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+														<ImageIcon className="h-7 w-7" />
+													</div>
+													<div className="text-center">
+														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
+															Select Sacred Imagery
+														</p>
+														<p className="text-[9px] text-foreground/40 font-medium mt-1">
+															Powered by Unsplash
+														</p>
+													</div>
+												</button>
+											)}
+										</div>
 										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+										<ImageSearchDialog
+											isOpen={isImageSearchOpen}
+											onOpenChange={setIsImageSearchOpen}
+											onSelect={field.onChange}
+											currentValue={field.value}
+										/>
 									</FormItem>
 								)}
 							/>
