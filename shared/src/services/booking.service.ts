@@ -2,6 +2,7 @@ import {
 	collection,
 	doc,
 	getDocs,
+	updateDoc,
 	query,
 	where,
 	orderBy,
