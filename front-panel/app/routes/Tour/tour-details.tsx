@@ -111,6 +111,7 @@ export default function TourDetailsPage() {
 	const isRegistering =
 		navigation.state === "submitting" && navigation.formData?.get("intent") === "register";
 	const isRegistrationOpen = tour.status === "REGISTRATION_OPEN" || tour.status === "PUBLISHED";
+	const isFull = tour.max_participants && (tour.currentParticipants || 0) >= tour.max_participants;
 
 	return (
 		<div className="min-h-screen bg-background animate-in fade-in duration-1000 pb-32">
@@ -420,11 +421,18 @@ export default function TourDetailsPage() {
 											<Button
 												type="submit"
 												size="lg"
-												className="w-full h-28 rounded-full text-base font-bold uppercase tracking-wider bg-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03] transition-all"
+												className={cn(
+													"w-full h-28 rounded-full text-base font-bold uppercase tracking-wider shadow-2xl transition-all",
+													isFull
+														? "bg-amber-600 text-white shadow-amber-900/30 hover:bg-amber-700"
+														: "bg-primary text-primary-foreground shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03]",
+												)}
 												disabled={isRegistering}
 											>
 												{isRegistering ? (
 													<Loader2 className="animate-spin mr-4 h-10 w-10" />
+												) : isFull ? (
+													"Join The Waitlist"
 												) : (
 													"Join This Pilgrimage"
 												)}

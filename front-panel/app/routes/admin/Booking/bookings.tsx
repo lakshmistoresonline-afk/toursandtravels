@@ -213,7 +213,9 @@ export default function BookingsPage() {
 					Email: reg.profileSnapshot?.email || "N/A",
 					Phone: reg.profileSnapshot?.phone_number || "N/A",
 					Travellers: reg.travellersCount,
-					Status: reg.status,
+					"Booking Status": reg.status,
+					"Payment Method": reg.paymentMode || "CASH",
+					"Payment Status": reg.paymentStatus || "PENDING",
 					"Amount (INR)": (reg.tours?.price || 0) * reg.travellersCount || 0,
 					"Registration Date": registrationDate,
 					"ALL RECIPIENTS (BCC)": allEmails,
@@ -346,13 +348,26 @@ export default function BookingsPage() {
 			id: "Status",
 			accessorKey: "status",
 			header: "Status",
-			cell: ({ row }) => (
-				<Badge
-					className={`px-3 py-1 rounded-full border shadow-none font-bold text-[9px] uppercase tracking-widest ${row.original.status === "CONFIRMED" ? "text-emerald-600 border-emerald-500/20 bg-emerald-50" : "text-primary border-primary/20 bg-primary/5"}`}
-				>
-					{row.original.status}
-				</Badge>
-			),
+			cell: ({ row }) => {
+				const status = row.original.status;
+				const variants: Record<string, string> = {
+					CONFIRMED: "text-emerald-600 border-emerald-500/20 bg-emerald-50",
+					PENDING: "text-primary border-primary/20 bg-primary/5",
+					WAITLISTED: "text-amber-600 border-amber-500/20 bg-amber-50",
+					CANCELLED: "text-red-600 border-red-500/20 bg-red-50",
+				};
+
+				return (
+					<Badge
+						className={cn(
+							"px-3 py-1 rounded-full border shadow-none font-bold text-[9px] uppercase tracking-wider",
+							variants[status] || variants.PENDING,
+						)}
+					>
+						{status}
+					</Badge>
+				);
+			},
 		},
 		{
 			id: "actions",

@@ -88,12 +88,9 @@ export class BookingService extends Service {
 				const tourData = tourDoc.data();
 
 				const currentParticipants = tourData.currentParticipants || 0;
-				if (
+				const isFull =
 					tourData.max_participants &&
-					currentParticipants + travellersCount > tourData.max_participants
-				) {
-					throw new ApiError("Pilgrimage journey is full", 400);
-				}
+					currentParticipants + travellersCount > tourData.max_participants;
 
 				const userRef = doc(this.db, this.USERS_COLLECTION, customerId);
 				const userDoc = await transaction.get(userRef);
@@ -117,6 +114,13 @@ export class BookingService extends Service {
 
 				const regRef = collection(this.db, this.REGISTRATIONS_COLLECTION);
 				const newRegDoc = doc(regRef);
+
+				const status = isFull
+					? "WAITLISTED"
+					: customerId === this.currentUid
+						? "PENDING"
+						: "CONFIRMED";
+
 				transaction.set(newRegDoc, {
 					tourId,
 					customerId,
@@ -124,7 +128,7 @@ export class BookingService extends Service {
 					paymentMode: paymentMode || "CASH",
 					paymentStatus: "PENDING",
 					notes: notes || null,
-					status: customerId === this.currentUid ? "PENDING" : "CONFIRMED",
+					status,
 					profileSnapshot: {
 						first_name: userData.first_name,
 						last_name: userData.last_name,
@@ -143,9 +147,11 @@ export class BookingService extends Service {
 					updatedAt: serverTimestamp(),
 				});
 
-				transaction.update(tourRef, {
-					currentParticipants: currentParticipants + travellersCount,
-				});
+				if (!isFull) {
+					transaction.update(tourRef, {
+						currentParticipants: currentParticipants + travellersCount,
+					});
+				}
 
 				// Queue emails after transaction is finalized (but we'll trigger them now for simplicity)
 				// In a real app, this would be a background job

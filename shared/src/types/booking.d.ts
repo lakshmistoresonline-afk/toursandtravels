@@ -5,7 +5,7 @@ export type TourRegistration = {
 	travellersCount: number;
 	paymentMode?: "CASH" | "GPAY" | "OTHER_UPI";
 	paymentStatus?: "PENDING" | "PAID" | "FAILED" | "REFUNDED";
-	status: "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED";
+	status: "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED" | "WAITLISTED";
 	notes: string | null;
 	profileSnapshot: {
 		first_name: string | null;
