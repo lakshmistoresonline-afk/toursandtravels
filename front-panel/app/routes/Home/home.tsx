@@ -64,8 +64,11 @@ export default function Home() {
 								<h1 className="text-5xl md:text-6xl font-serif text-foreground">
 									Welcome back, {user.first_name}
 								</h1>
-								<p className="text-xs text-primary uppercase tracking-[0.4em] font-bold">
+								<p className="text-xs text-primary uppercase tracking-wider font-bold">
 									Your spiritual path continues here.
+								</p>
+								<p className="text-sm text-primary uppercase tracking-wider font-bold">
+									Discover our curated pilgrimage journeys
 								</p>
 							</div>
 						</div>
@@ -76,7 +79,7 @@ export default function Home() {
 					<section className="py-32 bg-background border-b border-primary/10">
 						<div className="container mx-auto px-6 text-center space-y-12">
 							<div className="space-y-8 max-w-3xl mx-auto">
-								<h4 className="text-sm font-bold uppercase tracking-[0.5em] text-primary">
+								<h4 className="text-sm font-bold uppercase tracking-wider text-primary">
 									The AMBADY Way
 								</h4>
 								<h2 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight">
@@ -116,7 +119,7 @@ export default function Home() {
 									<h3 className="text-5xl font-serif text-primary">F</h3>
 								</div>
 								<h3 className="text-3xl font-serif text-foreground">Faith</h3>
-								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
+								<p className="text-base text-foreground/70 uppercase tracking-wider font-bold leading-loose">
 									Deeply rooted in spiritual traditions and divine connection.
 								</p>
 							</div>
@@ -125,7 +128,7 @@ export default function Home() {
 									<h3 className="text-5xl font-serif text-primary">H</h3>
 								</div>
 								<h3 className="text-3xl font-serif text-foreground">Heritage</h3>
-								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
+								<p className="text-base text-foreground/70 uppercase tracking-wider font-bold leading-loose">
 									Preserving the sacred stories and architectural wonders of our past.
 								</p>
 							</div>
@@ -134,7 +137,7 @@ export default function Home() {
 									<h3 className="text-5xl font-serif text-primary">I</h3>
 								</div>
 								<h3 className="text-3xl font-serif text-foreground">Inner Journeys</h3>
-								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
+								<p className="text-base text-foreground/70 uppercase tracking-wider font-bold leading-loose">
 									More than travel—a path to introspection and enlightenment.
 								</p>
 							</div>

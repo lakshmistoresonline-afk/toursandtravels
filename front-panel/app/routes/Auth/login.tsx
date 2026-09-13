@@ -104,7 +104,7 @@ export default function LoginPage() {
 					</Link>
 					<div className="space-y-2">
 						<h2 className="text-4xl font-serif text-foreground tracking-tight">Welcome Back</h2>
-						<p className="text-[11px] font-bold text-primary uppercase tracking-[0.4em]">
+						<p className="text-[11px] font-bold text-primary uppercase tracking-wider">
 							Your Sacred Journey Awaits
 						</p>
 					</div>
@@ -118,7 +118,7 @@ export default function LoginPage() {
 								name="email"
 								render={({ field }) => (
 									<FormItem className="space-y-4">
-										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 											Email Address
 										</FormLabel>
 										<FormControl>
@@ -141,13 +141,13 @@ export default function LoginPage() {
 								render={({ field }) => (
 									<FormItem className="space-y-4">
 										<div className="flex justify-between items-center px-3">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em]">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider">
 												Secret Code
 											</FormLabel>
 											<Link
 												to="/forgot-password"
 												title="Forgot Password"
-												className="text-xs font-bold text-primary hover:text-foreground uppercase tracking-[0.1em] transition-all underline underline-offset-4"
+												className="text-xs font-bold text-primary hover:text-foreground uppercase tracking-wide transition-all underline underline-offset-4"
 											>
 												Forgot?
 											</Link>
@@ -180,7 +180,7 @@ export default function LoginPage() {
 							/>
 							<Button
 								type="submit"
-								className="w-full h-20 rounded-full text-sm font-bold uppercase tracking-[0.4em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 hover:scale-[1.03]"
+								className="w-full h-20 rounded-full text-sm font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 hover:scale-[1.03]"
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? (

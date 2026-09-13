@@ -27,7 +27,7 @@ export default function ToursPage() {
 			<div className="relative pt-32 pb-24 overflow-hidden bg-[#0a0e1a] border-b border-[#d4af37]/20">
 				<div className="container mx-auto px-6 text-center space-y-10 relative z-10">
 					<div className="space-y-8">
-						<h4 className="text-sm font-bold uppercase tracking-[0.5em] text-[#d4af37]">
+						<h4 className="text-sm font-bold uppercase tracking-wider text-[#d4af37]">
 							Sacred Destinations
 						</h4>
 						<h1 className="text-6xl md:text-9xl font-serif text-[#fdfcf0] tracking-tight leading-tight">
@@ -65,7 +65,7 @@ export default function ToursPage() {
 						</div>
 						<div className="space-y-3">
 							<h2 className="text-3xl font-serif text-foreground">No Journeys Found</h2>
-							<p className="text-foreground/40 font-sans text-xs uppercase tracking-[0.2em] font-bold">
+							<p className="text-foreground/40 font-sans text-xs uppercase tracking-wider font-bold">
 								The path you seek is currently unavailable.
 							</p>
 						</div>

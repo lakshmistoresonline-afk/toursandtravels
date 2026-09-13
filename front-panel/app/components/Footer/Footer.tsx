@@ -11,7 +11,7 @@ export default function Footer() {
 								AMBADY
 							</span>
 						</div>
-						<p className="text-xs text-[#fdfcf0]/70 uppercase tracking-[0.4em] font-bold leading-loose">
+						<p className="text-xs text-[#fdfcf0]/70 uppercase tracking-wider font-bold leading-loose">
 							"Faith | Heritage | Inner Journeys"
 						</p>
 						<p className="text-base text-[#fdfcf0]/60 font-serif italic leading-relaxed">
@@ -19,7 +19,7 @@ export default function Footer() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-2 sm:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-[0.3em]">
+					<div className="grid grid-cols-2 sm:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-wider">
 						<div className="flex flex-col gap-8">
 							<span className="text-[#d4af37] text-sm">Navigation</span>
 							<Link to="/" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Home Sanctuary</Link>
@@ -40,11 +40,11 @@ export default function Footer() {
 				</div>
 
 				<div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-10">
-					<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-[0.2em] font-bold">
+					<p className="text-[10px] text-[#fdfcf0]/40 uppercase tracking-wider font-bold">
 						© {new Date().getFullYear()} AMBADY — PILGRIMAGE EXPERIENCES. ALL RIGHTS RESERVED.
 					</p>
 					<div className="flex items-center gap-8">
-						<span className="text-[10px] text-[#d4af37]/80 uppercase tracking-[0.3em] font-black">
+						<span className="text-[10px] text-[#d4af37]/80 uppercase tracking-wider font-black">
 							From Thiruvambady to a Higher You
 						</span>
 					</div>

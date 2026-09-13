@@ -49,7 +49,7 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 					<div className="absolute top-4 left-4 z-20">
 						<Badge
 							className={cn(
-								"px-4 py-2 text-[10px] font-bold uppercase tracking-widest border backdrop-blur-md rounded-full shadow-lg",
+								"px-4 py-2 text-[10px] font-bold uppercase tracking-wider border backdrop-blur-md rounded-full shadow-lg",
 								statusColors[tour.status] || "",
 							)}
 						>
@@ -65,7 +65,7 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 							{tour.name}
 						</h3>
 
-						<div className="flex flex-wrap items-center gap-6 text-foreground/70 text-xs font-bold uppercase tracking-widest">
+						<div className="flex flex-wrap items-center gap-6 text-foreground/70 text-xs font-bold uppercase tracking-wider">
 							<div className="flex items-center gap-2">
 								<MapPin className="h-4 w-4 text-primary" />
 								<span>{tour.destination || "Holy Land"}</span>
@@ -79,14 +79,14 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 
 					<div className="pt-6 border-t border-primary/10 flex items-center justify-between">
 						<div className="space-y-1">
-							<p className="text-[11px] text-foreground/50 uppercase tracking-widest font-bold">
+							<p className="text-[11px] text-foreground/50 uppercase tracking-wider font-bold">
 								Exchange
 							</p>
 							<p className="font-serif text-3xl text-primary font-bold">
 								{tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquire"}
 							</p>
 						</div>
-						<div className="text-[10px] font-bold uppercase tracking-widest text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all bg-primary/5 px-6 py-3 rounded-full border border-primary/20">
+						<div className="text-[10px] font-bold uppercase tracking-wider text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all bg-primary/5 px-6 py-3 rounded-full border border-primary/20">
 							View Details
 						</div>
 					</div>

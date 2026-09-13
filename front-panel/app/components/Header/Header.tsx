@@ -70,7 +70,7 @@ export default function Header() {
 										to={link.to}
 										prefetch="intent"
 										className={({ isActive }) =>
-											`text-sm font-bold uppercase tracking-[0.3em] transition-all ${isActive ? "text-[#d4af37] pl-4 border-l-2 border-[#d4af37]" : "text-[#fdfcf0]/60 hover:text-[#d4af37]"}`
+											`text-sm font-bold uppercase tracking-wider transition-all ${isActive ? "text-[#d4af37] pl-4 border-l-2 border-[#d4af37]" : "text-[#fdfcf0]/60 hover:text-[#d4af37]"}`
 										}
 									>
 										{link.label}
@@ -89,7 +89,7 @@ export default function Header() {
 						<span className="text-3xl md:text-4xl font-display font-bold tracking-[0.15em] text-[#d4af37]">
 							AMBADY
 						</span>
-						<span className="text-[8px] md:text-[10px] font-bold text-[#d4af37]/80 uppercase tracking-[0.4em] mt-1.5">
+						<span className="text-[8px] md:text-[10px] font-bold text-[#d4af37]/80 uppercase tracking-wider mt-1.5">
 							Pilgrimage Experiences
 						</span>
 					</div>
@@ -102,7 +102,7 @@ export default function Header() {
 							to={link.to}
 							prefetch="intent"
 							className={({ isActive }) =>
-								`text-xs font-bold uppercase tracking-[0.3em] transition-all hover:text-[#d4af37] ${isActive ? "text-[#d4af37]" : "text-[#fdfcf0]/80"}`
+								`text-xs font-bold uppercase tracking-wider transition-all hover:text-[#d4af37] ${isActive ? "text-[#d4af37]" : "text-[#fdfcf0]/80"}`
 							}
 						>
 							{link.label}
@@ -126,7 +126,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 		return (
 			<Button
 				size="lg"
-				className="rounded-full font-bold px-10 bg-[#d4af37] text-[#0a0e1a] hover:bg-[#d4af37]/90 text-xs uppercase tracking-[0.2em] shadow-2xl shadow-yellow-900/30 h-16"
+				className="rounded-full font-bold px-10 bg-[#d4af37] text-[#0a0e1a] hover:bg-[#d4af37]/90 text-xs uppercase tracking-wider shadow-2xl shadow-yellow-900/30 h-16"
 				asChild
 			>
 				<Link to="/login">Sign In</Link>
@@ -166,20 +166,20 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 				<DropdownMenuGroup className="space-y-1 py-2">
 					<DropdownMenuItem
 						asChild
-						className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/80 focus:bg-white/5 focus:text-[#d4af37]"
+						className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider text-[#fdfcf0]/80 focus:bg-white/5 focus:text-[#d4af37]"
 					>
 						<Link to="/account/details">Profile Settings</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						asChild
-						className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#fdfcf0]/80 focus:bg-white/5 focus:text-[#d4af37]"
+						className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider text-[#fdfcf0]/80 focus:bg-white/5 focus:text-[#d4af37]"
 					>
 						<Link to="/account/bookings">My Sacred Journeys</Link>
 					</DropdownMenuItem>
 					{user.role === "admin" && (
 						<DropdownMenuItem
 							asChild
-							className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-[0.2em] bg-[#d4af37]/10 text-[#d4af37] focus:bg-[#d4af37]/20"
+							className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider bg-[#d4af37]/10 text-[#d4af37] focus:bg-[#d4af37]/20"
 						>
 							<Link to="/admin">Admin Sanctuary</Link>
 						</DropdownMenuItem>
@@ -190,7 +190,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 					<button type="submit" className="w-full">
 						<DropdownMenuItem
 							variant="destructive"
-							className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-[0.2em] text-red-400 focus:bg-red-500/10"
+							className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider text-red-400 focus:bg-red-500/10"
 						>
 							{isLoggingOut ? <Loader2 className="mr-3 h-4 w-4 animate-spin" /> : null}
 							Sign Out

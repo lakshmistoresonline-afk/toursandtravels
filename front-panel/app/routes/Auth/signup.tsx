@@ -146,7 +146,7 @@ export default function SignupPage() {
 						<h2 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
 							Begin Your Journey
 						</h2>
-						<p className="text-[11px] font-bold text-primary uppercase tracking-[0.4em]">
+						<p className="text-[11px] font-bold text-primary uppercase tracking-wider">
 							Create Your Pilgrim Profile
 						</p>
 					</div>
@@ -161,7 +161,7 @@ export default function SignupPage() {
 									name="firstName"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												First Name
 											</FormLabel>
 											<FormControl>
@@ -183,7 +183,7 @@ export default function SignupPage() {
 									name="lastName"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												Last Name
 											</FormLabel>
 											<FormControl>
@@ -208,7 +208,7 @@ export default function SignupPage() {
 									name="email"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												Email Address
 											</FormLabel>
 											<FormControl>
@@ -230,7 +230,7 @@ export default function SignupPage() {
 									name="phone"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												Phone Number
 											</FormLabel>
 											<FormControl>
@@ -254,7 +254,7 @@ export default function SignupPage() {
 								name="aadharNumber"
 								render={({ field }) => (
 									<FormItem className="space-y-4">
-										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 											Aadhar Number (12 Digits)
 										</FormLabel>
 										<FormControl>
@@ -279,7 +279,7 @@ export default function SignupPage() {
 									name="gender"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												Gender
 											</FormLabel>
 											<Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -303,7 +303,7 @@ export default function SignupPage() {
 									name="dateOfBirth"
 									render={({ field }) => (
 										<FormItem className="space-y-4">
-											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 												Date of Birth
 											</FormLabel>
 											<FormControl>
@@ -327,7 +327,7 @@ export default function SignupPage() {
 								name="password"
 								render={({ field }) => (
 									<FormItem className="space-y-4">
-										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
+										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-wider ml-3">
 											Create Secret Code
 										</FormLabel>
 										<FormControl>
@@ -358,7 +358,7 @@ export default function SignupPage() {
 							/>
 							<Button
 								type="submit"
-								className="w-full h-24 rounded-full text-sm font-bold uppercase tracking-[0.4em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 hover:scale-[1.02]"
+								className="w-full h-24 rounded-full text-sm font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 hover:scale-[1.02]"
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? (

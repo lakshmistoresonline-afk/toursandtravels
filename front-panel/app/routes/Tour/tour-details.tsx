@@ -237,7 +237,7 @@ export default function TourDetailsPage() {
 					<aside>
 						<div className="sticky top-24 bg-card border border-primary/30 rounded-[3.5rem] overflow-hidden shadow-2xl">
 							<div className="bg-primary/10 border-b border-primary/20 p-12 space-y-8">
-								<p className="text-[12px] font-bold uppercase tracking-[0.4em] text-primary text-center">
+								<p className="text-[12px] font-bold uppercase tracking-wider text-primary text-center">
 									Sacred Exchange
 								</p>
 								<div className="flex flex-col items-center gap-4">
@@ -262,7 +262,7 @@ export default function TourDetailsPage() {
 											<Button
 												asChild
 												size="lg"
-												className="w-full rounded-full h-20 bg-primary text-primary-foreground font-bold uppercase tracking-[0.2em] text-sm shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
+												className="w-full rounded-full h-20 bg-primary text-primary-foreground font-bold uppercase tracking-wider text-sm shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
 											>
 												<Link to="/login">Sign In to Register</Link>
 											</Button>
@@ -282,7 +282,7 @@ export default function TourDetailsPage() {
 												asChild
 												size="lg"
 												variant="outline"
-												className="w-full rounded-full h-20 border-primary/40 text-primary text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary/10 mt-6 shadow-sm"
+												className="w-full rounded-full h-20 border-primary/40 text-primary text-xs font-bold uppercase tracking-wider hover:bg-primary/10 mt-6 shadow-sm"
 											>
 												<Link to={`/admin/tours/edit/${tour.id}`}>Edit Journey Details</Link>
 											</Button>
@@ -311,7 +311,7 @@ export default function TourDetailsPage() {
 										<Form method="post" className="space-y-12">
 											<input type="hidden" name="intent" value="register" />
 											<div className="space-y-6">
-												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-[0.3em] ml-4">
+												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-wider ml-4">
 													Number of Pilgrims
 												</label>
 												<Input
@@ -325,7 +325,7 @@ export default function TourDetailsPage() {
 											</div>
 
 											<div className="space-y-6">
-												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-[0.3em] ml-4">
+												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-wider ml-4">
 													Select Payment Method
 												</label>
 												<div className="grid grid-cols-1 gap-5">
@@ -360,7 +360,7 @@ export default function TourDetailsPage() {
 																<mode.icon className="h-7 w-7" />
 															</div>
 															<span
-																className={`text-sm font-bold uppercase tracking-[0.2em] ${
+																className={`text-sm font-bold uppercase tracking-wider ${
 																	paymentMode === mode.id ? "text-primary" : "text-foreground/70"
 																}`}
 															>
@@ -374,7 +374,7 @@ export default function TourDetailsPage() {
 											{paymentMode !== "CASH" && (
 												<div className="space-y-10 animate-in fade-in slide-in-from-top-4 duration-500">
 													<div className="p-10 bg-primary/5 border-2 border-primary/20 rounded-[3rem] space-y-8 text-center shadow-inner">
-														<p className="text-sm font-bold text-primary uppercase tracking-[0.4em]">
+														<p className="text-sm font-bold text-primary uppercase tracking-wider">
 															Sacred Scan to Pay
 														</p>
 														{(() => {
@@ -407,7 +407,7 @@ export default function TourDetailsPage() {
 											)}
 
 											<div className="space-y-6">
-												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-[0.3em] ml-4">
+												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-wider ml-4">
 													Sacred Requests / Notes
 												</label>
 												<textarea
@@ -420,7 +420,7 @@ export default function TourDetailsPage() {
 											<Button
 												type="submit"
 												size="lg"
-												className="w-full h-28 rounded-full text-base font-bold uppercase tracking-[0.5em] bg-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03] transition-all"
+												className="w-full h-28 rounded-full text-base font-bold uppercase tracking-wider bg-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03] transition-all"
 												disabled={isRegistering}
 											>
 												{isRegistering ? (
@@ -430,7 +430,7 @@ export default function TourDetailsPage() {
 												)}
 											</Button>
 
-											<p className="text-center text-xs text-foreground/60 font-bold uppercase tracking-[0.3em]">
+											<p className="text-center text-xs text-foreground/60 font-bold uppercase tracking-wider">
 												Limited to {tour.max_participants || 20} pilgrims only
 											</p>
 										</Form>
