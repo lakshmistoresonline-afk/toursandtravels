@@ -110,12 +110,34 @@ class EmailService {
 
 	/** Send confirmation email to customer */
 	public async sendBookingConfirmation(payload: any) {
-		const { booking_ref, customer_name, customer_email } = payload;
+		const { booking_ref, customer_name, customer_email, tour_name, travellersCount } = payload;
 		return this.sendEmail({
 			from: `AMBADY PILGRIMAGE EXPERIENCES <bookings@ambadypilgrimage.com>`,
 			to: customer_email,
 			subject: `Registration Confirmed – #${booking_ref}`,
-			text: `Dear ${customer_name},\n\nYour registration #${booking_ref} has been confirmed.\n\nThank you for choosing AMBADY PILGRIMAGE EXPERIENCES!`,
+			text: `Dear ${customer_name},\n\nYour registration for the ${tour_name} journey has been confirmed for ${travellersCount} pilgrims.\n\nRegistration Reference: #${booking_ref}\n\nThank you for choosing AMBADY PILGRIMAGE EXPERIENCES! We are honored to guide you on this path.`,
+		});
+	}
+
+	/** Send payment receipt to customer */
+	public async sendPaymentReceipt(payload: any) {
+		const { booking_ref, customer_name, customer_email, tour_name, amount } = payload;
+		return this.sendEmail({
+			from: `AMBADY PILGRIMAGE EXPERIENCES <finance@ambadypilgrimage.com>`,
+			to: customer_email,
+			subject: `Payment Received – Registration #${booking_ref}`,
+			text: `Dear ${customer_name},\n\nWe have successfully received your payment of ₹${amount?.toLocaleString()} for the ${tour_name} journey.\n\nThis receipt is for your registration #${booking_ref}.\n\nYour place is now fully secured. We look forward to seeing you on the sacred path!`,
+		});
+	}
+
+	/** Send alert to admin about new registration */
+	public async sendAdminNewRegistrationAlert(payload: any) {
+		const { booking_ref, customer_name, customer_email, tour_name, travellersCount } = payload;
+		return this.sendEmail({
+			from: `AMBADY SYSTEM <system@ambadypilgrimage.com>`,
+			to: EMAIL_ADDRESS_1,
+			subject: `🔔 New Registration: ${tour_name} - #${booking_ref}`,
+			text: `A new pilgrim has registered!\n\nJourney: ${tour_name}\nReference: #${booking_ref}\nPilgrim: ${customer_name} (${customer_email})\nCount: ${travellersCount} pilgrims\n\nPlease review the details in the Admin Dashboard.`,
 		});
 	}
 

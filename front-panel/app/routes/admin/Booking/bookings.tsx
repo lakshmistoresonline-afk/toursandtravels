@@ -30,6 +30,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { ToursService } from "@workspace/shared/services/tours.service";
 import { AuthService } from "@workspace/shared/services/auth.service";
+import { emailService } from "@workspace/shared/services/emails.service";
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
 import { maskAadhar, cn } from "@workspace/shared/utils/ui";
@@ -112,6 +113,25 @@ export const clientAction = async ({ request }: any) => {
 
 		try {
 			await bookingSvc.updatePaymentStatus(regId, status);
+
+			// Trigger receipt email if marked as PAID
+			if (status === "PAID") {
+				const registrations = await bookingSvc.getAllRegistrations();
+				const reg = registrations.registrations.find((r) => r.id === regId);
+
+				if (reg) {
+					emailService
+						.sendPaymentReceipt({
+							booking_ref: reg.id,
+							customer_name: `${reg.profileSnapshot?.first_name} ${reg.profileSnapshot?.last_name}`,
+							customer_email: reg.profileSnapshot?.email,
+							tour_name: reg.tourSnapshot?.name || reg.tours?.name,
+							amount: (reg.tourSnapshot?.price || reg.tours?.price || 0) * reg.travellersCount,
+						})
+						.catch(console.error);
+				}
+			}
+
 			return { success: true, message: `Payment marked as ${status}` };
 		} catch (err: any) {
 			return { success: false, error: err.message };

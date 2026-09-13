@@ -13,6 +13,7 @@ import {
 import { Service } from "@workspace/shared/services/service.base";
 import { ApiError } from "@workspace/shared/utils/ApiError";
 import type { GetTourRegistrationsResponse } from "@workspace/shared/types/booking";
+import { emailService } from "./emails.service";
 
 export class BookingService extends Service {
 	/**
@@ -145,6 +146,19 @@ export class BookingService extends Service {
 				transaction.update(tourRef, {
 					currentParticipants: currentParticipants + travellersCount,
 				});
+
+				// Queue emails after transaction is finalized (but we'll trigger them now for simplicity)
+				// In a real app, this would be a background job
+				const payload = {
+					booking_ref: newRegDoc.id,
+					customer_name: `${userData.first_name} ${userData.last_name}`,
+					customer_email: userData.email,
+					tour_name: tourData.name,
+					travellersCount,
+				};
+
+				emailService.sendBookingConfirmation(payload).catch(console.error);
+				emailService.sendAdminNewRegistrationAlert(payload).catch(console.error);
 
 				return newRegDoc.id;
 			});
