@@ -38,6 +38,7 @@ export default [
 			]),
 			...prefix("registrations", [index("./routes/admin/Booking/bookings.tsx")]),
 			route("users", "./routes/admin/users.tsx"),
+			route("analytics", "./routes/admin/analytics.tsx"),
 		]),
 	]),
 

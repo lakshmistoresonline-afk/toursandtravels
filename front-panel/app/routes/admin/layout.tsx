@@ -19,6 +19,7 @@ import {
 	Users,
 	AlertTriangle,
 	RefreshCw,
+	TrendingUp,
 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
@@ -90,11 +91,22 @@ export default function AdminLayout() {
 							prefetch="intent"
 							viewTransition
 							className={({ isActive }) =>
-								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-[0.15em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
+								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
 							}
 						>
 							<Users className="h-3.5 w-3.5" />
 							<span className="hidden lg:inline">Pilgrims</span>
+						</NavLink>
+						<NavLink
+							to="/admin/analytics"
+							prefetch="intent"
+							viewTransition
+							className={({ isActive }) =>
+								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
+							}
+						>
+							<TrendingUp className="h-3.5 w-3.5" />
+							<span className="hidden lg:inline">Analytics</span>
 						</NavLink>
 					</div>
 				</div>
