@@ -302,7 +302,7 @@ export default function TourDetailsPage() {
 												asChild
 												size="lg"
 												variant="outline"
-												className="w-full rounded-full h-20 border-emerald-500/40 text-emerald-600 text-xs font-bold uppercase tracking-[0.2em] hover:bg-emerald-500/10 mt-8 shadow-sm"
+												className="w-full rounded-full h-14 border-emerald-500/30 text-emerald-600 text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-500/10 mt-8 shadow-sm"
 											>
 												<Link to="/account/bookings">View My Registrations</Link>
 											</Button>
@@ -377,24 +377,30 @@ export default function TourDetailsPage() {
 														<p className="text-sm font-bold text-primary uppercase tracking-[0.4em]">
 															Sacred Scan to Pay
 														</p>
-														{tour.qr_code_url || defaultQrCode ? (
-															<div className="bg-white p-8 rounded-[2.5rem] shadow-2xl inline-block mx-auto border border-primary/20 hover:scale-105 transition-transform duration-500">
-																<img
-																	src={tour.qr_code_url || defaultQrCode}
-																	alt="Payment QR Code"
-																	className="h-64 w-64 object-contain"
-																/>
-															</div>
-														) : (
-															<div className="h-64 w-64 mx-auto bg-primary/10 border-2 border-dashed border-primary/30 rounded-[2.5rem] flex flex-col items-center justify-center p-10 gap-6 opacity-80">
-																<QrCode className="h-14 w-14 text-primary" />
-																<p className="text-xs font-bold text-primary uppercase tracking-widest leading-relaxed">
-																	QR Code setup in progress.
-																</p>
-															</div>
-														)}
+														{(() => {
+															const displayQr = (tour.qr_code_url && tour.qr_code_url.startsWith("http"))
+																? tour.qr_code_url
+																: defaultQrCode;
+
+															return displayQr ? (
+																<div className="bg-white p-8 rounded-[2.5rem] shadow-2xl inline-block mx-auto border border-primary/20 hover:scale-105 transition-transform duration-500">
+																	<img
+																		src={displayQr}
+																		alt="Payment QR Code"
+																		className="h-64 w-64 object-contain"
+																	/>
+																</div>
+															) : (
+																<div className="h-64 w-64 mx-auto bg-primary/10 border-2 border-dashed border-primary/30 rounded-[2.5rem] flex flex-col items-center justify-center p-10 gap-6 opacity-80">
+																	<QrCode className="h-14 w-14 text-primary" />
+																	<p className="text-xs font-bold text-primary uppercase tracking-widest leading-relaxed">
+																		QR Code setup in progress.
+																	</p>
+																</div>
+															);
+														})()}
 														<p className="text-xs text-foreground/70 font-bold uppercase tracking-[0.1em] bg-white/50 py-3 rounded-full">
-															Please save your payment confirmation.
+															Please save your payment screenshot.
 														</p>
 													</div>
 												</div>
