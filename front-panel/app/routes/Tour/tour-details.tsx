@@ -18,6 +18,7 @@ import { BackButton } from "~/components/ui/back-button";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { toast } from "sonner";
+import defaultQrCode from "~/assets/images/payment-qr.png";
 
 export const clientLoader = async ({ params, request }: LoaderFunctionArgs) => {
 	if (!params.id) return null;
@@ -373,10 +374,10 @@ export default function TourDetailsPage() {
 														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">
 															Scan to Pay
 														</p>
-														{(tour.qr_code_url || "/payment-qr.png") ? (
+														{tour.qr_code_url || defaultQrCode ? (
 															<div className="bg-white p-4 rounded-2xl shadow-inner inline-block mx-auto border border-primary/10">
 																<img
-																	src={tour.qr_code_url || "/payment-qr.png"}
+																	src={tour.qr_code_url || defaultQrCode}
 																	alt="Payment QR Code"
 																	className="h-48 w-48 object-contain"
 																/>
