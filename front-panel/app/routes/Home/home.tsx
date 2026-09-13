@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useLoaderData, useRouteLoaderData, Link } from "react-router";
 import { clientLoader as rootLoader } from "~/root";
 import { Button } from "~/components/ui/button";
+import homeOgImage from "~/assets/ambady-background.png";
 
 export const clientLoader = async ({ request }: any) => {
 	try {
@@ -48,6 +49,7 @@ export default function Home() {
 			<MetaDetails
 				metaTitle="AMBADY | Pilgrimage Experiences"
 				metaDescription="Faith, Heritage, and Inner Journeys. Curated pilgrimage experiences."
+				ogImage={homeOgImage}
 			/>
 
 			{/* Phase 1: Background Visual Only Section - DEDICATED AREA */}

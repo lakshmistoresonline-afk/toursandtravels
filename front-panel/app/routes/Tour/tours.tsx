@@ -15,12 +15,14 @@ export const clientLoader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function ToursPage() {
 	const { toursResp, q } = useLoaderData<typeof clientLoader>();
+	const firstTourImage = toursResp.tours?.[0]?.cover_image;
 
 	return (
 		<div className="animate-in fade-in duration-1000 bg-background min-h-screen">
 			<MetaDetails
 				metaTitle="Pilgrimage Journeys | AMBADY"
 				metaDescription="Explore our sacred journeys and spiritual experiences curated for you."
+				ogImage={firstTourImage}
 			/>
 
 			{/* Header Search Section */}

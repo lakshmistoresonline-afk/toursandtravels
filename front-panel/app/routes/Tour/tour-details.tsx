@@ -118,6 +118,10 @@ export default function TourDetailsPage() {
 			<MetaDetails
 				metaTitle={tour.name + " | AMBADY Pilgrimage"}
 				metaDescription={tour.overview?.slice(0, 320)}
+				ogImage={tour.cover_image}
+				ogType="article"
+				hasPricing={tour.price > 0}
+				pricing={{ price: tour.price.toString() }}
 			/>
 
 			{/* Hero/Cover Section */}
