@@ -9,11 +9,12 @@ import {
 	Plus,
 	CheckCircle2,
 	Clock,
+	CheckSquare,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLoaderData, useLocation, useNavigation, useActionData, useSubmit } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
-import { DataTable, DataTableSkeleton } from "~/components/Table/data-table";
+import { DataTable, DataTableSkeleton, TableRowSelector } from "~/components/Table/data-table";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { BackButton } from "~/components/ui/back-button";
@@ -138,6 +139,23 @@ export const clientAction = async ({ request }: any) => {
 		}
 	}
 
+	if (intent === "bulk-update-payment-status") {
+		const regIds = formData.getAll("regIds[]") as string[];
+		const status = formData.get("status") as string;
+		const bookingSvc = new BookingService();
+
+		try {
+			await Promise.all(regIds.map((id) => bookingSvc.updatePaymentStatus(id, status)));
+
+			// Optional: Trigger emails for all if status === 'PAID'
+			// (Skipping for now to avoid Gmail rate limits on bulk actions)
+
+			return { success: true, message: `Updated ${regIds.length} records to ${status}` };
+		} catch (err: any) {
+			return { success: false, error: err.message };
+		}
+	}
+
 	return null;
 };
 
@@ -152,6 +170,7 @@ export default function BookingsPage() {
 	const [isExporting, setIsExporting] = useState(false);
 	const [isManualRegOpen, setIsManualRegOpen] = useState(false);
 	const [isNewUser, setIsNewUser] = useState(false);
+	const [rowSelection, setRowSelection] = useState({});
 
 	const isFetching = navigation.state === "loading" && navigation.location?.pathname === location.pathname;
 	const isSubmitting = navigation.state === "submitting";
@@ -212,7 +231,14 @@ export default function BookingsPage() {
 		}
 	};
 
+	const selection = TableRowSelector<any>({ name: "id" });
+
 	const tableColumns: ColumnDef<any, unknown>[] = [
+		{
+			id: "select",
+			header: selection.header,
+			cell: selection.cell,
+		},
 		{
 			id: "Tour",
 			accessorKey: "tours.name",
@@ -391,8 +417,26 @@ export default function BookingsPage() {
 	const table = useReactTable({
 		data: data.registrations ?? [],
 		columns: tableColumns,
+		state: {
+			rowSelection,
+		},
+		onRowSelectionChange: setRowSelection,
 		getCoreRowModel: getCoreRowModel(),
 	});
+
+	const selectedRows = table.getSelectedRowModel().rows;
+	const hasSelection = selectedRows.length > 0;
+
+	const handleBulkUpdate = (status: string) => {
+		const fd = new FormData();
+		fd.append("intent", "bulk-update-payment-status");
+		selectedRows.forEach((row) => {
+			fd.append("regIds[]", row.original.id);
+		});
+		fd.append("status", status);
+		submit(fd, { method: "post" });
+		setRowSelection({});
+	};
 
 	const handleManualSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -444,7 +488,40 @@ export default function BookingsPage() {
 				</div>
 			</div>
 
-			<div className="bg-card rounded-[2.5rem] overflow-hidden shadow-xl border border-primary/10">
+			<div className="bg-card rounded-[2.5rem] overflow-hidden shadow-xl border border-primary/10 relative">
+				{hasSelection && (
+					<div className="absolute top-0 left-0 right-0 z-20 p-4 bg-primary/5 border-b border-primary/10 flex items-center justify-between animate-in slide-in-from-top duration-300">
+						<div className="flex items-center gap-4 ml-4">
+							<CheckSquare className="h-5 w-5 text-primary" />
+							<p className="text-xs font-bold uppercase tracking-wider text-primary">
+								{selectedRows.length} Pilgrims Selected
+							</p>
+						</div>
+						<div className="flex items-center gap-3">
+							<Button
+								onClick={() => handleBulkUpdate("PAID")}
+								className="h-10 px-6 rounded-full bg-emerald-600 text-white hover:bg-emerald-700 text-[9px] font-bold uppercase tracking-widest shadow-lg shadow-emerald-900/10"
+							>
+								Mark as Paid
+							</Button>
+							<Button
+								onClick={() => handleBulkUpdate("PENDING")}
+								variant="outline"
+								className="h-10 px-6 rounded-full border-amber-500/30 text-amber-600 hover:bg-amber-50 text-[9px] font-bold uppercase tracking-widest"
+							>
+								Mark as Pending
+							</Button>
+							<Button
+								variant="ghost"
+								onClick={() => setRowSelection({})}
+								className="text-[9px] font-bold uppercase tracking-widest text-foreground/40 hover:text-foreground"
+							>
+								Clear
+							</Button>
+						</div>
+					</div>
+				)}
+
 				{isFetching ? (
 					<div className="p-12">
 						<DataTableSkeleton noOfSkeletons={10} columns={tableColumns} />
