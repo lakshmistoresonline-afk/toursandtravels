@@ -153,29 +153,29 @@ export default function TourDetailsPage() {
 					{/* Main Content Area */}
 					<div className="space-y-16">
 						{/* Journey Info Bar */}
-						<div className="flex flex-wrap items-center gap-10 py-8 border-y border-primary/10">
-							<div className="flex items-center gap-3">
-								<div className="h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center text-primary">
-									<MapPin className="h-5 w-5" />
+						<div className="flex flex-wrap items-center gap-12 py-10 border-y border-primary/20">
+							<div className="flex items-center gap-4">
+								<div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-sm">
+									<MapPin className="h-6 w-6" />
 								</div>
 								<div>
-									<p className="text-[9px] font-bold uppercase tracking-widest text-foreground/40">
+									<p className="text-[11px] font-bold uppercase tracking-widest text-foreground/40">
 										Destination
 									</p>
-									<p className="font-bold text-foreground uppercase tracking-wider">
+									<p className="text-xl font-bold text-foreground uppercase tracking-wider">
 										{tour.destination || "Holy Land"}
 									</p>
 								</div>
 							</div>
-							<div className="flex items-center gap-3">
-								<div className="h-10 w-10 rounded-full bg-primary/5 flex items-center justify-center text-primary">
-									<Calendar className="h-5 w-5" />
+							<div className="flex items-center gap-4">
+								<div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-sm">
+									<Calendar className="h-6 w-6" />
 								</div>
 								<div>
-									<p className="text-[9px] font-bold uppercase tracking-widest text-foreground/40">
+									<p className="text-[11px] font-bold uppercase tracking-widest text-foreground/40">
 										Departure
 									</p>
-									<p className="font-bold text-foreground uppercase tracking-wider">
+									<p className="text-xl font-bold text-foreground uppercase tracking-wider">
 										{tour.start_date || "Flexible"}
 									</p>
 								</div>
@@ -183,45 +183,45 @@ export default function TourDetailsPage() {
 						</div>
 
 						{/* Content Sections */}
-						<div className="space-y-16">
+						<div className="space-y-20">
 							{tour.overview && (
-								<div className="space-y-6">
-									<h2 className="text-3xl font-serif text-foreground">Overview</h2>
-									<div className="text-lg leading-relaxed text-foreground/70 whitespace-pre-wrap font-sans">
+								<div className="space-y-8">
+									<h2 className="text-4xl font-serif text-foreground">Overview</h2>
+									<div className="text-xl leading-relaxed text-foreground/80 whitespace-pre-wrap font-sans font-medium">
 										{tour.overview}
 									</div>
 								</div>
 							)}
 
 							{tour_images.length > 1 && (
-								<div className="space-y-6">
-									<h2 className="text-3xl font-serif text-foreground">Gallery</h2>
-									<div className="rounded-3xl overflow-hidden shadow-xl border border-primary/10">
+								<div className="space-y-8">
+									<h2 className="text-4xl font-serif text-foreground">Gallery</h2>
+									<div className="rounded-[3rem] overflow-hidden shadow-2xl border border-primary/10">
 										<TourImageCarousel images={tour_images} />
 									</div>
 								</div>
 							)}
 
 							{tour.itinerary && tour.itinerary.length > 0 && (
-								<div className="space-y-10">
-									<h2 className="text-3xl font-serif text-foreground">
+								<div className="space-y-12">
+									<h2 className="text-4xl font-serif text-foreground">
 										The Pilgrimage Roadmap
 									</h2>
 									<div className="space-y-0 relative pl-4">
-										<div className="absolute left-9 top-4 bottom-4 w-px bg-primary/20" />
+										<div className="absolute left-10 top-4 bottom-4 w-px bg-primary/20" />
 										{tour.itinerary.map((day: any) => (
 											<div
 												key={day.id}
-												className="relative flex gap-10 pb-12 last:pb-0 group"
+												className="relative flex gap-12 pb-16 last:pb-0 group"
 											>
-												<div className="h-10 w-10 min-w-[2.5rem] rounded-full border-2 border-primary/20 bg-background flex items-center justify-center font-serif text-lg text-primary z-10 transition-colors group-hover:border-primary">
+												<div className="h-12 w-12 min-w-[3rem] rounded-full border-2 border-primary/30 bg-background flex items-center justify-center font-serif text-xl text-primary z-10 transition-colors group-hover:border-primary shadow-sm">
 													{day.day_number}
 												</div>
-												<div className="space-y-2 pt-1">
-													<h3 className="text-xl font-serif text-foreground">
+												<div className="space-y-4 pt-1">
+													<h3 className="text-2xl font-serif text-foreground font-bold">
 														{day.title}
 													</h3>
-													<p className="text-foreground/60 text-base leading-relaxed">
+													<p className="text-foreground/70 text-lg leading-relaxed font-medium">
 														{day.description}
 													</p>
 												</div>
@@ -235,81 +235,81 @@ export default function TourDetailsPage() {
 
 					{/* Registration Sidebar */}
 					<aside>
-						<div className="sticky top-24 bg-card border border-primary/20 rounded-[2rem] overflow-hidden shadow-2xl">
-							<div className="bg-primary/5 border-b border-primary/10 p-10 space-y-4">
-								<p className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-									Exchange
+						<div className="sticky top-24 bg-card border border-primary/30 rounded-[3rem] overflow-hidden shadow-2xl">
+							<div className="bg-primary/10 border-b border-primary/20 p-12 space-y-6">
+								<p className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary">
+									Sacred Exchange
 								</p>
-								<div className="flex items-baseline gap-2">
-									<span className="text-5xl font-serif text-primary">
+								<div className="flex items-baseline gap-3">
+									<span className="text-6xl font-serif text-primary font-bold">
 										{tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquiry Only"}
 									</span>
 									{tour.price > 0 && (
-										<span className="text-foreground/40 text-[10px] font-bold uppercase tracking-widest">
+										<span className="text-foreground/50 text-[11px] font-bold uppercase tracking-widest">
 											/ pilgrim
 										</span>
 									)}
 								</div>
 							</div>
 
-							<div className="p-10 space-y-10">
-								<div className="space-y-6">
+							<div className="p-12 space-y-12">
+								<div className="space-y-8">
 									{!user ? (
-										<div className="text-center space-y-6 py-10 px-6 border border-dashed border-primary/20 rounded-3xl bg-primary/5">
-											<p className="text-[11px] font-bold text-foreground/40 uppercase tracking-widest leading-relaxed">
+										<div className="text-center space-y-8 py-12 px-8 border-2 border-dashed border-primary/30 rounded-[2.5rem] bg-primary/5">
+											<p className="text-sm font-bold text-foreground/60 uppercase tracking-widest leading-relaxed">
 												Sign in to reserve your place on this path.
 											</p>
 											<Button
 												asChild
-												className="w-full rounded-full h-14 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-[10px] shadow-xl shadow-primary/20 hover:scale-105 transition-transform"
+												className="w-full rounded-full h-16 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
 											>
 												<Link to="/login">Sign In to Register</Link>
 											</Button>
 										</div>
 									) : user.role === "admin" ? (
-										<div className="text-center space-y-4 py-10 px-6 border border-primary/20 rounded-3xl bg-primary/5">
-											<ShieldCheck className="h-8 w-8 text-primary mx-auto opacity-40" />
-											<div className="space-y-1">
-												<p className="text-[11px] font-bold text-foreground/60 uppercase tracking-widest">
-													Admin Access
+										<div className="text-center space-y-6 py-12 px-8 border border-primary/30 rounded-[2.5rem] bg-primary/5 shadow-inner">
+											<ShieldCheck className="h-12 w-12 text-primary mx-auto opacity-60" />
+											<div className="space-y-2">
+												<p className="text-xs font-bold text-foreground/70 uppercase tracking-widest">
+													Administrator Access
 												</p>
-												<p className="text-[9px] text-primary font-bold uppercase tracking-[0.3em]">
-													Registration Disabled
+												<p className="text-[10px] text-primary font-bold uppercase tracking-[0.4em]">
+													Direct Management Mode
 												</p>
 											</div>
 											<Button
 												asChild
 												variant="outline"
-												className="w-full rounded-full h-12 border-primary/20 text-primary text-[9px] font-bold uppercase tracking-widest hover:bg-primary/5 mt-4"
+												className="w-full rounded-full h-14 border-primary/40 text-primary text-[10px] font-bold uppercase tracking-widest hover:bg-primary/10 mt-4 shadow-sm"
 											>
-												<Link to={`/admin/tours/edit/${tour.id}`}>Edit Journey</Link>
+												<Link to={`/admin/tours/edit/${tour.id}`}>Edit Journey Details</Link>
 											</Button>
 										</div>
 									) : isAlreadyRegistered ? (
-										<div className="text-center space-y-4 py-10 px-6 border border-emerald-500/20 rounded-3xl bg-emerald-500/5">
-											<CheckCircle2 className="h-8 w-8 text-emerald-600 mx-auto" />
-											<div className="space-y-1">
-												<p className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">
+										<div className="text-center space-y-6 py-12 px-8 border border-emerald-500/30 rounded-[2.5rem] bg-emerald-500/5 shadow-sm">
+											<CheckCircle2 className="h-12 w-12 text-emerald-600 mx-auto" />
+											<div className="space-y-2">
+												<p className="text-sm font-bold text-emerald-600 uppercase tracking-widest">
 													Journey Joined
 												</p>
-												<p className="text-[9px] text-emerald-600/60 font-bold uppercase tracking-[0.3em]">
-													Your place is reserved.
+												<p className="text-[10px] text-emerald-600/70 font-bold uppercase tracking-[0.3em]">
+													Your place is reserved on this path.
 												</p>
 											</div>
 											<Button
 												asChild
 												variant="outline"
-												className="w-full rounded-full h-12 border-emerald-500/20 text-emerald-600 text-[9px] font-bold uppercase tracking-widest hover:bg-emerald-500/10 mt-4"
+												className="w-full rounded-full h-14 border-emerald-500/30 text-emerald-600 text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-500/10 mt-6 shadow-sm"
 											>
-												<Link to="/account/bookings">My Registrations</Link>
+												<Link to="/account/bookings">View My Registrations</Link>
 											</Button>
 										</div>
 									) : isRegistrationOpen ? (
-										<Form method="post" className="space-y-8">
+										<Form method="post" className="space-y-10">
 											<input type="hidden" name="intent" value="register" />
-											<div className="space-y-4">
-												<label className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] ml-2">
-													Pilgrims Count
+											<div className="space-y-5">
+												<label className="text-[11px] font-bold text-foreground/50 uppercase tracking-[0.3em] ml-3">
+													Pilgrims Joining
 												</label>
 												<Input
 													type="number"
@@ -317,15 +317,15 @@ export default function TourDetailsPage() {
 													defaultValue={1}
 													min={1}
 													max={tour.max_participants || 50}
-													className="h-14 rounded-2xl bg-white border-primary/20 font-serif text-2xl px-6 text-primary focus-visible:ring-primary/20 shadow-sm"
+													className="h-16 rounded-2xl bg-white border-primary/30 font-serif text-3xl px-8 text-primary focus-visible:ring-primary/40 shadow-sm"
 												/>
 											</div>
 
-											<div className="space-y-4">
-												<label className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] ml-2">
-													Payment Mode
+											<div className="space-y-5">
+												<label className="text-[11px] font-bold text-foreground/50 uppercase tracking-[0.3em] ml-3">
+													Payment Method
 												</label>
-												<div className="grid grid-cols-1 gap-3">
+												<div className="grid grid-cols-1 gap-4">
 													{[
 														{ id: "CASH", label: "Cash Payment", icon: Banknote },
 														{ id: "GPAY", label: "Google Pay", icon: CreditCard },
@@ -333,10 +333,10 @@ export default function TourDetailsPage() {
 													].map((mode) => (
 														<label
 															key={mode.id}
-															className={`flex items-center gap-4 p-4 rounded-2xl border transition-all cursor-pointer ${
+															className={`flex items-center gap-5 p-5 rounded-[1.5rem] border-2 transition-all cursor-pointer ${
 																paymentMode === mode.id
-																	? "bg-primary/5 border-primary shadow-sm"
-																	: "bg-white border-primary/10 hover:border-primary/30"
+																	? "bg-primary/10 border-primary shadow-md"
+																	: "bg-white border-primary/10 hover:border-primary/40"
 															}`}
 														>
 															<input
@@ -348,17 +348,17 @@ export default function TourDetailsPage() {
 																onChange={() => setPaymentMode(mode.id as any)}
 															/>
 															<div
-																className={`h-10 w-10 rounded-xl flex items-center justify-center ${
+																className={`h-12 w-12 rounded-xl flex items-center justify-center shadow-sm ${
 																	paymentMode === mode.id
 																		? "bg-primary text-primary-foreground"
-																		: "bg-primary/5 text-primary"
+																		: "bg-primary/10 text-primary"
 																}`}
 															>
-																<mode.icon className="h-5 w-5" />
+																<mode.icon className="h-6 w-6" />
 															</div>
 															<span
-																className={`text-[11px] font-bold uppercase tracking-widest ${
-																	paymentMode === mode.id ? "text-primary" : "text-foreground/60"
+																className={`text-xs font-bold uppercase tracking-[0.2em] ${
+																	paymentMode === mode.id ? "text-primary" : "text-foreground/70"
 																}`}
 															>
 																{mode.label}
@@ -369,44 +369,70 @@ export default function TourDetailsPage() {
 											</div>
 
 											{paymentMode !== "CASH" && (
-												<div className="space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
-													<div className="p-6 bg-primary/5 border border-primary/10 rounded-3xl space-y-4 text-center">
-														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">
+												<div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
+													<div className="p-8 bg-primary/5 border-2 border-primary/20 rounded-[2rem] space-y-6 text-center shadow-inner">
+														<p className="text-xs font-bold text-primary uppercase tracking-[0.4em]">
 															Scan to Pay
 														</p>
 														{tour.qr_code_url || defaultQrCode ? (
-															<div className="bg-white p-4 rounded-2xl shadow-inner inline-block mx-auto border border-primary/10">
+															<div className="bg-white p-6 rounded-3xl shadow-xl inline-block mx-auto border border-primary/20">
 																<img
 																	src={tour.qr_code_url || defaultQrCode}
 																	alt="Payment QR Code"
-																	className="h-48 w-48 object-contain"
+																	className="h-56 w-56 object-contain"
 																/>
 															</div>
 														) : (
-															<div className="h-48 w-48 mx-auto bg-primary/5 border border-dashed border-primary/20 rounded-2xl flex flex-col items-center justify-center p-6 gap-3 opacity-60">
-																<QrCode className="h-10 w-10 text-primary" />
-																<p className="text-[8px] font-bold text-primary uppercase tracking-widest leading-relaxed">
-																	QR Code not set for this journey. Please contact admin.
+															<div className="h-56 w-56 mx-auto bg-primary/10 border-2 border-dashed border-primary/30 rounded-3xl flex flex-col items-center justify-center p-8 gap-4 opacity-70">
+																<QrCode className="h-12 w-12 text-primary" />
+																<p className="text-[10px] font-bold text-primary uppercase tracking-widest leading-relaxed">
+																	QR Code configuration pending.
 																</p>
 															</div>
 														)}
-														<p className="text-[9px] text-foreground/40 font-medium italic">
-															Please save the screenshot of payment confirmation.
+														<p className="text-[10px] text-foreground/60 font-bold uppercase tracking-widest">
+															Please save your payment screenshot.
 														</p>
 													</div>
 												</div>
 											)}
 
-											<div className="space-y-4">
-												<label className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] ml-2">
-													Sacred Requests
+											<div className="space-y-5">
+												<label className="text-[11px] font-bold text-foreground/50 uppercase tracking-[0.3em] ml-3">
+													Sacred Requests / Notes
 												</label>
 												<textarea
 													name="notes"
-													className="w-full min-h-[120px] p-6 bg-white border border-primary/20 rounded-3xl text-sm font-sans text-foreground/70 focus:ring-1 focus:ring-primary/20 transition-all outline-none resize-none shadow-sm"
-													placeholder="Any special needs or prayers?"
+													className="w-full min-h-[160px] p-8 bg-white border border-primary/30 rounded-[2.5rem] text-base font-sans text-foreground/80 focus:ring-2 focus:ring-primary/30 transition-all outline-none resize-none shadow-sm font-medium"
+													placeholder="Any special needs or prayers for this journey?"
 												></textarea>
 											</div>
+
+											<Button
+												type="submit"
+												className="w-full h-24 rounded-full text-sm font-bold uppercase tracking-[0.4em] bg-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03] transition-all"
+												disabled={isRegistering}
+											>
+												{isRegistering ? (
+													<Loader2 className="animate-spin mr-4 h-8 w-8" />
+												) : (
+													"Join This Pilgrimage"
+												)}
+											</Button>
+
+											<p className="text-center text-[10px] text-foreground/50 font-bold uppercase tracking-[0.3em]">
+												Limited to {tour.max_participants || 20} pilgrims only
+											</p>
+										</Form>
+									) : (
+										<div className="text-center p-12 bg-red-500/5 rounded-[2.5rem] border border-red-500/20 font-bold text-red-600 uppercase tracking-[0.3em] text-xs leading-relaxed shadow-inner">
+											Journey Registration is Currently {tour.status?.replace("_", " ")}
+										</div>
+									)}
+								</div>
+							</div>
+						</div>
+					</aside>
 
 											<Button
 												type="submit"

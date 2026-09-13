@@ -73,23 +73,23 @@ export default function Home() {
 				)}
 
 				{!user && (
-					<section className="py-24 bg-background border-b border-primary/10">
+					<section className="py-32 bg-background border-b border-primary/10">
 						<div className="container mx-auto px-6 text-center space-y-12">
-							<div className="space-y-6 max-w-2xl mx-auto">
-								<h4 className="text-[11px] font-bold uppercase tracking-[0.6em] text-primary">
+							<div className="space-y-8 max-w-3xl mx-auto">
+								<h4 className="text-sm font-bold uppercase tracking-[0.5em] text-primary">
 									The AMBADY Way
 								</h4>
-								<h2 className="text-4xl md:text-6xl font-serif text-foreground tracking-tight leading-tight">
+								<h2 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight">
 									Sacred Paths & Meaningful Journeys
 								</h2>
-								<p className="text-foreground/60 text-xl font-serif italic">
+								<p className="text-foreground/80 text-2xl font-serif italic">
 									"Faith | Heritage | Inner Journeys"
 								</p>
 							</div>
-							<div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+							<div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-8">
 								<Button
 									size="lg"
-									className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-12 h-16 text-xs font-bold uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all hover:scale-105"
+									className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-14 h-20 text-sm font-bold uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all hover:scale-105"
 									asChild
 								>
 									<Link to="/tours">Explore Pilgrimage Journeys</Link>
@@ -97,7 +97,7 @@ export default function Home() {
 								<Button
 									variant="outline"
 									size="lg"
-									className="rounded-full border-primary/20 text-foreground hover:bg-primary/5 px-12 h-16 text-xs font-bold uppercase tracking-widest transition-all"
+									className="rounded-full border-primary/40 text-foreground hover:bg-primary/5 px-14 h-20 text-sm font-bold uppercase tracking-widest transition-all"
 									asChild
 								>
 									<Link to="/about">Learn About AMBADY</Link>
@@ -110,31 +110,31 @@ export default function Home() {
 				{/* Section: Feature Columns */}
 				<section className="py-32 bg-background relative z-10 border-b border-primary/5">
 					<div className="container mx-auto px-6">
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-20">
-							<div className="text-center space-y-6 group">
-								<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
-									<h3 className="text-4xl font-serif text-primary">F</h3>
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-24">
+							<div className="text-center space-y-8 group">
+								<div className="h-24 w-24 rounded-3xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500 shadow-sm">
+									<h3 className="text-5xl font-serif text-primary">F</h3>
 								</div>
-								<h3 className="text-2xl font-serif text-foreground">Faith</h3>
-								<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+								<h3 className="text-3xl font-serif text-foreground">Faith</h3>
+								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
 									Deeply rooted in spiritual traditions and divine connection.
 								</p>
 							</div>
-							<div className="text-center space-y-6 group">
-								<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
-									<h3 className="text-4xl font-serif text-primary">H</h3>
+							<div className="text-center space-y-8 group">
+								<div className="h-24 w-24 rounded-3xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500 shadow-sm">
+									<h3 className="text-5xl font-serif text-primary">H</h3>
 								</div>
-								<h3 className="text-2xl font-serif text-foreground">Heritage</h3>
-								<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+								<h3 className="text-3xl font-serif text-foreground">Heritage</h3>
+								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
 									Preserving the sacred stories and architectural wonders of our past.
 								</p>
 							</div>
-							<div className="text-center space-y-6 group">
-								<div className="h-20 w-20 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500">
-									<h3 className="text-4xl font-serif text-primary">I</h3>
+							<div className="text-center space-y-8 group">
+								<div className="h-24 w-24 rounded-3xl bg-primary/5 border border-primary/20 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500 shadow-sm">
+									<h3 className="text-5xl font-serif text-primary">I</h3>
 								</div>
-								<h3 className="text-2xl font-serif text-foreground">Inner Journeys</h3>
-								<p className="text-xs text-foreground/60 uppercase tracking-[0.2em] font-medium leading-loose">
+								<h3 className="text-3xl font-serif text-foreground">Inner Journeys</h3>
+								<p className="text-base text-foreground/70 uppercase tracking-[0.2em] font-bold leading-loose">
 									More than travel—a path to introspection and enlightenment.
 								</p>
 							</div>

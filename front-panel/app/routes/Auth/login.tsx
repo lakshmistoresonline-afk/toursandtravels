@@ -110,28 +110,28 @@ export default function LoginPage() {
 					</div>
 				</div>
 
-				<div className="bg-card p-10 md:p-14 rounded-[3rem] shadow-xl border border-primary/10">
+				<div className="bg-card p-12 md:p-16 rounded-[3.5rem] shadow-2xl border border-primary/10">
 					<Form {...form}>
-						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
+						<form onSubmit={handleSubmit(onFormSubmit)} className="space-y-10">
 							<FormField
 								control={control}
 								name="email"
 								render={({ field }) => (
-									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+									<FormItem className="space-y-4">
+										<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em] ml-3">
 											Email Address
 										</FormLabel>
 										<FormControl>
 											<div className="relative group">
-												<MailIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
+												<MailIcon className="absolute left-7 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													placeholder="name@pilgrimage.com"
-													className="h-14 pl-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base shadow-sm"
+													className="h-16 pl-16 rounded-2xl border-primary/30 bg-white text-foreground focus-visible:ring-primary/30 text-lg shadow-sm font-medium"
 													{...field}
 												/>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+										<FormMessage className="text-red-600 text-xs font-bold uppercase tracking-widest ml-4" />
 									</FormItem>
 								)}
 							/>
@@ -139,64 +139,64 @@ export default function LoginPage() {
 								control={control}
 								name="password"
 								render={({ field }) => (
-									<FormItem className="space-y-3">
-										<div className="flex justify-between items-center px-2">
-											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+									<FormItem className="space-y-4">
+										<div className="flex justify-between items-center px-3">
+											<FormLabel className="text-[12px] font-bold text-foreground/50 uppercase tracking-[0.2em]">
 												Secret Code
 											</FormLabel>
 											<Link
 												to="/forgot-password"
 												title="Forgot Password"
-												className="text-[9px] font-bold text-primary hover:text-foreground uppercase tracking-[0.1em] transition-all"
+												className="text-xs font-bold text-primary hover:text-foreground uppercase tracking-[0.1em] transition-all underline underline-offset-4"
 											>
 												Forgot?
 											</Link>
 										</div>
 										<FormControl>
 											<div className="relative group">
-												<LockIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 group-focus-within:text-primary transition-colors" />
+												<LockIcon className="absolute left-7 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/60 group-focus-within:text-primary transition-colors" />
 												<Input
 													type={showPassword ? "text" : "password"}
 													placeholder="••••••••"
-													className="h-14 pl-14 pr-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 text-base shadow-sm"
+													className="h-16 pl-16 pr-16 rounded-2xl border-primary/30 bg-white text-foreground focus-visible:ring-primary/30 text-lg shadow-sm font-medium"
 													{...field}
 												/>
 												<button
 													type="button"
 													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-6 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
+													className="absolute right-7 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
 												>
 													{showPassword ? (
-														<EyeOffIcon className="h-5 w-5" />
+														<EyeOffIcon className="h-6 w-6" />
 													) : (
-														<EyeIcon className="h-5 w-5" />
+														<EyeIcon className="h-6 w-6" />
 													)}
 												</button>
 											</div>
 										</FormControl>
-										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+										<FormMessage className="text-red-600 text-xs font-bold uppercase tracking-widest ml-4" />
 									</FormItem>
 								)}
 							/>
 							<Button
 								type="submit"
-								className="w-full h-16 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:scale-[1.02]"
+								className="w-full h-20 rounded-full text-sm font-bold uppercase tracking-[0.4em] bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 hover:scale-[1.03]"
 								disabled={isSubmitting}
 							>
 								{isSubmitting ? (
-									<Loader2 className="mr-3 h-5 w-5 animate-spin" />
+									<Loader2 className="mr-4 h-6 w-6 animate-spin" />
 								) : (
 									"Sign In to Journey"
 								)}
 							</Button>
 						</form>
 					</Form>
-					<div className="mt-10 text-center">
-						<p className="text-foreground/30 text-[10px] font-bold uppercase tracking-widest">
+					<div className="mt-12 text-center">
+						<p className="text-foreground/40 text-xs font-bold uppercase tracking-widest leading-loose">
 							New to Ambady?{" "}
 							<Link
 								to="/signup"
-								className="text-primary hover:text-foreground transition-colors ml-1 underline underline-offset-4 decoration-primary/30"
+								className="text-primary hover:text-foreground transition-colors ml-1 underline underline-offset-8 decoration-primary/40"
 							>
 								Begin Registration
 							</Link>

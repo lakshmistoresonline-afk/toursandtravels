@@ -10,6 +10,7 @@
 html {
 	background-color: #fdfcf0;
 	scroll-behavior: smooth;
+	font-size: 110%; /* Slightly larger base for older users */
 }
 
 body {
@@ -59,8 +60,8 @@ body {
 	--primary-foreground: #0a0e1a;
 	--secondary: rgba(212, 175, 55, 0.1);
 	--secondary-foreground: #d4af37;
-	--muted: rgba(10, 14, 26, 0.05);
-	--muted-foreground: rgba(10, 14, 26, 0.6);
+	--muted: rgba(10, 14, 26, 0.1);
+	--muted-foreground: rgba(10, 14, 26, 0.85); /* Increased contrast */
 	--accent: #d4af37;
 	--accent-foreground: #ffffff;
 	--warning: #f59e0b;
