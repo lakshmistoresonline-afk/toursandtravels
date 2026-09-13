@@ -436,23 +436,23 @@ export default function TourDetailsPage() {
 
 											<Button
 												type="submit"
-												className="w-full h-20 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] bg-primary text-primary-foreground shadow-2xl shadow-primary/20 hover:bg-primary/90 hover:scale-[1.02] transition-all"
+												className="w-full h-24 rounded-full text-sm font-bold uppercase tracking-[0.4em] bg-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:scale-[1.03] transition-all"
 												disabled={isRegistering}
 											>
 												{isRegistering ? (
-													<Loader2 className="animate-spin mr-3 h-6 w-6" />
+													<Loader2 className="animate-spin mr-4 h-8 w-8" />
 												) : (
-													"Join Pilgrimage"
+													"Join This Pilgrimage"
 												)}
 											</Button>
 
-											<p className="text-center text-[9px] text-foreground/40 font-bold uppercase tracking-widest">
-												Limited to {tour.max_participants || 20} pilgrims
+											<p className="text-center text-[10px] text-foreground/50 font-bold uppercase tracking-[0.3em]">
+												Limited to {tour.max_participants || 20} pilgrims only
 											</p>
 										</Form>
 									) : (
-										<div className="text-center p-10 bg-red-500/5 rounded-3xl border border-red-500/10 font-bold text-red-600 uppercase tracking-[0.2em] text-[11px]">
-											Registration is {tour.status?.replace("_", " ")}
+										<div className="text-center p-12 bg-red-500/5 rounded-[2.5rem] border border-red-500/20 font-bold text-red-600 uppercase tracking-[0.3em] text-xs leading-relaxed shadow-inner">
+											Journey Registration is Currently {tour.status?.replace("_", " ")}
 										</div>
 									)}
 								</div>
