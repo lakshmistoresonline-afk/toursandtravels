@@ -144,8 +144,8 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 							{user.first_name?.charAt(0) ?? "A"}
 						</AvatarFallback>
 					</Avatar>
-					<span className="text-[10px] font-bold uppercase tracking-widest text-[#fdfcf0]/80 hidden sm:inline">
-						Menu
+					<span className="text-[10px] font-bold uppercase tracking-wider text-[#fdfcf0]/80 hidden sm:inline max-w-[100px] truncate">
+						{user.first_name || "Menu"}
 					</span>
 				</div>
 			</DropdownMenuTrigger>
