@@ -98,7 +98,7 @@ export default function AdminLayout() {
 							<span className="hidden lg:inline">Pilgrims</span>
 						</NavLink>
 						<NavLink
-							to="/admin/analytics"
+							to="/admin/stats"
 							prefetch="intent"
 							viewTransition
 							className={({ isActive }) =>

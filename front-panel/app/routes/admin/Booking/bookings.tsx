@@ -140,6 +140,19 @@ export const clientAction = async ({ request }: any) => {
 		}
 	}
 
+	if (intent === "confirm-registration") {
+		const regId = formData.get("regId") as string;
+		const bookingSvc = new BookingService();
+
+		try {
+			// We need a method to update the registration status
+			await bookingSvc.updateRegistrationStatus(regId, "CONFIRMED");
+			return { success: true, message: "Registration confirmed successfully!" };
+		} catch (err: any) {
+			return { success: false, error: err.message };
+		}
+	}
+
 	if (intent === "bulk-update-payment-status") {
 		const regIds = formData.getAll("regIds[]") as string[];
 		const status = formData.get("status") as string;
@@ -896,9 +909,20 @@ export default function BookingsPage() {
 								>
 									Close Profile
 								</Button>
-								<Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest text-[11px] px-14 h-16 rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-all">
-									Confirm Verification
-								</Button>
+								{selectedReg.status === "PENDING" && (
+									<Button
+										onClick={() => {
+											const fd = new FormData();
+											fd.append("intent", "confirm-registration");
+											fd.append("regId", selectedReg.id);
+											submit(fd, { method: "post" });
+											setSelectedReg(null);
+										}}
+										className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold uppercase tracking-widest text-[11px] px-14 h-16 rounded-full shadow-2xl shadow-primary/20 hover:scale-105 transition-all"
+									>
+										Confirm Verification
+									</Button>
+								)}
 							</div>
 						</div>
 					</DialogContent>
