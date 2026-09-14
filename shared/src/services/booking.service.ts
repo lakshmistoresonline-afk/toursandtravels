@@ -150,6 +150,7 @@ export class BookingService extends Service {
 						last_name: userData.last_name,
 						email: userData.email,
 						phone_number: userData.phone_number,
+						aadhar_number: userData.aadhar_number,
 					},
 					tourSnapshot: {
 						name: tourData.name,

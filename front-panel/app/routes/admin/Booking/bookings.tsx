@@ -24,6 +24,7 @@ import {
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
+	DropdownMenuSeparator,
 } from "~/components/ui/dropdown-menu";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -410,14 +411,31 @@ export default function BookingsPage() {
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
 						align="end"
-						className="w-52 rounded-2xl p-2 shadow-2xl bg-white border border-primary/10"
+						className="w-56 rounded-2xl p-2 shadow-2xl bg-white border border-primary/10"
 					>
 						<DropdownMenuItem
 							onClick={() => setSelectedReg(row.original)}
 							className="rounded-xl cursor-pointer py-3 text-foreground/80 focus:bg-primary/5 font-medium"
 						>
-							View Full Details
+							<User className="mr-3 h-4 w-4 opacity-50" />
+							View Full Profile
 						</DropdownMenuItem>
+
+						<DropdownMenuSeparator className="bg-primary/5 mx-2 my-1" />
+
+						{row.original.status === "PENDING" && (
+							<DropdownMenuItem
+								onClick={() => {
+									const fd = new FormData();
+									fd.append("intent", "confirm-registration");
+									fd.append("regId", row.original.id);
+									submit(fd, { method: "post" });
+								}}
+								className="rounded-xl cursor-pointer py-3 text-primary focus:bg-primary/5 font-bold"
+							>
+								<CheckCircle2 className="mr-3 h-4 w-4" /> Confirm Verification
+							</DropdownMenuItem>
+						)}
 
 						{row.original.paymentStatus !== "PAID" ? (
 							<DropdownMenuItem
@@ -447,8 +465,10 @@ export default function BookingsPage() {
 							</DropdownMenuItem>
 						)}
 
+						<DropdownMenuSeparator className="bg-primary/5 mx-2 my-1" />
+
 						<DropdownMenuItem className="rounded-xl cursor-pointer py-3 text-red-600 focus:bg-red-50 font-medium">
-							Cancel Registration
+							<Trash2 className="mr-3 h-4 w-4" /> Cancel Registration
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
