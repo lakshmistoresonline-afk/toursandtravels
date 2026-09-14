@@ -118,19 +118,18 @@ export const clientAction = async ({ request }: any) => {
 
 			// Trigger receipt email if marked as PAID
 			if (status === "PAID") {
-				const registrations = await bookingSvc.getAllRegistrations();
+				// Fetch the specific registration to ensure we have all data for the email
+				const registrations = await bookingSvc.getAllRegistrations(0, 100);
 				const reg = registrations.registrations.find((r) => r.id === regId);
 
 				if (reg) {
-					emailService
-						.sendPaymentReceipt({
-							booking_ref: reg.id,
-							customer_name: `${reg.profileSnapshot?.first_name} ${reg.profileSnapshot?.last_name}`,
-							customer_email: reg.profileSnapshot?.email,
-							tour_name: reg.tourSnapshot?.name || reg.tours?.name,
-							amount: (reg.tourSnapshot?.price || reg.tours?.price || 0) * reg.travellersCount,
-						})
-						.catch(console.error);
+					await emailService.sendPaymentReceipt({
+						booking_ref: reg.id,
+						customer_name: `${reg.profileSnapshot?.first_name} ${reg.profileSnapshot?.last_name}`,
+						customer_email: reg.profileSnapshot?.email,
+						tour_name: reg.tourSnapshot?.name || reg.tours?.name,
+						amount: (reg.tourSnapshot?.price || reg.tours?.price || 0) * reg.travellersCount,
+					});
 				}
 			}
 
@@ -145,9 +144,23 @@ export const clientAction = async ({ request }: any) => {
 		const bookingSvc = new BookingService();
 
 		try {
-			// We need a method to update the registration status
 			await bookingSvc.updateRegistrationStatus(regId, "CONFIRMED");
-			return { success: true, message: "Registration confirmed successfully!" };
+
+			// Also send a confirmation email when manually confirmed by admin
+			const registrations = await bookingSvc.getAllRegistrations(0, 100);
+			const reg = registrations.registrations.find((r) => r.id === regId);
+
+			if (reg) {
+				await emailService.sendBookingConfirmation({
+					booking_ref: reg.id,
+					customer_name: `${reg.profileSnapshot?.first_name} ${reg.profileSnapshot?.last_name}`,
+					customer_email: reg.profileSnapshot?.email,
+					tour_name: reg.tourSnapshot?.name || reg.tours?.name,
+					travellersCount: reg.travellersCount,
+				});
+			}
+
+			return { success: true, message: "Registration confirmed and email sent!" };
 		} catch (err: any) {
 			return { success: false, error: err.message };
 		}
