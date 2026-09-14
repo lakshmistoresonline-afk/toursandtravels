@@ -5,3 +5,4 @@ export type MiddlewareFn<T extends ServiceBase> = (context: T) => Promise<void> 
 export function asServiceMiddleware<T extends ServiceBase>(fn: MiddlewareFn<T>): MiddlewareFn<T> {
 	return fn;
 }
+

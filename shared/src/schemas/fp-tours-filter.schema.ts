@@ -7,3 +7,4 @@ export const FPTourFilterFormSchema = z.object({
 });
 
 export type FPTourFilterFormData = z.infer<typeof FPTourFilterFormSchema>;
+

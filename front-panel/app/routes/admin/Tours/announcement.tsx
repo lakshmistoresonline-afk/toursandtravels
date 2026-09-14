@@ -91,7 +91,7 @@ export const clientAction = async ({ request, params }: any) => {
 
 			return {
 				success: true,
-				message: `Sacred broadcast successfully sent to ${recipientsData.length} pilgrims!`,
+				message: `Broadcast successfully sent to ${recipientsData.length} pilgrims!`,
 			};
 		} catch (err: any) {
 			return { success: false, error: err.message };
@@ -294,7 +294,7 @@ export default function JourneyAnnouncementPage() {
 							Journey Announcement
 						</h1>
 						<p className="text-foreground/40 mt-2 text-[10px] font-bold uppercase tracking-[0.3em]">
-							Prepare sacred announcement for {tour.name}
+							Prepare Announcement for {tour.name}
 						</p>
 					</div>
 				</div>
@@ -535,7 +535,7 @@ export default function JourneyAnnouncementPage() {
 							<li>In Gmail, paste them into the <strong>BCC</strong> field.</li>
 							<li>Copy the branded template and paste it into the compose window.</li>
 							<li>Add a subject: <strong>New Pilgrimage Journey: {tour.name}</strong></li>
-							<li>Send your sacred broadcast.</li>
+							<li>Send your Broadcast.</li>
 						</ol>
 					</div>
 				</div>
@@ -565,7 +565,7 @@ export default function JourneyAnnouncementPage() {
 					<DialogHeader className="p-10 bg-primary/5 border-b border-primary/10">
 						<DialogTitle className="text-2xl font-serif">Confirm Broadcast</DialogTitle>
 						<DialogDescription className="text-[10px] font-bold uppercase tracking-widest text-primary mt-2">
-							Final verification before sacred transmission.
+							Final verification before Broadcast.
 						</DialogDescription>
 					</DialogHeader>
 					<div className="p-10 space-y-6">
@@ -603,3 +603,6 @@ export default function JourneyAnnouncementPage() {
 		</div>
 	);
 }
+
+
+

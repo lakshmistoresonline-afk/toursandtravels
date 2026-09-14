@@ -133,7 +133,7 @@ export default function SignupPage() {
 			<div className="w-full max-w-3xl space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
 				<MetaDetails
 					metaTitle="Begin Registration | AMBADY"
-					metaDescription="Join our sacred pilgrimage community."
+					metaDescription="Join our pilgrimage community."
 				/>
 
 				<div className="text-center space-y-4">
@@ -386,3 +386,6 @@ export default function SignupPage() {
 		</div>
 	);
 }
+
+
+

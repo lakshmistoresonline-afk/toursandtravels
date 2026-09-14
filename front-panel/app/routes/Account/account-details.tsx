@@ -105,7 +105,7 @@ export default function AccountDetailsPage() {
 	return (
 		<div className="space-y-12 max-w-4xl animate-in slide-in-from-right-8 duration-700 relative">
 			<div className="flex items-center justify-between">
-				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+				<BackButton fallbackUrl="/" label="Home" />
 			</div>
 
 			<div className="bg-card p-10 md:p-14 rounded-[3rem] flex items-center gap-10 border border-primary/10 shadow-xl">
@@ -334,7 +334,7 @@ export default function AccountDetailsPage() {
 												Journey Announcements
 											</FormLabel>
 											<p className="text-xs text-foreground/40">
-												Receive emails about new pilgrimage journeys and sacred paths.
+												Receive emails about new pilgrimage journeys and Paths.
 											</p>
 										</div>
 										<FormControl>
@@ -405,3 +405,6 @@ export default function AccountDetailsPage() {
 		</div>
 	);
 }
+
+
+

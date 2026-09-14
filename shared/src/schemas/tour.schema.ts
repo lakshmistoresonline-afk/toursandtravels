@@ -43,3 +43,4 @@ export const TourSchema = z.object({
 export const AddTourActionSchema = TourSchema;
 export type AddTourActionDate = z.infer<typeof AddTourActionSchema>;
 export type AddTourInput = AddTourActionDate;
+

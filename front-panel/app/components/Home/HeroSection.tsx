@@ -9,7 +9,7 @@ export default function HeroSection({ user }: { user?: any }) {
 				{/* We keep the HTML overlay minimal as the branding is in the artwork */}
 				<div className="space-y-6">
 					<h2 className="text-6xl md:text-8xl font-serif text-[#fdfcf0] tracking-tight drop-shadow-2xl leading-tight">
-						Sacred Journeys
+						Journeys
 					</h2>
 					<div className="w-32 h-0.5 bg-primary/60 mx-auto rounded-full" />
 					<p className="text-[11px] md:text-xs text-primary uppercase tracking-[0.6em] font-bold drop-shadow-md">
@@ -48,3 +48,6 @@ export default function HeroSection({ user }: { user?: any }) {
 		</section>
 	);
 }
+
+
+

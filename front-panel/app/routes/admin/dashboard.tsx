@@ -72,7 +72,7 @@ export default function AdminDashboard() {
 		<div className="space-y-12 animate-in fade-in duration-700 max-w-7xl mx-auto">
 			<MetaDetails
 				metaTitle="Admin Dashboard | AMBADY"
-				metaDescription="Overview of sacred paths and pilgrims."
+				metaDescription="Overview of Paths and pilgrims."
 			/>
 
 			<div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-primary/10 pb-8">
@@ -84,7 +84,7 @@ export default function AdminDashboard() {
 						Admin Overview
 					</h1>
 					<p className="text-foreground/40 text-xs font-sans uppercase tracking-[0.1em] font-medium leading-relaxed">
-						Overseeing sacred paths and spiritual journeys.
+						Overseeing Paths and spiritual journeys.
 					</p>
 				</div>
 				<Button
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
 								Active Journeys
 							</p>
 							<p className="text-[10px] text-foreground/50 font-bold uppercase tracking-[0.2em] leading-loose">
-								Initiate new sacred paths and pilgrimage experiences for your community.
+								Initiate new Paths and pilgrimage experiences for your community.
 							</p>
 						</div>
 						<Button
@@ -229,3 +229,6 @@ export default function AdminDashboard() {
 		</div>
 	);
 }
+
+
+

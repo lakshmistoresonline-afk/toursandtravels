@@ -13,3 +13,4 @@ export const getCurrentUser = async (_request?: Request) => {
 		error,
 	};
 };
+

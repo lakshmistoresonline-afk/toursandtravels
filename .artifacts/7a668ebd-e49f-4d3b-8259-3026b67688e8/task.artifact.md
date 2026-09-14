@@ -1,3 +1,4 @@
 - [ ] Add "Contact" link to Header.tsx
 - [ ] Add "Terms of Usage" link to Footer.tsx
 - [ ] Update clientLoader typing in home.tsx
+

@@ -9,7 +9,7 @@ export default function NotFound() {
 					<h2 className="text-4xl font-serif text-[#fdfcf0]">Path Not Found</h2>
 					<div className="w-16 h-0.5 bg-[#d4af37]/40 mx-auto rounded-full" />
 					<p className="text-[#fdfcf0]/40 max-w-md mx-auto text-[11px] font-bold uppercase tracking-[0.3em] leading-relaxed">
-						The destination you seek is currently beyond our sacred map.
+						The destination you seek is currently beyond our Map.
 					</p>
 				</div>
 				<div className="pt-8">
@@ -17,10 +17,13 @@ export default function NotFound() {
 						href="/"
 						className="px-12 py-4 bg-[#d4af37] text-[#0a0e1a] rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl shadow-yellow-900/20 hover:scale-105 transition-transform inline-block"
 					>
-						Return to Sanctuary
+						Return to Home
 					</a>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+
+

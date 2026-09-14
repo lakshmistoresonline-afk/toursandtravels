@@ -28,7 +28,7 @@ export default function AccountLayout() {
 							Pilgrim Hub
 						</h1>
 						<p className="text-foreground/40 text-sm font-sans uppercase tracking-[0.1em] font-medium leading-relaxed">
-							Manage your sacred data and journey history.
+							Manage your data and journey history.
 						</p>
 					</div>
 
@@ -65,7 +65,7 @@ export default function AccountLayout() {
 								Profile Secured
 							</p>
 							<p className="text-xs text-foreground/50 leading-loose font-medium">
-								Your sacred journey data is stored securely in our private pilgrimage network.
+								Your Journey data is stored securely in our private pilgrimage network.
 							</p>
 						</div>
 					</div>
@@ -78,3 +78,6 @@ export default function AccountLayout() {
 		</div>
 	);
 }
+
+
+

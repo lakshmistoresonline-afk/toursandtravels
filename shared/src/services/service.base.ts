@@ -30,3 +30,4 @@ export class Service implements ServiceBase {
 		return this.auth.currentUser?.uid || null;
 	}
 }
+

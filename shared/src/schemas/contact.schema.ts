@@ -8,3 +8,4 @@ export const contactSchema = z.object({
 });
 
 export type contactFormData = z.infer<typeof contactSchema>;
+

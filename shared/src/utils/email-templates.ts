@@ -185,7 +185,7 @@ HOW TO REGISTER
 3. Review the journey details.
 4. Complete the registration form.
 
-We look forward to embarking on this sacred path with you.
+We look forward to embarking on this path with you.
 
 Blessings,
 AMBADY TEAM
@@ -194,3 +194,4 @@ AMBADY TEAM
 Manage your email preferences at: ${appUrl}/account/details
 `;
 };
+

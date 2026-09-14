@@ -4,3 +4,4 @@ export type DashboardMainStats = {
 	total_categories: number;
 	total_revenue: number;
 };
+

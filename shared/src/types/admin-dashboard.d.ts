@@ -17,3 +17,4 @@ export type BookingForExport = Database["public"]["Tables"]["bookings_new"]["Row
 		paid_amount: number;
 	};
 };
+

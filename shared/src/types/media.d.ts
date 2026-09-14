@@ -7,3 +7,4 @@ export interface MediaData {
 export interface UploadMediaResponse {
 	data: MediaData;
 }
+

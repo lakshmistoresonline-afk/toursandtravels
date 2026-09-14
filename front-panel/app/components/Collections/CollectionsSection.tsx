@@ -7,7 +7,7 @@ import { ArrowRight, Compass } from "lucide-react";
 
 export default function CollectionsSection({
 	collections,
-	title = "Sacred Collections",
+	title = "Collections",
 	isCity = false,
 }: {
 	collections: FPCollection[];
@@ -27,7 +27,7 @@ export default function CollectionsSection({
 					<p className="text-[#fdfcf0]/40 font-sans font-light uppercase tracking-[0.2em] text-xs">
 						{!isCity
 							? "Handpicked spiritual experiences curated by AMBADY PILGRIMAGE EXPERIENCES"
-							: "Explore sacred destinations for your next spiritual journey"}
+							: "Explore Destinations for your next spiritual journey"}
 					</p>
 				</div>
 				<div className="space-y-24">
@@ -96,3 +96,6 @@ function CollectionCarousel({ collection, ...props }: { collection: FPCollection
 		</div>
 	);
 }
+
+
+

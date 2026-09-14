@@ -34,3 +34,4 @@ export type GetHighLevelToursResponse = {
 	tours: HighLevelTour[];
 	total: number;
 };
+

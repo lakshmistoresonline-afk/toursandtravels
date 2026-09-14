@@ -14,3 +14,4 @@ export function UseMiddleware<T extends ServiceBase>(middleware: MiddlewareFn<T>
 		return descriptor;
 	};
 }
+

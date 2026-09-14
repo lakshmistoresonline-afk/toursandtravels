@@ -82,7 +82,7 @@ export function ImageSearchDialog({
 						Spiritual Image Search
 					</DialogTitle>
 					<DialogDescription className="text-primary text-[10px] font-bold uppercase tracking-[0.3em] mt-3">
-						Find high-quality sacred imagery from Unsplash.
+						Find high-quality images from Unsplash.
 					</DialogDescription>
 				</DialogHeader>
 
@@ -173,7 +173,7 @@ export function ImageSearchDialog({
 						<div className="py-20 text-center space-y-4 opacity-20">
 							<ImageIcon className="h-12 w-12 mx-auto" />
 							<p className="text-[10px] font-bold uppercase tracking-widest">
-								Search for sacred destinations to see suggestions.
+								Search for Destinations to see suggestions.
 							</p>
 						</div>
 					)}
@@ -185,3 +185,6 @@ export function ImageSearchDialog({
 		</Dialog>
 	);
 }
+
+
+

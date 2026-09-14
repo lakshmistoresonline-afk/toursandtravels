@@ -33,11 +33,11 @@ export default function MyBookingsPage() {
 	return (
 		<div className="container mx-auto max-w-5xl px-6 animate-in fade-in duration-700 bg-background relative">
 			<div className="mb-8">
-				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+				<BackButton fallbackUrl="/" label="Home" />
 			</div>
 			<MetaDetails
 				metaTitle="My Pilgrimage Journeys | AMBADY"
-				metaDescription="View your upcoming and past sacred journeys."
+				metaDescription="View your upcoming and past Journeys."
 			/>
 			<div className="mb-12">
 				<h4 className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary mb-3">
@@ -47,7 +47,7 @@ export default function MyBookingsPage() {
 					My Pilgrimage History
 				</h1>
 				<p className="text-foreground/40 mt-3 text-sm font-sans uppercase tracking-[0.1em] font-medium leading-relaxed">
-					View your past and upcoming sacred registrations.
+					View your past and upcoming registrations.
 				</p>
 			</div>
 
@@ -61,7 +61,7 @@ export default function MyBookingsPage() {
 						to="/tours"
 						className="text-primary hover:text-foreground mt-8 inline-block text-[11px] font-bold uppercase tracking-[0.2em] border-b border-primary/40 pb-1 transition-all"
 					>
-						Explore Sacred Pilgrimage Journeys
+						Explore Pilgrimage Journeys
 					</Link>
 				</div>
 			) : (
@@ -144,3 +144,6 @@ export default function MyBookingsPage() {
 		</div>
 	);
 }
+
+
+

@@ -4,3 +4,4 @@ export type GetAllParticipantTypes = {
 	id: number;
 	name: string;
 }[];
+

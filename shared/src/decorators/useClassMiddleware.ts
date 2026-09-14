@@ -21,3 +21,4 @@ export function UseClassMiddleware<T extends ServiceBase>(...middlewares: Middle
 		});
 	};
 }
+

@@ -127,7 +127,7 @@ class EmailService {
 			from: `AMBADY PILGRIMAGE EXPERIENCES <${EMAIL_ADDRESS_1}>`,
 			to: customer_email,
 			subject: `Payment Received – Registration #${booking_ref}`,
-			text: `Dear ${customer_name},\n\nWe have successfully received your payment of ₹${amount?.toLocaleString()} for the ${tour_name} journey.\n\nThis receipt is for your registration #${booking_ref}.\n\nYour place is now fully secured. We look forward to seeing you on the sacred path!`,
+			text: `Dear ${customer_name},\n\nWe have successfully received your payment of ₹${amount?.toLocaleString()} for the ${tour_name} journey.\n\nThis receipt is for your registration #${booking_ref}.\n\nYour place is now fully secured. We look forward to seeing you on the path!`,
 		});
 	}
 
@@ -174,3 +174,4 @@ class EmailService {
 }
 
 export const emailService = EmailService.getInstance();
+

@@ -21,3 +21,4 @@ export interface NotificationCampaign {
 	startedAt?: any;
 	completedAt?: any;
 }
+

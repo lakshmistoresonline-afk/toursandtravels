@@ -21,7 +21,7 @@ export default function ToursPage() {
 		<div className="animate-in fade-in duration-1000 bg-background min-h-screen">
 			<MetaDetails
 				metaTitle="Pilgrimage Journeys | AMBADY"
-				metaDescription="Explore our sacred journeys and spiritual experiences curated for you."
+				metaDescription="Explore our Journeys and spiritual experiences curated for you."
 				ogImage={firstTourImage}
 			/>
 
@@ -30,7 +30,7 @@ export default function ToursPage() {
 				<div className="container mx-auto px-6 text-center space-y-10 relative z-10">
 					<div className="space-y-8">
 						<h4 className="text-sm font-bold uppercase tracking-wider text-[#d4af37]">
-							Sacred Destinations
+							Destinations
 						</h4>
 						<h1 className="text-6xl md:text-9xl font-serif text-[#fdfcf0] tracking-tight leading-tight">
 							Pilgrimage Journeys
@@ -47,7 +47,7 @@ export default function ToursPage() {
 							<Search className="absolute left-8 top-1/2 -translate-y-1/2 h-8 w-8 text-[#d4af37]/60 group-focus-within:text-[#d4af37] transition-colors" />
 							<Input
 								name="q"
-								placeholder="Search your sacred destination..."
+								placeholder="Search your destination..."
 								className="h-24 pl-20 pr-10 rounded-full border-2 border-[#d4af37]/20 bg-white/5 backdrop-blur-2xl focus-visible:border-[#d4af37]/60 focus-visible:ring-[#d4af37]/30 transition-all text-2xl text-[#fdfcf0] placeholder:text-[#fdfcf0]/30 shadow-2xl"
 								defaultValue={q}
 							/>
@@ -91,3 +91,6 @@ export default function ToursPage() {
 		</div>
 	);
 }
+
+
+

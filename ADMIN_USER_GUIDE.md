@@ -4,7 +4,7 @@
 
 ---
 
-Welcome to the AMBADY administrative sanctuary. This guide provides step-by-step instructions for managing sacred journeys, pilgrims, and registrations.
+Welcome to the AMBADY administrative sanctuary. This guide provides step-by-step instructions for managing Journeys, pilgrims, and registrations.
 
 ## 1. Admin Dashboard
 The Dashboard is your control center for overseeing the spiritual community.
@@ -16,7 +16,7 @@ The Dashboard is your control center for overseeing the spiritual community.
 ## 2. Journey Inventory (/admin/tours)
 Manage the life cycle of every pilgrimage experience.
 - **Initiate New Journey**: Click the button in the header to draft a new experience.
-- **Search**: Use the search bar to find journeys by name or sacred code.
+- **Search**: Use the search bar to find journeys by name or  code.
 - **Actions Menu (... )**:
     - **Send Announcement**: Prepare an email broadcast for a specific journey.
     - **Edit Journey**: Modify itinerary, pricing, dates, or visual identity.
@@ -48,3 +48,4 @@ To notify pilgrims about a new journey:
 
 ---
 *Faith | Heritage | Inner Journeys*
+

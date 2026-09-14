@@ -116,7 +116,7 @@ export default function AddTourPage() {
 		<div className="flex flex-col gap-10 animate-in fade-in duration-500 max-w-5xl mx-auto pb-32">
 			<MetaDetails
 				metaTitle="Initiate Journey | AMBADY Admin"
-				metaDescription="Create a new sacred pilgrimage experience."
+				metaDescription="Create a new pilgrimage experience."
 			/>
 
 			<div className="flex items-center justify-between border-b border-primary/10 pb-8">
@@ -127,7 +127,7 @@ export default function AddTourPage() {
 							Initiate Journey
 						</h1>
 						<p className="text-foreground/40 mt-2 text-[10px] font-bold uppercase tracking-[0.3em]">
-							Draft or Publish a new sacred experience.
+							Draft or Publish a new experience.
 						</p>
 					</div>
 				</div>
@@ -379,7 +379,7 @@ export default function AddTourPage() {
 						<div className="px-10 py-7 border-b border-primary/10 flex items-center gap-4 bg-primary/5">
 							<FileText className="h-4.5 w-4.5 text-primary" />
 							<h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
-								Sacred Narrative
+								Description
 							</h3>
 						</div>
 						<CardContent className="p-10">
@@ -558,7 +558,7 @@ export default function AddTourPage() {
 													</div>
 													<div className="text-center">
 														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
-															Select Sacred Imagery
+															Select images
 														</p>
 														<p className="text-[9px] text-foreground/40 font-medium mt-1">
 															Powered by Unsplash
@@ -624,3 +624,6 @@ export default function AddTourPage() {
 		</div>
 	);
 }
+
+
+

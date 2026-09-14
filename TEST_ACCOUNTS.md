@@ -52,3 +52,4 @@ These accounts are for testing the customer booking flow and profile reuse.
 - Login with `test1@ambady.com`.
 - Try to manually navigate to `/admin`.
 - Verify that the application redirects you back to the login or home page (Access Denied).
+

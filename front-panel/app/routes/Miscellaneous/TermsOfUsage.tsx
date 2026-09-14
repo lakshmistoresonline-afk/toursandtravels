@@ -8,7 +8,7 @@ export default function TermsOfUsePage() {
 		<>
 			<MetaDetails
 				metaTitle="Terms of Use | AMBADY PILGRIMAGE EXPERIENCES"
-				metaDescription="Our terms of use outline the rules and guidelines for using our website and services."
+				metaDescription="Our Terms of Use outline the rules and guidelines for using our website and services."
 				metaKeywords="Terms of Use, User Agreement, AMBADY PILGRIMAGE EXPERIENCES"
 				canonicalUrl={`${process.env.VITE_MAIN_APP_URL}/terms-of-use`}
 			/>
@@ -103,7 +103,7 @@ export default function TermsOfUsePage() {
 
 						<section>
 							<h2 className="text-xl font-semibold text-foreground mb-3">8. Governing Law</h2>
-							<p>These terms are governed by the laws of the United Arab Emirates.</p>
+							<p>These Terms are governed by the laws of the United Arab Emirates.</p>
 						</section>
 
 						<section>
@@ -120,8 +120,7 @@ export default function TermsOfUsePage() {
 							<h2 className="text-xl font-semibold text-foreground mb-3">10. Contact Us</h2>
 							<span>
 								<p>
-									For questions about these terms, contact us at
-									{EMAIL_ADDRESS_1}
+									For questions about these Terms, contact us at {EMAIL_ADDRESS_1}
 								</p>
 								<Link to={"/contact-us"} prefetch="intent" viewTransition>
 									<p className="hover:underline underline-offset-2">

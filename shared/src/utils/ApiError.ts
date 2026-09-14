@@ -20,3 +20,4 @@ export class ApiError extends Error {
 		this.details.push({ stack: this.stack ?? "" }, ...details);
 	}
 }
+

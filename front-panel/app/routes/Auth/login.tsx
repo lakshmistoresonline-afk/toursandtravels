@@ -88,12 +88,12 @@ export default function LoginPage() {
 	return (
 		<div className="min-h-[80vh] w-full flex items-center justify-center py-20 px-6 bg-background relative">
 			<div className="absolute top-8 left-8">
-				<BackButton fallbackUrl="/" label="Home Sanctuary" />
+				<BackButton fallbackUrl="/" label="Home" />
 			</div>
 			<div className="w-full max-w-md space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
 				<MetaDetails
 					metaTitle="Login | AMBADY"
-					metaDescription="Access your sacred journey portal."
+					metaDescription="Access your Journey portal."
 				/>
 
 				<div className="text-center space-y-4">
@@ -105,7 +105,7 @@ export default function LoginPage() {
 					<div className="space-y-2">
 						<h2 className="text-4xl font-serif text-foreground tracking-tight">Welcome Back</h2>
 						<p className="text-[11px] font-bold text-primary uppercase tracking-wider">
-							Your Sacred Journey Awaits
+							Your Journey Awaits
 						</p>
 					</div>
 				</div>
@@ -207,3 +207,6 @@ export default function LoginPage() {
 		</div>
 	);
 }
+
+
+

@@ -221,7 +221,7 @@ export default function AdminToursPage() {
 							<Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/60" />
 							<Input
 								name="q"
-								placeholder="Search by journey name or sacred code..."
+								placeholder="Search by journey name or code..."
 								className="h-14 pl-14 rounded-2xl bg-white border-primary/20 text-foreground focus-visible:ring-primary/20 placeholder:text-foreground/30 shadow-sm"
 								defaultValue={query}
 							/>
@@ -248,3 +248,6 @@ export default function AdminToursPage() {
 		</div>
 	);
 }
+
+
+

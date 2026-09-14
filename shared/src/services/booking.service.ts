@@ -277,3 +277,4 @@ export class BookingService extends Service {
 		return registrations;
 	}
 }
+

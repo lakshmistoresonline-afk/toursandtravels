@@ -527,7 +527,7 @@ export default function UpdateTourPage() {
 													</div>
 													<div className="text-center">
 														<p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
-															Select Sacred Imagery
+															Select images
 														</p>
 														<p className="text-[9px] text-foreground/40 font-medium mt-1">
 															Powered by Unsplash
@@ -700,3 +700,6 @@ export function ErrorBoundary() {
 		</div>
 	);
 }
+
+
+

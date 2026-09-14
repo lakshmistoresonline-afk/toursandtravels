@@ -80,3 +80,4 @@ The system uses a **Single Login** at `/login`.
 ---
 
 _For more details on the architecture, see `FIREBASE_MIGRATION_GUIDE.md`._
+

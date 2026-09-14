@@ -24,3 +24,6 @@ export default function ToursPageContex({ children }: { children: React.ReactNod
 
 	return <ToursPageCtx.Provider value={values}>{children}</ToursPageCtx.Provider>;
 }
+
+
+

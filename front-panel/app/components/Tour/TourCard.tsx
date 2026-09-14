@@ -40,7 +40,7 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 						<div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-primary/5">
 							<Compass className="h-10 w-10 text-primary opacity-30" />
 							<span className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary/40">
-								Sacred Path
+								Path
 							</span>
 						</div>
 					)}
@@ -95,4 +95,7 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 		</Link>
 	);
 });
+
+
+
 

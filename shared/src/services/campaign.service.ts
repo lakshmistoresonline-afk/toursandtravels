@@ -154,3 +154,4 @@ export class CampaignService extends Service {
 		return this.sendCampaign(campaignId);
 	}
 }
+

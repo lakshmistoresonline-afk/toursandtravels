@@ -570,7 +570,7 @@ export default function BookingsPage() {
 							Manual Registration
 						</DialogTitle>
 						<DialogDescription className="text-primary text-[11px] font-bold uppercase tracking-[0.3em] mt-3">
-							Assisting pilgrims with their sacred registration.
+							Assisting pilgrims with their registration.
 						</DialogDescription>
 					</DialogHeader>
 
@@ -931,4 +931,7 @@ export default function BookingsPage() {
 		</div>
 	);
 }
+
+
+
 

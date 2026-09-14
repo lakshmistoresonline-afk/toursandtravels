@@ -257,3 +257,4 @@ export class AuthService extends Service {
 		return onAuthStateChanged(this.auth, callback);
 	}
 }
+

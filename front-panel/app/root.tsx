@@ -32,14 +32,14 @@ export default function App() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 
-	let title = "Sacred Connection Lost";
+	let title = "Connection Lost";
 	let message = "The path you were seeking has vanished or encountered a temporary disturbance.";
 	let icon = <AlertCircle className="h-16 w-16 text-[#d4af37]/50 mb-6" />;
 
 	if (isRouteErrorResponse(error)) {
 		if (error.status === 404) {
 			title = "Destination Not Found";
-			message = "The pilgrimage path you seek is currently beyond our sacred map.";
+			message = "The pilgrimage path you seek is currently beyond our Map.";
 		} else {
 			title = `Encountered a ${error.status} Disturbance`;
 			message = error.data?.message || "An unexpected disturbance occurred on our path.";
@@ -47,7 +47,7 @@ export function ErrorBoundary() {
 	} else if (error instanceof Error) {
 		console.error("Path Disturbance:", error);
 		if (error.message.includes("index")) {
-			message = "We are currently optimizing our sacred records. Please try again in a few moments.";
+			message = "We are currently optimizing our Records. Please try again in a few moments.";
 		}
 	}
 
@@ -86,3 +86,6 @@ export function ErrorBoundary() {
 		</div>
 	);
 }
+
+
+

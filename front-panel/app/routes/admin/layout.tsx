@@ -143,7 +143,7 @@ export default function AdminLayout() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 
-	let message = "An unexpected disturbance occurred while managing the sacred map.";
+	let message = "An unexpected disturbance occurred while managing the Map.";
 	if (isRouteErrorResponse(error)) {
 		message = error.data?.message || message;
 	} else if (error instanceof Error) {
@@ -174,3 +174,6 @@ export function ErrorBoundary() {
 		</div>
 	);
 }
+
+
+

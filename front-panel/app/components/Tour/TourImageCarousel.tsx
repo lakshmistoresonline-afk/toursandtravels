@@ -15,3 +15,6 @@ const TourImageCarousel = memo(({ images, thumbPosition = "left", ...props }: Im
 });
 
 export default TourImageCarousel;
+
+
+

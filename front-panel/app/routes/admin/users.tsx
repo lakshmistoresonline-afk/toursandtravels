@@ -78,7 +78,7 @@ export default function AdminUsersPage() {
 		},
 		{
 			id: "Identity",
-			header: "Sacred Identity",
+			header: "Identity",
 			cell: ({ row }) => (
 				<div className="space-y-1">
 					<p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">
@@ -166,7 +166,7 @@ export default function AdminUsersPage() {
 		<div className="flex flex-col gap-10 animate-in fade-in duration-500 max-w-7xl mx-auto">
 			<MetaDetails
 				metaTitle="Pilgrim Inventory | AMBADY Admin"
-				metaDescription="Manage all registered pilgrims in the sacred community."
+				metaDescription="Manage all registered pilgrims in the community."
 			/>
 
 			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-primary/10 pb-8">
@@ -207,3 +207,6 @@ export default function AdminUsersPage() {
 		</div>
 	);
 }
+
+
+

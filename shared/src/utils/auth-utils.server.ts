@@ -10,3 +10,4 @@ export function extractAuthId(_request: Request): string | null {
 export function genAuthSecurity(_request: Request) {
 	return { authId: "user", headers: new Headers() };
 }
+

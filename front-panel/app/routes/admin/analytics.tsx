@@ -89,7 +89,7 @@ export default function AnalyticsPage() {
 					Financial Analytics
 				</h1>
 				<p className="text-foreground/40 mt-3 text-[10px] font-bold uppercase tracking-wider ml-1">
-					Strategic overview of sacred journey performance.
+					Strategic overview of Journey performance.
 				</p>
 			</div>
 
@@ -233,3 +233,6 @@ function StatCard({ title, value, icon, description, trend, variant = "default" 
 		</Card>
 	);
 }
+
+
+

@@ -48,3 +48,4 @@ export type GetFpCollectionsResponse = {
 	total: number;
 	error: ApiError | null;
 };
+

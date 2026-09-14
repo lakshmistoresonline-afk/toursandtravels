@@ -9,7 +9,7 @@ export default function About() {
 		<div className="min-h-screen bg-background animate-in fade-in duration-1000">
 			<MetaDetails
 				metaTitle="Our Story | AMBADY"
-				metaDescription="Learn about AMBADY PILGRIMAGE EXPERIENCES - your trusted partner for sacred and meaningful pilgrimage journeys."
+				metaDescription="Learn about AMBADY PILGRIMAGE EXPERIENCES - your trusted partner for and meaningful pilgrimage journeys."
 				metaKeywords="About us, AMBADY PILGRIMAGE EXPERIENCES, pilgrimage journeys, faith, heritage"
 			/>
 
@@ -20,7 +20,7 @@ export default function About() {
 							The Essence
 						</h4>
 						<h1 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight">
-							Our Sacred Story
+							Our Our Story
 						</h1>
 						<div className="w-24 h-1 bg-primary mx-auto rounded-full" />
 					</div>
@@ -36,7 +36,7 @@ export default function About() {
 
 							<p>
 								For years, we have dedicated ourselves to crafting experiences that honor the
-								sacred traditions of the lands we visit. Our pilgrimage journeys are
+								 traditions of the lands we visit. Our pilgrimage journeys are
 								meticulously designed to provide not just comfort and ease, but the space and
 								silence necessary for true spiritual reflection.
 							</p>
@@ -81,3 +81,6 @@ export default function About() {
 		</div>
 	);
 }
+
+
+

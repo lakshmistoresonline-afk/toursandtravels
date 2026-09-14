@@ -70,7 +70,7 @@ export default function ForgotPassword() {
 						Reset Password
 					</h2>
 					<p className="text-[10px] font-bold text-[#fdfcf0]/40 uppercase tracking-[0.3em]">
-						Recover Your Sacred Access
+						Recover Your Access
 					</p>
 				</div>
 
@@ -125,3 +125,6 @@ export default function ForgotPassword() {
 		</div>
 	);
 }
+
+
+

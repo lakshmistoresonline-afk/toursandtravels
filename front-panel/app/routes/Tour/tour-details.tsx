@@ -244,7 +244,7 @@ export default function TourDetailsPage() {
 						<div className="sticky top-24 bg-card border border-primary/30 rounded-[3.5rem] overflow-hidden shadow-2xl">
 							<div className="bg-primary/10 border-b border-primary/20 p-12 space-y-8">
 								<p className="text-[12px] font-bold uppercase tracking-wider text-primary text-center">
-									Sacred Exchange
+									Journey Fee
 								</p>
 								<div className="flex flex-col items-center gap-4">
 									<span className="text-7xl font-serif text-primary font-bold">
@@ -252,7 +252,7 @@ export default function TourDetailsPage() {
 									</span>
 									{tour.price > 0 && (
 										<span className="text-foreground/60 text-xs font-bold uppercase tracking-widest bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10">
-											per pilgrim journey
+											per participant
 										</span>
 									)}
 								</div>
@@ -382,7 +382,7 @@ export default function TourDetailsPage() {
 												<div className="space-y-10 animate-in fade-in slide-in-from-top-4 duration-500">
 													<div className="p-10 bg-primary/5 border-2 border-primary/20 rounded-[3rem] space-y-8 text-center shadow-inner">
 														<p className="text-sm font-bold text-primary uppercase tracking-wider">
-															Sacred Scan to Pay
+															Scan to Pay
 														</p>
 														{(() => {
 															const displayQr = (tour.qr_code_url && tour.qr_code_url.startsWith("http"))
@@ -415,12 +415,12 @@ export default function TourDetailsPage() {
 
 											<div className="space-y-6">
 												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-wider ml-4">
-													Sacred Requests / Notes
+													Special Requests / Notes
 												</label>
 												<textarea
 													name="notes"
 													className="w-full min-h-[200px] p-10 bg-white border border-primary/30 rounded-[3rem] text-xl font-sans text-foreground/80 focus:ring-4 focus:ring-primary/20 transition-all outline-none resize-none shadow-sm font-medium"
-													placeholder="Special prayers or needs for your journey?"
+													placeholder="Any special needs for your journey?"
 												></textarea>
 											</div>
 
@@ -478,4 +478,7 @@ function TourStatusBadge({ status }: { status: string }) {
 		</Badge>
 	);
 }
+
+
+
 

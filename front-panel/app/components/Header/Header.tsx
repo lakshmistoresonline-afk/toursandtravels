@@ -16,18 +16,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
 import { cn } from "~/lib/utils";
 
-const NAV_LINKS = [
-	{ label: "Home", to: "/" },
-	{ label: "Journeys", to: "/tours" },
-	{ label: "About", to: "/about" },
-	{ label: "Contact", to: "/contact-us" },
-];
-
 export default function Header() {
 	const rootLoaderData = useRouteLoaderData<typeof loader>("root");
 	const user = rootLoaderData?.user as FullCurrentUser | null;
 	const location = useLocation();
 	const isHomePage = location.pathname === "/";
+
+	const navLinks = [
+		{ label: "Home", to: "/" },
+		{ label: "Journeys", to: "/tours" },
+		{ label: "About", to: "/about" },
+		{ label: "Contact", to: "/contact-us" },
+	];
+
+	if (user?.role === "admin") {
+		navLinks.push({ label: "Admin Panel", to: "/admin" });
+	}
 
 	return (
 		<header
@@ -63,8 +67,8 @@ export default function Header() {
 									</span>
 								</Link>
 							</div>
-									<nav className="flex flex-col gap-10">
-								{NAV_LINKS.map((link) => (
+							<nav className="flex flex-col gap-10">
+								{navLinks.map((link) => (
 									<NavLink
 										key={link.to}
 										to={link.to}
@@ -96,7 +100,7 @@ export default function Header() {
 				</Link>
 
 				<nav className="ml-16 hidden lg:flex items-center gap-16">
-					{NAV_LINKS.map((link) => (
+					{navLinks.map((link) => (
 						<NavLink
 							key={link.to}
 							to={link.to}
@@ -174,16 +178,8 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 						asChild
 						className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider text-[#fdfcf0]/80 focus:bg-white/5 focus:text-[#d4af37]"
 					>
-						<Link to="/account/bookings">My Sacred Journeys</Link>
+						<Link to="/account/bookings">My Journeys</Link>
 					</DropdownMenuItem>
-					{user.role === "admin" && (
-						<DropdownMenuItem
-							asChild
-							className="rounded-xl cursor-pointer py-4 text-xs font-bold uppercase tracking-wider bg-[#d4af37]/10 text-[#d4af37] focus:bg-[#d4af37]/20"
-						>
-							<Link to="/admin">Admin Sanctuary</Link>
-						</DropdownMenuItem>
-					)}
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator className="bg-white/10" />
 				<Form action="/logout" method="POST" className="p-1">
@@ -201,4 +197,7 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 		</DropdownMenu>
 	);
 }
+
+
+
 

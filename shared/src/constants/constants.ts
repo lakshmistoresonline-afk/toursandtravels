@@ -32,3 +32,4 @@ export const PLACEHOLDER_TOUR_IMAGE = "/placeholder-tour.jpg";
 // Sorting
 export const fpDefaultTourSortByFilter = "createdAt";
 export const fpDefaultTourSortTypeFilter = "desc";
+

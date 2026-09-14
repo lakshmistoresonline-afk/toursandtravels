@@ -37,3 +37,4 @@ export type AppUser = {
 // Compatibility types
 export type AdminUser = AppUser;
 export type FullCurrentUser = AppUser;
+

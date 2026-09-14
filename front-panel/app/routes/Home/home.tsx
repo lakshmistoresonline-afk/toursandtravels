@@ -85,7 +85,7 @@ export default function Home() {
 									The AMBADY Way
 								</h4>
 								<h2 className="text-5xl md:text-7xl font-serif text-foreground tracking-tight leading-tight">
-									Sacred Paths & Meaningful Journeys
+									Paths & Meaningful Journeys
 								</h2>
 								<p className="text-foreground/80 text-2xl font-serif italic">
 									"Faith | Heritage | Inner Journeys"
@@ -131,7 +131,7 @@ export default function Home() {
 								</div>
 								<h3 className="text-3xl font-serif text-foreground">Heritage</h3>
 								<p className="text-base text-foreground/70 uppercase tracking-wider font-bold leading-loose">
-									Preserving the sacred stories and architectural wonders of our past.
+									Preserving the stories and architectural wonders of our past.
 								</p>
 							</div>
 							<div className="text-center space-y-8 group">
@@ -155,3 +155,6 @@ export default function Home() {
 		</div>
 	);
 }
+
+
+

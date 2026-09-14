@@ -32,3 +32,4 @@ export const profileUpdateSchema = z.object({
 });
 
 export type ProfileUpdateForm = z.infer<typeof profileUpdateSchema>;
+

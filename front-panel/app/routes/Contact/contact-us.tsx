@@ -15,12 +15,12 @@ import { emailService } from "@workspace/shared/services/emails.service";
 
 const contactInfo = [
 	{
-		title: "Sacred Hours",
+		title: "Working Hours",
 		icon: Clock8Icon,
 		description: "Mon-Fri: 8:00 AM - 5:00 PM",
 	},
 	{
-		title: "The Sanctuary",
+		title: "Our Office",
 		icon: MapPinIcon,
 		description: "Surya Kiron, Shornoor Road,\nNext to Thiruvambady Temple,\nThrissur.",
 	},
@@ -242,3 +242,6 @@ const InquiryForm = () => {
 		</div>
 	);
 };
+
+
+

@@ -143,7 +143,7 @@ export const DataTable = ({
 								<div className="flex flex-col items-center justify-center gap-6 opacity-20">
 									<Settings2 className="h-12 w-12 text-primary" />
 									<p className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary">
-										{customEmptyMessage ?? "No Sacred Records Found"}
+										{customEmptyMessage ?? "No Records Found"}
 									</p>
 								</div>
 							</TableCell>
@@ -358,4 +358,7 @@ export function TableRowSelector<TableValues extends Record<string, any>>({
 
 	return { header, cell };
 }
+
+
+
 

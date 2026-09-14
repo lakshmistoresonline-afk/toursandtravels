@@ -16,3 +16,4 @@ export type MiddlewareFn<
 	THeaders = Headers,
 	TRequest = Request,
 > = (ctx: MiddlewareContext<TService, THeaders, TRequest>, next: () => Promise<unknown>) => Promise<unknown>;
+

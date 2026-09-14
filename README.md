@@ -42,8 +42,9 @@ npm run dev
 firebase deploy
 ```
 
-## Admin Sanctuary
-To access the Admin Sanctuary:
+## Admin Panel
+To access the Admin Panel:
 1. Register as a user through the `/signup` page.
 2. In Firestore, change the user's `role` to `"admin"`.
 3. Refresh the application to access `/admin`.
+

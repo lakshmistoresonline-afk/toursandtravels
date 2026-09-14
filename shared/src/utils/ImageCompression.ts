@@ -23,3 +23,4 @@ export const compressImage = async (file: File) => {
 	// Test
 	// 74kb -> 13kb
 };
+

@@ -129,3 +129,4 @@ export class ToursService extends Service {
 		await deleteObject(storageRef);
 	}
 }
+

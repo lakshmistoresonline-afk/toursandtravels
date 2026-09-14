@@ -15,26 +15,26 @@ export default function Footer() {
 							"Faith | Heritage | Inner Journeys"
 						</p>
 						<p className="text-base text-[#fdfcf0]/60 font-serif italic leading-relaxed">
-							Rooted in tradition, guiding you through sacred paths to the divine essence within.
+							Rooted in tradition, guiding you through meaningful journeys to the divine essence within.
 						</p>
 					</div>
 
 					<div className="grid grid-cols-2 sm:grid-cols-3 gap-16 text-xs font-bold uppercase tracking-wider">
 						<div className="flex flex-col gap-8">
 							<span className="text-[#d4af37] text-sm">Navigation</span>
-							<Link to="/" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Home Sanctuary</Link>
-							<Link to="/tours" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Sacred Journeys</Link>
-							<Link to="/about" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">About Our Path</Link>
+							<Link to="/" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Home</Link>
+							<Link to="/tours" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Journeys</Link>
+							<Link to="/about" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">About Us</Link>
 						</div>
 						<div className="flex flex-col gap-8">
 							<span className="text-[#d4af37] text-sm">Community</span>
-							<Link to="/contact-us" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Reach Us</Link>
-							<Link to="/forgot-password" title="Reset Access" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Reset Access</Link>
+							<Link to="/contact-us" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Contact Us</Link>
+							<Link to="/forgot-password" title="Reset Password" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Reset Password</Link>
 						</div>
 						<div className="flex flex-col gap-8">
-							<span className="text-[#d4af37] text-sm">Sacred Terms</span>
-							<Link to="/privacy-policy" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Privacy Map</Link>
-							<Link to="/terms-of-usage" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Usage Scroll</Link>
+							<span className="text-[#d4af37] text-sm">Legal</span>
+							<Link to="/privacy-policy" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Privacy Policy</Link>
+							<Link to="/terms-of-usage" className="text-[#fdfcf0]/80 hover:text-[#d4af37] transition-colors">Terms of Usage</Link>
 						</div>
 					</div>
 				</div>
@@ -53,3 +53,6 @@ export default function Footer() {
 		</footer>
 	);
 }
+
+
+
