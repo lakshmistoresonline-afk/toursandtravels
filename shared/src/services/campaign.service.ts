@@ -34,8 +34,20 @@ export class CampaignService extends Service {
 	async createCampaign(
 		data: Omit<NotificationCampaign, "createdAt" | "status" | "sentCount" | "failedCount">,
 	) {
+		// Sanitize data to remove any undefined values which Firestore rejects
+		const cleanRecipients = data.recipients.map((r) => {
+			const recipient: any = {
+				email: r.email,
+				source: r.source,
+				status: r.status,
+			};
+			if (r.uid) recipient.uid = r.uid;
+			return recipient;
+		});
+
 		const docRef = await addDoc(collection(this.db, this.CAMPAIGN_COLLECTION), {
 			...data,
+			recipients: cleanRecipients,
 			status: "DRAFT",
 			sentCount: 0,
 			failedCount: 0,

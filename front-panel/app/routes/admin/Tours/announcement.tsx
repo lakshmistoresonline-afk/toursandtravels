@@ -111,7 +111,7 @@ export default function JourneyAnnouncementPage() {
 	const [search, setSearch] = useState("");
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-	const [testEmail, setTestEmail] = useState(admin?.email || "");
+	const [testEmail, setTestEmail] = useState("cspushpa.raman@gmail.com");
 	const [isSendingTest, setIsSendingTest] = useState(false);
 	const [isBroadcasting, setIsBroadcasting] = useState(false);
 	const [copiedEmails, setCopiedEmails] = useState(false);
