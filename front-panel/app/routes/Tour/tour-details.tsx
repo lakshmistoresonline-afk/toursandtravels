@@ -215,9 +215,9 @@ export default function TourDetailsPage() {
 									</h2>
 									<div className="space-y-0 relative pl-4">
 										<div className="absolute left-10 top-4 bottom-4 w-px bg-primary/20" />
-										{tour.itinerary.map((day: any) => (
+										{tour.itinerary.map((day: any, idx: number) => (
 											<div
-												key={day.id}
+												key={day.id || idx}
 												className="relative flex gap-16 pb-20 last:pb-0 group"
 											>
 												<div className="h-14 w-14 min-w-[3.5rem] rounded-full border-2 border-primary/30 bg-background flex items-center justify-center font-serif text-2xl text-primary z-10 transition-colors group-hover:border-primary shadow-sm">
@@ -342,11 +342,12 @@ export default function TourDetailsPage() {
 													].map((mode) => (
 														<label
 															key={mode.id}
-															className={`flex items-center gap-6 p-6 rounded-[2rem] border-2 transition-all cursor-pointer ${
+															className={cn(
+																"flex items-center gap-6 p-6 rounded-[2rem] border-2 transition-all cursor-pointer",
 																paymentMode === mode.id
 																	? "bg-primary/10 border-primary shadow-lg scale-[1.02]"
-																	: "bg-white border-primary/10 hover:border-primary/40"
-															}`}
+																	: "bg-white border-primary/10 hover:border-primary/40",
+															)}
 														>
 															<input
 																type="radio"

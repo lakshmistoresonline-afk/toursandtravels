@@ -32,11 +32,11 @@ class EmailService {
 
 		if (gasUrl) {
 			try {
-				// Use text/plain to avoid CORS preflight (OPTIONS) which GAS doesn't support for Web Apps
+				// Use the simplest fetch possible to avoid CORS preflight (OPTIONS)
+				// mode: 'no-cors' + no custom headers = Simple Request
 				await fetch(gasUrl, {
 					method: "POST",
-					mode: "no-cors", // Crucial for GAS Web Apps from browser
-					headers: { "Content-Type": "text/plain" },
+					mode: "no-cors",
 					body: JSON.stringify({
 						action: "sendEmail",
 						secret: gasSecret,
@@ -48,8 +48,7 @@ class EmailService {
 					}),
 				});
 
-				// With no-cors, we can't read the response body, but the request will be sent.
-				return { id: "sent-via-gateway-no-cors" };
+				return { id: "sent-via-gateway-simple" };
 			} catch (err: any) {
 				console.error("❌ [GAS EMAIL ERROR]", err);
 				// Fallback to console log in dev or re-throw
