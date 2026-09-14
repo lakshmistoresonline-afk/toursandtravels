@@ -11,7 +11,6 @@ VITE_ENV=production
 VITE_MAIN_APP_URL=https://ambadypilgrimage.web.app
 VITE_UNSPLASH_ACCESS_KEY=q70vsBHTWghE3rAoMbScGGt3Eg89TPtqJ0RkbUg0HCM
 VITE_UNSPLASH_SECRET_KEY=v139EDriop8bpGpyMenKpnOSx1SJDWY3Z0rLPAvnICU
-VITE_GEMINI_API_KEY=AQ.Ab8RN6JPYyOkbXtqGcXNL_TKjbnk5-fNxrRjTzidRRnPoNCxHA
 
 # Gmail Automation
 VITE_GMAIL_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbzifZmgW1HRp-P6Vh2og4h8Bizj0m4VmzwV1Nq72PbRZCajGtBcIsoE0nnj_mTpImvS/exec

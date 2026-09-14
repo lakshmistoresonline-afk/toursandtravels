@@ -10,6 +10,7 @@ import {
 	MapPin,
 	IndianRupee,
 	FileText,
+	Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
@@ -31,6 +32,7 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
+import { GeminiService } from "@workspace/shared/services/gemini.service";
 
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
@@ -54,6 +56,7 @@ export default function AddTourPage() {
 	const actionData = useActionData() as any;
 
 	const [isImageSearchOpen, setIsImageSearchOpen] = useState(false);
+	const [isGeneratingOverview, setIsGeneratingOverview] = useState(false);
 
 	const form = useForm<any>({
 		resolver: zodResolver(AddTourActionSchema),
@@ -108,6 +111,25 @@ export default function AddTourPage() {
 		const formData = new FormData();
 		formData.append("payload", JSON.stringify(values));
 		submit(formData, { method: "post" });
+	};
+
+	const handleGenerateOverview = async () => {
+		if (!destination) {
+			toast.error("Please enter a destination first to generate an overview.");
+			return;
+		}
+
+		setIsGeneratingOverview(true);
+		try {
+			const gemini = new GeminiService();
+			const overview = await gemini.generateJourneyOverview(destination);
+			setValue("overview", overview, { shouldValidate: true });
+			toast.success("Meaningful overview generated!");
+		} catch (err: any) {
+			toast.error(err.message || "Failed to generate overview");
+		} finally {
+			setIsGeneratingOverview(false);
+		}
 	};
 
 	const isSubmitting = navigation.state === "submitting";
@@ -388,9 +410,26 @@ export default function AddTourPage() {
 								name="overview"
 								render={({ field }) => (
 									<FormItem className="space-y-3">
-										<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
-											Journey Overview
-										</FormLabel>
+										<div className="flex items-center justify-between px-2">
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+												Journey Overview
+											</FormLabel>
+											<Button
+												type="button"
+												variant="ghost"
+												size="sm"
+												disabled={isGeneratingOverview || !destination}
+												onClick={handleGenerateOverview}
+												className="h-8 text-[9px] font-bold uppercase tracking-widest text-primary hover:bg-primary/5 rounded-full"
+											>
+												{isGeneratingOverview ? (
+													<Loader2 className="h-3 w-3 mr-2 animate-spin" />
+												) : (
+													<Sparkles className="h-3 w-3 mr-2" />
+												)}
+												Magic Write
+											</Button>
+										</div>
 										<FormControl>
 											<Textarea
 												placeholder="Describe the spiritual experience..."

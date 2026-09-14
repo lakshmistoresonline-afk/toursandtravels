@@ -9,9 +9,11 @@ import {
 	Info,
 	MapPin,
 	IndianRupee,
-	Image as ImageIcon,
+	Image as 	ImageIcon,
 	Users,
 	User,
+	Sparkles,
+	FileText,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
@@ -39,6 +41,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { format } from "date-fns";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
 import { AlertTriangle, RefreshCw, Map } from "lucide-react";
+import { GeminiService } from "@workspace/shared/services/gemini.service";
 
 export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
 	try {
@@ -71,6 +74,7 @@ export default function UpdateTourPage() {
 	const actionData = useActionData() as any;
 
 	const [isImageSearchOpen, setIsImageSearchOpen] = useState(false);
+	const [isGeneratingOverview, setIsGeneratingOverview] = useState(false);
 
 	const form = useForm<any>({
 		resolver: zodResolver(AddTourActionSchema),
@@ -112,6 +116,25 @@ export default function UpdateTourPage() {
 		const formData = new FormData();
 		formData.append("payload", JSON.stringify(values));
 		submit(formData, { method: "post" });
+	};
+
+	const handleGenerateOverview = async () => {
+		if (!destination) {
+			toast.error("Please enter a destination first to generate an overview.");
+			return;
+		}
+
+		setIsGeneratingOverview(true);
+		try {
+			const gemini = new GeminiService();
+			const overview = await gemini.generateJourneyOverview(destination);
+			setValue("overview", overview, { shouldValidate: true });
+			toast.success("Meaningful overview generated!");
+		} catch (err: any) {
+			toast.error(err.message || "Failed to generate overview");
+		} finally {
+			setIsGeneratingOverview(false);
+		}
 	};
 
 	const isSubmitting = navigation.state === "submitting";
@@ -365,6 +388,54 @@ export default function UpdateTourPage() {
 													const val = e.target.value;
 													field.onChange(val === "" ? 0 : Number(val));
 												}}
+											/>
+										</FormControl>
+										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+									</FormItem>
+								)}
+							/>
+						</CardContent>
+					</Card>
+
+					{/* Narrative */}
+					<Card className="bg-card border border-primary/10 rounded-[3rem] overflow-hidden shadow-xl">
+						<div className="px-10 py-7 border-b border-primary/10 flex items-center gap-4 bg-primary/5">
+							<FileText className="h-4.5 w-4.5 text-primary" />
+							<h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
+								Description
+							</h3>
+						</div>
+						<CardContent className="p-10">
+							<FormField
+								control={control}
+								name="overview"
+								render={({ field }) => (
+									<FormItem className="space-y-3">
+										<div className="flex items-center justify-between px-2">
+											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
+												Journey Overview
+											</FormLabel>
+											<Button
+												type="button"
+												variant="ghost"
+												size="sm"
+												disabled={isGeneratingOverview || !destination}
+												onClick={handleGenerateOverview}
+												className="h-8 text-[9px] font-bold uppercase tracking-widest text-primary hover:bg-primary/5 rounded-full"
+											>
+												{isGeneratingOverview ? (
+													<Loader2 className="h-3 w-3 mr-2 animate-spin" />
+												) : (
+													<Sparkles className="h-3 w-3 mr-2" />
+												)}
+												Magic Write
+											</Button>
+										</div>
+										<FormControl>
+											<Textarea
+												placeholder="Describe the spiritual experience..."
+												className="min-h-[200px] p-8 rounded-[2.5rem] border-primary/20 bg-white text-foreground text-base resize-none focus:ring-primary/20 leading-relaxed shadow-sm"
+												{...field}
 											/>
 										</FormControl>
 										<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
