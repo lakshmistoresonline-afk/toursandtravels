@@ -30,17 +30,16 @@ class EmailService {
 		const gasUrl = (import.meta as any).env?.VITE_GMAIL_APPS_SCRIPT_URL;
 		const gasSecret = (import.meta as any).env?.VITE_GMAIL_APPS_SCRIPT_SECRET;
 
-		console.log(`✉️ Sending email to ${to} via ${gasUrl ? "Google Gateway" : "Console Log"}`);
+		console.log(`✉️ Transmission: Sending email to ${to}...`);
 
 		if (gasUrl) {
 			try {
-				// Use the simplest fetch possible to avoid CORS preflight (OPTIONS)
-				// mode: 'no-cors' means we can't see the response, but the request will go through
-				await fetch(gasUrl, {
+				// Use 'text/plain' as Content-Type. This is a "Simple Request" that
+				// avoids CORS preflight (OPTIONS) which Google Apps Script doesn't handle.
+				const response = await fetch(gasUrl, {
 					method: "POST",
-					mode: "no-cors",
 					headers: {
-						"Content-Type": "text/plain", // Simple content type avoids preflight
+						"Content-Type": "text/plain",
 					},
 					body: JSON.stringify({
 						action: "sendEmail",
@@ -53,9 +52,18 @@ class EmailService {
 					}),
 				});
 
-				return { id: "sent-via-gateway-simple" };
+				// We can read the response if the server (GAS) allows our origin,
+				// which it does by default for Web Apps.
+				const result = await response.json();
+
+				if (!result.success) {
+					console.warn("⚠️ Gateway reported an issue:", result.error);
+					throw new Error(result.error);
+				}
+
+				return { id: result.messageId || "sent-via-gateway" };
 			} catch (err: any) {
-				console.error("❌ [GAS EMAIL ERROR]", err);
+				console.error("❌ Transmission Error:", err.message);
 				// Fallback to console log in dev
 				this.logEmail({ from, to, subject, text });
 				return { id: "logged-to-console-fallback" };
