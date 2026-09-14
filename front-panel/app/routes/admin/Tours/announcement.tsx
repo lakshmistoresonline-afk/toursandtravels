@@ -66,6 +66,38 @@ export const clientAction = async ({ request, params }: any) => {
 		}
 	}
 
+	if (intent === "broadcast") {
+		const recipientsData = JSON.parse(formData.get("recipients") as string);
+		const subject = formData.get("subject") as string;
+		const adminUid = formData.get("adminUid") as string;
+
+		try {
+			const campaignId = await campaignSvc.createCampaign({
+				type: "JOURNEY_ANNOUNCEMENT",
+				tourId: params.id,
+				subject,
+				recipientCount: recipientsData.length,
+				recipients: recipientsData.map((r: any) => ({
+					email: r.email,
+					uid: r.uid,
+					source: r.source,
+					status: "PENDING",
+				})),
+				createdBy: adminUid,
+			});
+
+			// Trigger sending
+			await campaignSvc.sendCampaign(campaignId);
+
+			return {
+				success: true,
+				message: `Sacred broadcast successfully sent to ${recipientsData.length} pilgrims!`,
+			};
+		} catch (err: any) {
+			return { success: false, error: err.message };
+		}
+	}
+
 	return null;
 };
 
@@ -78,8 +110,10 @@ export default function JourneyAnnouncementPage() {
 	const [manualEmail, setManualEmail] = useState("");
 	const [search, setSearch] = useState("");
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+	const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 	const [testEmail, setTestEmail] = useState(admin?.email || "");
 	const [isSendingTest, setIsSendingTest] = useState(false);
+	const [isBroadcasting, setIsBroadcasting] = useState(false);
 	const [copiedEmails, setCopiedEmails] = useState(false);
 	const [copiedTemplate, setCopiedTemplate] = useState(false);
 	const [copiedText, setCopiedText] = useState(false);
@@ -103,9 +137,12 @@ export default function JourneyAnnouncementPage() {
 		if (actionData?.success) {
 			toast.success(actionData.message);
 			setIsSendingTest(false);
+			setIsBroadcasting(false);
+			setIsConfirmOpen(false);
 		} else if (actionData?.error) {
 			toast.error(actionData.error);
 			setIsSendingTest(false);
+			setIsBroadcasting(false);
 		}
 	}, [actionData]);
 
@@ -161,6 +198,20 @@ export default function JourneyAnnouncementPage() {
 		const formData = new FormData();
 		formData.append("intent", "send-test");
 		formData.append("testEmail", testEmail);
+		submit(formData, { method: "post" });
+	};
+
+	const handleBroadcast = () => {
+		if (selectedCount === 0) {
+			toast.error("No recipients selected");
+			return;
+		}
+		setIsBroadcasting(true);
+		const formData = new FormData();
+		formData.append("intent", "broadcast");
+		formData.append("recipients", JSON.stringify(selectedRecipients));
+		formData.append("subject", `New Pilgrimage Journey: ${tour.name}`);
+		formData.append("adminUid", admin?.uid || "");
 		submit(formData, { method: "post" });
 	};
 
@@ -390,6 +441,19 @@ export default function JourneyAnnouncementPage() {
 
 						<div className="space-y-4">
 							<Button
+								className="w-full h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-[11px] font-bold uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 transition-all"
+								onClick={() => setIsConfirmOpen(true)}
+								disabled={isBroadcasting || selectedCount === 0}
+							>
+								{isBroadcasting ? (
+									<Loader2 className="h-5 w-5 mr-3 animate-spin" />
+								) : (
+									<Send className="h-5 w-5 mr-3" />
+								)}
+								Send Official Broadcast ({selectedCount})
+							</Button>
+
+							<Button
 								variant="outline"
 								className="w-full h-14 rounded-full border-primary/20 text-primary hover:bg-primary/5 text-[10px] font-bold uppercase tracking-widest"
 								onClick={() => setIsPreviewOpen(true)}
@@ -397,49 +461,36 @@ export default function JourneyAnnouncementPage() {
 								<Eye className="h-4 w-4 mr-3" /> Preview Branded Template
 							</Button>
 
-							<div className="pt-4 border-t border-primary/5 space-y-3">
-								<Button
-									className="w-full h-14 rounded-full bg-white border border-primary/20 text-primary hover:bg-primary/5 text-[10px] font-bold uppercase tracking-widest"
-									onClick={handleCopyEmails}
-								>
-									{copiedEmails ? (
-										<Check className="h-4 w-4 mr-3 text-emerald-500" />
-									) : (
-										<Copy className="h-4 w-4 mr-3" />
-									)}
-									Copy BCC Emails ({selectedCount})
-								</Button>
-
-								<Button
-									className="w-full h-14 rounded-full bg-white border border-primary/20 text-primary hover:bg-primary/5 text-[10px] font-bold uppercase tracking-widest"
-									onClick={handleCopyTemplate}
-								>
-									{copiedTemplate ? (
-										<Check className="h-4 w-4 mr-3 text-emerald-500" />
-									) : (
-										<Copy className="h-4 w-4 mr-3" />
-									)}
-									Copy Branded Template
-								</Button>
-
-								<Button
-									className="w-full h-14 rounded-full bg-white border border-primary/20 text-primary hover:bg-primary/5 text-[10px] font-bold uppercase tracking-widest"
-									onClick={handleCopyText}
-								>
-									{copiedText ? (
-										<Check className="h-4 w-4 mr-3 text-emerald-500" />
-									) : (
-										<Copy className="h-4 w-4 mr-3" />
-									)}
-									Copy Text Summary
-								</Button>
-
-								<Button
-									className="w-full h-14 rounded-full bg-primary/5 border border-primary/10 text-primary hover:bg-primary/10 text-[10px] font-bold uppercase tracking-widest"
-									onClick={handleExportExcel}
-								>
-									<Download className="h-4 w-4 mr-3" /> Export to Excel
-								</Button>
+							<div className="pt-6 border-t border-primary/5">
+								<p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest mb-4 ml-2">
+									Manual Fallback (Gmail)
+								</p>
+								<div className="grid grid-cols-2 gap-3">
+									<Button
+										variant="ghost"
+										className="h-12 rounded-xl bg-white border border-primary/10 text-primary hover:bg-primary/5 text-[9px] font-bold uppercase tracking-widest"
+										onClick={handleCopyEmails}
+									>
+										{copiedEmails ? (
+											<Check className="h-3.5 w-3.5 mr-2 text-emerald-500" />
+										) : (
+											<Copy className="h-3.5 w-3.5 mr-2" />
+										)}
+										Copy BCC
+									</Button>
+									<Button
+										variant="ghost"
+										className="h-12 rounded-xl bg-white border border-primary/10 text-primary hover:bg-primary/5 text-[9px] font-bold uppercase tracking-widest"
+										onClick={handleCopyTemplate}
+									>
+										{copiedTemplate ? (
+											<Check className="h-3.5 w-3.5 mr-2 text-emerald-500" />
+										) : (
+											<Copy className="h-3.5 w-3.5 mr-2" />
+										)}
+										Copy Template
+									</Button>
+								</div>
 							</div>
 
 							<div className="pt-8 border-t border-primary/5 space-y-4">
@@ -504,6 +555,48 @@ export default function JourneyAnnouncementPage() {
 							className="bg-white shadow-2xl rounded-lg overflow-hidden mx-auto max-w-[600px]"
 							dangerouslySetInnerHTML={{ __html: previewHtml }}
 						/>
+					</div>
+				</DialogContent>
+			</Dialog>
+
+			{/* Final Confirmation Dialog */}
+			<Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+				<DialogContent className="max-w-md p-0 rounded-[2.5rem] overflow-hidden">
+					<DialogHeader className="p-10 bg-primary/5 border-b border-primary/10">
+						<DialogTitle className="text-2xl font-serif">Confirm Broadcast</DialogTitle>
+						<DialogDescription className="text-[10px] font-bold uppercase tracking-widest text-primary mt-2">
+							Final verification before sacred transmission.
+						</DialogDescription>
+					</DialogHeader>
+					<div className="p-10 space-y-6">
+						<p className="text-sm text-foreground/70 leading-relaxed font-medium">
+							You are about to send an automated journey announcement to{" "}
+							<span className="text-primary font-bold">{selectedCount} pilgrims</span>.
+						</p>
+						<p className="text-[11px] text-foreground/40 italic">
+							* Each email will be sent individually via the secure AMBADY Gateway.
+						</p>
+						<div className="flex flex-col gap-3 pt-4">
+							<Button
+								onClick={handleBroadcast}
+								disabled={isBroadcasting}
+								className="h-14 rounded-full bg-primary text-primary-foreground font-bold uppercase tracking-widest text-[11px] shadow-2xl"
+							>
+								{isBroadcasting ? (
+									<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+								) : (
+									<Send className="h-4 w-4 mr-2" />
+								)}
+								Confirm & Send Broadcast
+							</Button>
+							<Button
+								variant="ghost"
+								onClick={() => setIsConfirmOpen(false)}
+								className="h-12 rounded-full text-foreground/40 text-[10px] font-bold uppercase tracking-widest"
+							>
+								Cancel
+							</Button>
+						</div>
 					</div>
 				</DialogContent>
 			</Dialog>
