@@ -15,7 +15,7 @@ import { ArrowLeft, ArrowRight, MinusCircle, PlusCircle, X } from "lucide-react"
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 type ThumbPropType = {
 	selected: boolean;
@@ -473,3 +473,4 @@ const ImageCarousel: React.FC<ImageCarousel_BasicProps> = memo(
 
 export default ImageCarousel;
 export type { CarouselImage, CarouselImages };
+

@@ -14,7 +14,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 type PhoneInputProps = Omit<React.ComponentProps<"input">, "onChange" | "value" | "ref"> &
 	Omit<RPNInput.Props<typeof RPNInput.default>, "onChange"> & {
@@ -189,3 +189,4 @@ const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
 };
 
 export { PhoneInput };
+

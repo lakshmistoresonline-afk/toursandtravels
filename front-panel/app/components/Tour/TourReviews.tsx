@@ -1,6 +1,6 @@
 import { Loader2, Star, StarOff } from "lucide-react";
 import { Card, CardContent } from "~/components/ui/card";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { TourReview } from "@workspace/shared/types/tour-reviews";
 import ReviewCard from "~/components/Tour/ReviewCard";
@@ -202,3 +202,4 @@ export function TourReviewsSkeleton({ className }: { className?: string }) {
 		</section>
 	);
 }
+

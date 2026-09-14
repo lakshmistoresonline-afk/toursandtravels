@@ -4,7 +4,7 @@ import { Calendar, type CalendarProps } from "~/components/Inputs/calendar";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import type { Matcher } from "react-day-picker";
 import type { PopoverContentProps } from "@radix-ui/react-popover";
 
@@ -78,3 +78,4 @@ export default function DatePicker({
 		</div>
 	);
 }
+

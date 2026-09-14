@@ -1,5 +1,5 @@
 import { type ComponentProps } from "react";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 function Input({ className, type, ...props }: ComponentProps<"input">) {
 	return (
@@ -20,3 +20,4 @@ function Input({ className, type, ...props }: ComponentProps<"input">) {
 }
 
 export { Input };
+

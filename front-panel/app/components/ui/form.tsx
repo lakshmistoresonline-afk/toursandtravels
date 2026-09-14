@@ -10,7 +10,7 @@ import {
 	type FieldPath,
 	type FieldValues,
 } from "react-hook-form";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import { Label } from "~/components/ui/label";
 
 const Form = FormProvider;
@@ -138,3 +138,4 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField };
+

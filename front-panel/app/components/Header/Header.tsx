@@ -14,7 +14,7 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import type { FullCurrentUser } from "@workspace/shared/types/user";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 const NAV_LINKS = [
 	{ label: "Home", to: "/" },
@@ -201,3 +201,4 @@ function UserAccountButton({ user }: { user: FullCurrentUser | null }) {
 		</DropdownMenu>
 	);
 }
+

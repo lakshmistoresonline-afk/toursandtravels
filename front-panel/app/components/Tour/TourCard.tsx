@@ -3,7 +3,7 @@ import { memo, useState } from "react";
 import { Link } from "react-router";
 import { Badge } from "~/components/ui/badge";
 import type { HighLevelTour } from "@workspace/shared/types/tours";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; className?: string }) => {
 	const [imgError, setImgError] = useState(false);
@@ -95,3 +95,4 @@ export const TourCard = memo(({ tour, className }: { tour: HighLevelTour; classN
 		</Link>
 	);
 });
+

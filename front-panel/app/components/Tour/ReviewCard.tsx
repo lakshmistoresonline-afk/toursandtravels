@@ -2,7 +2,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Star, BadgeCheck } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Card, CardContent } from "~/components/ui/card";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import type { TourReview } from "@workspace/shared/types/tour-reviews";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
 
@@ -73,3 +73,4 @@ export default function ReviewCard({ review }: ReviewCardProps) {
 		</Card>
 	);
 }
+

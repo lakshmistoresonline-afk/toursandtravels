@@ -1,4 +1,4 @@
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import * as React from "react";
 
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
@@ -17,3 +17,4 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
 }
 
 export { Textarea };
+

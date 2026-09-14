@@ -34,7 +34,8 @@ import { AuthService } from "@workspace/shared/services/auth.service";
 import { emailService } from "@workspace/shared/services/emails.service";
 import * as XLSX from "xlsx";
 import { toast } from "sonner";
-import { maskAadhar, cn } from "@workspace/shared/utils/ui";
+import { maskAadhar } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import { type TourRegistration } from "@workspace/shared/types/booking";
 
 export const clientLoader = async () => {
@@ -906,3 +907,4 @@ export default function BookingsPage() {
 		</div>
 	);
 }
+

@@ -1,6 +1,6 @@
 /*
 import * as TagsInputPrimitive from "@diceui/tags-input";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import { RefreshCcw, X } from "lucide-react";
 import * as React from "react";
 
@@ -134,3 +134,4 @@ export const TagsInputInput = () => null;
 export const TagsInputItem = () => null;
 export const TagsInputClear = () => null;
 export const CustomTagsInputClear = () => null;
+

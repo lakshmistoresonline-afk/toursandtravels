@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router";
 import { useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { Label } from "~/components/ui/label";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 const SORT_PRESET = ["rating_desc", "rating_asc", "date_asc", "date_desc"] as const;
 
@@ -106,3 +106,4 @@ function getSortPresetFromParams(params: URLSearchParams): string | undefined {
 
 	return undefined;
 }
+

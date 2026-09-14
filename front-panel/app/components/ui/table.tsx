@@ -1,4 +1,4 @@
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import * as React from "react";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
@@ -79,3 +79,4 @@ function TableCaption({ className, ...props }: React.ComponentProps<"caption">) 
 }
 
 export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };
+

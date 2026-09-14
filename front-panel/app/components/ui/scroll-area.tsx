@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 function ScrollArea({
 	className,
@@ -47,3 +47,4 @@ function ScrollBar({
 }
 
 export { ScrollArea, ScrollBar };
+

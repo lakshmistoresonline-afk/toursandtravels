@@ -8,7 +8,7 @@ import { Loader2, Star } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import { Label } from "~/components/ui/label";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 const reviewSchema = z.object({
 	rating: z.number().min(1, "Please select a rating").max(5),
@@ -153,3 +153,4 @@ export default function AddReviewForm({ tour_id, booking_id, setAddReviewDialog 
 		</form>
 	);
 }
+

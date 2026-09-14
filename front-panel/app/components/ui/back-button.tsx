@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { Button } from "./button";
 import { ArrowLeft } from "lucide-react";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 interface BackButtonProps {
 	className?: string;
@@ -37,3 +37,4 @@ export function BackButton({ className, fallbackUrl, label = "Back" }: BackButto
 		</Button>
 	);
 }
+

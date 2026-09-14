@@ -19,7 +19,7 @@ import {
 	TableRow,
 } from "~/components/ui/table";
 import { Skeleton } from "~/components/ui/skeleton";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
@@ -358,3 +358,4 @@ export function TableRowSelector<TableValues extends Record<string, any>>({
 
 	return { header, cell };
 }
+

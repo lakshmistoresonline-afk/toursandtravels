@@ -1,4 +1,4 @@
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 import { Minus, Plus } from "lucide-react";
 import { type ChangeEvent, useState, useEffect } from "react";
 
@@ -125,3 +125,4 @@ const QuantityInput = ({
 };
 
 export default QuantityInput;
+

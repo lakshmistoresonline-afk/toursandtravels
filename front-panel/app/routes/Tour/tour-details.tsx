@@ -19,7 +19,7 @@ import { getCurrentUser } from "@workspace/shared/queries/auth.q";
 import { BookingService } from "@workspace/shared/services/booking.service";
 import { toast } from "sonner";
 import defaultQrCode from "~/assets/images/payment-qr.png";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 export const clientLoader = async ({ params, request }: LoaderFunctionArgs) => {
 	if (!params.id) return null;
@@ -477,3 +477,4 @@ function TourStatusBadge({ status }: { status: string }) {
 		</Badge>
 	);
 }
+

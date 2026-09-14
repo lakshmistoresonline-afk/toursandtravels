@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Badge } from "~/components/ui/badge";
 import { Check, X } from "lucide-react";
 import { IconPointFilled } from "@tabler/icons-react";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 const Default_Icon = "dot";
 
@@ -56,3 +56,4 @@ const StatusBadge = ({ className, variant, icon = Default_Icon, children, ...pro
 };
 
 export default StatusBadge;
+

@@ -32,9 +32,11 @@ class EmailService {
 
 		if (gasUrl) {
 			try {
-				const response = await fetch(gasUrl, {
+				// Use text/plain to avoid CORS preflight (OPTIONS) which GAS doesn't support for Web Apps
+				await fetch(gasUrl, {
 					method: "POST",
-					headers: { "Content-Type": "application/json" },
+					mode: "no-cors", // Crucial for GAS Web Apps from browser
+					headers: { "Content-Type": "text/plain" },
 					body: JSON.stringify({
 						action: "sendEmail",
 						secret: gasSecret,
@@ -45,9 +47,9 @@ class EmailService {
 						html,
 					}),
 				});
-				const result = await response.json();
-				if (!result.success) throw new Error(result.error);
-				return { id: result.messageId || "sent-via-gas" };
+
+				// With no-cors, we can't read the response body, but the request will be sent.
+				return { id: "sent-via-gateway-no-cors" };
 			} catch (err: any) {
 				console.error("❌ [GAS EMAIL ERROR]", err);
 				// Fallback to console log in dev or re-throw

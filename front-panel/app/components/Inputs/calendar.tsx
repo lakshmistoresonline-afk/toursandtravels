@@ -12,7 +12,7 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import { cn } from "@workspace/shared/utils/ui";
+import { cn } from "~/lib/utils";
 
 export type CalendarProps = DayPickerProps & {
 	/**
@@ -456,3 +456,4 @@ function YearGrid({
 }
 
 export { Calendar };
+
