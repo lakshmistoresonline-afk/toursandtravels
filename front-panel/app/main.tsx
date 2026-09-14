@@ -36,6 +36,7 @@ import UpdateTour, {
 } from "./routes/admin/Tours/update-tour";
 import Tours, { clientLoader as toursLoader } from "./routes/Tour/tours";
 import AdminUsers, { clientLoader as adminUsersLoader } from "./routes/admin/users";
+import Analytics, { clientLoader as analyticsLoader } from "./routes/admin/analytics";
 import JourneyAnnouncement, {
 	clientLoader as announcementLoader,
 	clientAction as announcementAction,
@@ -171,6 +172,11 @@ const router = createBrowserRouter([
 						path: "users",
 						element: <AdminUsers />,
 						loader: adminUsersLoader as any,
+					},
+					{
+						path: "stats",
+						element: <Analytics />,
+						loader: analyticsLoader as any,
 					},
 				],
 			},
