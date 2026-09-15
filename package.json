@@ -18,7 +18,8 @@
 		"build": "npm run build:shared && npm run build:app",
 		"typecheck": "npm -ws --if-present run typecheck",
 		"format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md,css,scss}\"",
-		"db:reset": "node shared/src/scripts/reset-db.cjs"
+		"db:reset": "node shared/src/scripts/reset-db.cjs",
+		"db:import": "node shared/src/scripts/import-registrations.cjs"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.1",
