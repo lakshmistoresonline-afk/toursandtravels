@@ -121,12 +121,20 @@ class EmailService {
 
 	/** Send confirmation email to customer */
 	public async sendBookingConfirmation(payload: any) {
-		const { booking_ref, customer_name, customer_email, tour_name, travellersCount } = payload;
+		const { booking_ref, customer_name, customer_email, tour_name, travellersCount, isPromotion } = payload;
+		const subject = isPromotion
+			? `Good News! A spot opened for ${tour_name}`
+			: `Registration Confirmed – #${booking_ref}`;
+
+		const intro = isPromotion
+			? `We have great news! A spot has opened up for your waitlisted registration for the ${tour_name} journey.`
+			: `Your registration for the ${tour_name} journey has been confirmed for ${travellersCount} pilgrims.`;
+
 		return this.sendEmail({
 			from: `AMBADY PILGRIMAGE EXPERIENCES <${EMAIL_ADDRESS_1}>`,
 			to: customer_email,
-			subject: `Registration Confirmed – #${booking_ref}`,
-			text: `Dear ${customer_name},\n\nYour registration for the ${tour_name} journey has been confirmed for ${travellersCount} pilgrims.\n\nRegistration Reference: #${booking_ref}\n\nThank you for choosing AMBADY PILGRIMAGE EXPERIENCES! We are honored to guide you on this path.`,
+			subject,
+			text: `Dear ${customer_name},\n\n${intro}\n\nRegistration Reference: #${booking_ref}\n\nThank you for choosing AMBADY PILGRIMAGE EXPERIENCES! We are honored to guide you on this path.`,
 		});
 	}
 

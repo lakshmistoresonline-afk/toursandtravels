@@ -182,7 +182,7 @@ export default function AnalyticsPage() {
 									paddingAngle={5}
 									dataKey="value"
 								>
-									{statusData.map((entry, index) => (
+									{statusData.map((_, index) => (
 										<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 									))}
 								</Pie>
@@ -190,7 +190,7 @@ export default function AnalyticsPage() {
 							</PieChart>
 						</ResponsiveContainer>
 						<div className="grid grid-cols-2 gap-8 mt-8 w-full">
-							{statusData.map((item, i) => (
+							{statusData.map((item) => (
 								<div key={item.name} className="text-center">
 									<p className="text-[9px] font-bold uppercase tracking-widest text-foreground/40 mb-1">
 										{item.name}

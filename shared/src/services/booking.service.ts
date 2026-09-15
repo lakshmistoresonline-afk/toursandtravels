@@ -24,9 +24,17 @@ export class BookingService extends Service {
 		travellersCount: number,
 		notes?: string,
 		paymentMode?: string,
+		additionalTravellers?: Array<{ name: string; age: number }>,
 	): Promise<string> {
 		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
-		return this.performRegistration(tourId, this.currentUid, travellersCount, notes, paymentMode);
+		return this.performRegistration(
+			tourId,
+			this.currentUid,
+			travellersCount,
+			notes,
+			paymentMode,
+			additionalTravellers,
+		);
 	}
 
 	/**
@@ -38,8 +46,16 @@ export class BookingService extends Service {
 		travellersCount: number,
 		notes?: string,
 		paymentMode?: string,
+		additionalTravellers?: Array<{ name: string; age: number }>,
 	): Promise<string> {
-		return this.performRegistration(tourId, customerId, travellersCount, notes, paymentMode);
+		return this.performRegistration(
+			tourId,
+			customerId,
+			travellersCount,
+			notes,
+			paymentMode,
+			additionalTravellers,
+		);
 	}
 
 	/**
@@ -75,6 +91,90 @@ export class BookingService extends Service {
 	}
 
 	/**
+	 * Cancel a registration and auto-promote from waitlist
+	 */
+	async cancelRegistration(registrationId: string): Promise<void> {
+		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
+
+		try {
+			await runTransaction(this.db, async (transaction) => {
+				const regRef = doc(this.db, this.REGISTRATIONS_COLLECTION, registrationId);
+				const regDoc = await transaction.get(regRef);
+
+				if (!regDoc.exists()) throw new Error("Registration not found");
+				const regData = regDoc.data();
+
+				if (regData.status === "CANCELLED") return;
+
+				const tourRef = doc(this.db, this.TOURS_COLLECTION, regData.tourId);
+				const tourDoc = await transaction.get(tourRef);
+
+				// 1. Mark as cancelled
+				transaction.update(regRef, {
+					status: "CANCELLED",
+					updatedAt: serverTimestamp(),
+				});
+
+				// 2. If it was active, decrement count and check waitlist
+				if (regData.status !== "WAITLISTED") {
+					let newCount = Math.max(0, (tourDoc.data()?.currentParticipants || 0) - regData.travellersCount);
+					transaction.update(tourRef, { currentParticipants: newCount });
+
+					// 3. Iteratively promote from waitlist to fill available seats
+					const maxParticipants = tourDoc.data()?.max_participants || 100;
+					const waitlistQuery = query(
+						collection(this.db, this.REGISTRATIONS_COLLECTION),
+						where("tourId", "==", regData.tourId),
+						where("status", "==", "WAITLISTED"),
+						orderBy("createdAt", "asc")
+					);
+					const waitlistSnap = await getDocs(waitlistQuery);
+
+					for (const nextReg of waitlistSnap.docs) {
+						const nextRegData = nextReg.data();
+						if (newCount + nextRegData.travellersCount <= maxParticipants) {
+							transaction.update(nextReg.ref, {
+								status: "PENDING",
+								updatedAt: serverTimestamp(),
+							});
+							newCount += nextRegData.travellersCount;
+							transaction.update(tourRef, { currentParticipants: newCount });
+
+							// Trigger Email (Async)
+							emailService.sendBookingConfirmation({
+								booking_ref: nextReg.id,
+								customer_name: `${nextRegData.profileSnapshot.first_name} ${nextRegData.profileSnapshot.last_name}`,
+								customer_email: nextRegData.profileSnapshot.email,
+								tour_name: nextRegData.tourSnapshot.name,
+								travellersCount: nextRegData.travellersCount,
+								isPromotion: true,
+							}).catch(console.error);
+						}
+					}
+				}
+			});
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
+		}
+	}
+
+	/**
+	 * Update logistics assignments (Bus/Room)
+	 */
+	async updateLogisticsAssignments(registrationId: string, data: { busNumber?: string; roomNumber?: string }): Promise<void> {
+		if (!this.currentUid) throw new ApiError("Unauthorized", 401);
+		try {
+			const regRef = doc(this.db, this.REGISTRATIONS_COLLECTION, registrationId);
+			await updateDoc(regRef, {
+				...data,
+				updatedAt: serverTimestamp(),
+			});
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
+		}
+	}
+
+	/**
 	 * Shared registration logic
 	 */
 	private async performRegistration(
@@ -83,6 +183,7 @@ export class BookingService extends Service {
 		travellersCount: number,
 		notes?: string,
 		paymentMode?: string,
+		additionalTravellers?: Array<{ name: string; age: number }>,
 	): Promise<string> {
 		try {
 			// Check for existing registration before starting transaction
@@ -141,6 +242,7 @@ export class BookingService extends Service {
 					tourId,
 					customerId,
 					travellersCount,
+					additionalTravellers: additionalTravellers || [],
 					paymentMode: paymentMode || "CASH",
 					paymentStatus: "PENDING",
 					notes: notes || null,

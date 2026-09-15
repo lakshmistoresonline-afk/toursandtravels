@@ -7,7 +7,7 @@ import {
 	Link,
 } from "react-router";
 import { Button } from "~/components/ui/button";
-import { Calendar, Loader2, MapPin, ShieldCheck, CheckCircle2, Compass, QrCode, CreditCard, Banknote } from "lucide-react";
+import { Calendar, Loader2, MapPin, ShieldCheck, CheckCircle2, Compass, QrCode, CreditCard, Banknote, Printer } from "lucide-react";
 import { useMemo, useEffect, useState } from "react";
 import TourImageCarousel from "~/components/Tour/TourImageCarousel";
 import { tourDetailsQuery } from "~/queries/tours.q";
@@ -51,12 +51,23 @@ export const clientAction = async ({ request, params }: any) => {
 		const notes = formData.get("notes")?.toString();
 		const paymentMode = formData.get("paymentMode")?.toString();
 
+		const additionalTravellers = [];
+		if (travellersCount > 1) {
+			for (let i = 0; i < travellersCount - 1; i++) {
+				additionalTravellers.push({
+					name: formData.get(`traveller_name_${i}`)?.toString() || "",
+					age: Number(formData.get(`traveller_age_${i}`) || 0),
+				});
+			}
+		}
+
 		try {
 			const regId = await bookingSvc.createRegistration(
 				params.id!,
 				travellersCount,
 				notes,
 				paymentMode,
+				additionalTravellers,
 			);
 			return { success: true, regId };
 		} catch (err: any) {
@@ -76,6 +87,7 @@ export default function TourDetailsPage() {
 	const isAlreadyRegistered = loaderData?.isAlreadyRegistered;
 
 	const [paymentMode, setPaymentMode] = useState<"CASH" | "GPAY" | "OTHER_UPI">("CASH");
+	const [travellersCount, setTravellersCount] = useState(1);
 
 	useEffect(() => {
 		if (actionData?.success) {
@@ -114,12 +126,25 @@ export default function TourDetailsPage() {
 	const isRegistrationOpen = tour.status === "REGISTRATION_OPEN" || tour.status === "PUBLISHED";
 	const isFull = tour.max_participants && (tour.currentParticipants || 0) >= tour.max_participants;
 
+	const earlyBirdActive = useMemo(() => {
+		if (!tour.earlyBirdRule) return false;
+		if (tour.earlyBirdRule.type === "count") {
+			return (tour.currentParticipants || 0) < tour.earlyBirdRule.threshold;
+		}
+		if (tour.earlyBirdRule.type === "date") {
+			return new Date() < new Date(tour.earlyBirdRule.threshold);
+		}
+		return false;
+	}, [tour]);
+
+	const currentPrice = earlyBirdActive ? tour.price : (tour.earlyBirdRule?.originalPrice || tour.price);
+
 	return (
 		<div className="min-h-screen bg-background animate-in fade-in duration-1000 pb-32">
 			<MetaDetails
 				metaTitle={tour.name + " | AMBADY Pilgrimage"}
 				metaDescription={tour.overview?.slice(0, 320)}
-				ogImage={tour.cover_image}
+				ogImage={tour.cover_image ?? undefined}
 				ogType="article"
 				hasPricing={tour.price > 0}
 				pricing={{ price: tour.price.toString() }}
@@ -190,6 +215,18 @@ export default function TourDetailsPage() {
 
 						{/* Content Sections */}
 						<div className="space-y-24">
+							<div className="flex justify-end">
+								<Button
+									asChild
+									variant="outline"
+									className="rounded-full border-primary/20 text-primary hover:bg-primary/5 text-[9px] font-bold uppercase tracking-widest px-8 h-12"
+								>
+									<Link to={`/tours/print/${tour.id}`} target="_blank">
+										<Printer className="mr-2 h-4 w-4" /> Download Itinerary (PDF)
+									</Link>
+								</Button>
+							</div>
+
 							{tour.overview && (
 								<div className="space-y-10">
 									<h2 className="text-5xl font-serif text-foreground tracking-tight border-l-4 border-primary pl-8">Overview</h2>
@@ -247,10 +284,24 @@ export default function TourDetailsPage() {
 									Journey Fee
 								</p>
 								<div className="flex flex-col items-center gap-4">
-									<span className="text-7xl font-serif text-primary font-bold">
-										{tour.price > 0 ? `₹${tour.price.toLocaleString()}` : "Inquiry Only"}
-									</span>
-									{tour.price > 0 && (
+									<div className="flex flex-col items-center">
+										{earlyBirdActive && (
+											<span className="text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full mb-3 animate-pulse">
+												Early Bird Active
+											</span>
+										)}
+										<div className="flex items-baseline gap-4">
+											<span className="text-7xl font-serif text-primary font-bold">
+												{currentPrice > 0 ? `₹${currentPrice.toLocaleString()}` : "Inquiry Only"}
+											</span>
+											{!earlyBirdActive && tour.earlyBirdRule && (
+												<span className="text-2xl text-foreground/20 line-through font-serif">
+													₹{tour.earlyBirdRule.originalPrice.toLocaleString()}
+												</span>
+											)}
+										</div>
+									</div>
+									{currentPrice > 0 && (
 										<span className="text-foreground/60 text-xs font-bold uppercase tracking-widest bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10">
 											per participant
 										</span>
@@ -323,12 +374,49 @@ export default function TourDetailsPage() {
 												<Input
 													type="number"
 													name="travellersCount"
-													defaultValue={1}
+													value={travellersCount}
+													onChange={(e) => setTravellersCount(Number(e.target.value))}
 													min={1}
 													max={tour.max_participants || 50}
 													className="h-20 rounded-[1.5rem] bg-white border-primary/30 font-serif text-4xl px-10 text-primary focus-visible:ring-primary/40 shadow-sm"
 												/>
 											</div>
+
+											{travellersCount > 1 && (
+												<div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
+													<p className="text-[10px] font-bold text-primary uppercase tracking-widest ml-4">
+														Additional Pilgrim Details
+													</p>
+													{Array.from({ length: travellersCount - 1 }).map((_, i) => (
+														<div key={i} className="p-8 bg-primary/5 border border-primary/20 rounded-[2.5rem] space-y-6 shadow-inner">
+															<p className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest">
+																Pilgrim #{i + 2}
+															</p>
+															<div className="grid grid-cols-[1fr_80px] gap-4">
+																<div className="space-y-2">
+																	<label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Name</label>
+																	<Input
+																		name={`traveller_name_${i}`}
+																		placeholder="Full Name"
+																		required
+																		className="h-12 rounded-xl bg-white border-primary/10 text-sm px-4"
+																	/>
+																</div>
+																<div className="space-y-2">
+																	<label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Age</label>
+																	<Input
+																		name={`traveller_age_${i}`}
+																		type="number"
+																		placeholder="Age"
+																		required
+																		className="h-12 rounded-xl bg-white border-primary/10 text-sm px-4"
+																	/>
+																</div>
+															</div>
+														</div>
+													))}
+												</div>
+											)}
 
 											<div className="space-y-6">
 												<label className="text-[12px] font-bold text-foreground/60 uppercase tracking-wider ml-4">

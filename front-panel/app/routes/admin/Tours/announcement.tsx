@@ -27,18 +27,14 @@ import {
 	Users,
 	Copy,
 	Check,
-	Download,
 } from "lucide-react";
 import { ToursService } from "@workspace/shared/services/tours.service";
 import { CampaignService } from "@workspace/shared/services/campaign.service";
 import {
 	generateJourneyAnnouncementHtml,
-	generateJourneyAnnouncementText,
 } from "@workspace/shared/utils/email-templates";
 import { toast } from "sonner";
 import { getCurrentUser } from "@workspace/shared/queries/auth.q";
-import * as XLSX from "xlsx";
-import { format } from "date-fns";
 
 export const clientLoader = async ({ params, request }: any) => {
 	const toursSvc = new ToursService();
@@ -116,7 +112,6 @@ export default function JourneyAnnouncementPage() {
 	const [isBroadcasting, setIsBroadcasting] = useState(false);
 	const [copiedEmails, setCopiedEmails] = useState(false);
 	const [copiedTemplate, setCopiedTemplate] = useState(false);
-	const [copiedText, setCopiedText] = useState(false);
 
 	// Initialize recipients from eligible users
 	useEffect(() => {
@@ -210,7 +205,9 @@ export default function JourneyAnnouncementPage() {
 		const formData = new FormData();
 		formData.append("intent", "broadcast");
 		formData.append("recipients", JSON.stringify(selectedRecipients));
-		formData.append("subject", `New Pilgrimage Journey: ${tour.name}`);
+		if (tour) {
+			formData.append("subject", `New Pilgrimage Journey: ${tour.name}`);
+		}
 		formData.append("adminUid", admin?.uid || "");
 		submit(formData, { method: "post" });
 	};
@@ -229,7 +226,6 @@ export default function JourneyAnnouncementPage() {
 	const appUrl =
 		typeof window !== "undefined" ? window.location.origin : "https://ambadypilgrimage.com";
 	const previewHtml = generateJourneyAnnouncementHtml(tour as any, appUrl);
-	const previewText = generateJourneyAnnouncementText(tour as any, appUrl);
 
 	const handleCopyTemplate = () => {
 		// Try to copy the HTML version if possible, otherwise text
@@ -246,35 +242,6 @@ export default function JourneyAnnouncementPage() {
 			navigator.clipboard.writeText(previewHtml);
 			toast.success("HTML source copied!");
 		}
-	};
-
-	const handleCopyText = () => {
-		navigator.clipboard.writeText(previewText);
-		setCopiedText(true);
-		toast.success("Text summary copied!");
-		setTimeout(() => setCopiedText(false), 2000);
-	};
-
-	const handleExportExcel = () => {
-		if (selectedCount === 0) {
-			toast.error("No recipients selected");
-			return;
-		}
-
-		const exportData = selectedRecipients.map((r) => ({
-			Name: r.name,
-			Email: r.email,
-			Source: r.source,
-			"Formatted for Gmail (Copy All)": bccList,
-		}));
-
-		const worksheet = XLSX.utils.json_to_sheet(exportData);
-		const workbook = XLSX.utils.book_new();
-		XLSX.utils.book_append_sheet(workbook, worksheet, "Recipients");
-		XLSX.writeFile(
-			workbook,
-			`AMBADY_Announcement_${tour?.tour_code || "Journey"}_${format(new Date(), "yyyyMMdd")}.xlsx`,
-		);
 	};
 
 	if (!tour) return null;

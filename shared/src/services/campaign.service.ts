@@ -16,6 +16,8 @@ export type { NotificationCampaign };
 import { emailService } from "./emails.service";
 import { generateJourneyAnnouncementHtml } from "../utils/email-templates";
 import { ToursService } from "./tours.service";
+import { BookingService } from "./booking.service";
+import { TourRegistration } from "../types/booking";
 
 export class CampaignService extends Service {
 	private readonly CAMPAIGN_COLLECTION = "notificationCampaigns";
@@ -164,6 +166,45 @@ export class CampaignService extends Service {
 		});
 
 		return this.sendCampaign(campaignId);
+	}
+
+	/** Send post-journey review requests */
+	async sendPostJourneyReviewRequests(tourId: string) {
+		const toursSvc = new ToursService();
+		const tour = await toursSvc.getTourDetails(tourId);
+		if (!tour) throw new Error("Tour not found");
+
+		const bookingSvc = new BookingService();
+		const regs = await bookingSvc.getRegistrationsByTour(tourId);
+		const confirmedRegs = (regs as TourRegistration[]).filter((r) => r.status === "CONFIRMED" || r.status === "COMPLETED");
+
+		if (confirmedRegs.length === 0) return { success: false, message: "No eligible pilgrims found." };
+
+		const appUrl = (import.meta as any).env?.VITE_MAIN_APP_URL || "https://ambadypilgrimage.web.app";
+		const reviewUrl = `${appUrl}/tours/tour/${tourId}#tour-reviews`;
+
+		const html = `
+			<div style="font-family: serif; color: #0a0e1a; padding: 40px; background-color: #fdfcf0;">
+				<h1 style="color: #d4af37; text-align: center;">Welcome Home from ${tour.name}!</h1>
+				<p style="font-size: 18px; line-height: 1.6; text-align: center;">
+					We hope your journey was a transformative and spiritual experience.
+					Your story can inspire others on their path.
+				</p>
+				<div style="text-align: center; margin-top: 40px;">
+					<a href="${reviewUrl}" style="background-color: #d4af37; color: #0a0e1a; padding: 20px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; text-transform: uppercase;">Share Your Experience</a>
+				</div>
+				<p style="margin-top: 60px; font-style: italic; text-align: center; opacity: 0.6;">Faith | Heritage | Inner Journeys</p>
+			</div>
+		`;
+
+		await emailService.sendJourneyAnnouncementBatch({
+			tourName: tour.name,
+			recipients: confirmedRegs.map((r) => r.profileSnapshot.email || ""),
+			subject: `Welcome Home! Share your experience with ${tour.name}`,
+			html,
+		});
+
+		return { success: true, message: `Review requests sent to ${confirmedRegs.length} pilgrims.` };
 	}
 }
 

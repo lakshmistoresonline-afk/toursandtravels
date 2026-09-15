@@ -21,6 +21,7 @@ import TourDetails, {
 	clientLoader as tourDetailsLoader,
 	clientAction as tourDetailsAction,
 } from "./routes/Tour/tour-details";
+import ItineraryPrint, { clientLoader as itineraryPrintLoader } from "./routes/Tour/itinerary-print";
 import AccountDetails, { clientAction as accountDetailsAction } from "./routes/Account/account-details";
 import MyBookings, { clientLoader as myBookingsLoader } from "./routes/Account/my-bookings";
 import About from "./routes/About/about";
@@ -37,6 +38,7 @@ import UpdateTour, {
 import Tours, { clientLoader as toursLoader } from "./routes/Tour/tours";
 import AdminUsers, { clientLoader as adminUsersLoader } from "./routes/admin/users";
 import Analytics, { clientLoader as analyticsLoader } from "./routes/admin/analytics";
+import PilgrimManifesto, { clientLoader as manifestoLoader } from "./routes/admin/Tours/manifesto";
 import JourneyAnnouncement, {
 	clientLoader as announcementLoader,
 	clientAction as announcementAction,
@@ -101,6 +103,11 @@ const router = createBrowserRouter([
 								loader: tourDetailsLoader as any,
 								action: tourDetailsAction as any,
 							},
+							{
+								path: "print/:id",
+								element: <ItineraryPrint />,
+								loader: itineraryPrintLoader as any,
+							},
 						],
 					},
 					{
@@ -159,6 +166,11 @@ const router = createBrowserRouter([
 								element: <JourneyAnnouncement />,
 								loader: announcementLoader as any,
 								action: announcementAction as any,
+							},
+							{
+								path: "manifesto/:id",
+								element: <PilgrimManifesto />,
+								loader: manifestoLoader as any,
 							},
 						],
 					},

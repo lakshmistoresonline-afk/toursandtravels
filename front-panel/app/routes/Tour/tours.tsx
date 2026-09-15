@@ -22,7 +22,7 @@ export default function ToursPage() {
 			<MetaDetails
 				metaTitle="Pilgrimage Journeys | AMBADY"
 				metaDescription="Explore our Journeys and spiritual experiences curated for you."
-				ogImage={firstTourImage}
+				ogImage={firstTourImage ?? undefined}
 			/>
 
 			{/* Header Search Section */}

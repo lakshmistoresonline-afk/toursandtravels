@@ -13,7 +13,7 @@ import {
 	Megaphone,
 } from "lucide-react";
 import React from "react";
-import { Form, Link, useLoaderData, useNavigation, useLocation } from "react-router";
+import { Form, Link, useLoaderData, useNavigation, useLocation, useActionData, useSubmit } from "react-router";
 import { MetaDetails } from "~/components/SEO/MetaDetails";
 import { DataTable, DataTableSkeleton, TableColumnsToggle } from "~/components/Table/data-table";
 import { Button } from "~/components/ui/button";
@@ -28,6 +28,8 @@ import { Input } from "~/components/ui/input";
 import { Badge } from "~/components/ui/badge";
 import { ToursService } from "@workspace/shared/services/tours.service";
 import { BookingService } from "@workspace/shared/services/booking.service";
+import { CampaignService } from "@workspace/shared/services/campaign.service";
+import { toast } from "sonner";
 
 export const clientLoader = async ({ request }: any) => {
 	const url = new URL(request.url);
@@ -50,10 +52,37 @@ export const clientLoader = async ({ request }: any) => {
 	return { data: { ...data, tours: toursWithRegs }, query: q };
 };
 
+export const clientAction = async ({ request }: any) => {
+	const formData = await request.formData();
+	const intent = formData.get("intent");
+	const tourId = formData.get("tourId") as string;
+
+	if (intent === "request-reviews") {
+		const campaignSvc = new CampaignService();
+		try {
+			const result = await campaignSvc.sendPostJourneyReviewRequests(tourId);
+			return result;
+		} catch (err: any) {
+			return { success: false, message: err.message };
+		}
+	}
+	return null;
+};
+
 export default function AdminToursPage() {
 	const { data, query } = useLoaderData<typeof clientLoader>();
+	const actionData = useActionData() as any;
 	const navigation = useNavigation();
 	const location = useLocation();
+	const submit = useSubmit();
+
+	React.useEffect(() => {
+		if (actionData?.success) {
+			toast.success(actionData.message);
+		} else if (actionData?.message) {
+			toast.error(actionData.message);
+		}
+	}, [actionData]);
 
 	const isFetching =
 		navigation.state === "loading" && navigation.location?.pathname === location.pathname;
@@ -166,6 +195,30 @@ export default function AdminToursPage() {
 								<Edit3 className="mr-3 h-4.5 w-4.5 opacity-60 text-primary" /> Edit Journey
 							</DropdownMenuItem>
 						</Link>
+
+						{(() => {
+							const startDate = row.original.start_date ? new Date(row.original.start_date) : null;
+							const isPast = startDate && startDate < new Date();
+							const isCompleted = row.original.status === "COMPLETED";
+
+							if (!isPast && !isCompleted) return null;
+
+							return (
+								<DropdownMenuItem
+									onClick={() => {
+										const fd = new FormData();
+										fd.append("intent", "request-reviews");
+										fd.append("tourId", row.original.id);
+										submit(fd, { method: "post" });
+									}}
+									className="rounded-xl cursor-pointer py-3 text-foreground/80 focus:bg-primary/5"
+								>
+									<PlusCircle className="mr-3 h-4.5 w-4.5 opacity-60 text-primary" /> Request
+									Reviews
+								</DropdownMenuItem>
+							);
+						})()}
+
 						<a href={`/tours/tour/${row.original.id}`} target="_blank">
 							<DropdownMenuItem className="rounded-xl cursor-pointer py-3 text-foreground/80 focus:bg-primary/5">
 								<ExternalLink className="mr-3 h-4.5 w-4.5 opacity-60 text-primary" /> View

@@ -10,6 +10,7 @@ import {
 	CheckCircle2,
 	Clock,
 	CheckSquare,
+	Trash2,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLoaderData, useLocation, useNavigation, useActionData, useSubmit } from "react-router";
@@ -96,12 +97,23 @@ export const clientAction = async ({ request }: any) => {
 				customerId = res.uid!;
 			}
 
+			const additionalTravellers = [];
+			if (travellersCount > 1) {
+				for (let i = 0; i < travellersCount - 1; i++) {
+					additionalTravellers.push({
+						name: formData.get(`traveller_name_${i}`)?.toString() || "",
+						age: Number(formData.get(`traveller_age_${i}`) || 0),
+					});
+				}
+			}
+
 			await bookingSvc.adminCreateRegistration(
 				tourId,
 				customerId,
 				travellersCount,
 				notes,
 				paymentMode,
+				additionalTravellers,
 			);
 			return { success: true };
 		} catch (err: any) {
@@ -198,6 +210,7 @@ export default function BookingsPage() {
 	const [isExporting, setIsExporting] = useState(false);
 	const [isManualRegOpen, setIsManualRegOpen] = useState(false);
 	const [isNewUser, setIsNewUser] = useState(false);
+	const [travellersCount, setTravellersCount] = useState(1);
 	const [rowSelection, setRowSelection] = useState({});
 
 	const isFetching = navigation.state === "loading" && navigation.location?.pathname === location.pathname;
@@ -784,7 +797,8 @@ export default function BookingsPage() {
 									<Input
 										type="number"
 										name="travellersCount"
-										defaultValue={1}
+										value={travellersCount}
+										onChange={(e) => setTravellersCount(Number(e.target.value))}
 										min={1}
 										required
 										className="h-14 bg-white border-primary/20 text-foreground rounded-2xl focus:ring-primary/20 shadow-sm px-8 font-serif text-2xl text-primary"
@@ -816,6 +830,42 @@ export default function BookingsPage() {
 									/>
 								</div>
 							</div>
+
+							{travellersCount > 1 && (
+								<div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500 bg-primary/5 p-8 rounded-[2rem] border border-primary/10">
+									<p className="text-[10px] font-bold text-primary uppercase tracking-widest ml-4">
+										Additional Pilgrim Details
+									</p>
+									{Array.from({ length: travellersCount - 1 }).map((_, i) => (
+										<div key={i} className="p-6 bg-white rounded-2xl border border-primary/10 space-y-6 shadow-sm">
+											<p className="text-[9px] font-bold text-foreground/40 uppercase tracking-widest">
+												Pilgrim #{i + 2}
+											</p>
+											<div className="grid grid-cols-[1fr_100px] gap-6">
+												<div className="space-y-2">
+													<Label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Name</Label>
+													<Input
+														name={`traveller_name_${i}`}
+														placeholder="Full Name"
+														required
+														className="h-12 rounded-xl border-primary/10 text-sm px-4"
+													/>
+												</div>
+												<div className="space-y-2">
+													<Label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Age</Label>
+													<Input
+														name={`traveller_age_${i}`}
+														type="number"
+														placeholder="Age"
+														required
+														className="h-12 rounded-xl border-primary/10 text-sm px-4"
+													/>
+												</div>
+											</div>
+										</div>
+									))}
+								</div>
+							)}
 						</form>
 					</div>
 

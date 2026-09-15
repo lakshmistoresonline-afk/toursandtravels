@@ -76,6 +76,7 @@ export default function AddTourPage() {
 			cover_image: "",
 			cover_image_attribution: null,
 			qr_code_url: "",
+			earlyBirdRule: null,
 		},
 	});
 
@@ -394,6 +395,78 @@ export default function AddTourPage() {
 								)}
 							/>
 						</CardContent>
+
+						{/* Early Bird Section */}
+						<div className="px-10 pb-10">
+							<div className="p-8 rounded-[2.5rem] bg-emerald-50/50 border border-emerald-100 space-y-8">
+								<div className="flex items-center gap-3">
+									<Sparkles className="h-4 w-4 text-emerald-600" />
+									<p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+										Early Bird Configuration (Optional)
+									</p>
+								</div>
+
+								<div className="grid md:grid-cols-3 gap-8">
+									<FormField
+										control={control}
+										name="earlyBirdRule.type"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Rule Type</FormLabel>
+												<Select onValueChange={field.onChange} value={field.value || ""}>
+													<FormControl>
+														<SelectTrigger className="h-12 rounded-xl bg-white border-emerald-100">
+															<SelectValue placeholder="Disabled" />
+														</SelectTrigger>
+													</FormControl>
+													<SelectContent className="bg-white border-emerald-100">
+														<SelectItem value="count">First N Pilgrims</SelectItem>
+														<SelectItem value="date">Before Specific Date</SelectItem>
+													</SelectContent>
+												</Select>
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={control}
+										name="earlyBirdRule.threshold"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Threshold Value</FormLabel>
+												<FormControl>
+													<Input
+														type={form.getValues("earlyBirdRule.type") === "date" ? "date" : "number"}
+														className="h-12 rounded-xl bg-white border-emerald-100"
+														{...field}
+														value={field.value || ""}
+													/>
+												</FormControl>
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={control}
+										name="earlyBirdRule.originalPrice"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Full Price after EB</FormLabel>
+												<FormControl>
+													<Input
+														type="number"
+														className="h-12 rounded-xl bg-white border-emerald-100"
+														{...field}
+														value={field.value || ""}
+														onChange={(e) => field.onChange(Number(e.target.value))}
+													/>
+												</FormControl>
+											</FormItem>
+										)}
+									/>
+								</div>
+							</div>
+						</div>
 					</Card>
 
 					{/* Narrative */}
@@ -663,6 +736,3 @@ export default function AddTourPage() {
 		</div>
 	);
 }
-
-
-

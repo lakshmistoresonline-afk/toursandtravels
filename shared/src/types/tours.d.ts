@@ -15,6 +15,11 @@ export type HighLevelTour = {
 	currentParticipants?: number;
 	registrations?: any[];
 	pilgrimCount?: number;
+	earlyBirdRule?: {
+		type: "count" | "date";
+		threshold: number;
+		originalPrice: number;
+	} | null;
 	createdAt: string | Date;
 	updatedAt: string | Date;
 };
@@ -28,6 +33,10 @@ export type GetTourDetails = HighLevelTour & {
 		description: string;
 	}>;
 	images: string[];
+	cover_image_attribution?: {
+		name: string;
+		url: string;
+	} | null;
 };
 
 export type GetHighLevelToursResponse = {

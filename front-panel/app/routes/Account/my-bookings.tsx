@@ -110,6 +110,24 @@ export default function MyBookingsPage() {
 												{reg.status}
 											</Badge>
 										</div>
+
+										{(reg.busNumber || reg.roomNumber) && (
+											<div className="flex flex-wrap gap-4 pt-2">
+												{reg.busNumber && (
+													<div className="flex items-center gap-3 bg-primary/5 px-6 py-3 rounded-2xl border border-primary/10">
+														<div className="text-[8px] font-bold text-foreground/40 uppercase tracking-widest">Bus Assignment</div>
+														<div className="text-sm font-bold text-primary font-mono">{reg.busNumber}</div>
+													</div>
+												)}
+												{reg.roomNumber && (
+													<div className="flex items-center gap-3 bg-primary/5 px-6 py-3 rounded-2xl border border-primary/10">
+														<div className="text-[8px] font-bold text-foreground/40 uppercase tracking-widest">Room Allocation</div>
+														<div className="text-sm font-bold text-primary font-mono">{reg.roomNumber}</div>
+													</div>
+												)}
+											</div>
+										)}
+
 										<div className="pt-8 border-t border-primary/5 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
 											<div className="text-foreground/70">
 												<span className="text-primary text-sm">

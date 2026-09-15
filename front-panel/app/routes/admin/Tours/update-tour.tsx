@@ -40,12 +40,27 @@ import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { format } from "date-fns";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
-import { AlertTriangle, RefreshCw, Map } from "lucide-react";
+import { AlertTriangle, RefreshCw, Map, Bus, BedDouble, Printer } from "lucide-react";
 import { GeminiService } from "@workspace/shared/services/gemini.service";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Label } from "~/components/ui/label";
+import { Link } from "react-router";
 
 export const clientAction = async ({ request, params }: ActionFunctionArgs) => {
 	try {
 		const formData = await request.formData();
+		const intent = formData.get("intent");
+
+		if (intent === "update-logistics") {
+			const regId = formData.get("regId") as string;
+			const busNumber = formData.get("busNumber") as string;
+			const roomNumber = formData.get("roomNumber") as string;
+
+			const svc = new BookingService();
+			await svc.updateLogisticsAssignments(regId, { busNumber, roomNumber });
+			return { success: true, message: "Logistics updated successfully!" };
+		}
+
 		const payloadRaw = formData.get("payload") as string;
 		const payload = JSON.parse(payloadRaw);
 
@@ -94,6 +109,7 @@ export default function UpdateTourPage() {
 			cover_image: tour?.cover_image || "",
 			cover_image_attribution: tour?.cover_image_attribution || null,
 			qr_code_url: tour?.qr_code_url || "",
+			earlyBirdRule: tour?.earlyBirdRule || null,
 		},
 	});
 
@@ -160,9 +176,26 @@ export default function UpdateTourPage() {
 				</div>
 			</div>
 
-			<Form {...form}>
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
-					{/* Basic Information */}
+			<Tabs defaultValue="details" className="space-y-12">
+				<TabsList className="bg-primary/5 p-1 rounded-full border border-primary/10 h-14">
+					<TabsTrigger
+						value="details"
+						className="rounded-full px-10 h-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold uppercase tracking-widest text-[9px] transition-all"
+					>
+						Journey Details
+					</TabsTrigger>
+					<TabsTrigger
+						value="logistics"
+						className="rounded-full px-10 h-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold uppercase tracking-widest text-[9px] transition-all"
+					>
+						Rooming & Transport
+					</TabsTrigger>
+				</TabsList>
+
+				<TabsContent value="details">
+					<Form {...form}>
+						<form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+							{/* Basic Information */}
 					<Card className="bg-card border border-primary/10 rounded-[3rem] overflow-hidden shadow-xl">
 						<div className="px-10 py-7 border-b border-primary/10 flex items-center gap-4 bg-primary/5">
 							<Info className="h-4.5 w-4.5 text-primary" />
@@ -395,6 +428,78 @@ export default function UpdateTourPage() {
 								)}
 							/>
 						</CardContent>
+
+						{/* Early Bird Section */}
+						<div className="px-10 pb-10">
+							<div className="p-8 rounded-[2.5rem] bg-emerald-50/50 border border-emerald-100 space-y-8">
+								<div className="flex items-center gap-3">
+									<Sparkles className="h-4 w-4 text-emerald-600" />
+									<p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+										Early Bird Configuration (Optional)
+									</p>
+								</div>
+
+								<div className="grid md:grid-cols-3 gap-8">
+									<FormField
+										control={control}
+										name="earlyBirdRule.type"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Rule Type</FormLabel>
+												<Select onValueChange={field.onChange} value={field.value || ""}>
+													<FormControl>
+														<SelectTrigger className="h-12 rounded-xl bg-white border-emerald-100">
+															<SelectValue placeholder="Disabled" />
+														</SelectTrigger>
+													</FormControl>
+													<SelectContent className="bg-white border-emerald-100">
+														<SelectItem value="count">First N Pilgrims</SelectItem>
+														<SelectItem value="date">Before Specific Date</SelectItem>
+													</SelectContent>
+												</Select>
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={control}
+										name="earlyBirdRule.threshold"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Threshold Value</FormLabel>
+												<FormControl>
+													<Input
+														type={form.getValues("earlyBirdRule.type") === "date" ? "date" : "number"}
+														className="h-12 rounded-xl bg-white border-emerald-100"
+														{...field}
+														value={field.value || ""}
+													/>
+												</FormControl>
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={control}
+										name="earlyBirdRule.originalPrice"
+										render={({ field }) => (
+											<FormItem className="space-y-3">
+												<FormLabel className="text-[9px] font-bold text-foreground/40 uppercase tracking-wider ml-2">Full Price after EB</FormLabel>
+												<FormControl>
+													<Input
+														type="number"
+														className="h-12 rounded-xl bg-white border-emerald-100"
+														{...field}
+														value={field.value || ""}
+														onChange={(e) => field.onChange(Number(e.target.value))}
+													/>
+												</FormControl>
+											</FormItem>
+										)}
+									/>
+								</div>
+							</div>
+						</div>
 					</Card>
 
 					{/* Narrative */}
@@ -656,7 +761,127 @@ export default function UpdateTourPage() {
 						</Button>
 					</div>
 				</form>
-			</Form>
+					</Form>
+				</TabsContent>
+
+				<TabsContent value="logistics" className="space-y-12">
+					<Card className="bg-card border border-primary/10 rounded-[3rem] overflow-hidden shadow-xl">
+						<div className="px-10 py-7 border-b border-primary/10 flex items-center justify-between bg-primary/5">
+							<div className="flex items-center gap-4">
+								<Bus className="h-5 w-5 text-primary" />
+								<h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary">
+									Pilgrim Manifesto & Logistics
+								</h3>
+							</div>
+							<Button
+								asChild
+								variant="outline"
+								size="sm"
+								className="rounded-full border-primary/20 text-primary hover:bg-primary/5 text-[9px] font-bold uppercase tracking-widest px-6 h-10"
+							>
+								<Link to={`/admin/tours/manifesto/${tour?.id}`} target="_blank">
+									<Printer className="mr-2 h-3.5 w-3.5" /> Print Manifesto
+								</Link>
+							</Button>
+						</div>
+						<CardContent className="p-10">
+							{registrations.registrations.length === 0 ? (
+								<div className="py-20 text-center space-y-4 opacity-30">
+									<Users className="h-12 w-12 mx-auto" />
+									<p className="text-sm font-bold uppercase tracking-widest">
+										No pilgrims registered for logistics yet.
+									</p>
+								</div>
+							) : (
+								<div className="space-y-6">
+									{registrations.registrations
+										.filter((r: any) => r.status === "CONFIRMED")
+										.map((reg: any) => (
+										<div
+											key={reg.id}
+											className="p-8 rounded-[2.5rem] bg-background border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-primary/40 transition-all shadow-sm"
+										>
+											<div className="flex items-center gap-6 flex-1">
+												<div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+													<User className="h-7 w-7" />
+												</div>
+												<div className="space-y-1">
+													<p className="font-bold text-lg text-foreground">
+														{reg.profileSnapshot?.first_name} {reg.profileSnapshot?.last_name}
+													</p>
+													<div className="flex items-center gap-3">
+														<Badge variant="outline" className="text-[9px] font-bold uppercase tracking-widest border-primary/10 text-primary/60">
+															{reg.travellersCount} Pilgrims
+														</Badge>
+														<span className="text-[10px] text-foreground/30 font-medium">{reg.profileSnapshot?.email}</span>
+													</div>
+													{reg.additionalTravellers && reg.additionalTravellers.length > 0 && (
+														<div className="mt-4 p-4 rounded-2xl bg-primary/5 border border-primary/10 space-y-2">
+															<p className="text-[8px] font-bold uppercase tracking-widest text-primary/60 mb-2">Group Members</p>
+															{reg.additionalTravellers.map((t: any, idx: number) => (
+																<div key={idx} className="flex items-center justify-between text-[11px] font-medium">
+																	<span className="text-foreground/70">{t.name}</span>
+																	<span className="text-foreground/40">{t.age} yrs</span>
+																</div>
+															))}
+														</div>
+													)}
+												</div>
+											</div>
+
+											<div className="flex flex-wrap items-center gap-6">
+												<div className="space-y-3">
+													<Label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Bus Number</Label>
+													<div className="relative">
+														<Bus className="absolute left-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary/40" />
+														<Input
+															defaultValue={reg.busNumber || ""}
+															placeholder="e.g. A-101"
+															className="h-12 rounded-xl bg-primary/5 border-none pl-10 text-sm font-bold text-primary w-32 focus-visible:ring-primary/20"
+															onBlur={(e) => {
+																if (e.target.value !== reg.busNumber) {
+																	const fd = new FormData();
+																	fd.append("intent", "update-logistics");
+																	fd.append("regId", reg.id);
+																	fd.append("busNumber", e.target.value);
+																	fd.append("roomNumber", reg.roomNumber || "");
+																	submit(fd, { method: "post" });
+																}
+															}}
+														/>
+													</div>
+												</div>
+
+												<div className="space-y-3">
+													<Label className="text-[8px] font-bold uppercase tracking-widest text-foreground/40 ml-2">Room Number</Label>
+													<div className="relative">
+														<BedDouble className="absolute left-4 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary/40" />
+														<Input
+															defaultValue={reg.roomNumber || ""}
+															placeholder="e.g. 204"
+															className="h-12 rounded-xl bg-primary/5 border-none pl-10 text-sm font-bold text-primary w-32 focus-visible:ring-primary/20"
+															onBlur={(e) => {
+																if (e.target.value !== reg.roomNumber) {
+																	const fd = new FormData();
+																	fd.append("intent", "update-logistics");
+																	fd.append("regId", reg.id);
+																	fd.append("busNumber", reg.busNumber || "");
+																	fd.append("roomNumber", e.target.value);
+																	submit(fd, { method: "post" });
+																}
+															}}
+														/>
+													</div>
+												</div>
+											</div>
+										</div>
+									))}
+								</div>
+							)}
+						</CardContent>
+					</Card>
+				</TabsContent>
+			</Tabs>
 
 			{/* Registered Pilgrims Section */}
 			<Card className="bg-card border border-primary/10 rounded-[3rem] overflow-hidden shadow-xl mt-12">
@@ -699,6 +924,15 @@ export default function UpdateTourPage() {
 												<span className="h-1.5 w-1.5 rounded-full bg-primary/30" />
 												<span>{reg.profileSnapshot?.phone_number || "No Phone"}</span>
 											</div>
+											{reg.additionalTravellers && reg.additionalTravellers.length > 0 && (
+												<div className="mt-4 flex flex-wrap gap-2">
+													{reg.additionalTravellers.map((t: any, idx: number) => (
+														<Badge key={idx} variant="secondary" className="text-[8px] font-bold uppercase bg-primary/5 text-primary/60 border-none px-3">
+															{t.name} ({t.age})
+														</Badge>
+													))}
+												</div>
+											)}
 										</div>
 									</div>
 									<div className="text-right space-y-3">

@@ -27,6 +27,14 @@ export const TourSchema = z.object({
 		.optional()
 		.nullable(),
 	qr_code_url: z.string().optional().nullable(),
+	earlyBirdRule: z
+		.object({
+			type: z.enum(["count", "date"]),
+			threshold: z.any(),
+			originalPrice: z.number().positive(),
+		})
+		.optional()
+		.nullable(),
 	images: z.array(z.string()).optional().default([]),
 	itinerary: z
 		.array(

@@ -11,6 +11,7 @@ export default [
 		...prefix("tours", [
 			index("./routes/Tour/tours.tsx"),
 			route("tour/:id", "./routes/Tour/tour-details.tsx"),
+			route("print/:id", "./routes/Tour/itinerary-print.tsx"),
 		]),
 
 		layout("./routes/Account/account-layout.tsx", [
@@ -35,6 +36,7 @@ export default [
 				route("add", "./routes/admin/Tours/add-tour.tsx"),
 				route("edit/:id", "./routes/admin/Tours/update-tour.tsx"),
 				route("announcement/:id", "./routes/admin/Tours/announcement.tsx"),
+				route("manifesto/:id", "./routes/admin/Tours/manifesto.tsx"),
 			]),
 			...prefix("registrations", [index("./routes/admin/Booking/bookings.tsx")]),
 			route("users", "./routes/admin/users.tsx"),
