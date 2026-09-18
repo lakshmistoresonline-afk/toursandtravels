@@ -11,6 +11,7 @@ import {
 	ExternalLink,
 	Compass,
 	Megaphone,
+	Copy,
 } from "lucide-react";
 import React from "react";
 import { Form, Link, useLoaderData, useNavigation, useLocation, useActionData, useSubmit } from "react-router";
@@ -62,6 +63,30 @@ export const clientAction = async ({ request }: any) => {
 		try {
 			const result = await campaignSvc.sendPostJourneyReviewRequests(tourId);
 			return result;
+		} catch (err: any) {
+			return { success: false, message: err.message };
+		}
+	}
+
+	if (intent === "duplicate") {
+		const toursSvc = new ToursService();
+		try {
+			const original = await toursSvc.getTourDetails(tourId);
+			if (!original) throw new Error("Original journey not found");
+
+			// Prepare new data based on original
+			const { id, createdAt, updatedAt, currentParticipants, registrations, pilgrimCount, ...baseData } = original as any;
+
+			const newData = {
+				...baseData,
+				name: `${baseData.name} (Copy)`,
+				tour_code: `${baseData.tour_code}-COPY`,
+				status: "DRAFT",
+				currentParticipants: 0,
+			};
+
+			const newId = await toursSvc.addTour(newData);
+			return { success: true, message: "Journey duplicated as a Draft!", newId };
 		} catch (err: any) {
 			return { success: false, message: err.message };
 		}
@@ -195,6 +220,18 @@ export default function AdminToursPage() {
 								<Edit3 className="mr-3 h-4.5 w-4.5 opacity-60 text-primary" /> Edit Journey
 							</DropdownMenuItem>
 						</Link>
+
+						<DropdownMenuItem
+							onClick={() => {
+								const fd = new FormData();
+								fd.append("intent", "duplicate");
+								fd.append("tourId", row.original.id);
+								submit(fd, { method: "post" });
+							}}
+							className="rounded-xl cursor-pointer py-3 text-foreground/80 focus:bg-primary/5"
+						>
+							<Copy className="mr-3 h-4.5 w-4.5 opacity-60 text-primary" /> Duplicate Journey
+						</DropdownMenuItem>
 
 						{(() => {
 							const startDate = row.original.start_date ? new Date(row.original.start_date) : null;
