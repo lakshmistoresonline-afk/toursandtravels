@@ -9,6 +9,8 @@ export const TourSchema = z.object({
 	name: z.string().min(1, "Name is required"),
 	overview: z.string().min(1, "Overview is required"),
 	destination: z.string().min(1, "Destination is required"),
+	primarySpotId: z.string().optional(),
+	additionalSpotIds: z.array(z.string()).default([]),
 	price: z.number().nonnegative("Price must be a positive number"),
 	max_participants: z.number().int().positive("Max participants must be at least 1"),
 	status: z
@@ -42,6 +44,7 @@ export const TourSchema = z.object({
 				day_number: z.number().int().positive(),
 				title: z.string().min(1, "Title is required"),
 				description: z.string().min(1, "Description is required"),
+				spotId: z.string().optional(),
 			}),
 		)
 		.optional()

@@ -1,0 +1,37 @@
+region,stateUT,type,records_currently_extracted,status
+North,Chandigarh,UT,0,DISCOVERY_FRAMEWORK
+North,Delhi,UT,1,DISCOVERY_FRAMEWORK
+North,Haryana,State,0,DISCOVERY_FRAMEWORK
+North,Himachal Pradesh,State,0,DISCOVERY_FRAMEWORK
+North,Jammu and Kashmir,UT,0,DISCOVERY_FRAMEWORK
+North,Ladakh,UT,0,DISCOVERY_FRAMEWORK
+North,Punjab,State,1,DISCOVERY_FRAMEWORK
+North,Rajasthan,State,1,DISCOVERY_FRAMEWORK
+North,Uttar Pradesh,State,2,DISCOVERY_FRAMEWORK
+North,Uttarakhand,State,0,DISCOVERY_FRAMEWORK
+Northeast,Arunachal Pradesh,State,1,DISCOVERY_FRAMEWORK
+Northeast,Assam,State,1,DISCOVERY_FRAMEWORK
+Northeast,Manipur,State,1,DISCOVERY_FRAMEWORK
+Northeast,Meghalaya,State,1,DISCOVERY_FRAMEWORK
+Northeast,Mizoram,State,1,DISCOVERY_FRAMEWORK
+Northeast,Nagaland,State,1,DISCOVERY_FRAMEWORK
+Northeast,Sikkim,State,2,DISCOVERY_FRAMEWORK
+Northeast,Tripura,State,1,DISCOVERY_FRAMEWORK
+East,Andaman and Nicobar Islands,UT,1,DISCOVERY_FRAMEWORK
+East,Bihar,State,1,DISCOVERY_FRAMEWORK
+East,Jharkhand,State,0,DISCOVERY_FRAMEWORK
+East,Odisha,State,1,DISCOVERY_FRAMEWORK
+East,West Bengal,State,6,DISCOVERY_FRAMEWORK
+Central,Chhattisgarh,State,0,DISCOVERY_FRAMEWORK
+Central,Madhya Pradesh,State,1,DISCOVERY_FRAMEWORK
+West,Dadra and Nagar Haveli and Daman and Diu,UT,11,DISCOVERY_FRAMEWORK
+West,Goa,State,1,DISCOVERY_FRAMEWORK
+West,Gujarat,State,3,DISCOVERY_FRAMEWORK
+West,Maharashtra,State,9,DISCOVERY_FRAMEWORK
+South,Andhra Pradesh,State,0,DISCOVERY_FRAMEWORK
+South,Karnataka,State,25,DISCOVERY_FRAMEWORK
+South,Kerala,State,32,DISCOVERY_FRAMEWORK
+South,Lakshadweep,UT,0,DISCOVERY_FRAMEWORK
+South,Puducherry,UT,0,DISCOVERY_FRAMEWORK
+South,Tamil Nadu,State,2,DISCOVERY_FRAMEWORK
+South,Telangana,State,8,DISCOVERY_FRAMEWORK

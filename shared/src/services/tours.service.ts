@@ -6,6 +6,7 @@ import {
 	addDoc,
 	updateDoc,
 	query,
+	where,
 	orderBy,
 	serverTimestamp,
 } from "firebase/firestore";
@@ -66,6 +67,48 @@ export class ToursService extends Service {
 		}
 	}
 
+	async getTourDetailsRelational(tourId: string): Promise<GetTourDetails | null> {
+		try {
+			const tourDoc = await getDoc(doc(this.db, this.TOURS_COLLECTION, tourId));
+			if (!tourDoc.exists()) throw new ApiError("Pilgrimage journey not found", 404);
+			const tourData = tourDoc.data();
+
+			// Support both legacy subcollection and new field-based itinerary
+			let itinerary = tourData.itinerary || [];
+
+			if (itinerary.length === 0) {
+				const itineraryRef = collection(this.db, this.TOURS_COLLECTION, tourId, "itineraries");
+				const itinerarySnap = await getDocs(query(itineraryRef, orderBy("day_number", "asc")));
+				itinerary = itinerarySnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+			}
+
+			// Resolve Primary Spot
+			let primarySpot: any = null;
+			if (tourData.primarySpotId) {
+				const spotDoc = await getDoc(doc(this.db, "spots", tourData.primarySpotId));
+				if (spotDoc.exists()) primarySpot = spotDoc.data();
+			}
+
+			// Resolve Itinerary Spots
+			const resolvedItinerary = await Promise.all(itinerary.map(async (item: any) => {
+				if (item.spotId) {
+					const spotDoc = await getDoc(doc(this.db, "spots", item.spotId));
+					if (spotDoc.exists()) return { ...item, spot: spotDoc.data() };
+				}
+				return item;
+			}));
+
+			return {
+				id: tourDoc.id,
+				...tourData,
+				primarySpot,
+				itinerary: resolvedItinerary
+			} as any;
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
+		}
+	}
+
 	/**
 	 * Get tours for front panel
 	 * REFACTORED: Filtering in-memory to avoid mandatory composite indexes on Spark Plan.
@@ -113,6 +156,20 @@ export class ToursService extends Service {
 			}
 
 			return { tours, total: tours.length };
+		} catch (err: any) {
+			throw new ApiError(err.message, 500);
+		}
+	}
+
+	async getToursBySpotId(spotId: string): Promise<HighLevelTour[]> {
+		try {
+			const toursRef = collection(this.db, this.TOURS_COLLECTION);
+			const q = query(toursRef, where("primarySpotId", "==", spotId));
+			const snap = await getDocs(q);
+			return snap.docs.map((d) => ({
+				id: d.id,
+				...d.data(),
+			})) as HighLevelTour[];
 		} catch (err: any) {
 			throw new ApiError(err.message, 500);
 		}

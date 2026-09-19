@@ -1,3 +1,5 @@
+import type { DestinationSpot } from "./spots";
+
 export type HighLevelTour = {
 	id: string;
 	tour_code: string;
@@ -6,6 +8,8 @@ export type HighLevelTour = {
 	status: string;
 	price: number;
 	destination: string;
+	primarySpotId?: string;
+	additionalSpotIds?: string[];
 	start_date: string | null;
 	qr_code_url?: string | null;
 	start_time: string | null;
@@ -26,11 +30,14 @@ export type HighLevelTour = {
 
 export type GetTourDetails = HighLevelTour & {
 	overview: string;
+	primarySpot?: DestinationSpot;
 	itinerary: Array<{
 		id: string;
 		day_number: number;
 		title: string;
 		description: string;
+		spotId?: string;
+		spot?: DestinationSpot;
 	}>;
 	images: string[];
 	cover_image_attribution?: {

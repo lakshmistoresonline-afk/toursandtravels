@@ -33,7 +33,8 @@ import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
 import { ResearchService } from "@workspace/shared/services/research.service";
-import { Sparkles } from "lucide-react";
+import { SpotSearch } from "~/components/Admin/SpotSearch";
+
 
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
@@ -66,6 +67,8 @@ export default function AddTourPage() {
 			name: "",
 			overview: "",
 			destination: "",
+			primarySpotId: "",
+			additionalSpotIds: [],
 			price: 0,
 			max_participants: 20,
 			status: "REGISTRATION_OPEN",
@@ -212,17 +215,21 @@ export default function AddTourPage() {
 							<div className="grid md:grid-cols-2 gap-10">
 								<FormField
 									control={control}
-									name="destination"
+									name="primarySpotId"
 									render={({ field }) => (
 										<FormItem className="space-y-3">
 											<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
-												Primary Destination
+												Primary Master Spot
 											</FormLabel>
 											<FormControl>
-												<Input
-													placeholder="e.g. Kedarnath, Uttarakhand"
-													className="h-14 rounded-2xl border-primary/20 bg-white text-foreground focus-visible:ring-primary/20 shadow-sm"
-													{...field}
+												<SpotSearch
+													onSelect={(spot) => {
+														field.onChange(spot.spotId);
+														// Auto-populate legacy destination and name if empty
+														if (!tourName) setValue("name", spot.canonicalName, { shouldValidate: true });
+														setValue("destination", `${spot.geography.cityLocality}, ${spot.geography.stateUT}`, { shouldValidate: true });
+													}}
+													defaultValue={field.value}
 												/>
 											</FormControl>
 											<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
@@ -595,6 +602,25 @@ export default function AddTourPage() {
 														/>
 													</FormControl>
 													<FormMessage className="text-red-600 text-[9px] font-bold uppercase tracking-widest ml-3" />
+												</FormItem>
+											)}
+										/>
+										<FormField
+											control={control}
+											name={`itinerary.${index}.spotId`}
+											render={({ field }) => (
+												<FormItem className="space-y-3">
+													<FormLabel className="text-[10px] font-bold text-foreground/40 uppercase tracking-[0.2em] ml-2">
+														Link to Master Spot (Optional)
+													</FormLabel>
+													<FormControl>
+														<SpotSearch
+															onSelect={(spot) => field.onChange(spot.spotId)}
+															defaultValue={field.value}
+															placeholder="Link this stop to a destination..."
+															className="h-12 rounded-xl"
+														/>
+													</FormControl>
 												</FormItem>
 											)}
 										/>

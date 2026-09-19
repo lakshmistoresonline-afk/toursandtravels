@@ -61,5 +61,17 @@ service cloud.firestore {
     match /notificationCampaigns/{campaignId} {
       allow read, write: if isAdmin();
     }
+
+    // Destination Master
+    match /spots/{spotId} {
+      allow read: if resource.data.verification.status == 'PUBLISHED' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Circuit Master
+    match /circuits/{circuitId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }

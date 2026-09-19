@@ -2,7 +2,7 @@ import { ToursService } from "@workspace/shared/services/tours.service";
 
 export const tourDetailsQuery = async ({ tour_id }: { request: Request; tour_id: string }) => {
 	const svc = new ToursService();
-	return await svc.getTourDetails(tour_id);
+	return await svc.getTourDetailsRelational(tour_id);
 };
 
 export const toursQuery = async ({

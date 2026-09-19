@@ -194,8 +194,13 @@ export default function TourDetailsPage() {
 										Destination
 									</p>
 									<p className="text-2xl font-bold text-foreground uppercase tracking-wider">
-										{tour.destination || "Holy Land"}
+										{tour.primarySpot?.canonicalName || tour.destination || "Holy Land"}
 									</p>
+									{tour.primarySpot && (
+										<p className="text-[10px] font-bold text-primary uppercase tracking-widest mt-1">
+											{tour.primarySpot.geography.cityLocality}, {tour.primarySpot.geography.stateUT}
+										</p>
+									)}
 								</div>
 							</div>
 							<div className="flex items-center gap-4">
@@ -261,9 +266,17 @@ export default function TourDetailsPage() {
 													{day.day_number}
 												</div>
 												<div className="space-y-6 pt-1">
-													<h3 className="text-3xl font-serif text-foreground font-bold">
-														{day.title}
-													</h3>
+													<div className="space-y-2">
+														<h3 className="text-3xl font-serif text-foreground font-bold">
+															{day.title}
+														</h3>
+														{day.spot && (
+															<div className="flex items-center gap-2 text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/5 w-fit px-3 py-1 rounded-full">
+																<MapPin className="h-3 w-3" />
+																{day.spot.canonicalName} ({day.spot.geography.cityLocality})
+															</div>
+														)}
+													</div>
 													<p className="text-foreground/70 text-xl leading-relaxed font-medium">
 														{day.description}
 													</p>

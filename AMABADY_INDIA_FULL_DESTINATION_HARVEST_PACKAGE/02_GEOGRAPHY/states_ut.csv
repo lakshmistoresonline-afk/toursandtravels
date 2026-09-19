@@ -1,0 +1,37 @@
+region,state_ut,type
+North,Chandigarh,UT
+North,Delhi,UT
+North,Haryana,State
+North,Himachal Pradesh,State
+North,Jammu and Kashmir,UT
+North,Ladakh,UT
+North,Punjab,State
+North,Rajasthan,State
+North,Uttar Pradesh,State
+North,Uttarakhand,State
+Northeast,Arunachal Pradesh,State
+Northeast,Assam,State
+Northeast,Manipur,State
+Northeast,Meghalaya,State
+Northeast,Mizoram,State
+Northeast,Nagaland,State
+Northeast,Sikkim,State
+Northeast,Tripura,State
+East,Andaman and Nicobar Islands,UT
+East,Bihar,State
+East,Jharkhand,State
+East,Odisha,State
+East,West Bengal,State
+Central,Chhattisgarh,State
+Central,Madhya Pradesh,State
+West,Dadra and Nagar Haveli and Daman and Diu,UT
+West,Goa,State
+West,Gujarat,State
+West,Maharashtra,State
+South,Andhra Pradesh,State
+South,Karnataka,State
+South,Kerala,State
+South,Lakshadweep,UT
+South,Puducherry,UT
+South,Tamil Nadu,State
+South,Telangana,State

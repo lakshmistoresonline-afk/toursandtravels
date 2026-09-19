@@ -1,0 +1,6 @@
+status,definition
+DISCOVERED,Found in source discovery
+PENDING_ADMIN_VERIFICATION,Identity/location/source linkage requires admin verification
+VERIFIED,"Identity, location and source independently verified"
+PUBLISHED,Approved for production
+ARCHIVED,Retained for audit

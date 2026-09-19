@@ -1,0 +1,13 @@
+{
+  "scope": "India-wide source-harvested destination universe; no importance filter during discovery",
+  "geography": "Region > State/UT > District > City/Locality > Spot",
+  "rule": "Discover first, verify and shortlist later",
+  "verification": "Dynamic data such as timings, fees, closures, festival dates and access must be verified before publication",
+  "source_priority": [
+    "Government tourism",
+    "UNESCO/ASI/official protected-area authorities",
+    "state/district tourism",
+    "official religious institutions",
+    "reputable secondary discovery sources"
+  ]
+}

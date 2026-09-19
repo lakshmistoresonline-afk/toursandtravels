@@ -17,6 +17,8 @@ export class Service implements ServiceBase {
 	protected readonly USERS_COLLECTION = "users";
 	protected readonly TOURS_COLLECTION = "tours";
 	protected readonly REGISTRATIONS_COLLECTION = "registrations";
+	protected readonly SPOTS_COLLECTION = "spots";
+	protected readonly CIRCUITS_COLLECTION = "circuits";
 
 	constructor(_request?: Request) {}
 

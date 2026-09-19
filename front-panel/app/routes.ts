@@ -38,6 +38,16 @@ export default [
 				route("announcement/:id", "./routes/admin/Tours/announcement.tsx"),
 				route("manifesto/:id", "./routes/admin/Tours/manifesto.tsx"),
 			]),
+			...prefix("destinations", [
+				index("./routes/admin/Destinations/destinations.tsx"),
+				route("add", "./routes/admin/Destinations/add-spot.tsx"),
+				route("edit/:id", "./routes/admin/Destinations/edit-spot.tsx"),
+			]),
+			...prefix("circuits", [
+				index("./routes/admin/Circuits/circuits.tsx"),
+				route("add", "./routes/admin/Circuits/add-circuit.tsx"),
+				route("edit/:id", "./routes/admin/Circuits/edit-circuit.tsx"),
+			]),
 			...prefix("registrations", [index("./routes/admin/Booking/bookings.tsx")]),
 			route("users", "./routes/admin/users.tsx"),
 			route("stats", "./routes/admin/analytics.tsx"),

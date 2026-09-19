@@ -76,6 +76,28 @@ export default function AdminLayout() {
 							<span className="hidden lg:inline">Journeys</span>
 						</NavLink>
 						<NavLink
+							to="/admin/destinations"
+							prefetch="intent"
+							viewTransition
+							className={({ isActive }) =>
+								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-[0.15em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
+							}
+						>
+							<Compass className="h-3.5 w-3.5" />
+							<span className="hidden lg:inline">Destinations</span>
+						</NavLink>
+						<NavLink
+							to="/admin/circuits"
+							prefetch="intent"
+							viewTransition
+							className={({ isActive }) =>
+								`flex items-center gap-2.5 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-[0.15em] transition-all ${isActive ? "bg-[#d4af37] text-[#0a0e1a]" : "text-[#fdfcf0]/60 hover:text-[#fdfcf0] hover:bg-white/5"}`
+							}
+						>
+							<ClipboardList className="h-3.5 w-3.5" />
+							<span className="hidden lg:inline">Circuits</span>
+						</NavLink>
+						<NavLink
 							to="/admin/registrations"
 							prefetch="intent"
 							viewTransition
@@ -143,7 +165,7 @@ export default function AdminLayout() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 
-	let message = "An unexpected disturbance occurred while managing the Map.";
+	let message = "An unexpected disturbance occurred while managing destinations.";
 	if (isRouteErrorResponse(error)) {
 		message = error.data?.message || message;
 	} else if (error instanceof Error) {
