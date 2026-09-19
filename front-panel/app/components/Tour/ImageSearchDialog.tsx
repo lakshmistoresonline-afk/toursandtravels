@@ -59,6 +59,19 @@ export function ImageSearchDialog({
 					query
 				)}&per_page=12&client_id=${accessKey}`
 			);
+
+			if (response.status === 401) {
+				toast.error("Invalid Unsplash API key. Please check your configuration.");
+				setIsLoading(false);
+				return;
+			}
+
+			if (response.status === 403) {
+				toast.error("Unsplash API rate limit exceeded.");
+				setIsLoading(false);
+				return;
+			}
+
 			const data = await response.json();
 			if (data.results) {
 				setImages(data.results);
