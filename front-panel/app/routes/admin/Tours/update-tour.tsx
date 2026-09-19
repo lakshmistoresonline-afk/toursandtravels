@@ -40,8 +40,8 @@ import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { format } from "date-fns";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
-import { AlertTriangle, RefreshCw, Map, Bus, BedDouble, Printer } from "lucide-react";
-import { GeminiService } from "@workspace/shared/services/gemini.service";
+import { AlertTriangle, RefreshCw, Map, Bus, BedDouble, Printer, Sparkles } from "lucide-react";
+import { ResearchService } from "@workspace/shared/services/research.service";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Label } from "~/components/ui/label";
 import { Link } from "react-router";
@@ -142,8 +142,8 @@ export default function UpdateTourPage() {
 
 		setIsGeneratingOverview(true);
 		try {
-			const gemini = new GeminiService();
-			const overview = await gemini.generateJourneyOverview(destination);
+			const research = new ResearchService();
+			const overview = await research.generateSpiritualOverview(destination);
 			setValue("overview", overview, { shouldValidate: true });
 			toast.success("Meaningful overview generated!");
 		} catch (err: any) {

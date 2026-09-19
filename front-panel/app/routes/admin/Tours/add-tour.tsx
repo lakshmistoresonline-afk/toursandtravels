@@ -32,7 +32,8 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { ImageSearchDialog } from "~/components/Tour/ImageSearchDialog";
-import { GeminiService } from "@workspace/shared/services/gemini.service";
+import { ResearchService } from "@workspace/shared/services/research.service";
+import { Sparkles } from "lucide-react";
 
 export const clientAction = async ({ request }: ActionFunctionArgs) => {
 	try {
@@ -122,8 +123,8 @@ export default function AddTourPage() {
 
 		setIsGeneratingOverview(true);
 		try {
-			const gemini = new GeminiService();
-			const overview = await gemini.generateJourneyOverview(destination);
+			const research = new ResearchService();
+			const overview = await research.generateSpiritualOverview(destination);
 			setValue("overview", overview, { shouldValidate: true });
 			toast.success("Meaningful overview generated!");
 		} catch (err: any) {
